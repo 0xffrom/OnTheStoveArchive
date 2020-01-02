@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace HTMLPARCER_CORE.Parse
+{
+    public interface IParserSettings
+    {
+        string BaseUrl { get; set; }
+
+        string Prefix { get; set; }
+
+        public int Count { get; set; }
+
+        public string PrefixFind { get; set; }
+
+        public string Recipe { get; set; }
+    }
+}
