@@ -23,5 +23,8 @@ namespace HTMLPARCER_CORE
         public int Count { get; set; }
         public string PrefixFind { get; set; }
         public string Recipe { get; set; }
+        public string PrefixFindWithCount { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public int MinPage { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public int MaxPage { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }

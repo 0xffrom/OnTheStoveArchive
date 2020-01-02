@@ -15,5 +15,9 @@ namespace HTMLPARCER_CORE.Parse
         public string PrefixFind { get; set; }
 
         public string Recipe { get; set; }
+
+        public string PrefixFindWithCount { get; set; }
+        public int MinPage { get; set; }
+        public int MaxPage { get; set; }
     }
 }
