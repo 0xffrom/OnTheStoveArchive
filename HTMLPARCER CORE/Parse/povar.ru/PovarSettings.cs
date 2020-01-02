@@ -6,7 +6,7 @@ namespace HTMLPARCER_CORE
     {
         public PovarSettings(int count)
         {
-            Count = count;
+            MaxPage = count;
         }
 
         public PovarSettings(int minPage, int maxPage)
@@ -22,7 +22,7 @@ namespace HTMLPARCER_CORE
 
         public PovarSettings()
         {
-            Count = 1;
+            MaxPage = 1;
         }
 
         public PovarSettings(string recipe) : this()
@@ -32,14 +32,13 @@ namespace HTMLPARCER_CORE
 
         public PovarSettings(string recipe, int count) : this(recipe)
         {
-            Count = count;
+            MaxPage = count;
         }
 
         public string BaseUrl { get; set; } = "https://povar.ru";
 
         public string Prefix { get; set; } = "mostnew/all/{CurrentId}";
 
-        public int Count { get; set; }
         public string PrefixFind { get; set; } = "xmlsearch?query=";
         public string Recipe { get; set; }
         public string PrefixFindWithCount { get; set; } = "&page={CurrentId}";

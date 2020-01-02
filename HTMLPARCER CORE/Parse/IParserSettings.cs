@@ -10,7 +10,6 @@ namespace HTMLPARCER_CORE.Parse
 
         string Prefix { get; set; }
 
-        public int Count { get; set; }
 
         public string PrefixFind { get; set; }
 

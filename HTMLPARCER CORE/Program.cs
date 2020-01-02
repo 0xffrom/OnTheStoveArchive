@@ -21,7 +21,7 @@ namespace HTMLPARCER_CORE
                 ParserWorker<RecipeShort[]> parser =
                     new ParserWorker<RecipeShort[]>(new PovarParser());
 
-                parser.Settings = new PovarSettings("Оливье", 1, 20);
+                parser.Settings = new PovarSettings("Салатик", 3, 5);
                 parser.Start();
 
                 parser.OnNewData += Parser_OnNewData;

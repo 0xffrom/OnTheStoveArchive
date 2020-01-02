@@ -6,7 +6,6 @@ namespace HTMLPARCER_CORE
     {
         public string BaseUrl { get; set; } = "https://eda.ru";
         public string Prefix { get; set; } = "recepty?page={CurrentId}";
-        public int Count { get; set; }
         public string PrefixFind { get; set; } = "recipesearch?q=";
         public string PrefixFindWithCount { get; set; } = "&page={CurrentId}";
         public string Recipe { get; set; }
@@ -17,7 +16,7 @@ namespace HTMLPARCER_CORE
 
         public EdaSettings(int count)
         {
-            Count = count;
+            MaxPage = count;
         }
 
         public EdaSettings(int minPage, int maxPage)
@@ -33,7 +32,7 @@ namespace HTMLPARCER_CORE
 
         public EdaSettings()
         {
-            Count = 1;
+            MaxPage = 1;
         }
 
         public EdaSettings(string recipe) : this()
@@ -43,9 +42,9 @@ namespace HTMLPARCER_CORE
 
         public EdaSettings(string recipe, int count) : this(recipe)
         {
-            Count = count;
+            MaxPage = count;
         }
 
-        
+
     }
 }
