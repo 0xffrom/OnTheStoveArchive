@@ -14,8 +14,9 @@ namespace HTMLPARCER_CORE
             var title = document.QuerySelectorAll("a").
                     Where(item => item.ClassList != null &&
                     item.ParentElement.TagName == "H3" && item.ParentElement.ClassList.Contains("item-title")
-                    && item.Attributes[0].Value != "https://eda.ru/recepty/afishaeda").ToArray();
-
+                    && item.Attributes[0].Value != "https://eda.ru/recepty/afishaeda" 
+                    && item.Attributes[0].Value != "https://eda.ru/specialproject/gold_1000").ToArray() ;
+            
             var urlPicture = document.QuerySelectorAll("div").
                 Where(item => item.ClassList != null && 
                 item.ClassList.Contains("lazy-load-container")).ToArray();

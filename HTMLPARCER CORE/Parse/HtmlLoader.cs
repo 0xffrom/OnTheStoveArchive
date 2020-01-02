@@ -15,7 +15,7 @@ namespace HTMLPARCER_CORE.Parse
         public HtmlLoader(IParserSettings settings)
         {
             client = new HttpClient();
-            if (settings.PrefixFind == "")
+            if (settings.Recipe == "")
                 url = $"{settings.BaseUrl}/{settings.Prefix}/";
             else
                 url = $"{settings.BaseUrl}/{settings.PrefixFind}{settings.Recipe}/";

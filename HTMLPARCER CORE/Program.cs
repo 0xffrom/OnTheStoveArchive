@@ -21,7 +21,7 @@ namespace HTMLPARCER_CORE
                 ParserWorker<RecipeShort[]> parser =
                     new ParserWorker<RecipeShort[]>(new EdaParser());
 
-                parser.Settings = new EdaSettings("Ольвие");
+                parser.Settings = new EdaSettings("Оливье");
                 parser.Start();
 
                 parser.OnNewData += Parser_OnNewData;
@@ -35,10 +35,11 @@ namespace HTMLPARCER_CORE
         {
             foreach (var item in list)
             {
+                
                 File.AppendAllText(@"edaOlivie.txt", ($"Название: {item.Title}\nОписание: {item.ShortDescription}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
                
             }
-            Console.WriteLine($"Добавлена страница №{count++}");
+            Console.WriteLine($"Добавлена страница №{count++}. Кол-во: {list.Length}");
         }
 
        

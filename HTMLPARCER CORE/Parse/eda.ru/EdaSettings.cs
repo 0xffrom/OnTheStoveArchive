@@ -16,6 +16,7 @@ namespace HTMLPARCER_CORE
         public EdaSettings(string recipe)
         {
             Recipe = recipe;
+            Count = 1;
         }
         public EdaSettings(string recipe, int count) : this(recipe)
         {
