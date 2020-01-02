@@ -12,6 +12,10 @@ namespace HTMLPARCER_CORE
         {
             Count = 1;
         }
+        public RussianfoodSettings(string recipe)
+        {
+            Recipe = recipe;
+        }
         public string BaseUrl { get; set; } = "https://www.russianfood.com/recipes/bytype";
 
         public string Prefix { get; set; } = "?fid=791&sort=id&page={CurrentId}";

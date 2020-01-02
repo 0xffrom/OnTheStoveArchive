@@ -15,11 +15,18 @@ namespace HTMLPARCER_CORE.Parse
         public HtmlLoader(IParserSettings settings)
         {
             client = new HttpClient();
-            url = $"{settings.BaseUrl}/{settings.Prefix}/";
+            if (settings.PrefixFind == "")
+                url = $"{settings.BaseUrl}/{settings.Prefix}/";
+            else
+                url = $"{settings.BaseUrl}/{settings.PrefixFind}{settings.Recipe}/";
+               
+            
+
         }
 
-        public async Task<string> GetSourceByPageId(int id)
+        public async Task<string> GetSource(int id)
         {
+            
             var currentUrl = url.Replace("{CurrentId}", id.ToString());
             var response = await client.GetAsync(currentUrl);
             string source = String.Empty;

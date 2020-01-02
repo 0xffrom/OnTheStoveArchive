@@ -75,7 +75,7 @@ namespace HTMLPARCER_CORE.Parse
                     return;
                 }
 
-                var source = await loader.GetSourceByPageId(i);
+                var source = await loader.GetSource(i);
                 var domParser = new HtmlParser();
 
                 var document = await domParser.ParseDocumentAsync(source);

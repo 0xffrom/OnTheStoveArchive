@@ -14,12 +14,12 @@ namespace HTMLPARCER_CORE
             Count = 1;
         }
 
-        public string BaseUrl { get; set; } = "https://povar.ru/mostnew/all";
+        public string BaseUrl { get; set; } = "https://povar.ru";
 
-        public string Prefix { get; set; } = "{CurrentId}";
+        public string Prefix { get; set; } = "mostnew/all/{CurrentId}";
 
         public int Count { get; set; }
-        public string PrefixFind { get; set; }
+        public string PrefixFind { get; set; } = "xmlsearch?query={CurrentName}";
         public string Recipe { get; set; }
     }
 }

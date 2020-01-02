@@ -17,7 +17,7 @@ namespace HTMLPARCER_CORE
         public string Prefix { get; set; } = "~{CurrentId}";
 
         public int Count { get; set; }
-        public string PrefixFind { get; set; }
+        public string PrefixFind { get; set; } = "search/?name={CurrentName}#searchformtop";
         public string Recipe { get; set; }
     }
 }
