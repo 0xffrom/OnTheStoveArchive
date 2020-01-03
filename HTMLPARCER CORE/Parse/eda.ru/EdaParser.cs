@@ -13,7 +13,6 @@ namespace HTMLPARCER_CORE
 
         public RecipeShort[] Parse(IHtmlDocument document)
         {
-            System.Console.WriteLine(document.Context);
             var list = new List<RecipeShort>();
 
             var title = document.QuerySelectorAll("a").

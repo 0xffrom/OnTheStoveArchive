@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace HTMLPARCER_CORE
 {
-    public class VkosoParser : IParser<RecipeShort[]>
+    public class VkusoParser : IParser<RecipeShort[]>
     {
         public static int count;
 

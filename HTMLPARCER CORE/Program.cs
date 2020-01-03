@@ -17,29 +17,62 @@ namespace HTMLPARCER_CORE
             do
             {
                 var EdaParser =
-                    new ParserWorker<RecipeShort[]>(new VkosoParser());
+                    new ParserWorker<RecipeShort[]>(new EdaParser());
 
-                EdaParser.Settings = new VkusoSettings("Лол", 5);
+                EdaParser.Settings = new EdaSettings(100000);
                 EdaParser.Start();
 
                 EdaParser.OnNewData += Parser_OnNewData;
 
+                var PovarParser =
+                  new ParserWorker<RecipeShort[]>(new PovarParser());
+
+                PovarParser.Settings = new PovarSettings(100000);
+                PovarParser.Start();
+
+                PovarParser.OnNewData += Parser_OnNewData;
+
+                var Povarenok =
+                      new ParserWorker<RecipeShort[]>(new PovarenokParser());
+
+                Povarenok.Settings = new PovarenokSettings(100000);
+                Povarenok.Start();
+
+                Povarenok.OnNewData += Parser_OnNewData;
+
+                var russiaFood =
+                     new ParserWorker<RecipeShort[]>(new RussianfoodParser());
+
+                russiaFood.Settings = new RussianfoodSettings(100000);
+                russiaFood.Start();
+
+                russiaFood.OnNewData += Parser_OnNewData;
+
+                var vkuso =
+                  new ParserWorker<RecipeShort[]>(new VkusoParser());
+
+                vkuso.Settings = new VkusoSettings(100000);
+                vkuso.Start();
+
+                vkuso.OnNewData += Parser_OnNewData;
             }
 
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
         }
 
-        public static int count = 1;
+        public static int countOfPages = 0;
+        public static int countOfRecipes = 0;
         private static void Parser_OnNewData(object arg1, RecipeShort[] list)
         {
             foreach (var item in list)
             {
                 
-                File.AppendAllText(@$"{item.WebSite}.txt", ($"Название: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
-               
+                File.AppendAllText(@$"recipes/{item.WebSite}.txt", ($"Название: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
+                
             }
-            Console.WriteLine($"Добавлена страница №{count++}. Кол-во: {list.Length}");
+            countOfRecipes += list.Length;
+            Console.WriteLine($"Всего страниц:{countOfPages++}. Всего рецептов: {countOfRecipes}");
         }
 
        

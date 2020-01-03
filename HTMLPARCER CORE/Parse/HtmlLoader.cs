@@ -27,7 +27,6 @@ namespace HTMLPARCER_CORE.Parse
         public async Task<string> GetSource(int id)
         {
             var currentUrl = url.Replace("{CurrentId}", id.ToString());
-            Console.WriteLine(currentUrl);
             var response = await client.GetAsync(currentUrl);
             string source = String.Empty;
 
