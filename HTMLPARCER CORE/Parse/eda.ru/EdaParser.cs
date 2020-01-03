@@ -19,11 +19,14 @@ namespace HTMLPARCER_CORE
                     Where(item => item.ClassList != null &&
                     item.ParentElement.TagName == "H3" && item.ParentElement.ClassList.Contains("item-title")
                     && item.Attributes[0].Value != "https://eda.ru/recepty/afishaeda" 
-                    && item.Attributes[0].Value != "https://eda.ru/specialproject/gold_1000").ToArray() ;
+                    && item.Attributes[0].Value != "https://eda.ru/specialproject/gold_1000"
+                    && !item.ParentElement.ParentElement.ParentElement.
+                    FirstElementChild.FirstElementChild.LastElementChild.
+                    ClassList.Contains("horizontal-tile__preview-image_empty")).ToArray() ;
             
-            var urlPicture = document.QuerySelectorAll("svg").
+            var urlPicture = document.QuerySelectorAll("div").
                 Where(item => item.ClassList != null && (
-                item.ClassList.Contains("horizontal-tile__preview-image") || )).ToArray();
+                item.ClassList.Contains("lazy-load-container"))).ToArray();
 
             count = title.Length;
             System.Console.WriteLine(title.Length);

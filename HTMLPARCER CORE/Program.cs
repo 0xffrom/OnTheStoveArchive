@@ -19,7 +19,7 @@ namespace HTMLPARCER_CORE
                 var EdaParser =
                     new ParserWorker<RecipeShort[]>(new EdaParser());
 
-                EdaParser.Settings = new EdaSettings(100000);
+                EdaParser.Settings = new EdaSettings(30,70);
                 EdaParser.Start();
 
                 EdaParser.OnNewData += Parser_OnNewData;
