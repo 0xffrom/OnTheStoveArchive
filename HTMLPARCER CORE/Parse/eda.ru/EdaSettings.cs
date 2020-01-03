@@ -6,8 +6,7 @@ namespace HTMLPARCER_CORE
     {
         public string BaseUrl { get; set; } = "https://eda.ru";
         public string Prefix { get; set; } = "recepty?page={CurrentId}";
-        public string PrefixFind { get; set; } = "recipesearch?q=";
-        public string PrefixFindWithCount { get; set; } = "&page={CurrentId}";
+        public string PrefixFind { get; set; } = "recipesearch?page={CurrentId}&q=";
         public string Recipe { get; set; }
         public int MinPage { get; set; } = 1;
         public int MaxPage { get; set; } = 1;

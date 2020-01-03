@@ -18,12 +18,7 @@ namespace HTMLPARCER_CORE.Parse
             if (string.IsNullOrEmpty(settings.Recipe))
                 url = $"{settings.BaseUrl}/{settings.Prefix}/";
             else
-            {
-                if (settings.MaxPage != 0)
-                    url = $"{settings.BaseUrl}/{settings.PrefixFind}{settings.Recipe}{settings.PrefixFindWithCount}/";
-                else
-                    url = $"{settings.BaseUrl}/{settings.PrefixFind}{settings.Recipe}/";
-            }
+                url = $"{settings.BaseUrl}/{settings.PrefixFind}{settings.Recipe}";
                
             
 

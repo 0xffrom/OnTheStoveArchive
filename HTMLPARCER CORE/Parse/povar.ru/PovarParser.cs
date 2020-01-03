@@ -19,13 +19,9 @@ namespace HTMLPARCER_CORE
                 Where(item => item.ClassList != null && item.ParentElement.TagName == "SPAN" &&
                 item.ParentElement.ClassName.Contains("a thumb hashString")).ToArray();
 
-            var shortDiscription = document.QuerySelectorAll("p").
-               Where(item => item.ClassList != null && item.ParentElement.ClassName.Contains("recipe") &&
-               item.ClassName.Contains("txt")).ToArray();
-
             for (int j = 0; j < title.Length; j++)
                 list.Add(new RecipeShort("povar.ru", title[j].TextContent, urlPicture[j].Attributes[0].Value,
-                    shortDiscription[j].TextContent.Replace(" ...далее", ""), "https://povar.ru" + title[j].Attributes[0].Value));
+                     "https://povar.ru" + title[j].Attributes[0].Value));
 
             return list.ToArray();
         }

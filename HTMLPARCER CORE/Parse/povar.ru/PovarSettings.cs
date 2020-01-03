@@ -38,10 +38,8 @@ namespace HTMLPARCER_CORE
         public string BaseUrl { get; set; } = "https://povar.ru";
 
         public string Prefix { get; set; } = "mostnew/all/{CurrentId}";
-
-        public string PrefixFind { get; set; } = "xmlsearch?query=";
+        public string PrefixFind { get; set; } = "xmlsearch?page={CurrentId}&query=";
         public string Recipe { get; set; }
-        public string PrefixFindWithCount { get; set; } = "&page={CurrentId}";
         public int MinPage { get; set; } = 1;
         public int MaxPage { get; set; }
     }

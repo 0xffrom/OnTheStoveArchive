@@ -10,22 +10,22 @@ namespace HTMLPARCER_CORE
 {
     class Program
     {
-        static List<string> ListTitles = new List<string>();
-        public 
         static void Main(string[] args)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             do
             {
-                ParserWorker<RecipeShort[]> parser =
-                    new ParserWorker<RecipeShort[]>(new PovarParser());
+                var EdaParser =
+                    new ParserWorker<RecipeShort[]>(new VkosoParser());
 
-                parser.Settings = new PovarSettings("Салатик", 3, 5);
-                parser.Start();
+                EdaParser.Settings = new VkusoSettings(1000);
+                EdaParser.Start();
 
-                parser.OnNewData += Parser_OnNewData;
+                EdaParser.OnNewData += Parser_OnNewData;
+
             }
+
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
         }
@@ -36,7 +36,7 @@ namespace HTMLPARCER_CORE
             foreach (var item in list)
             {
                 
-                File.AppendAllText(@"povar.oliv.txt", ($"Название: {item.Title}\nОписание: {item.ShortDescription}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
+                File.AppendAllText(@$"{item.WebSite}.txt", ($"Название: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
                
             }
             Console.WriteLine($"Добавлена страница №{count++}. Кол-во: {list.Length}");

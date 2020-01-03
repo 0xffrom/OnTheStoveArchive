@@ -9,6 +9,7 @@ namespace HTMLPARCER_CORE
     {
         public RecipeShort[] Parse(IHtmlDocument document)
         {
+            System.Console.WriteLine(document.Context);
             var list = new List<RecipeShort>();
 
             var title = document.QuerySelectorAll("a").
@@ -26,7 +27,6 @@ namespace HTMLPARCER_CORE
                     "eda.ru",
                     urlPicture[j].Attributes[2].Value,
                     urlPicture[j].Attributes[3].Value,
-                    urlPicture[j].Attributes[2].Value,
                     "https://eda.ru" + title[j].Attributes[0].Value));
 
             return list.ToArray();

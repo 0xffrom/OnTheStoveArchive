@@ -19,13 +19,10 @@ namespace HTMLPARCER_CORE
                 Where(item => item.ClassList != null && item.ParentElement.ParentElement.TagName == "DIV" &&
                 item.ParentElement.ParentElement.ClassName.Contains("m-img conima")).ToArray();
 
-            var shortDiscription = document.QuerySelectorAll("p").
-               Where(item => item.ClassList != null && item.ParentElement.TagName == "ARTICLE" &&
-               item.ParentElement.ClassName.Contains("item-bl")).ToArray();
 
             for (int j = 0; j < title.Length; j++)
                 list.Add(new RecipeShort("povarenok.ru", title[j].TextContent, urlPicture[j].Attributes[0].Value.Replace("-330x220x", ""),
-                    shortDiscription[j].TextContent, title[j].Attributes[0].Value));
+                     title[j].Attributes[0].Value));
 
             return list.ToArray();
         }
