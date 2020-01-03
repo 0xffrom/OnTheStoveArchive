@@ -16,7 +16,7 @@ namespace HTMLPARCER_CORE.Parse
         {
             client = new HttpClient();
             if (string.IsNullOrEmpty(settings.Recipe))
-                url = $"{settings.BaseUrl}/{settings.Prefix}/";
+                url = $"{settings.BaseUrl}/{settings.Prefix}";
             else
                 url = $"{settings.BaseUrl}/{settings.PrefixFind}{settings.Recipe}";
                
@@ -29,7 +29,7 @@ namespace HTMLPARCER_CORE.Parse
             var currentUrl = url.Replace("{CurrentId}", id.ToString());
             var response = await client.GetAsync(currentUrl);
             string source = String.Empty;
-
+            Console.WriteLine(currentUrl);
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();
 

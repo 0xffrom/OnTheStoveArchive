@@ -23,7 +23,7 @@ namespace HTMLPARCER_CORE
                 EdaParser.Start();
 
                 EdaParser.OnNewData += Parser_OnNewData;
-
+                /*
                 var PovarParser =
                   new ParserWorker<RecipeShort[]>(new PovarParser());
 
@@ -55,6 +55,7 @@ namespace HTMLPARCER_CORE
                 vkuso.Start();
 
                 vkuso.OnNewData += Parser_OnNewData;
+                */
             }
 
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);

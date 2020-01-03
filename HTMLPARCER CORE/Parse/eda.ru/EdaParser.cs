@@ -21,16 +21,17 @@ namespace HTMLPARCER_CORE
                     && item.Attributes[0].Value != "https://eda.ru/recepty/afishaeda" 
                     && item.Attributes[0].Value != "https://eda.ru/specialproject/gold_1000").ToArray() ;
             
-            var urlPicture = document.QuerySelectorAll("div").
-                Where(item => item.ClassList != null && 
-                item.ClassList.Contains("lazy-load-container")).ToArray();
+            var urlPicture = document.QuerySelectorAll("svg").
+                Where(item => item.ClassList != null && (
+                item.ClassList.Contains("horizontal-tile__preview-image") || )).ToArray();
 
             count = title.Length;
-
+            System.Console.WriteLine(title.Length);
+            System.Console.WriteLine(urlPicture.Length);
             for (int j = 0; j < title.Length; j++)
                 list.Add(new RecipeShort(
                     "eda.ru",
-                    urlPicture[j].Attributes[2].Value,
+                    title[j].TextContent.Replace("  ","").Replace("\n", ""),
                     urlPicture[j].Attributes[3].Value,
                     "https://eda.ru" + title[j].Attributes[0].Value));
 
