@@ -7,6 +7,10 @@ namespace HTMLPARCER_CORE
 {
     public class EdaParser : IParser<RecipeShort[]>
     {
+        public static int count;
+
+        public int GetCount() => count;
+
         public RecipeShort[] Parse(IHtmlDocument document)
         {
             System.Console.WriteLine(document.Context);
@@ -21,6 +25,8 @@ namespace HTMLPARCER_CORE
             var urlPicture = document.QuerySelectorAll("div").
                 Where(item => item.ClassList != null && 
                 item.ClassList.Contains("lazy-load-container")).ToArray();
+
+            count = title.Length;
 
             for (int j = 0; j < title.Length; j++)
                 list.Add(new RecipeShort(

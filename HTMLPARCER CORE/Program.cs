@@ -19,7 +19,7 @@ namespace HTMLPARCER_CORE
                 var EdaParser =
                     new ParserWorker<RecipeShort[]>(new VkosoParser());
 
-                EdaParser.Settings = new VkusoSettings(1000);
+                EdaParser.Settings = new VkusoSettings("Лол", 5);
                 EdaParser.Start();
 
                 EdaParser.OnNewData += Parser_OnNewData;

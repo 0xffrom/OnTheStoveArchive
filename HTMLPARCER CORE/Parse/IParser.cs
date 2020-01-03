@@ -5,5 +5,7 @@ namespace HTMLPARCER_CORE.Parse
     public interface IParser<T> where T : class
     {
         T Parse(IHtmlDocument document);
+
+        int GetCount();
     }
 }

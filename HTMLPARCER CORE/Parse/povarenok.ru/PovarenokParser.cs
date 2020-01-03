@@ -7,6 +7,10 @@ namespace HTMLPARCER_CORE
 {
     public class PovarenokParser : IParser<RecipeShort[]>
     {
+        public static int count;
+
+        public int GetCount() => count;
+
         public RecipeShort[] Parse(IHtmlDocument document)
         {
             var list = new List<RecipeShort>();
@@ -19,6 +23,7 @@ namespace HTMLPARCER_CORE
                 Where(item => item.ClassList != null && item.ParentElement.ParentElement.TagName == "DIV" &&
                 item.ParentElement.ParentElement.ClassName.Contains("m-img conima")).ToArray();
 
+            count = title.Length;
 
             for (int j = 0; j < title.Length; j++)
                 list.Add(new RecipeShort("povarenok.ru", title[j].TextContent, urlPicture[j].Attributes[0].Value.Replace("-330x220x", ""),

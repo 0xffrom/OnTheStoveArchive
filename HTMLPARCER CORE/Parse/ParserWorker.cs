@@ -79,8 +79,10 @@ namespace HTMLPARCER_CORE.Parse
                 var source = await loader.GetSource(i);
                 var domParser = new HtmlParser();
                 var document = await domParser.ParseDocumentAsync(source);
-
+                
                 var result = parser.Parse(document);
+                if (parser.GetCount() == 0)
+                    break;
 
                 OnNewData?.Invoke(this, result);
             }
