@@ -16,14 +16,22 @@ namespace HTMLPARCER_CORE
 
             do
             {
+                var Edimdoma =
+                       new ParserWorker<RecipeShort[]>(new EdimdomaParser());
+
+                Edimdoma.Settings = new EdimdomaSettings(1000);
+                Edimdoma.Start();
+
+                Edimdoma.OnNewData += Parser_OnNewData;
+                /*
                 var EdaParser =
                     new ParserWorker<RecipeShort[]>(new EdaParser());
 
-                EdaParser.Settings = new EdaSettings(30,70);
+                EdaParser.Settings = new EdaSettings(220, 280);
                 EdaParser.Start();
 
                 EdaParser.OnNewData += Parser_OnNewData;
-                /*
+                
                 var PovarParser =
                   new ParserWorker<RecipeShort[]>(new PovarParser());
 

@@ -28,7 +28,8 @@ namespace HTMLPARCER_CORE
                 Where(item => item.ClassList != null && (
                 item.ClassList.Contains("lazy-load-container"))).ToArray();
 
-            count = title.Length;
+            
+           
             System.Console.WriteLine(title.Length);
             System.Console.WriteLine(urlPicture.Length);
             for (int j = 0; j < title.Length; j++)
@@ -38,6 +39,22 @@ namespace HTMLPARCER_CORE
                     urlPicture[j].Attributes[3].Value,
                     "https://eda.ru" + title[j].Attributes[0].Value));
 
+            if (title.Length == 0)
+            {
+                title = document.QuerySelectorAll("a").
+                 Where(item => item.ClassList != null &&
+                 item.ParentElement.TagName == "H3" && item.ParentElement.ClassList.Contains("item-title")
+                 && item.Attributes[0].Value != "https://eda.ru/recepty/afishaeda"
+                 && item.Attributes[0].Value != "https://eda.ru/specialproject/gold_1000").ToArray();
+                  list.Add(new RecipeShort(
+                    "eda.ru",
+                    title[0].TextContent.Replace("  ", "").Replace("\n", ""),
+                    "//s2.eda.ru/StaticContent/DefaultRecipePhoto/no-photo.svg",
+                    "https://eda.ru" + title[0].Attributes[0].Value));
+
+            }
+
+            count = list.Count;
             return list.ToArray();
         }
     }

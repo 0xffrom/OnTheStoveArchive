@@ -16,17 +16,17 @@ namespace HTMLPARCER_CORE
             var list = new List<RecipeShort>();
 
             var title = document.QuerySelectorAll("a").
-                    Where(item => item.ClassName != null &&
-                    item.ClassName.Contains("listRecipieTitle")).ToArray();
+                    Where(item => item.ClassList != null &&
+                    item.ParentElement.ClassList.Contains("card__description")).ToArray();
 
             var urlPicture = document.QuerySelectorAll("img").
-                Where(item => item.ClassList != null && item.ParentElement.TagName == "SPAN" &&
-                item.ParentElement.ClassName.Contains("a thumb hashString")).ToArray();
+                Where(item => item.ClassList != null  &&
+                item.ParentElement.ClassList.Contains("card__picture")).ToArray();
 
             count = title.Length;
 
             for (int j = 0; j < title.Length; j++)
-                list.Add(new RecipeShort("edimdoma.ru", title[j].TextContent, urlPicture[j].Attributes[0].Value,
+                list.Add(new RecipeShort("edimdoma.ru", title[j].FirstElementChild.TextContent, urlPicture[j].Attributes[2].Value,
                      "https://povar.ru" + title[j].Attributes[0].Value));
 
             return list.ToArray();

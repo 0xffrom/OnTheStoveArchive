@@ -2,35 +2,35 @@
 
 namespace HTMLPARCER_CORE
 {
-    public class EdimSettings : IParserSettings
+    public class EdimdomaSettings : IParserSettings
     {
-        public EdimSettings(int count)
+        public EdimdomaSettings(int count)
         {
             MaxPage = count;
         }
 
-        public EdimSettings(int minPage, int maxPage)
+        public EdimdomaSettings(int minPage, int maxPage)
         {
             MinPage = minPage;
             MaxPage = maxPage;
         }
 
-        public EdimSettings(string recipe, int minPage, int maxPage) : this(minPage, maxPage)
+        public EdimdomaSettings(string recipe, int minPage, int maxPage) : this(minPage, maxPage)
         {
             Recipe = recipe;
         }
 
-        public EdimSettings()
+        public EdimdomaSettings()
         {
             MaxPage = 1;
         }
 
-        public EdimSettings(string recipe) : this()
+        public EdimdomaSettings(string recipe) : this()
         {
             Recipe = recipe;
         }
 
-        public EdimSettings(string recipe, int count) : this(recipe)
+        public EdimdomaSettings(string recipe, int count) : this(recipe)
         {
             MaxPage = count;
         }
