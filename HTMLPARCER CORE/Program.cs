@@ -19,15 +19,14 @@ namespace HTMLPARCER_CORE
                 var Edimdoma =
                        new ParserWorker<RecipeShort[]>(new EdimdomaParser());
 
-                Edimdoma.Settings = new EdimdomaSettings(1000);
+                Edimdoma.Settings = new EdimdomaSettings(10000);
                 Edimdoma.Start();
 
                 Edimdoma.OnNewData += Parser_OnNewData;
-                /*
                 var EdaParser =
                     new ParserWorker<RecipeShort[]>(new EdaParser());
 
-                EdaParser.Settings = new EdaSettings(220, 280);
+                EdaParser.Settings = new EdaSettings(10000);
                 EdaParser.Start();
 
                 EdaParser.OnNewData += Parser_OnNewData;
@@ -63,22 +62,26 @@ namespace HTMLPARCER_CORE
                 vkuso.Start();
 
                 vkuso.OnNewData += Parser_OnNewData;
-                */
             }
 
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
         }
 
-        public static int countOfPages = 0;
+        public static int countOfPages = 1;
         public static int countOfRecipes = 0;
         private static void Parser_OnNewData(object arg1, RecipeShort[] list)
         {
             foreach (var item in list)
             {
-                
-                File.AppendAllText(@$"recipes/{item.WebSite}.txt", ($"Название: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
-                
+                try
+                {
+                    File.AppendAllText(@$"recipes/{item.WebSite}.txt", ($"Название: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
+                }
+                catch(Exception)
+                {
+                    File.AppendAllText(@$"recipes/{item.WebSite} - error.txt", ($"Название: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
+                }
             }
             countOfRecipes += list.Length;
             Console.WriteLine($"Всего страниц:{countOfPages++}. Всего рецептов: {countOfRecipes}");

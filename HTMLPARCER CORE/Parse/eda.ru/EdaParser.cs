@@ -29,9 +29,7 @@ namespace HTMLPARCER_CORE
                 item.ClassList.Contains("lazy-load-container"))).ToArray();
 
             
-           
-            System.Console.WriteLine(title.Length);
-            System.Console.WriteLine(urlPicture.Length);
+          
             for (int j = 0; j < title.Length; j++)
                 list.Add(new RecipeShort(
                     "eda.ru",

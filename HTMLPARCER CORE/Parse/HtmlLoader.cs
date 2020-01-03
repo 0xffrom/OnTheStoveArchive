@@ -29,7 +29,7 @@ namespace HTMLPARCER_CORE.Parse
             var currentUrl = url.Replace("{CurrentId}", id.ToString());
             var response = await client.GetAsync(currentUrl);
             string source = String.Empty;
-            Console.WriteLine(currentUrl);
+            Console.WriteLine($"Загружаю страничку: {currentUrl}");
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();
 
