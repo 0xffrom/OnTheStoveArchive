@@ -16,7 +16,7 @@ namespace HTMLPARCER_CORE
 
             do
             {
-                
+                /*
                 var Edimdoma =
                        new ParserWorker<RecipeShort[]>(new EdimdomaParser());
 
@@ -63,6 +63,15 @@ namespace HTMLPARCER_CORE
                 vkuso.Start();
 
                 vkuso.OnNewData += Parser_OnNewData;
+                */
+
+                var tvoiRecept =
+                       new ParserWorker<RecipeShort[]>(new TvoireceptyParser());
+
+                tvoiRecept.Settings = new TvoireceptySettings(10000);
+                tvoiRecept.Start();
+
+                tvoiRecept.OnNewData += Parser_OnNewData;
 
             }
 
@@ -72,16 +81,13 @@ namespace HTMLPARCER_CORE
 
         public static int countOfPages = 1;
         public static int countOfRecipes = 0;
-        public static List<string> count = new List<string>();
         private static void Parser_OnNewData(object arg1, RecipeShort[] list)
         {
             foreach (var item in list)
             {
                 try
                 {
-                    count.Add(item.WebSite);
-                    int countOfSite = count.Where(i => (i == item.WebSite)).ToArray().Length;
-                    File.AppendAllText(@$"recipes/{item.WebSite}.txt", ($"Рецепт №{countOfSite}\nНазвание: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
+                    File.AppendAllText(@$"recipes/{item.WebSite}.txt", ($"\nНазвание: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
 
                 }
                 catch(Exception)

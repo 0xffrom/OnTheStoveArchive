@@ -68,6 +68,8 @@ namespace HTMLPARCER_CORE.Parse
         private async void Worker()
         {
             int count = Settings.MaxPage == 0 ? Settings.MinPage : Settings.MaxPage;
+            if (Settings.MaxCountPage != 0)
+                count = Settings.MaxCountPage;
             for (int i = Settings.MinPage; i <= count; i++)
             {
                 if (!isActive)
