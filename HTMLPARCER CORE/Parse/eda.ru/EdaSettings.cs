@@ -10,6 +10,7 @@ namespace HTMLPARCER_CORE
         public string Recipe { get; set; } = null;
         public int MinPage { get; set; } = 1;
         public int MaxPage { get; set; } = 1;
+        public int MaxCountPage { get; set; }
 
         // Сайт https://eda.ru не поддерживает поиск конкретного рецепта по нескольким страницам.
 

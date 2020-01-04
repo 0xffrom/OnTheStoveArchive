@@ -42,5 +42,6 @@ namespace HTMLPARCER_CORE
         public string Recipe { get; set; }
         public int MinPage { get; set; } = 1;
         public int MaxPage { get; set; }
+        public int MaxCountPage { get; set; }
     }
 }
