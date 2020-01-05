@@ -17,54 +17,6 @@ namespace HTMLPARCER_CORE
             do
             {
                 
-                var Edimdoma =
-                       new ParserWorker<RecipeShort[]>(new EdimdomaParser());
-
-                Edimdoma.Settings = new EdimdomaSettings(10000);
-                Edimdoma.Start();
-
-                Edimdoma.OnNewData += Parser_OnNewData;
-                var EdaParser =
-                    new ParserWorker<RecipeShort[]>(new EdaParser());
-
-                EdaParser.Settings = new EdaSettings(10000);
-                EdaParser.Start();
-
-                EdaParser.OnNewData += Parser_OnNewData;
-                
-                var PovarParser =
-                  new ParserWorker<RecipeShort[]>(new PovarParser());
-
-                PovarParser.Settings = new PovarSettings(100000);
-                PovarParser.Start();
-
-                PovarParser.OnNewData += Parser_OnNewData;
-
-                var Povarenok =
-                      new ParserWorker<RecipeShort[]>(new PovarenokParser());
-
-                Povarenok.Settings = new PovarenokSettings(100000);
-                Povarenok.Start();
-
-                Povarenok.OnNewData += Parser_OnNewData;
-
-                var russiaFood =
-                     new ParserWorker<RecipeShort[]>(new RussianfoodParser());
-
-                russiaFood.Settings = new RussianfoodSettings(100000);
-                russiaFood.Start();
-
-                russiaFood.OnNewData += Parser_OnNewData;
-
-                var vkuso =
-                  new ParserWorker<RecipeShort[]>(new VkusoParser());
-
-                vkuso.Settings = new VkusoSettings(100000);
-                vkuso.Start();
-
-                vkuso.OnNewData += Parser_OnNewData;
-                
-
                 var tvoiRecept =
                        new ParserWorker<RecipeShort[]>(new TvoireceptyParser());
 
@@ -72,6 +24,8 @@ namespace HTMLPARCER_CORE
                 tvoiRecept.Start();
 
                 tvoiRecept.OnNewData += Parser_OnNewData;
+                
+                
 
             }
 
