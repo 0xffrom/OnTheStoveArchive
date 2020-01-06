@@ -2,9 +2,8 @@
 
 namespace HTMLPARCER_CORE.Parse
 {
-    public interface IParserRecipe
+    public interface IParserRecipe<T> where T : class
     {
         T Parse(IHtmlDocument document);
-        
     }
 }
