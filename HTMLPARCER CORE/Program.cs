@@ -16,7 +16,6 @@ namespace HTMLPARCER_CORE
 
             do
             {
-                
                 var tvoiRecept =
                        new ParserWorker<RecipeShort[]>(new TvoireceptyParser());
 
