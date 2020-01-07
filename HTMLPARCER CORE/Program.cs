@@ -16,13 +16,12 @@ namespace HTMLPARCER_CORE
 
             do
             {
-                var tvoiRecept =
-                       new ParserWorker<RecipeShort[]>(new TvoireceptyParser());
+                var test =
+                       new ParserWorker<RecipeFull[]>(new PovarenokParserPage());
 
-                tvoiRecept.Settings = new TvoireceptySettings(10000);
-                tvoiRecept.Start();
-
-                tvoiRecept.OnNewData += Parser_OnNewData;
+                test.Settings = new PovarenokPageSettings("https://www.povarenok.ru/recipes/show/25691/");
+                test.Start();
+                test.OnNewData += Parser_OnNewData;
                 
                 
 
@@ -33,8 +32,12 @@ namespace HTMLPARCER_CORE
         }
 
         public static int countOfPages = 1;
-        public static int countOfRecipes = 0;
         public static List<string> count = new List<string>();
+
+        private static void Parser_OnNewData(object arg1, RecipeFull[] list)
+        {
+            Console.WriteLine("the end");
+        }
         private static void Parser_OnNewData(object arg1, RecipeShort[] list)
         {
 
@@ -42,18 +45,15 @@ namespace HTMLPARCER_CORE
             {
                 try
                 {
-                    count.Add(item.WebSite);
-                    int countOfSite = count.Where(i => (i == item.WebSite)).ToArray().Length;
-                    File.AppendAllText(@$"recipes/{item.WebSite}.txt", ($"Рецепт №{countOfSite}\nНазвание: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
+                    File.AppendAllText(@$"{item.WebSite}-url.txt", ($"{item.Url}\n"));
 
                 }
                 catch(Exception)
                 {
-                    File.AppendAllText(@$"recipes/{item.WebSite} - error.txt", ($"Название: {item.Title}\nКартинка: {item.UrlPicture}\nСсылка: {item.Url}\n\n"));
+                    File.AppendAllText(@$"{item.WebSite}-url.txt", ($"{item.Url}\n"));
                 }
             }
-            countOfRecipes += list.Length;
-            Console.WriteLine($"Всего страниц:{countOfPages++}. Всего рецептов: {countOfRecipes}");
+            Console.WriteLine($"Всего страниц: {countOfPages++}");
         }
 
        

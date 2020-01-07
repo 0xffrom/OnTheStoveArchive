@@ -6,7 +6,6 @@ namespace HTMLPARCER_CORE.Parse
 {
     public class ParserWorker<T> where T : class
     {
-
         IParser<T> parser;
         IParserSettings parserSettings;
 
@@ -18,20 +17,15 @@ namespace HTMLPARCER_CORE.Parse
 
         public IParser<T> Parser
         {
-            get {
-                return parser;
-            }
-            set {
-                parser = value;
-            }
+            get { return parser; }
+            set { parser = value; }
         }
 
         public IParserSettings Settings
         {
-            get {
-                return parserSettings;
-            }
-            set {
+            get { return parserSettings; }
+            set
+            {
                 parserSettings = value;
                 loader = new HtmlLoader(value);
             }
@@ -39,15 +33,12 @@ namespace HTMLPARCER_CORE.Parse
 
         public bool IsActive
         {
-            get {
-                return isActive;
-            }
+            get { return isActive; }
         }
 
         #endregion
 
         public event Action<object, T> OnNewData;
-        public event Action<object> OnCompleted;
 
         public ParserWorker(IParser<T> parser)
         {
@@ -68,32 +59,22 @@ namespace HTMLPARCER_CORE.Parse
         private async void Worker()
         {
             int count = Settings.MaxPage == 0 ? Settings.MinPage : Settings.MaxPage;
+
             if (Settings.MaxCountPage != 0)
                 count = Settings.MaxCountPage;
+
             for (int i = Settings.MinPage; i <= count; i++)
             {
-                if (!isActive)
-                {
-                    OnCompleted?.Invoke(this);
-                    return;
-                }
-                ;
                 var source = await loader.GetSource(i);
                 var domParser = new HtmlParser();
                 var document = await domParser.ParseDocumentAsync(source);
-                
+
                 var result = parser.Parse(document);
                 if (parser.GetCount() == 0)
                     break;
 
                 OnNewData?.Invoke(this, result);
             }
-           
-
-            OnCompleted?.Invoke(this);
-            isActive = false;
         }
-
-
     }
 }
