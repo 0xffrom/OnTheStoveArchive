@@ -2,13 +2,13 @@ namespace HTMLPARCER_CORE
 {
     public class RecipeFull
     {
-        public RecipeFull(string webSite, string title, string titlePicture, string url,
+        public RecipeFull(string webSite, string title, string titlePicture,
             Ingredient[] ingredients, StepRecipe[] stepsOfRecipe, string introductionContent, string endContent)
         {
             WebSite = webSite;
             Title = title;
             TitlePicture = titlePicture;
-            Url = url;
+
             Ingredients = ingredients;
             StepsOfRecipe = stepsOfRecipe;
             IntroductionContent = introductionContent;
@@ -18,7 +18,7 @@ namespace HTMLPARCER_CORE
         public string WebSite { get; }
         public string Title { get; }
         public string TitlePicture { get; }
-        public string Url { get; }
+
         public Ingredient[] Ingredients { get; }
         public StepRecipe[] StepsOfRecipe { get; }
         public string IntroductionContent { get; }
