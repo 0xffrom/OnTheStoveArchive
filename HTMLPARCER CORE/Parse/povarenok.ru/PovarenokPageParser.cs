@@ -46,6 +46,7 @@ namespace HTMLPARCER_CORE
                     item.ParentElement.ParentElement.ClassName.Contains("item-bl item-about"))
                 .ToArray();
 
+            //TODO: Сделать специальный массив с пикчами, а endcontent всего лишь текст.
 
             title = titleArray[0].TextContent;
             titlePicture = titlePictureArray[0].Attributes[1].Value;
@@ -82,14 +83,11 @@ namespace HTMLPARCER_CORE
 
             ingredients = ingridientsList.ToArray();
 
-
-
             stepsOfRecipe = new StepRecipe[stepsOfRecipeArray.Length];
             for (int i = 0; i < stepsOfRecipe.Length; i++)
             {
                 string description = stepsOfRecipeArray[i].LastElementChild.TextContent.Replace("  ", "").Replace("\n", "");
                 string urlPicture = stepsOfRecipeArray[i].QuerySelector("img").Attributes[2].Value;
-                Console.WriteLine($"[DEBUG]: id:{i} name:{description}\npictrure: {urlPicture}");
                 stepsOfRecipe[i] = new StepRecipe(description, urlPicture);
             }
 
