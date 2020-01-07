@@ -19,7 +19,7 @@ namespace HTMLPARCER_CORE
                 var test =
                        new ParserWorker<RecipeFull[]>(new PovarenokParserPage());
 
-                test.Settings = new PovarenokPageSettings("https://www.povarenok.ru/recipes/show/25691/");
+                test.Settings = new PovarenokPageSettings("https://www.povarenok.ru/recipes/show/162439/");
                 test.Start();
                 test.OnNewData += Parser_OnNewData;
                 

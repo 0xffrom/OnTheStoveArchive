@@ -38,11 +38,11 @@ namespace HTMLPARCER_CORE
             Console.WriteLine($"[DEBUG]: {introductionContentArray.Length}");
 
 
-            var ingridientsArray = document.QuerySelectorAll("li").Where(item =>
-                item.ParentElement.ParentElement.ClassList != null &&
-                item.ParentElement.ParentElement.ClassList.Contains("ingredients-bl")).ToArray();
+            var ingridientsArray = document.QuerySelectorAll("div").Where(item =>
+                item.ClassList != null &&
+                item.ClassList.Contains("ingredients-bl")).ToArray();
 
-            Console.WriteLine($"[DEBUG]: {ingridientsArray.Length}");
+            Console.WriteLine($"[DEBUG]: {ingridientsArray[0].TextContent.Replace("\n", "").Replace("  ", "")}");
 
 
             var stepsOfRecipeArray = document.QuerySelectorAll("div")
@@ -67,8 +67,10 @@ namespace HTMLPARCER_CORE
 
             for (int i = 0; i < ingredients.Length; i++)
             {
-                string name = ingridientsArray[i].FirstElementChild.FirstElementChild.TextContent;
-                string unit = ingridientsArray[i].FirstElementChild.LastElementChild.TextContent;
+                string name = ingridientsArray[i].FirstElementChild.FirstElementChild.TextContent.Replace("\n", "").Replace("  ", "");
+                string unit = ingridientsArray[i].FirstElementChild.LastElementChild.TextContent.Replace("\n", "").Replace("  ", "");
+                if (unit == name)
+                    unit = "По вкусу.";
                 Console.WriteLine($"[DEBUG]: id:{i} name:{name}, unit: {unit}");
                 ingredients[i] = new Ingredient(title, name, unit);
             }
