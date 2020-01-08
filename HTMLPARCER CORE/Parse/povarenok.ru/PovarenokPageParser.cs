@@ -15,7 +15,8 @@ namespace HTMLPARCER_CORE
         private Ingredient[] ingredients;
         private StepRecipe[] stepsOfRecipe;
         private string introductionContent;
-        private string endContent;
+        private string endContentText;
+        private string[] endContentPictures;
 
         public RecipeFull[] Parse(IHtmlDocument document)
         {
@@ -33,8 +34,8 @@ namespace HTMLPARCER_CORE
                     "article-text")).ToArray();
 
             var ingridientsArray = document.QuerySelectorAll("div").Where(item =>
-                item.ClassList != null &&
-                item.ClassList.Contains("ingredients-bl")).ToArray();
+                item.ClassName != null &&
+                item.ClassName.Contains("ingredients-bl")).ToArray();
             
 
             var stepsOfRecipeArray = document.QuerySelectorAll("div")
@@ -43,8 +44,8 @@ namespace HTMLPARCER_CORE
 
             var endContentArray = document.QuerySelectorAll("div").Where(item =>
                     item.ParentElement.ParentElement.ClassName != null &&
-                    item.ParentElement.ParentElement.ClassName.Contains("item-bl item-about"))
-                .ToArray();
+                    item.ClassName == null &&
+                    item.ParentElement.ParentElement.ClassName.Contains("item-bl item-about")).ToArray();
 
             //TODO: Сделать специальный массив с пикчами, а endcontent всего лишь текст.
 
@@ -66,7 +67,7 @@ namespace HTMLPARCER_CORE
                     string unit;
                     if (text.Contains("—"))
                     {
-                        int index = text.IndexOf('—');
+                        int index = text.IndexOf("—");
                         name = text.Substring(0, index);
                         unit = text.Substring(index + 1);
                     }
@@ -91,11 +92,22 @@ namespace HTMLPARCER_CORE
                 stepsOfRecipe[i] = new StepRecipe(description, urlPicture);
             }
 
+            endContentText = endContentArray[0].TextContent;
+
+            var endContentPicturesArray = endContentArray[0].QuerySelectorAll("img")
+                .Where(item => item.ClassName != null && item.ClassName.Contains("bbimg")).ToArray();
+
+            endContentPictures = new string[endContentPicturesArray.Length];
+
+            for (int i = 0; i < endContentPicturesArray.Length; i++)
+            {
+                endContentPictures[i] = "https://www.povarenok.ru/" + endContentPicturesArray[i].Attributes[3].Value;   
+            }
 
             return new RecipeFull[]
             {
                 new RecipeFull(webSite, title, titlePicture,
-                    ingredients, stepsOfRecipe, introductionContent, endContent)
+                    ingredients, stepsOfRecipe, introductionContent, endContentText, endContentPictures)
             };
         }
 
