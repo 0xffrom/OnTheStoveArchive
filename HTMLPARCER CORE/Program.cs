@@ -17,24 +17,17 @@ namespace HTMLPARCER_CORE
 
             do
             {
-                
+
                 string url;
+                Console.Write("Введите ссылку: ");
+                url = Console.ReadLine();
+                var test = new ParserWorker<RecipeFull[]>(new PovarenokParserPage());
 
-                string[] lines;
+                test.Settings = new PovarenokPageSettings(url);
+                test.Start();
+                test.OnNewData += Parser_OnNewData;
 
-                lines = File.ReadAllLines("povarenok.ru.txt");
 
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    url = lines[i];
-                    var test = new ParserWorker<RecipeFull[]>(new PovarenokParserPage());
-
-                    test.Settings = new PovarenokPageSettings(url);
-                    test.Start();
-                    test.OnNewData += Parser_OnNewData;
-                    Thread.Sleep(2000);
-                }
-                
 
             }
 
@@ -49,7 +42,7 @@ namespace HTMLPARCER_CORE
         {
             RecipeFull element = list[0];
             string fileName = $"{element.WebSite} - Full Recipes.txt";
-            File.AppendAllText(fileName, 
+            File.AppendAllText(fileName,
                 $"Recipe:\n" +
                 $"Url: {element.Url}\n" +
                 $"Website: {element.WebSite}\n" +
@@ -62,7 +55,7 @@ namespace HTMLPARCER_CORE
 
             for (int i = 0; i < element.StepsOfRecipe.Length; i++)
             {
-                File.AppendAllText(fileName, $"№{i+1}. Picture: {element.StepsOfRecipe[i].UrlPicture}\n" +
+                File.AppendAllText(fileName, $"№{i + 1}. Picture: {element.StepsOfRecipe[i].UrlPicture}\n" +
                     $"Description: {element.StepsOfRecipe[i].Description}\n");
             }
 
@@ -84,7 +77,7 @@ namespace HTMLPARCER_CORE
                     File.AppendAllText(@$"{item.WebSite}-url.txt", ($"{item.Url}\n"));
 
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     File.AppendAllText(@$"{item.WebSite}-url.txt", ($"{item.Url}\n"));
                 }
@@ -92,7 +85,7 @@ namespace HTMLPARCER_CORE
             Console.WriteLine($"Всего страниц: {countOfPages++}");
         }
 
-       
+
 
     }
 }

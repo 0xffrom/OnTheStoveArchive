@@ -52,7 +52,6 @@ namespace HTMLPARCER_CORE
                     item.ClassName == null &&
                     item.ParentElement.ParentElement.ClassName.Contains("item-bl item-about")).ToArray();
 
-            //TODO: Сделать обратку странички, если несколько блюд в ингридиентах, и если одно блюдо.
 
             title = titleArray[0].TextContent;
             titlePicture = titlePictureArray[0].Attributes[1].Value;
@@ -95,7 +94,7 @@ namespace HTMLPARCER_CORE
                     if(isFragmented)
                         ingridientsList.Add(new Ingredient(pIngridientsArray[i].TextContent, name, unit));
                     else
-                        ingridientsList.Add(new Ingredient(String.Empty, name, unit));
+                        ingridientsList.Add(new Ingredient(title, name, unit));
                 }
 
             }
