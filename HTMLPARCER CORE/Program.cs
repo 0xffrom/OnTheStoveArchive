@@ -15,7 +15,7 @@ namespace HTMLPARCER_CORE
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            do
+            while(true)
             {
 
                 string url;
@@ -31,8 +31,6 @@ namespace HTMLPARCER_CORE
 
             }
 
-            while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-
         }
 
         public static int countOfPages = 1;
@@ -41,31 +39,30 @@ namespace HTMLPARCER_CORE
         private static void Parser_OnNewData(object arg1, RecipeFull[] list)
         {
             RecipeFull element = list[0];
-            string fileName = $"{element.WebSite} - Full Recipes.txt";
-            File.AppendAllText(fileName,
+            Console.WriteLine(
                 $"Recipe:\n" +
                 $"Url: {element.Url}\n" +
                 $"Website: {element.WebSite}\n" +
                 $"Title Picture: {element.TitlePicture}\n" +
                 $"Intoduction:{element.IntroductionContent}\n");
             foreach (var item in element.Ingredients)
-                File.AppendAllText(fileName, $"{item.Title}: {item.Name} ---- {item.Unit}\n");
+                Console.WriteLine($"{item.Title}: {item.Name} ---- {item.Unit}\n");
 
-            File.AppendAllText(fileName, $"Steps of Recipe:\n");
+            Console.WriteLine($"Steps of Recipe:\n");
 
             for (int i = 0; i < element.StepsOfRecipe.Length; i++)
             {
-                File.AppendAllText(fileName, $"№{i + 1}. Picture: {element.StepsOfRecipe[i].UrlPicture}\n" +
+                Console.WriteLine($"№{i + 1}. Picture: {element.StepsOfRecipe[i].UrlPicture}\n" +
                     $"Description: {element.StepsOfRecipe[i].Description}\n");
             }
 
-            File.AppendAllText(fileName, $"End Content: {element.EndContentText}\nPictures:\n");
+            Console.WriteLine($"End Content: {element.EndContentText}\nPictures:\n");
 
             foreach (var item in element.EndContentPictures)
             {
-                File.AppendAllText(fileName, $"{item}\n");
+                Console.WriteLine($"{item}\n");
             }
-            File.AppendAllText(fileName, $"\n==============================================\n");
+            Console.WriteLine($"\n==============================================\n");
         }
         private static void Parser_OnNewData(object arg1, RecipeShort[] list)
         {

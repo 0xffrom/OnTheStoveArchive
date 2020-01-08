@@ -18,6 +18,7 @@ namespace HTMLPARCER_CORE
         private string introductionContent;
         private string endContentText;
         private string[] endContentPictures;
+        private string videoUrl;
 
         public RecipeFull[] Parse(IHtmlDocument document)
         {
@@ -50,9 +51,15 @@ namespace HTMLPARCER_CORE
             var endContentArray = document.QuerySelectorAll("div").Where(item =>
                     item.ParentElement.ParentElement.ClassName != null &&
                     item.ClassName == null &&
+                    item.ParentElement.ClassName == null &&
+                    item.Attributes[0] == null &&
                     item.ParentElement.ParentElement.ClassName.Contains("item-bl item-about")).ToArray();
 
+            var videoUrlArray = document.QuerySelectorAll("iframe").
+                Where(item => item.ParentElement.ClassName != null
+                && item.ParentElement.ClassName.Contains("video-wrapper")).ToArray();
 
+            Console.WriteLine(endContentArray.Length);
             title = titleArray[0].TextContent;
             titlePicture = titlePictureArray[0].Attributes[1].Value;
             introductionContent = introductionContentArray[0].TextContent;
@@ -111,7 +118,7 @@ namespace HTMLPARCER_CORE
 
             if (endContentArray != null)
             {
-                endContentText = endContentArray[0].TextContent.Replace("  ", "").Replace("\n", "");
+                endContentText = endContentArray[0].TextContent.Replace("  ", "");
 
                 
                 var endContentPicturesArray = endContentArray[0].QuerySelectorAll("img")
@@ -128,7 +135,8 @@ namespace HTMLPARCER_CORE
             return new RecipeFull[]
             {
                 new RecipeFull(url, webSite, title, titlePicture,
-                    ingredients, stepsOfRecipe, introductionContent, endContentText, endContentPictures)
+                    ingredients, stepsOfRecipe, introductionContent, 
+                    endContentText, endContentPictures, videoUrl)
             };
         }
 
