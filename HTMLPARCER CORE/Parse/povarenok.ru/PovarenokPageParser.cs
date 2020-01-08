@@ -9,6 +9,7 @@ namespace HTMLPARCER_CORE
 {
     public class PovarenokParserPage : IParser<RecipeFull[]>
     {
+        private string url;
         private string webSite = "povarenok.ru";
         private string title;
         private string titlePicture;
@@ -20,6 +21,10 @@ namespace HTMLPARCER_CORE
 
         public RecipeFull[] Parse(IHtmlDocument document)
         {
+            
+            url = document.QuerySelectorAll("meta").
+                Where(item => item.Attributes[0]!= null && item.Attributes[0].Value == "og:url").
+                ToArray()[0].Attributes[1].Value;
 
             var titleArray = document.QuerySelectorAll("h1").Where(item =>
                 item.ParentElement.ParentElement.ClassList.Contains(
@@ -47,14 +52,25 @@ namespace HTMLPARCER_CORE
                     item.ClassName == null &&
                     item.ParentElement.ParentElement.ClassName.Contains("item-bl item-about")).ToArray();
 
-            //TODO: Сделать специальный массив с пикчами, а endcontent всего лишь текст.
+            //TODO: Сделать обратку странички, если несколько блюд в ингридиентах, и если одно блюдо.
 
             title = titleArray[0].TextContent;
             titlePicture = titlePictureArray[0].Attributes[1].Value;
             introductionContent = introductionContentArray[0].TextContent;
 
-            var pIngridientsArray = ingridientsArray[0].QuerySelectorAll("p").ToArray();
             var ulIngridientsArray = ingridientsArray[0].QuerySelectorAll("ul").ToArray();
+
+            bool isFragmented = true;
+
+            var pIngridientsArray = ingridientsArray[0].QuerySelectorAll("p").
+                Where(item => !item.TextContent.Contains("Время приготовления:") &&
+                !item.TextContent.Contains("Количество порций:")).ToArray();
+
+            if (pIngridientsArray.Length == 0)
+            {
+                isFragmented = false;   
+            }
+
             List<Ingredient> ingridientsList = new List<Ingredient>();
 
             for (int i = 0; i < ulIngridientsArray.Length; i++)
@@ -76,8 +92,10 @@ namespace HTMLPARCER_CORE
                         name = text;
                         unit = null;
                     }
-
-                    ingridientsList.Add(new Ingredient(pIngridientsArray[i].TextContent, name, unit));
+                    if(isFragmented)
+                        ingridientsList.Add(new Ingredient(pIngridientsArray[i].TextContent, name, unit));
+                    else
+                        ingridientsList.Add(new Ingredient(String.Empty, name, unit));
                 }
 
             }
@@ -92,21 +110,25 @@ namespace HTMLPARCER_CORE
                 stepsOfRecipe[i] = new StepRecipe(description, urlPicture);
             }
 
-            endContentText = endContentArray[0].TextContent;
-
-            var endContentPicturesArray = endContentArray[0].QuerySelectorAll("img")
-                .Where(item => item.ClassName != null && item.ClassName.Contains("bbimg")).ToArray();
-
-            endContentPictures = new string[endContentPicturesArray.Length];
-
-            for (int i = 0; i < endContentPicturesArray.Length; i++)
+            if (endContentArray != null)
             {
-                endContentPictures[i] = "https://www.povarenok.ru/" + endContentPicturesArray[i].Attributes[3].Value;   
-            }
+                endContentText = endContentArray[0].TextContent.Replace("  ", "").Replace("\n", "");
 
+                
+                var endContentPicturesArray = endContentArray[0].QuerySelectorAll("img")
+                    .Where(item => item.ClassName != null && item.ClassName.Contains("bbimg")).ToArray();
+
+
+                endContentPictures = new string[endContentPicturesArray.Length];
+
+                for (int i = 0; i < endContentPicturesArray.Length; i++)
+                {
+                    endContentPictures[i] = "https://www.povarenok.ru/" + endContentPicturesArray[i].Attributes[3].Value;
+                }
+            }
             return new RecipeFull[]
             {
-                new RecipeFull(webSite, title, titlePicture,
+                new RecipeFull(url, webSite, title, titlePicture,
                     ingredients, stepsOfRecipe, introductionContent, endContentText, endContentPictures)
             };
         }
