@@ -7,7 +7,7 @@ using HTMLPARCER_CORE.Parse;
 
 namespace HTMLPARCER_CORE
 {
-    public class EdimdomaPageParser : IParser<RecipeFull>
+    public class EdimdomaPageParser : IParser<RecipeFull[]>
     {
         private string url;
         private string webSite = "edimdoma.ru";
@@ -68,7 +68,7 @@ namespace HTMLPARCER_CORE
                         .ToArray()[0].TextContent;
 
                     ingredientsList.Add(new Ingredient(title, name, unit));
-                }1
+                }
 
                 ingredients = ingredientsList.ToArray();
             }
@@ -83,5 +83,7 @@ namespace HTMLPARCER_CORE
         }
 
         public int GetCount() => 1;
+
+  
     }
-}2
+}

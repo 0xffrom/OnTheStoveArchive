@@ -11,7 +11,7 @@ namespace HTMLPARCER_CORE
 
         public int GetCount() => count;
 
-        public RecipeFull[] Parse(IHtmlDocument document)
+        public RecipeShort[] Parse(IHtmlDocument document)
         {
             var list = new List<RecipeShort>();
 

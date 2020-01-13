@@ -18,6 +18,7 @@ namespace HTMLPARCER_CORE
         private string introductionContent;
         private string endContentText;
         private string[] endContentPictures;
+        private string[] contentVideos;
 
         public RecipeFull[] Parse(IHtmlDocument document)
         {
@@ -128,7 +129,7 @@ namespace HTMLPARCER_CORE
             return new RecipeFull[]
             {
                 new RecipeFull(url, webSite, title, titlePicture,
-                    ingredients, stepsOfRecipe, introductionContent, endContentText, endContentPictures)
+                    ingredients, stepsOfRecipe, introductionContent, endContentText, endContentPictures,contentVideos)
             };
         }
 
