@@ -4,7 +4,7 @@ namespace HTMLPARCER_CORE.Parse
 {
     public interface IParser<T> where T : class
     {
-        T Parse(IHtmlDocument document);
+        RecipeFull[] Parse(IHtmlDocument document);
 
         int GetCount();
     }

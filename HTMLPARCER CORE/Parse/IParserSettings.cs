@@ -8,11 +8,11 @@ namespace HTMLPARCER_CORE.Parse
     {
         string BaseUrl { get; set; }
         string Prefix { get; set; }
-        public string PrefixFind { get; set; }
-        public string Recipe { get; set; }
-        public int MinPage { get; set; }
-        public int MaxPage { get; set; }
+        string PrefixFind { get; set; }
+        string Recipe { get; set; }
+        int MinPage { get; set; }
+        int MaxPage { get; set; }
 
-        public int MaxCountPage { get; set; }
+        int MaxCountPage { get; set; }
     }
 }
