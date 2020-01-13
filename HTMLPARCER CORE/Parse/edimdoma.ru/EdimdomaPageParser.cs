@@ -30,15 +30,15 @@ namespace HTMLPARCER_CORE
                 .Where(item => item.Attributes[0] != null && item.Attributes[0].Value.Contains("og:title")).ToArray()[0]
                 .Attributes[1].Value;
 
-            titlePicture = document.QuerySelectorAll("meta")
-                .Where(item => item.Attributes[0] != null && item.Attributes[0].Value.Contains("og:image")).ToArray()[0]
+             titlePicture = document.QuerySelectorAll("meta")
+                .Where(item => item.Attributes[0] != null && item.Attributes[0].Value == "og:image").ToArray()[0]
                 .Attributes[1].Value;
-
-            introductionContent = titlePicture = document.QuerySelectorAll("meta")
+;
+            introductionContent = document.QuerySelectorAll("meta")
                 .Where(item => item.Attributes[0] != null && item.Attributes[0].Value.Contains("og:description"))
                 .ToArray()[0]
                 .Attributes[1].Value;
-
+            
             var ingredientsArray = document.QuerySelectorAll("div").Where(item =>
                 item.ClassName != null && item.ClassName.Contains("field-row recipe_ingredients")).ToArray();
 
@@ -47,7 +47,6 @@ namespace HTMLPARCER_CORE
             {
                 string titleRecipe;
                 titleRecipe = ingredientsArray[i].QuerySelector("div").TextContent ?? title;
-
                 // name + unit
                 var elementsRecipe = ingredientsArray[i].QuerySelectorAll("tr").Where(item =>
                     item.ClassName != null && item.ClassName.Contains("definition-list-table__tr")).ToArray();
@@ -57,22 +56,22 @@ namespace HTMLPARCER_CORE
                     string name;
                     string unit;
 
-                    name = elementsRecipe[j].QuerySelectorAll("td").Where(item =>
+                    name = elementsRecipe[j].QuerySelectorAll("span").Where(item =>
                             item.ClassName != null &&
-                            item.ClassName.Contains("definition-list-table__td definition-list-table__td_name"))
+                            item.ClassName.Contains("recipe_ingredient_title"))
                         .ToArray()[0].TextContent;
 
                     unit = elementsRecipe[j].QuerySelectorAll("td").Where(item =>
                             item.ClassName != null &&
                             item.ClassName.Contains("definition-list-table__td definition-list-table__td_value"))
                         .ToArray()[0].TextContent;
-
-                    ingredientsList.Add(new Ingredient(title, name, unit));
+                    System.Console.WriteLine($"{titleRecipe} {name} {unit}");
+                    ingredientsList.Add(new Ingredient(titleRecipe, name, unit));
                 }
 
                 ingredients = ingredientsList.ToArray();
             }
-
+            
             //TODO: доделать рецепты, добавить видеорецепты, конец рецепта => текст и картинки.x
             return new RecipeFull[]
             {

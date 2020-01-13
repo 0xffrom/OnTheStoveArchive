@@ -21,9 +21,9 @@ namespace HTMLPARCER_CORE
                 string url;
                 Console.Write("Введите ссылку: ");
                 url = Console.ReadLine();
-                var test = new ParserWorker<RecipeFull[]>(new PovarenokParserPage());
+                var test = new ParserWorker<RecipeFull[]>(new EdimdomaPageParser());
 
-                test.Settings = new PovarenokPageSettings(url);
+                test.Settings = new EdimdomaPageSettings(url);
                 test.Start();
                 test.OnNewData += Parser_OnNewData;
 
@@ -46,6 +46,7 @@ namespace HTMLPARCER_CORE
                 $"Recipe:\n" +
                 $"Url: {element.Url}\n" +
                 $"Website: {element.WebSite}\n" +
+                $"Title: {element.Title} \n" +
                 $"Title Picture: {element.TitlePicture}\n" +
                 $"Intoduction:{element.IntroductionContent}\n");
             foreach (var item in element.Ingredients)
