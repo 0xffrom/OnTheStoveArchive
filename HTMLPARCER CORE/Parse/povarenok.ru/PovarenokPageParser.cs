@@ -27,17 +27,17 @@ namespace HTMLPARCER_CORE
                 Where(item => item.Attributes[0]!= null && item.Attributes[0].Value == "og:url").
                 ToArray()[0].Attributes[1].Value;
 
-            var titleArray = document.QuerySelectorAll("h1").Where(item =>
-                item.ParentElement.ParentElement.ClassList.Contains(
-                    "item-about")).ToArray();
+            title = document.QuerySelectorAll("meta")
+               .Where(item => item.Attributes[0] != null && item.Attributes[0].Value.Contains("og:title")).ToArray()[0]
+               .Attributes[1].Value;
 
-            var titlePictureArray = document.QuerySelectorAll("img").Where(item =>
-                item.ParentElement.ClassList.Contains(
-                    "m-img")).ToArray();
+            titlePicture = document.QuerySelectorAll("meta")
+                .Where(item => item.Attributes[0] != null && item.Attributes[0].Value.Contains("og:image")).ToArray()[0]
+                .Attributes[1].Value;
 
-            var introductionContentArray = document.QuerySelectorAll("p").Where(item =>
-                item.ParentElement.ClassList.Contains(
-                    "article-text")).ToArray();
+            introductionContent = document.QuerySelectorAll("meta")
+                .Where(item => item.Attributes[0] != null && item.Attributes[0].Value.Contains("twitter:description")).ToArray()[0]
+                .Attributes[1].Value;
 
             var ingridientsArray = document.QuerySelectorAll("div").Where(item =>
                 item.ClassName != null &&
@@ -51,12 +51,20 @@ namespace HTMLPARCER_CORE
             var endContentArray = document.QuerySelectorAll("div").Where(item =>
                     item.ParentElement.ParentElement.ClassName != null &&
                     item.ClassName == null &&
+                    item.Attributes[0] == null &&
                     item.ParentElement.ParentElement.ClassName.Contains("item-bl item-about")).ToArray();
 
+            var videoArray = document.QuerySelectorAll("div").Where(item => item.ClassName != null &&
+            item.ClassName.Contains("video-wrapper")).ToArray();
 
-            title = titleArray[0].TextContent;
-            titlePicture = titlePictureArray[0].Attributes[1].Value;
-            introductionContent = introductionContentArray[0].TextContent;
+            List<string> contentVideosList = new List<string>();
+
+            for (int i = 0; i < videoArray.Length; i++)
+            {
+                contentVideosList.Add(videoArray[i].FirstElementChild.Attributes[2].Value);
+            }
+
+            contentVideos = contentVideosList.ToArray();
 
             var ulIngridientsArray = ingridientsArray[0].QuerySelectorAll("ul").ToArray();
 

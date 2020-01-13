@@ -42,48 +42,37 @@ namespace HTMLPARCER_CORE
         {
             RecipeFull element = list[0];
             string fileName = $"{element.WebSite} - Full Recipes.txt";
-            File.AppendAllText(fileName,
+            Console.Write(
                 $"Recipe:\n" +
                 $"Url: {element.Url}\n" +
                 $"Website: {element.WebSite}\n" +
                 $"Title Picture: {element.TitlePicture}\n" +
                 $"Intoduction:{element.IntroductionContent}\n");
             foreach (var item in element.Ingredients)
-                File.AppendAllText(fileName, $"{item.Title}: {item.Name} ---- {item.Unit}\n");
+                Console.Write($"{item.Title}: {item.Name} ---- {item.Unit}\n");
 
-            File.AppendAllText(fileName, $"Steps of Recipe:\n");
+            Console.Write($"Steps of Recipe:\n");
 
             for (int i = 0; i < element.StepsOfRecipe.Length; i++)
             {
-                File.AppendAllText(fileName, $"№{i + 1}. Picture: {element.StepsOfRecipe[i].UrlPicture}\n" +
+                Console.Write($"№{i + 1}. Picture: {element.StepsOfRecipe[i].UrlPicture}\n" +
                     $"Description: {element.StepsOfRecipe[i].Description}\n");
             }
 
-            File.AppendAllText(fileName, $"End Content: {element.EndContentText}\nPictures:\n");
+            Console.Write($"End Content: {element.EndContentText}\nPictures:\n");
 
             foreach (var item in element.EndContentPictures)
             {
-                File.AppendAllText(fileName, $"{item}\n");
+                Console.Write($"{item}\n");
             }
-            File.AppendAllText(fileName, $"\n==============================================\n");
-        }
-        private static void Parser_OnNewData(object arg1, RecipeShort[] list)
-        {
-
-            foreach (var item in list)
+            Console.Write("Videos:\n");
+            foreach (var item in element.ContentVideos)
             {
-                try
-                {
-                    File.AppendAllText(@$"{item.WebSite}-url.txt", ($"{item.Url}\n"));
-
-                }
-                catch (Exception)
-                {
-                    File.AppendAllText(@$"{item.WebSite}-url.txt", ($"{item.Url}\n"));
-                }
+                Console.Write($"{item}\n");
             }
-            Console.WriteLine($"Всего страниц: {countOfPages++}");
+            Console.Write($"\n==============================================\n");
         }
+       
 
 
 
