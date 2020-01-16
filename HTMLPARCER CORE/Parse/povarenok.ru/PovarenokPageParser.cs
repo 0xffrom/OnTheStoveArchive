@@ -114,8 +114,9 @@ namespace HTMLPARCER_CORE
             for (int i = 0; i < stepsOfRecipe.Length; i++)
             {
                 string description = stepsOfRecipeArray[i].LastElementChild.TextContent.Replace("  ", "").Replace("\n", "");
-                string urlPicture = stepsOfRecipeArray[i].QuerySelector("img").Attributes[2].Value;
-                stepsOfRecipe[i] = new StepRecipe(description, urlPicture);
+                string[] urls = new string[1];
+                urls[0] = stepsOfRecipeArray[i].QuerySelector("img").Attributes[2].Value;
+                stepsOfRecipe[i] = new StepRecipe(description, urls);
             }
 
             if (endContentArray != null)
