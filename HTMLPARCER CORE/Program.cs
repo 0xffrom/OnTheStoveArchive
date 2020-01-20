@@ -17,7 +17,7 @@ namespace HTMLPARCER_CORE
 
             do
             {
-
+                /*
                 string url;
                 Console.Write("Введите ссылку: ");
                 url = Console.ReadLine();
@@ -26,8 +26,7 @@ namespace HTMLPARCER_CORE
                 test.Settings = new EdimdomaPageSettings(url);
                 test.Start();
                 test.OnNewData += Parser_OnNewData;
-
-
+                */
 
             }
 
