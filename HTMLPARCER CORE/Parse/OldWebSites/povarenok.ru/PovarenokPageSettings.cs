@@ -1,10 +1,11 @@
-﻿using HTMLPARCER_CORE.Parse;
+﻿/*
+using HTMLPARCER_CORE.Parse;
 
 namespace HTMLPARCER_CORE
 {
-    public class EdimdomaPageSettings : IParserSettings
+    public class PovarenokPageSettings : IParserSettings
     {
-        public EdimdomaPageSettings(string url)
+        public PovarenokPageSettings(string url)
         {
             BaseUrl = url;
         }
@@ -17,4 +18,5 @@ namespace HTMLPARCER_CORE
         public int MaxPage { get; set; } = 1;
         public int MaxCountPage { get; set; } = 1;
     }
-    }
+}
+*/

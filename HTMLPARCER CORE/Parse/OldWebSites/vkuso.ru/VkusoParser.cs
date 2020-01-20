@@ -1,4 +1,5 @@
-﻿using AngleSharp.Html.Dom;
+﻿/*
+using AngleSharp.Html.Dom;
 using HTMLPARCER_CORE.Parse;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,3 +33,4 @@ namespace HTMLPARCER_CORE
         }
     }
 }
+*/

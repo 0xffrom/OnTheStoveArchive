@@ -1,4 +1,5 @@
-﻿using HTMLPARCER_CORE.Parse;
+﻿/*
+using HTMLPARCER_CORE.Parse;
 
 namespace HTMLPARCER_CORE
 {
@@ -36,3 +37,4 @@ namespace HTMLPARCER_CORE
 
     }
 }
+*/
