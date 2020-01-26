@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AngleSharp;
-namespace HTMLPARCER_CORE.Parse
+
+namespace RecipeLibrary.Parse
 {
 
     [Serializable]
-    public class ParserException : System.Net.WebException
+    internal class ParserException : System.Net.WebException
     {
         public ParserException() { }
         public ParserException(string message) : base(message) { }

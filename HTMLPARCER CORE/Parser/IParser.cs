@@ -1,11 +1,9 @@
 ﻿using AngleSharp.Html.Dom;
 
-namespace HTMLPARCER_CORE.Parse
+namespace RecipeLibrary.Parse
 {
-    public interface IParser<T> where T : class
+    internal interface IParser<T> where T : class
     {
         T Parse(IHtmlDocument document);
-
-        int GetCount();
     }
 }

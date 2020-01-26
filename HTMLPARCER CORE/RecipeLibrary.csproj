@@ -3,11 +3,19 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>HTMLPARCER_CORE</RootNamespace>
+    <RootNamespace>RecipeLibrary</RootNamespace>
+    <Authors>goga133</Authors>
+    <Product>RecipeLibrary</Product>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AngleSharp" Version="0.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Parser\ParserPage\" />
+    <Folder Include="Parser\ParserRecipe\" />
   </ItemGroup>
 
 </Project>

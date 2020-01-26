@@ -1,29 +1,25 @@
 ﻿using AngleSharp.Html.Parser;
 using System;
-using System.Text;
 
-namespace HTMLPARCER_CORE.Parse
+
+namespace RecipeLibrary.Parse
 {
-    public class ParserWorker<T> where T : class
+    internal class ParserWorker<T> where T : class
     {
         IParser<T> parser;
         IParserSettings parserSettings;
 
         HtmlLoader loader;
 
-        bool isActive;
-
-        #region Properties
-
-        public IParser<T> Parser
+        internal IParser<T> Parser
         {
-            get { return parser; }
-            set { parser = value; }
+            get => parser; 
+            set => parser = value; 
         }
 
-        public IParserSettings Settings
+        internal IParserSettings Settings
         {
-            get { return parserSettings; }
+            get => parserSettings;
             set
             {
                 parserSettings = value;
@@ -31,50 +27,38 @@ namespace HTMLPARCER_CORE.Parse
             }
         }
 
-        public bool IsActive
-        {
-            get { return isActive; }
-        }
-
-        #endregion
-
-        public event Action<object, T> OnNewData;
-
-        public ParserWorker(IParser<T> parser)
+        internal ParserWorker(IParser<T> parser)
         {
             this.parser = parser;
         }
 
-        public ParserWorker(IParser<T> parser, IParserSettings parserSettings) : this(parser)
+        internal ParserWorker(IParser<T> parser, IParserSettings parserSettings) : this(parser)
         {
             this.parserSettings = parserSettings;
         }
 
-        public void Start()
-        {
-            isActive = true;
-            Worker();
-        }
+        internal event Action<object, T> OnNewData;
+
+        internal void Start() => Worker();
+
+
+        internal static readonly Random random = new Random();
+        internal static int GetPageId(int maxPage) => random.Next(0, maxPage + 1);
+
 
         private async void Worker()
         {
-            int count = Settings.MaxPage == 0 ? Settings.MinPage : Settings.MaxPage;
+            int maxPage = Settings.MaxPage;
+            int pageId = GetPageId(maxPage);
 
-            if (Settings.MaxCountPage != 0)
-                count = Settings.MaxCountPage;
+            var source = await loader.GetSource(pageId);
+            var domParser = new HtmlParser();
+            var document = await domParser.ParseDocumentAsync(source);
 
-            for (int i = Settings.MinPage; i <= count; i++)
-            {
-                var source = await loader.GetSource(i);
-                var domParser = new HtmlParser();
-                var document = await domParser.ParseDocumentAsync(source);
+            var result = parser.Parse(document);
 
-                var result = parser.Parse(document);
-                if (parser.GetCount() == 0)
-                    break;
+            OnNewData?.Invoke(this, result);
 
-                OnNewData?.Invoke(this, result);
-            }
         }
     }
 }

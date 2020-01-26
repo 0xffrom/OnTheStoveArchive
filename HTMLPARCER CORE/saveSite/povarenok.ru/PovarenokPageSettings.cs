@@ -1,10 +1,9 @@
 ﻿/*
-using HTMLPARCER_CORE.Parse;
 using System;
+using System.Collections.Generic;
 using System.Text;
-using System.Web;
 
-namespace HTMLPARCER_CORE
+namespace HTMLPARCER_CORE.Parse.WebSites.povarenok.ru
 {
     public class PovarenokSettings : IParserSettings
     {
@@ -29,6 +28,11 @@ namespace HTMLPARCER_CORE
             MaxPage = 1;
         }
 
+        /// <summary>
+        /// Метод для смены кодировки URL с UTF-8 на URL-encoding.
+        /// </summary>
+        /// <param name="recipe">Название рецепта в кодировке UTF-8.</param>
+        /// <returns>Название рецепта в кодировке URL-encoding.</returns>
         public string GetRecipe(string recipe)
         {
             char[] alph = {'а','б','в','г','д','е','ё','ж','з',
@@ -50,6 +54,8 @@ namespace HTMLPARCER_CORE
 
             return newStr;
         }
+
+
         public PovarenokSettings(string recipe) : this()
         {
             Recipe = GetRecipe(recipe);
@@ -61,13 +67,23 @@ namespace HTMLPARCER_CORE
         }
 
         public string BaseUrl { get; set; } = "https://www.povarenok.ru/recipes";
-
         public string Prefix { get; set; } = "~{CurrentId}";
-        public string PrefixFind { get; set; } = "search/~{CurrentId}/?name=";
+        public string PrefixFind { get; set; } = "search/~{CurrentIdPage}/?name=";
+        public string SectionUrl { get; set; } = "/category/{CurrentIdSection}/~{CurrentIdPage}/";
+
         public string Recipe { get; set; }
         public int MinPage { get; set; } = 1;
         public int MaxPage { get; set; } = 0;
         public int MaxCountPage { get; set; } = 9202;
+
+        public int SoupId { get; set; } = 2;
+        public int HotMealsId { get; set; } = 5;
+        public int SaladsId { get; set; } = 12;
+        public int SnacksId { get; set; } = 15;
+        public int BakeryId { get; set; } = 25;
+        public int DessertId { get; set; } = 30;
+        public int SauceId { get; set; } = 23;
+
 
     }
 }

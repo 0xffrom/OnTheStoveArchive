@@ -1,37 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace HTMLPARCER_CORE.Parse
+namespace RecipeLibrary.Parse
 {
     public class HtmlLoader
     {
-        readonly HttpClient client;
-        readonly string url;
+        private readonly HttpClient client;
+        private readonly string url;
 
         public HtmlLoader(IParserSettings settings)
         {
             client = new HttpClient();
-            if (string.IsNullOrEmpty(settings.Recipe))
-                url = $"{settings.BaseUrl}/{settings.Prefix}";
-            else
-                url = $"{settings.BaseUrl}/{settings.PrefixFind}{settings.Recipe}";
+
+            url = "доделать";
+            // TODO: url =
                
             
 
         }
 
-        public async Task<string> GetSource(int id)
+        public async Task<string> GetSource(int idPage)
         {
-            var currentUrl = url.Replace("{CurrentId}", id.ToString());
+            var currentUrl = url.Replace("{IdPage}", idPage.ToString());
             var response = await client.GetAsync(currentUrl);
-            string source = String.Empty;
+
             Console.WriteLine($"Загружаю страничку: {currentUrl}");
+
+            string source;
+
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();
+            else
+                throw new ParserException("Страница не может быть загружена.");
 
             return source;
         }

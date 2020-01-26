@@ -1,13 +1,7 @@
-﻿
-using HTMLPARCER_CORE.Parse;
-using System;
+﻿using RecipeLibrary.Objects;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 
-namespace HTMLPARCER_CORE
+namespace RecipeLibrary
 {
     class GetRecipe
     {
