@@ -1,16 +1,17 @@
-﻿namespace HTMLPARCER_CORE
+﻿namespace RecipeLibrary.Objects.Boxes.Elements
 {
+    /// <summary>
+    /// Объект, который представляет собой ингредиент с названием и единицей измерения.
+    /// </summary>
     public class Ingredient
     {
         public Ingredient(string title, string name, string unit)
         {
-            Title = title;
             Name = name;
             Unit = unit;
         }
-        
+
         public string Name { get; }
         public string Unit { get; }
-        public string Title { get; }
     }
 }
