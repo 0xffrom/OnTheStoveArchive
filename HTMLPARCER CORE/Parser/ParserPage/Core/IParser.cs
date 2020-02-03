@@ -2,7 +2,7 @@
 
 namespace RecipeLibrary.Parse
 {
-    internal interface IParser<T> where T : class
+    internal interface IParserPage<T> where T : class
     {
         T Parse(IHtmlDocument document);
     }

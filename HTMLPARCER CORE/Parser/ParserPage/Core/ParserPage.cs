@@ -1,50 +1,56 @@
 ﻿using AngleSharp.Html.Parser;
 using System;
+using RecipeLibrary.Objects;
 
 
 namespace RecipeLibrary.Parse
 {
-    internal class ParserWorker<T> where T : class
+    internal class ParserPage<T> where T : class
     {
-        IParser<T> parser;
-        IParserSettings parserSettings;
+        IParserPage<T> parser;
+        IParserPageSettings parserSettings;
 
         HtmlLoader loader;
 
-        internal IParser<T> Parser
+        internal IParserPage<T> Parser
         {
-            get => parser; 
-            set => parser = value; 
+            get => parser;
+            set => parser = value;
         }
 
-        internal IParserSettings Settings
+        internal IParserPageSettings Settings
         {
             get => parserSettings;
-            set
-            {
+            set {
                 parserSettings = value;
                 loader = new HtmlLoader(value);
             }
         }
 
-        internal ParserWorker(IParser<T> parser)
+        internal ParserPage(IParserPage<T> parser)
         {
             this.parser = parser;
         }
 
-        internal ParserWorker(IParser<T> parser, IParserSettings parserSettings) : this(parser)
+        internal ParserPage(IParserPage<T> parser, IParserPageSettings parserSettings) : this(parser)
         {
             this.parserSettings = parserSettings;
         }
 
+
         internal event Action<object, T> OnNewData;
 
-        internal void Start() => Worker();
+        internal void StartParsePage(T obj)
+        {
+            if (obj.GetType().Name != "RecipeShort[]")
+                throw new ParserException("Unknown object");
+            Worker();
+
+        }
 
 
-        internal static readonly Random random = new Random();
-        internal static int GetPageId(int maxPage) => random.Next(0, maxPage + 1);
-
+        private static readonly Random random = new Random();
+        private static int GetPageId(int maxPage) => random.Next(0, maxPage + 1);
 
         private async void Worker()
         {

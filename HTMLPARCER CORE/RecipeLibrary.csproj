@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Parser\ParserPage\" />
     <Folder Include="Parser\ParserRecipe\" />
   </ItemGroup>
 

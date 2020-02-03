@@ -10,14 +10,13 @@ namespace RecipeLibrary.Parse
         private readonly HttpClient client;
         private readonly string url;
 
-        public HtmlLoader(IParserSettings settings)
+        public HtmlLoader(IParserPageSettings settings)
         {
             client = new HttpClient();
 
             url = "доделать";
             // TODO: url =
                
-            
 
         }
 
@@ -26,14 +25,12 @@ namespace RecipeLibrary.Parse
             var currentUrl = url.Replace("{IdPage}", idPage.ToString());
             var response = await client.GetAsync(currentUrl);
 
-            Console.WriteLine($"Загружаю страничку: {currentUrl}");
-
             string source;
 
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();
             else
-                throw new ParserException("Страница не может быть загружена.");
+                throw new ParserException("Error loading page");
 
             return source;
         }
