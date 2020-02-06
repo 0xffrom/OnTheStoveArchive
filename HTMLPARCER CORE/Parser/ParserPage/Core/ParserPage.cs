@@ -1,9 +1,8 @@
 ﻿using AngleSharp.Html.Parser;
 using System;
-using RecipeLibrary.Objects;
+using RecipeLibrary.Parse;
 
-
-namespace RecipeLibrary.Parse
+namespace RecipeLibrary.ParsePage
 {
     internal class ParserPage<T> where T : class
     {
@@ -54,10 +53,19 @@ namespace RecipeLibrary.Parse
 
         private async void Worker()
         {
-            int maxPage = Settings.MaxPage;
-            int pageId = GetPageId(maxPage);
+            int maxPage = Settings.MaxPageId;
+            int pageId;
+            if (Settings.PageId != 0)
+                pageId = Settings.PageId;
+            else
+                pageId = GetPageId(maxPage);
 
-            var source = await loader.GetSource(pageId);
+            string source;
+            string recipeName;
+            
+            recipeName = Settings.RecipeName == null ? String.Empty : Settings.RecipeName;
+            source = await loader.GetSource(pageId, recipeName);
+            
             var domParser = new HtmlParser();
             var document = await domParser.ParseDocumentAsync(source);
 

@@ -1,5 +1,5 @@
 ﻿
-namespace RecipeLibrary.Parse
+namespace RecipeLibrary.ParsePage
 {
     public interface IParserPageSettings
     {
@@ -7,7 +7,10 @@ namespace RecipeLibrary.Parse
         string SuffixNew { get; set; }
         string SuffixPopular { get; set; }
         string SuffixName { get; set; }
-        int MaxPageId { get; set; }
+        int MaxPageId { get; set; } 
+        int PageId { get; set; }
+        string RecipeName { get; }
+        
     }
 
 }

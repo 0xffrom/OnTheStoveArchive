@@ -1,6 +1,6 @@
 ﻿using AngleSharp.Html.Dom;
 
-namespace RecipeLibrary.Parse
+namespace RecipeLibrary.ParsePage
 {
     internal interface IParserPage<T> where T : class
     {

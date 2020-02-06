@@ -3,25 +3,23 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using RecipeLibrary.Parse;
 
-namespace RecipeLibrary.ParsePage
+namespace RecipeLibrary.ParseRecipe
 {
     public class HtmlLoader
     {
         private readonly HttpClient client;
         private readonly string url;
 
-        public HtmlLoader(IParserPageSettings settings)
+        public HtmlLoader(IParserRecipeSettings settings)
         {
             client = new HttpClient();
             url = settings.Url;
         }
 
-        public async Task<string> GetSource(int idPage, string recipeName)
+        public async Task<string> GetSource()
         {
-            var currentUrl = url
-                .Replace("{IdPage}", idPage.ToString())
-                .Replace("{RecipeName}", recipeName);
-            
+            var currentUrl = url;
+
             var response = await client.GetAsync(currentUrl);
 
             string source;

@@ -4,7 +4,7 @@ using AngleSharp.Html.Dom;
 using RecipeLibrary.Objects;
 using RecipeLibrary.Objects.Boxes.Elements;
 
-namespace RecipeLibrary.Parse.ParserPage
+namespace RecipeLibrary.ParsePage
 {
     class PovarenokPageParser : IParserPage<RecipeShort[]>
     {
@@ -18,6 +18,10 @@ namespace RecipeLibrary.Parse.ParserPage
 
             foreach (var recipeBlock in recipesList)
             {
+                string url = recipeBlock.QuerySelectorAll("div")
+                    .Where(item => item.ClassName != null && item.ClassName.Contains("m-img desktop-img conima"))
+                    .Select(item => item.FirstElementChild.Attributes[0].Value).ToArray()[0];
+                
                 string urlPicture = recipeBlock.QuerySelectorAll("div")
                     .Where(item => item.ClassName != null && item.ClassName.Contains("m-img desktop-img conima"))
                     .Select(item => item.FirstElementChild.FirstElementChild.Attributes[0].Value).ToArray()[0];
@@ -26,7 +30,7 @@ namespace RecipeLibrary.Parse.ParserPage
 
                 string title = recipeBlock.QuerySelector("h2").QuerySelector("a").TextContent;
 
-                RecipeShort recipeShort = new RecipeShort(title, picture);
+                RecipeShort recipeShort = new RecipeShort(title, picture, url);
 
                 listRecipes.Add(recipeShort);
             }

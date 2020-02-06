@@ -1,5 +1,6 @@
 ﻿using RecipeLibrary.Parse;
-namespace povarenok.ru
+
+namespace RecipeLibrary.ParsePage
 {
     internal class PovarenokPageSettings : IParserPageSettings
     {
@@ -8,4 +9,20 @@ namespace povarenok.ru
         public string SuffixPopular { get; set; } = "?sort=rating&order=desc";
         public string SuffixName { get; set; } = "?name={RecipeName}";
         public int MaxPageId { get; set; } = 0; // TODO: Определить количество.
+
+        public int PageId { get; set; }
+        public string RecipeName { get; }
+
+
+
+        PovarenokPageSettings(int pageId)
+        {
+            PageId = pageId;
+        }
+
+        PovarenokPageSettings(int pageId, string recipeName) : this(pageId)
+        {
+            RecipeName = recipeName;
+        }
     }
+}
