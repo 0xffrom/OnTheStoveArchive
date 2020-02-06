@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AngleSharp.Html.Dom;
 using RecipeLibrary.Objects;
+using RecipeLibrary.Objects.Boxes;
 using RecipeLibrary.Objects.Boxes.Elements;
 
 namespace RecipeLibrary.ParseRecipe
@@ -31,9 +33,48 @@ namespace RecipeLibrary.ParseRecipe
                 .Where(element => element.ClassName != null && element.ClassName == "ingredients-bl")
                 .ToArray()[0];
 
-            //int countIngredientTitles = ingredientBody.QuerySelectorAll("p").
-                // TODO: Не закончено.
+            int countIngredientTitles = ingredientBody.QuerySelectorAll("ul").ToArray().Length;
             
+            IngredientBox[] ingredientBoxes = new IngredientBox[countIngredientTitles];
+            
+            for (int i = 0; i < countIngredientTitles; i++)
+            {
+                string titleIngredient = ingredientBody.QuerySelectorAll("p")
+                    .Select(item => item.TextContent).ToArray()[i];
+
+                var ingredientsArray = ingredientBody.QuerySelectorAll("ul")
+                    .ToArray()[i]
+                    .QuerySelectorAll("li")
+                    .Select(item => item.FirstElementChild)
+                    .ToArray();
+                
+                Ingredient[] ingredients = new Ingredient[ingredientsArray.Length];
+                
+                for (int j = 0; j < ingredientsArray.Length; j++)
+                {
+                    string whiteSpaceBug = ("\n                ");
+                    
+                    string name = ingredientsArray[j].FirstElementChild.FirstElementChild.TextContent
+                        .Replace(whiteSpaceBug, String.Empty);
+                    
+                    string unit = ingredientsArray[j].TextContent
+                        .Replace(name, string.Empty)
+                        .Replace(whiteSpaceBug, String.Empty);
+                    
+                    Ingredient ingredient = new Ingredient(name, unit);
+
+                    ingredients[j] = ingredient;
+                }
+                
+                IngredientBox ingredientBox = new IngredientBox(titleIngredient, ingredients);
+                
+                ingredientBoxes[i] = ingredientBox;
+            }
+            
+            // TODO: Подумать насчёт энергетической ценности.
+            var recipesArray
+            StepRecipeBox[] stepRecipeBoxes = new StepRecipeBox[];
+
 
 
 

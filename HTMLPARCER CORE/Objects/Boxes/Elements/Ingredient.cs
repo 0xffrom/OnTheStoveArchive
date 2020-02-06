@@ -5,7 +5,7 @@
     /// </summary>
     public class Ingredient
     {
-        public Ingredient(string title, string name, string unit)
+        public Ingredient(string name, string unit)
         {
             Name = name;
             Unit = unit;
