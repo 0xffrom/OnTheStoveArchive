@@ -31,7 +31,7 @@ namespace RecipeLibrary.ParseRecipe
                 .Where(element => element.ClassName != null && element.ClassName == "ingredients-bl")
                 .ToArray()[0];
 
-            int countIngredientTitles = ingredientBody.QuerySelectorAll("p").
+            //int countIngredientTitles = ingredientBody.QuerySelectorAll("p").
                 // TODO: Не закончено.
             
 
