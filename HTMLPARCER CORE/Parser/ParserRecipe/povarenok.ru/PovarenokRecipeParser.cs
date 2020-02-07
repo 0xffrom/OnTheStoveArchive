@@ -32,7 +32,8 @@ namespace RecipeLibrary.ParseRecipe
             
             Picture titlePicture = new Picture(urlTitlePicture);
 
-
+            Title = title;
+            TitlePicture = titlePicture;
             #endregion
 
             #region IngredientBox
@@ -77,6 +78,8 @@ namespace RecipeLibrary.ParseRecipe
                 IngredientBox ingredientBox = new IngredientBox(titleIngredient, ingredients);
                 
                 ingredientBoxes[i] = ingredientBox;
+
+                IngredientsBoxes = ingredientBoxes;
             }
 
             #endregion
@@ -104,6 +107,7 @@ namespace RecipeLibrary.ParseRecipe
                 stepRecipeBoxes[i] = stepRecipeBox;
             }
 
+            StepRecipesBoxes = stepRecipeBoxes;
             #endregion
 
             #region AdditionalBox
@@ -139,14 +143,11 @@ namespace RecipeLibrary.ParseRecipe
             
             Additional = additionalBox;
             #endregion
-            
-            // TODO: Допилить ретурн
 
 
+            RecipeFull recipeFull = new RecipeFull(Title, TitlePicture, IngredientsBoxes, StepRecipesBoxes, Additional);
 
-
-
-            throw new System.NotImplementedException();
+            return recipeFull;
         }
         
         // TODO: Подумать насчёт энергетической ценности.
