@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using RecipeLibrary.Objects;
 using RecipeLibrary.Objects.Boxes;
@@ -9,14 +10,16 @@ namespace RecipeLibrary.ParseRecipe
 {
     public class PovarenokRecipeParser : IParserRecipe<RecipeFull>
     {
-        //public string Title { get; }
-        //public Picture TitlePicture { get; }
-        //public IngredientBox[] IngredientsBoxes { get; }
-        //public StepRecipeBox[] StepRecipesBoxes { get; }
-        //public AdditionalBox Additional { get; }
+        private string Title { get; set; }
+        private Picture TitlePicture { get; set;}
+        private IngredientBox[] IngredientsBoxes { get; set;}
+        private StepRecipeBox[] StepRecipesBoxes { get; set;}
+        private AdditionalBox Additional { get; set;}
         
         public RecipeFull Parse(IHtmlDocument document)
         {
+            #region Title
+
             var recipeBody = document.QuerySelectorAll("article")
                 .Where(element => element.ClassName != null && element.ClassName == "item-bl item-about")
                 .ToArray()[0];
@@ -28,6 +31,11 @@ namespace RecipeLibrary.ParseRecipe
                 .ToArray()[0];
             
             Picture titlePicture = new Picture(urlTitlePicture);
+
+
+            #endregion
+
+            #region IngredientBox
 
             var ingredientBody = recipeBody.QuerySelectorAll("div")
                 .Where(element => element.ClassName != null && element.ClassName == "ingredients-bl")
@@ -70,12 +78,69 @@ namespace RecipeLibrary.ParseRecipe
                 
                 ingredientBoxes[i] = ingredientBox;
             }
+
+            #endregion
+
+            #region StepRecipeBox
+
+            var recipesArray = ingredientBody.QuerySelectorAll("div")
+                .Where(item =>
+                    item.ClassName != null && item.ClassName.Contains("cooking-bl") &&
+                    item.Attributes[1].Value != null && item.Attributes[1].Value.Contains("recipeInstructions")).ToArray();
+            int countRecipes = recipesArray.Length;
             
-            // TODO: Подумать насчёт энергетической ценности.
-            var recipesArray
-            StepRecipeBox[] stepRecipeBoxes = new StepRecipeBox[];
+            StepRecipeBox[] stepRecipeBoxes = new StepRecipeBox[countRecipes];
 
+            for (int i = 0; i < countRecipes; i++)
+            {
+                string pictureUrl = recipesArray[i].FirstElementChild.FirstElementChild.Attributes[2].Value;
+                string description = recipesArray[i].LastElementChild.TextContent;
+                
+                Picture picture = new Picture(pictureUrl);
+                PictureBox pictureBox = new PictureBox(new Picture[1] {picture});
+                
+                StepRecipeBox stepRecipeBox = new StepRecipeBox(description, pictureBox);
 
+                stepRecipeBoxes[i] = stepRecipeBox;
+            }
+
+            #endregion
+
+            #region AdditionalBox
+
+            var additionalBody = recipeBody.QuerySelectorAll("div")
+                .Where(element => element.ClassName == null && element.Attributes.Length == 0).ToArray()[0];
+
+            var imagesArray = additionalBody.QuerySelectorAll("img")
+                .Select(item => "http://www.povarenok.ru/" + item.Attributes[2].Value)
+                .ToArray();
+            
+            Picture[] pictures = new Picture[imagesArray.Length];
+            
+            for (int i = 0; i < imagesArray.Length; i++)
+            {
+                Picture picture = new Picture(imagesArray[i]);
+
+                pictures[i] = picture;
+            }
+            
+            PictureBox picturesBox = new PictureBox(pictures);
+
+            string textAdditional = additionalBody.TextContent;
+
+            string videoUrl = recipeBody.QuerySelectorAll("div")
+                .Where(element => element.ClassName != null && element.ClassName.Contains("video-bl"))
+                .Select(element => element.FirstElementChild.FirstElementChild.Attributes[0].Value)
+                .ToArray()[0];
+            
+            
+            Video video = new Video(videoUrl);
+            AdditionalBox additionalBox = new AdditionalBox(textAdditional, picturesBox, video);
+            
+            Additional = additionalBox;
+            #endregion
+            
+            // TODO: Допилить ретурн
 
 
 
@@ -83,5 +148,7 @@ namespace RecipeLibrary.ParseRecipe
 
             throw new System.NotImplementedException();
         }
+        
+        // TODO: Подумать насчёт энергетической ценности.
     }
 }
