@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using RecipeLibrary.Parse;
+using RecipeLibrary.Parser.ParserPage.Core;
 
 namespace RecipeLibrary.ParsePage
 {

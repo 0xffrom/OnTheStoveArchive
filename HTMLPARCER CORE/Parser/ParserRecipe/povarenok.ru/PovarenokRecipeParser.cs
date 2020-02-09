@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using RecipeLibrary.Objects;
 using RecipeLibrary.Objects.Boxes;
 using RecipeLibrary.Objects.Boxes.Elements;
+using RecipeLibrary.Parser.ParserRecipe.Core;
 
-namespace RecipeLibrary.ParseRecipe
+namespace RecipeLibrary.Parser.ParserRecipe.povarenok.ru
 {
     public class PovarenokRecipeParser : IParserRecipe<RecipeFull>
     {

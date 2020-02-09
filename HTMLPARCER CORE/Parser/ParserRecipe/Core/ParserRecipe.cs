@@ -1,8 +1,9 @@
-﻿using AngleSharp.Html.Parser;
-using System;
+﻿using System;
+using AngleSharp.Html.Parser;
 using RecipeLibrary.Parse;
+using RecipeLibrary.ParseRecipe;
 
-namespace RecipeLibrary.ParseRecipe
+namespace RecipeLibrary.Parser.ParserRecipe.Core
 {
     internal class ParserRecipe<T> where T : class
     {
@@ -46,7 +47,6 @@ namespace RecipeLibrary.ParseRecipe
             Worker();
 
         }
-
 
         private static readonly Random random = new Random();
         private static int GetPageId(int maxPage) => random.Next(0, maxPage + 1);

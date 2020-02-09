@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using RecipeLibrary.Objects;
 using RecipeLibrary.Objects.Boxes.Elements;
+using RecipeLibrary.Parser.ParserPage.Core;
 
-namespace RecipeLibrary.ParsePage
+namespace RecipeLibrary.Parser.ParserPage.povarenok.ru
 {
     class PovarenokPageParser : IParserPage<RecipeShort[]>
     {
@@ -14,9 +16,9 @@ namespace RecipeLibrary.ParsePage
             var recipesList = document.QuerySelectorAll("article")
                 .Where(item => item.ClassName != null && item.ClassName.Contains("item-bl"));
 
-            int countRecipes = recipesList.Count();
+            var recipeBlocks = recipesList as IElement[] ?? recipesList.ToArray();
 
-            foreach (var recipeBlock in recipesList)
+            foreach (var recipeBlock in recipeBlocks)
             {
                 string url = recipeBlock.QuerySelectorAll("div")
                     .Where(item => item.ClassName != null && item.ClassName.Contains("m-img desktop-img conima"))

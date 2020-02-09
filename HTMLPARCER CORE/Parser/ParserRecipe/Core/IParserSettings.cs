@@ -1,4 +1,4 @@
-﻿namespace RecipeLibrary.ParseRecipe
+﻿namespace RecipeLibrary.Parser.ParserRecipe.Core
 {
     public interface IParserRecipeSettings
     { 

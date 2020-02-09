@@ -1,8 +1,9 @@
-﻿using AngleSharp.Html.Parser;
-using System;
+﻿using System;
+using AngleSharp.Html.Parser;
 using RecipeLibrary.Parse;
+using RecipeLibrary.ParsePage;
 
-namespace RecipeLibrary.ParsePage
+namespace RecipeLibrary.Parser.ParserPage.Core
 {
     internal class ParserPage<T> where T : class
     {
@@ -39,15 +40,8 @@ namespace RecipeLibrary.ParsePage
 
         internal event Action<object, T> OnNewData;
 
-        internal void StartParsePage(T obj)
-        {
-            if (obj.GetType().Name != "RecipeShort[]")
-                throw new ParserException("Unknown object");
-            Worker();
-
-        }
-
-
+        internal void StartParsePage() => Worker();
+        
         private static readonly Random random = new Random();
         private static int GetPageId(int maxPage) => random.Next(0, maxPage + 1);
 
@@ -59,11 +53,11 @@ namespace RecipeLibrary.ParsePage
                 pageId = Settings.PageId;
             else
                 pageId = GetPageId(maxPage);
-
-            string source;
-            string recipeName;
             
-            recipeName = Settings.RecipeName == null ? String.Empty : Settings.RecipeName;
+            string recipeName;
+            recipeName = Settings.RecipeName;
+            
+            string source;
             source = await loader.GetSource(pageId, recipeName);
             
             var domParser = new HtmlParser();
