@@ -39,7 +39,7 @@ namespace WebServer.Controllers
                 {
                     section = lineResponse;
                 }
-                else if (int.TryParse(lineResponse, out pageId)) ;
+                else if (int.TryParse(lineResponse, out pageId));
                 else
                 {
                     recipeName = lineResponse;
