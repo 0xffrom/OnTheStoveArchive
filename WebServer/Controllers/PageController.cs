@@ -14,11 +14,6 @@ namespace WebServer.Controllers
     [Route("[controller]")]
     public class PageController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<PageController> _logger;
 
         public PageController(ILogger<PageController> logger)
@@ -26,27 +21,53 @@ namespace WebServer.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<RecipeShort> Get()
+        // RESPONSE: section=<section>&recipeName=<recipe>&page=<page>
+        //           recipeName=<recipe>&section=<section>&page=<page>
+        [HttpGet("{response}", Name = "Response")]
+        public IEnumerable<RecipeShort> GetByResponse(string response)
         {
-            var rng = new Random();
-           // return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-           //     {
-           //        Date = DateTime.Now.AddDays(index),
-           //       TemperatureC = rng.Next(-20, 55),
-           //       Summary = Summaries[rng.Next(Summaries.Length)]
-           //   })
-           //   .ToArray();
-           //RecipeShort[] recipeShorts = GetPage("1", "1", 1);
-           
-           RecipeShort[] recipeShorts = new RecipeShort[2]
-           {
-               new RecipeShort("TEST1", new Picture("url picture"), "urlchik" ),
-               new RecipeShort("TEST2", new Picture("urlochka"), "ssilka" )
-           };
-           
-           // TODO: Тебе нужно изучить таски, чтобы ждать ассинхроннго выполнения метода.
-           return Enumerable.Range(1, recipeShorts.Length).Select(index => recipeShorts[index-1]).ToArray();
+            string section = String.Empty;
+            string recipeName = String.Empty;
+            int pageId = 1;
+
+
+            string[] responses = response.Split('&');
+            foreach (string res in responses)
+            {
+                string lineResponse = res.Substring(res.IndexOf('=') + 1).ToLower();
+                if (lineResponse == "new" || lineResponse == "random" || lineResponse == "popular" || lineResponse == "recipe")
+                {
+                    section = lineResponse;
+                }
+                else if (int.TryParse(lineResponse, out pageId)) ;
+                else
+                {
+                    recipeName = lineResponse;
+                }
+            }
+
+
+            GetData getData = new GetData();
+
+            try
+            {
+                getData.GetPage(section, pageId, recipeName);
+            }
+            catch
+            {
+                return Enumerable.Range(1, 1)
+                    .Select(index => new RecipeShort("error", new Picture("error"), "error"))
+                    .ToArray();
+            }
+
+            while (getData.isSuccesful == false)
+            {
+                // TODO: Полностью переделать реализацию ожидания.
+            }
+
+            Console.WriteLine($"response: <{response}> => pageId: <{pageId}>, section: <{section}>, recipeName: <{recipeName}>");
+            RecipeShort[] recipeShorts = getData.RecipeShorts.ToArray();
+            return Enumerable.Range(1, recipeShorts.Length).Select(index => recipeShorts[index - 1]).ToArray();
         }
     }
 }

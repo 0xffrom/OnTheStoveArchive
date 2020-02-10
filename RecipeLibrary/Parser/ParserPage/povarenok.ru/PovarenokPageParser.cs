@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
@@ -36,10 +37,7 @@ namespace RecipeLibrary.Parser.ParserPage.povarenok.ru
 
                 listRecipes.Add(recipeShort);
             }
-
-            // TODO: Потестить.
-
-
+            
             return listRecipes.ToArray();
         }
     }
