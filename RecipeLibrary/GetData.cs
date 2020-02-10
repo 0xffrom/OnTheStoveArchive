@@ -11,7 +11,7 @@ namespace RecipeLibrary
     {
         private static void Parser_OnNewData(object arg1, RecipeShort[] list)
         {
-
+            
         }
         
         // response example: ....code=popular&page=1&findName=Чебурек
