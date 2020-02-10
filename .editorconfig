@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# DV2001: Нет связанных схем зависимостей
+dotnet_diagnostic.DV2001.severity = none
