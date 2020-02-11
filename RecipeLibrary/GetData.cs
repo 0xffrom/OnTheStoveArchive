@@ -10,7 +10,6 @@ namespace RecipeLibrary
     public class GetData
     {
         public List<RecipeShort> RecipeShorts { get; private set; } = new List<RecipeShort>();
-        private RecipeFull _recipeFull;
 
         private const int countOfSites = 1;
         private int count = 0;
@@ -27,7 +26,7 @@ namespace RecipeLibrary
                 isSuccesful = true;
         }
 
-        // response example: ....code=popular&page=1&findName=Чебурек
+
         public void GetPage(string section, int page, string findName = null)
         {
             #region Povarenok.ru

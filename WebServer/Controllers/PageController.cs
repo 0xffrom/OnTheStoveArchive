@@ -32,18 +32,19 @@ namespace WebServer.Controllers
 
 
             string[] responses = response.Split('&');
+
             foreach (string res in responses)
             {
+                Console.WriteLine(res);
                 string lineResponse = res.Substring(res.IndexOf('=') + 1).ToLower();
+
                 if (lineResponse == "new" || lineResponse == "random" || lineResponse == "popular" || lineResponse == "recipe")
-                {
                     section = lineResponse;
-                }
-                else if (int.TryParse(lineResponse, out pageId));
+
+                else 
+                    if (int.TryParse(lineResponse, out pageId));
                 else
-                {
                     recipeName = lineResponse;
-                }
             }
 
 
@@ -53,8 +54,10 @@ namespace WebServer.Controllers
             {
                 getData.GetPage(section, pageId, recipeName);
             }
-            catch
+            catch(Exception exp)
             {
+                Console.WriteLine(exp.Message);
+
                 return Enumerable.Range(1, 1)
                     .Select(index => new RecipeShort("error", new Picture("error"), "error"))
                     .ToArray();
@@ -65,9 +68,9 @@ namespace WebServer.Controllers
                 // TODO: Полностью переделать реализацию ожидания.
             }
 
-            Console.WriteLine($"response: <{response}> => pageId: <{pageId}>, section: <{section}>, recipeName: <{recipeName}>");
-            RecipeShort[] recipeShorts = getData.RecipeShorts.ToArray();
-            return Enumerable.Range(1, recipeShorts.Length).Select(index => recipeShorts[index - 1]).ToArray();
+            Console.WriteLine($"response: <{response}>. PageId: <{pageId}>, section: <{section}>, recipeName: <{recipeName}>");
+
+            return Enumerable.Range(1, getData.RecipeShorts.Count).Select(index => getData.RecipeShorts[index - 1]).ToArray();
         }
     }
 }

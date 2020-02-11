@@ -29,7 +29,7 @@ namespace RecipeLibrary.ParsePage
             string currentUrl;
 
             currentUrl = url;
-            Console.WriteLine(_settings);
+
             switch (_settings.Section)
             {
                 case("new"):
@@ -39,8 +39,10 @@ namespace RecipeLibrary.ParsePage
                     currentUrl += _settings.SuffixPopular;
                     break;
                 case("recipe"):
-                    Console.WriteLine("Я тут");
                     currentUrl += _settings.SuffixRecipe;
+                    break;
+                default:
+                    currentUrl += _settings.SuffixId;
                     break;
             }
             currentUrl = currentUrl
@@ -48,6 +50,7 @@ namespace RecipeLibrary.ParsePage
                 .Replace("{RecipeName}", recipeName);
 
             Console.WriteLine($"Parsing URL: {currentUrl}");
+
             var response = await client.GetAsync(currentUrl);
 
             string source;
@@ -56,7 +59,6 @@ namespace RecipeLibrary.ParsePage
 
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();
-
 
             else
                 throw new ParserException("Error loading page");

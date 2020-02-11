@@ -43,22 +43,20 @@ namespace RecipeLibrary.Parser.ParserPage.Core
         internal void StartParsePage() => Worker();
         
         private static readonly Random random = new Random();
-        private static int GetPageId(int maxPage) => random.Next(0, maxPage + 1);
+        private static int GetPageId(int maxPage) => random.Next(1, maxPage + 1);
 
         private async void Worker()
         {
 
-            int pageId = 1;
-            if (Settings.PageId != 0)
-                pageId = Settings.PageId;
-            else if(Settings.Section == "random")
+            int pageId = Settings.PageId;
+
+            if (Settings.Section == "random")
                 pageId = GetPageId(Settings.MaxPageId);
-            
+
             string recipeName;
             recipeName = Settings.RecipeName;
-            string source;
-            
-            
+
+            string source;            
             source = await loader.GetSource(pageId, recipeName);
             
             var domParser = new HtmlParser();

@@ -10,8 +10,9 @@ namespace RecipeLibrary.Parser.ParserPage.povarenok.ru
         public string SuffixNew { get; set; } = "~{PageId}/?sort=new&order=desc";
         public string SuffixPopular { get; set; } = "~{PageId}/?sort=rating&order=desc";
         public string SuffixRecipe { get; set; } = "search/~{PageId}/?name={RecipeName}#searchformtop";
+        public string SuffixId { get; set; } = "~{PageId}/";
         public string Section { get; set; }
-        public int MaxPageId { get; set; } = 10000; // TODO: Определить количество.
+        public int MaxPageId { get; set; } = 9234;
         public int PageId { get; set; }
         public string RecipeName { get; }
 
@@ -32,7 +33,7 @@ namespace RecipeLibrary.Parser.ParserPage.povarenok.ru
             // абвгдеёжзийклмнопрстуфхцчшщъыьэюя =>
             // %E0%E1%E2%E3%E4%E5%B8%E6%E7%E8%E9%EA%EB%EC%ED%EE%EF%F0%F1%F2%F3%F4%F5%F6%F7%F8%F9%FA%FB%FC%FD%FE%FF
 
-            Dictionary<char, string> valuePairs = new Dictionary<char, string>()
+            var valuePairs = new Dictionary<char, string>()
             {
                 {'a', "E0"}, {'б', "E1"}, {'в', "E2"}, {'г', "E3"}, {'д', "E4"}, {'е', "E5"},
                 {'ё', "B8"}, {'ж', "E6"}, {'з', "E7"}, {'и', "E8"}, {'й', "E9"}, {'к', "EA"},
@@ -46,7 +47,7 @@ namespace RecipeLibrary.Parser.ParserPage.povarenok.ru
 
             foreach (char symb in recipeName)
                 url += '%' + valuePairs.FirstOrDefault(item => item.Key == symb).Value;
-            throw new System.Exception();
+            return url;
         }
 
     }
