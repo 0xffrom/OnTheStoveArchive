@@ -1,6 +1,7 @@
 ﻿using System;
 using RecipeLibrary.Objects;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using RecipeLibrary.Parser.ParserRecipe.Core;
 using RecipeLibrary.Parser.ParserPage.Core;
 using RecipeLibrary.Parser.ParserPage.povarenok.ru;
@@ -11,19 +12,16 @@ namespace RecipeLibrary
     {
         public List<RecipeShort> RecipeShorts { get; private set; } = new List<RecipeShort>();
 
-        private const int countOfSites = 1;
-        private int count = 0;
-
-        public bool isSuccesful = false;
-
+        private int countOfSites = 1;
+        public bool IsCompleted = false;
         private void Parser_OnNewData(object arg, RecipeShort[] list)
         {
-            count++;
+            countOfSites--;
             foreach (var item in list)
-                RecipeShorts.Add(item);
+                    RecipeShorts.Add(item);
+            if (countOfSites == 0)
+                IsCompleted = true;
 
-            if (count == countOfSites)
-                isSuccesful = true;
         }
 
 
@@ -35,11 +33,10 @@ namespace RecipeLibrary
                 (new PovarenokPageParser(), new PovarenokPageSettings(section, page, findName));
             povarenok.OnNewData += Parser_OnNewData;
             povarenok.StartParsePage();
-
             #endregion
         }
     }
-
+    
     class GetRecipe
     {
     }

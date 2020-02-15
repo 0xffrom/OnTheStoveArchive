@@ -35,14 +35,13 @@ namespace WebServer.Controllers
 
             foreach (string res in responses)
             {
-                Console.WriteLine(res);
                 string lineResponse = res.Substring(res.IndexOf('=') + 1).ToLower();
 
-                if (lineResponse == "new" || lineResponse == "random" || lineResponse == "popular" || lineResponse == "recipe")
+                if (lineResponse == "new" || lineResponse == "random" || lineResponse == "popular" ||
+                    lineResponse == "recipe")
                     section = lineResponse;
 
-                else 
-                    if (int.TryParse(lineResponse, out pageId));
+                else if (int.TryParse(lineResponse, out pageId)) ;
                 else
                     recipeName = lineResponse;
             }
@@ -53,24 +52,22 @@ namespace WebServer.Controllers
             try
             {
                 getData.GetPage(section, pageId, recipeName);
+                while (!getData.IsCompleted)
+                {
+                    // TODO: Переделать этот ужасный костыль.
+                }
+
+                return Enumerable.Range(1, getData.RecipeShorts.Count).Select(index => getData.RecipeShorts[index - 1])
+                    .ToArray();
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
-                Console.WriteLine(exp.Message);
+                Console.WriteLine(exp);
 
                 return Enumerable.Range(1, 1)
                     .Select(index => new RecipeShort("error", new Picture("error"), "error"))
                     .ToArray();
             }
-
-            while (getData.isSuccesful == false)
-            {
-                // TODO: Полностью переделать реализацию ожидания.
-            }
-
-            Console.WriteLine($"response: <{response}>. PageId: <{pageId}>, section: <{section}>, recipeName: <{recipeName}>");
-
-            return Enumerable.Range(1, getData.RecipeShorts.Count).Select(index => getData.RecipeShorts[index - 1]).ToArray();
         }
     }
 }

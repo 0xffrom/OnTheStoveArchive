@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AngleSharp.Html.Parser;
 using RecipeLibrary.Parse;
 using RecipeLibrary.ParsePage;
@@ -36,9 +37,8 @@ namespace RecipeLibrary.Parser.ParserPage.Core
         {
             this.Settings = parserSettings;
         }
-
-
-        internal event Action<object, T> OnNewData;
+        
+        internal event EventHandler<T> OnNewData;
 
         internal void StartParsePage() => Worker();
         
