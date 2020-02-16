@@ -1,7 +1,6 @@
 ﻿using System;
 using AngleSharp.Html.Parser;
 using RecipeLibrary.Parse;
-using RecipeLibrary.ParseRecipe;
 
 namespace RecipeLibrary.Parser.ParserRecipe.Core
 {
@@ -27,12 +26,12 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
             }
         }
 
-        internal ParserRecipe(IParserRecipe<T> parser)
+        public ParserRecipe(IParserRecipe<T> parser)
         {
             this.parser = parser;
         }
 
-        internal ParserRecipe(IParserRecipe<T> parser, IParserRecipeSettings parserSettings) : this(parser)
+        public ParserRecipe(IParserRecipe<T> parser, IParserRecipeSettings parserSettings) : this(parser)
         {
             this.parserSettings = parserSettings;
         }
@@ -40,13 +39,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
 
         internal event Action<object, T> OnNewData;
 
-        internal void StartParsePage(T obj)
-        {
-            if (obj.GetType().Name != "RecipeFull")
-                throw new ParserException("Unknown object");
-            Worker();
-
-        }
+        internal void StartParseRecipe() => Worker();
 
         private static readonly Random random = new Random();
         private static int GetPageId(int maxPage) => random.Next(0, maxPage + 1);

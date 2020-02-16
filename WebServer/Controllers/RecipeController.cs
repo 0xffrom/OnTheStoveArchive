@@ -13,27 +13,24 @@ namespace WebServer.Controllers
 {
     [ApiController]
     //[Route("[controller]")]
-    public class PageController : ControllerBase
+    public class RecipeController : ControllerBase
     {
         private readonly ILogger<PageController> _logger;
 
-        public PageController(ILogger<PageController> logger)
+        public RecipeController(ILogger<PageController> logger)
         {
             _logger = logger;
         }
 
         // RESPONSE: ?section=<section>&recipeName=<recipe>&page=<page>
         //           ?recipeName=<recipe>&section=<section>&page=<page>
-        [HttpGet("getPage")]
-        public IEnumerable<RecipeShort> Get(string section, string page = "1", string recipeName = null)
+        [HttpGet("getRecipe")]
+        public IEnumerable<RecipeShort> Get(string url)
         {
-            if (recipeName == null)
-                recipeName = string.Empty;
-
             GetData getData = new GetData();
             try
             {
-                getData.GetPage(section, int.Parse(page), recipeName.ToLower());
+                getData.GetRecipe(url);
                 while (!getData.IsCompleted)
                 {
                     // TODO: Переделать этот ужасный костыль.

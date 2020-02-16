@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
 using AngleSharp.Html.Parser;
-using RecipeLibrary.Parse;
-using RecipeLibrary.ParsePage;
 
 namespace RecipeLibrary.Parser.ParserPage.Core
 {

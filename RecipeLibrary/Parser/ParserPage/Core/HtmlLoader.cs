@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 using RecipeLibrary.Parse;
 using RecipeLibrary.Parser.ParserPage.Core;
-using static System.Text.Encoding;
 
-namespace RecipeLibrary.ParsePage
+namespace RecipeLibrary.Parser.ParserPage.Core
 {
     public class HtmlLoader
     {

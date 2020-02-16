@@ -1,10 +1,9 @@
-﻿using System;
-using RecipeLibrary.Objects;
+﻿using RecipeLibrary.Objects;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using RecipeLibrary.Parser.ParserRecipe.Core;
 using RecipeLibrary.Parser.ParserPage.Core;
 using RecipeLibrary.Parser.ParserPage.povarenok.ru;
+using RecipeLibrary.Parser.ParserRecipe.Core;
+using RecipeLibrary.Parser.ParserRecipe.povarenok.ru;
 
 namespace RecipeLibrary
 {
@@ -28,7 +27,6 @@ namespace RecipeLibrary
         public void GetPage(string section, int page, string findName = null)
         {
             #region Povarenok.ru
-
             ParserPage<RecipeShort[]> povarenok = new ParserPage<RecipeShort[]>
                 (new PovarenokPageParser(), new PovarenokPageSettings(section, page, findName));
             povarenok.OnNewData += Parser_OnNewData;
@@ -39,5 +37,27 @@ namespace RecipeLibrary
     
     class GetRecipe
     {
+
+        public RecipeFull RecipeFull;
+
+        public bool IsCompleted = false;
+        private void Parser_OnNewData(object arg, RecipeFull recipeFull)
+        {
+            RecipeFull = recipeFull;
+            IsCompleted = true;
+
+        }
+
+
+        public GetRecipe(string url)
+        {
+            #region Povarenok.ru
+            ParserRecipe<RecipeFull> povarenok = new ParserRecipe<RecipeFull>
+                (new PovarenokRecipeParser(), new PovarenokRecipeSettings(url));
+            povarenok.OnNewData += Parser_OnNewData;
+            povarenok.StartParseRecipe();
+            #endregion
+        }
+
     }
 }

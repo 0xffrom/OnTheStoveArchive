@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph DataVirtualized="True" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="(@1)" Category="CodeSchema_Assembly" Bounds="0,0,132.57,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(a8ad85b8-38eb-4c25-b8be-0cbe2c61ee0d.OutputPath)" Group="Collapsed" Label="WebServer.dll" />
+    <Node Id="(@1)" Category="CodeSchema_Assembly" Bounds="2,-46,132.57,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(a8ad85b8-38eb-4c25-b8be-0cbe2c61ee0d.OutputPath)" Group="Collapsed" Label="WebServer.dll" UseManualLocation="True" />
   </Nodes>
   <Links />
   <Categories>
@@ -25,6 +25,7 @@
     <Property Id="Layout" DataType="System.String" />
     <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
     <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
     <Property Id="Value" DataType="System.String" />
     <Property Id="ValueLabel" DataType="System.String" />
     <Property Id="Visibility" Label="Visibility" Description="Defines whether a node in the graph is visible or not" DataType="System.Windows.Visibility" />

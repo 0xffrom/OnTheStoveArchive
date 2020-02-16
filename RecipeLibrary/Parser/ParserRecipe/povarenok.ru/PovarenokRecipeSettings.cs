@@ -6,7 +6,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.povarenok.ru
     {
         public string Url { get; }
 
-        PovarenokRecipeSettings(string url)
+        public PovarenokRecipeSettings(string url)
         {
             Url = url;
         }

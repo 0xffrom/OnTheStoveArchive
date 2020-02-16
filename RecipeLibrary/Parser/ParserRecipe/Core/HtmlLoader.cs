@@ -2,9 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using RecipeLibrary.Parse;
-using RecipeLibrary.Parser.ParserRecipe.Core;
 
-namespace RecipeLibrary.ParseRecipe
+namespace RecipeLibrary.Parser.ParserRecipe.Core
 {
     public class HtmlLoader
     {
