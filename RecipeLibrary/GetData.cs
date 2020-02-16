@@ -22,7 +22,23 @@ namespace RecipeLibrary
                 IsCompleted = true;
 
         }
+        public RecipeFull RecipeFull;
+        
+        private void Parser_OnNewData(object arg, RecipeFull recipeFull)
+        {
+            RecipeFull = recipeFull;
+            IsCompleted = true;
 
+        }
+        public void GetRecipe(string url)
+        {
+            #region Povarenok.ru
+            ParserRecipe<RecipeFull> povarenok = new ParserRecipe<RecipeFull>
+                (new PovarenokRecipeParser(), new PovarenokRecipeSettings(url));
+            povarenok.OnNewData += Parser_OnNewData;
+            povarenok.StartParseRecipe();
+            #endregion
+        }
 
         public void GetPage(string section, int page, string findName = null)
         {
@@ -33,31 +49,5 @@ namespace RecipeLibrary
             povarenok.StartParsePage();
             #endregion
         }
-    }
-    
-    class GetRecipe
-    {
-
-        public RecipeFull RecipeFull;
-
-        public bool IsCompleted = false;
-        private void Parser_OnNewData(object arg, RecipeFull recipeFull)
-        {
-            RecipeFull = recipeFull;
-            IsCompleted = true;
-
-        }
-
-
-        public GetRecipe(string url)
-        {
-            #region Povarenok.ru
-            ParserRecipe<RecipeFull> povarenok = new ParserRecipe<RecipeFull>
-                (new PovarenokRecipeParser(), new PovarenokRecipeSettings(url));
-            povarenok.OnNewData += Parser_OnNewData;
-            povarenok.StartParseRecipe();
-            #endregion
-        }
-
     }
 }

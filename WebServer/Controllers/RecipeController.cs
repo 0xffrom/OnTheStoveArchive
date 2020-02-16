@@ -25,8 +25,9 @@ namespace WebServer.Controllers
         // RESPONSE: ?section=<section>&recipeName=<recipe>&page=<page>
         //           ?recipeName=<recipe>&section=<section>&page=<page>
         [HttpGet("getRecipe")]
-        public IEnumerable<RecipeShort> Get(string url)
+        public IEnumerable<RecipeFull> Get(string url)
         {
+            Console.WriteLine(url);
             GetData getData = new GetData();
             try
             {
@@ -36,7 +37,8 @@ namespace WebServer.Controllers
                     // TODO: Переделать этот ужасный костыль.
                 }
 
-                return Enumerable.Range(1, getData.RecipeShorts.Count).Select(index => getData.RecipeShorts[index - 1])
+                return Enumerable.Range(1, 1)
+                    .Select(index => getData.RecipeFull)
                     .ToArray();
             }
             catch (Exception exp)
@@ -44,7 +46,7 @@ namespace WebServer.Controllers
                 Console.WriteLine(exp);
 
                 return Enumerable.Range(1, 1)
-                    .Select(index => new RecipeShort("error", new Picture("error"), "error"))
+                    .Select(index => new RecipeFull(null,null,null,null, null))
                     .ToArray();
             }
         }

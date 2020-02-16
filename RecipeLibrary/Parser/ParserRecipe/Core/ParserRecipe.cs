@@ -28,12 +28,12 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
 
         public ParserRecipe(IParserRecipe<T> parser)
         {
-            this.parser = parser;
+            Parser = parser;
         }
 
         public ParserRecipe(IParserRecipe<T> parser, IParserRecipeSettings parserSettings) : this(parser)
         {
-            this.parserSettings = parserSettings;
+            Settings = parserSettings;
         }
 
 
@@ -41,13 +41,9 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
 
         internal void StartParseRecipe() => Worker();
 
-        private static readonly Random random = new Random();
-        private static int GetPageId(int maxPage) => random.Next(0, maxPage + 1);
-
         private async void Worker()
         {
-
-            var source = await loader.GetSource();
+            var source = await loader.GetSource(Settings.Url);
             
             var domParser = new HtmlParser();
             var document = await domParser.ParseDocumentAsync(source);
