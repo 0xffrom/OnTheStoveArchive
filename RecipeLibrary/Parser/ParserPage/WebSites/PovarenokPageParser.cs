@@ -6,7 +6,7 @@ using RecipeLibrary.Objects;
 using RecipeLibrary.Objects.Boxes.Elements;
 using RecipeLibrary.Parser.ParserPage.Core;
 
-namespace RecipeLibrary.Parser.ParserPage.povarenok.ru
+namespace RecipeLibrary.Parser.ParserPage.WebSites
 {
     class PovarenokPageParser : IParserPage<RecipeShort[]>
     {

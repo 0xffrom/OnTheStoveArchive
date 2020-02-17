@@ -1,29 +1,18 @@
 ﻿using System;
-using RecipeLibrary.Objects;
 using System.Collections.Generic;
-using RecipeLibrary.Parse;
+using System.Linq;
+using RecipeLibrary.Objects;
+using RecipeLibrary.Parser;
 using RecipeLibrary.Parser.ParserPage.Core;
-using RecipeLibrary.Parser.ParserPage.povarenok.ru;
 using RecipeLibrary.Parser.ParserRecipe.Core;
+using RecipeLibrary.Parser.ParserPage.WebSites;
 using RecipeLibrary.Parser.ParserRecipe.WebSites;
 
 namespace RecipeLibrary
 {
     public class GetData
     {
-        public List<RecipeShort> RecipeShorts { get; private set; } = new List<RecipeShort>();
-
-        private int countOfSites = 1;
         public bool IsCompleted = false;
-
-        private void Parser_OnNewData(object arg, RecipeShort[] list)
-        {
-            countOfSites--;
-            foreach (var item in list)
-                RecipeShorts.Add(item);
-            if (countOfSites == 0)
-                IsCompleted = true;
-        }
 
         public RecipeFull RecipeFull;
 
@@ -60,8 +49,34 @@ namespace RecipeLibrary
                 Console.WriteLine($"Exception. Message: {e.Message}. Source: {e.Source}");
                 IsCompleted = true;
             }
+
             #endregion
         }
+
+
+        public List<RecipeShort> RecipeShorts { get; private set; } = new List<RecipeShort>();
+
+        private int countOfSites = 2;
+
+        private static Random rng = new Random((int) DateTime.Now.Ticks & 0x0000FFFF);
+
+        private void Parser_OnNewData(object arg, RecipeShort[] list)
+        {
+            countOfSites--;
+            
+            foreach (var item in list)
+                RecipeShorts.Add(item);
+            
+            if (countOfSites != 0) return;
+            
+            // Random Sort
+            RecipeShorts = RecipeShorts.Select(i => new {I = i, sort = rng.Next()}).OrderBy(i => i.sort)
+                .Select(i => i.I).ToList();
+            
+            IsCompleted = true;
+
+        }
+
 
         public void GetPage(string section, int page, string findName = null)
         {
@@ -69,8 +84,15 @@ namespace RecipeLibrary
 
             ParserPage<RecipeShort[]> povarenok = new ParserPage<RecipeShort[]>
                 (new PovarenokPageParser(), new PovarenokPageSettings(section, page, findName));
+
             povarenok.OnNewData += Parser_OnNewData;
             povarenok.StartParsePage();
+
+            ParserPage<RecipeShort[]> povar = new ParserPage<RecipeShort[]>
+                (new PovarPageParser(), new PovarPageSettings(section, page, findName));
+
+            povar.OnNewData += Parser_OnNewData;
+            povar.StartParsePage();
 
             #endregion
         }

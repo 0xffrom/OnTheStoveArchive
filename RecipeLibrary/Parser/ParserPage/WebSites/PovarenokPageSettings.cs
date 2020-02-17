@@ -1,8 +1,8 @@
-﻿using RecipeLibrary.Parser.ParserPage.Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using RecipeLibrary.Parser.ParserPage.Core;
 
-namespace RecipeLibrary.Parser.ParserPage.povarenok.ru
+namespace RecipeLibrary.Parser.ParserPage.WebSites
 {
     internal class PovarenokPageSettings : IParserPageSettings
     {
