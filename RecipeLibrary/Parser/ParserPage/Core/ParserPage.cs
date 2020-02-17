@@ -19,7 +19,8 @@ namespace RecipeLibrary.Parser.ParserPage.Core
         internal IParserPageSettings Settings
         {
             get => parserSettings;
-            set {
+            set
+            {
                 parserSettings = value;
                 loader = new HtmlLoader(value);
             }
@@ -34,17 +35,16 @@ namespace RecipeLibrary.Parser.ParserPage.Core
         {
             this.Settings = parserSettings;
         }
-        
+
         internal event EventHandler<T> OnNewData;
 
         internal void StartParsePage() => Worker();
-        
+
         private static readonly Random random = new Random();
         private static int GetPageId(int maxPage) => random.Next(1, maxPage + 1);
 
         private async void Worker()
         {
-
             int pageId = Settings.PageId;
 
             if (Settings.Section == "random")
@@ -53,17 +53,16 @@ namespace RecipeLibrary.Parser.ParserPage.Core
             string recipeName;
             recipeName = Settings.RecipeName;
 
-            string source;            
+            string source;
             source = await loader.GetSource(pageId, recipeName);
-            
+
             var domParser = new HtmlParser();
-            
+
             var document = await domParser.ParseDocumentAsync(source);
 
             var result = parser.Parse(document);
-            
-            OnNewData?.Invoke(this, result);
 
+            OnNewData?.Invoke(this, result);
         }
     }
 }

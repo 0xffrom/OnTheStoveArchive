@@ -43,14 +43,22 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
 
         private async void Worker()
         {
-            var source = await loader.GetSource(Settings.Url);
-            
-            var domParser = new HtmlParser();
-            var document = await domParser.ParseDocumentAsync(source);
+            try
+            {
+                var source = await loader.GetSource(Settings.Url);
 
-            var result = parser.Parse(document);
+                var domParser = new HtmlParser();
+                var document = await domParser.ParseDocumentAsync(source);
 
-            OnNewData?.Invoke(this, result);
+                var result = parser.Parse(document);
+
+                OnNewData?.Invoke(this, result);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"Exception. Message: {e.Message}. Source: {e.Source}");
+                OnNewData?.Invoke(this, null);
+            }
 
         }
     }

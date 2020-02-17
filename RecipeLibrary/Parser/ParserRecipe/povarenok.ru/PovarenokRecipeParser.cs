@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Channels;
-using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
-using AngleSharp.Css;
 using RecipeLibrary.Objects;
 using RecipeLibrary.Objects.Boxes;
 using RecipeLibrary.Objects.Boxes.Elements;
 using RecipeLibrary.Parser.ParserRecipe.Core;
 
-namespace RecipeLibrary.Parser.ParserRecipe.povarenok.ru
+namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 {
     public class PovarenokRecipeParser : IParserRecipe<RecipeFull>
     {
+        private string Url { get; set; }
         private string Title { get; set; }
         private Picture TitlePicture { get; set; }
-
         private string Description { get; set; }
         private IngredientBox[] IngredientsBoxes { get; set; }
         private StepRecipeBox[] StepRecipesBoxes { get; set; }
@@ -23,6 +20,10 @@ namespace RecipeLibrary.Parser.ParserRecipe.povarenok.ru
 
         public RecipeFull Parse(IHtmlDocument document)
         {
+            #region Url
+
+            #endregion
+
             var recipeBody = document.QuerySelectorAll("article")
                 .Where(element => element.ClassName != null && element.ClassName == "item-bl item-about")
                 .ToArray()[0];
@@ -75,7 +76,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.povarenok.ru
                 if (p.Any(element => element.Contains("Количество порций:")))
                     count++;
 
-                
+
                 string titleIngredient;
 
                 var titleBody = ingredientBody.QuerySelectorAll("p").ToArray();
@@ -90,29 +91,41 @@ namespace RecipeLibrary.Parser.ParserRecipe.povarenok.ru
                 var ingredientsArray = ingredientBody.QuerySelectorAll("ul")
                     .ToArray()[i]
                     .QuerySelectorAll("li")
-                    .Select(item => item.FirstElementChild)
                     .ToArray();
 
                 Ingredient[] ingredients = new Ingredient[ingredientsArray.Length];
 
                 for (int j = 0; j < ingredientsArray.Length; j++)
                 {
-                    string jumpSpaceBug = ("\n");
-                    string whiteSpaceBug = ("  ");
+                    //string jumpSpaceBug = ("\n");
+                    //string whiteSpaceBug = ("  ");
 
-                    string name = ingredientsArray[j].FirstElementChild.FirstElementChild.TextContent
-                        .Replace(jumpSpaceBug, String.Empty)
-                        .Replace(whiteSpaceBug, String.Empty);
+                    //string name = ingredientsArray[j].FirstElementChild.FirstElementChild.TextContent
+                    //    .Replace(jumpSpaceBug, String.Empty)
+                    //    .Replace(whiteSpaceBug, String.Empty);
 
-                    string unit = ingredientsArray[j].TextContent
-                        .Replace(name, String.Empty)
-                        .Replace(whiteSpaceBug, String.Empty)
-                        .Replace(jumpSpaceBug, String.Empty)
-                        .Replace("—", " ")
-                        .Replace("/", String.Empty);
+                    //string unit = ingredientsArray[j].TextContent
+                    //    .Replace(name, String.Empty)
+                    //    .Replace(whiteSpaceBug, String.Empty)
+                    //    .Replace(jumpSpaceBug, String.Empty)
+                    //    .Replace("—", " ")
+                    //   .Replace("/", String.Empty);
 
+                    string name = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
+                            item.Attributes[0] != null && item.Attributes[0].Value.Contains("name"))
+                        .Select(item => item.TextContent).First();
+
+                    string unit = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
+                            item.Attributes[0] != null && item.Attributes[0].Value.Contains("amount"))
+                        .Select(item => item.TextContent).First();
+
+                    name += ingredientsArray[j].TextContent.Replace(name, string.Empty)
+                        .Replace(unit, String.Empty)
+                        .Replace("\n", String.Empty)
+                        .Replace("  ", String.Empty)
+                        .Replace("—", String.Empty);
+                    
                     Ingredient ingredient = new Ingredient(name, unit);
-
                     ingredients[j] = ingredient;
                 }
 
@@ -160,25 +173,29 @@ namespace RecipeLibrary.Parser.ParserRecipe.povarenok.ru
 
             if (additionalBody != null)
             {
-                var imagesArray = additionalBody.QuerySelectorAll("img")
+                var imagesArray = additionalBody.QuerySelectorAll("a")
                     .ToArray();
 
                 Picture[] pictures = new Picture[imagesArray.Length];
 
                 for (int i = 0; i < imagesArray.Length; i++)
                 {
-                    Picture picture = new Picture("http://www.povarenok.ru/" + imagesArray[i].Attributes[1].Value);
+                    Picture picture = new Picture("http://www.povarenok.ru" + imagesArray[i].Attributes[0].Value);
 
                     pictures[i] = picture;
                 }
 
                 PictureBox picturesBox = new PictureBox(pictures);
 
-                string textAdditional = additionalBody.TextContent;
+                string whiteSpaceBug = ("  ");
+
+
+                string textAdditional = additionalBody.TextContent
+                    .Replace(whiteSpaceBug, String.Empty);
 
                 var videoArray = recipeBody.QuerySelectorAll("div")
                     .Where(element => element.ClassName != null && element.ClassName.Contains("video-bl"))
-                    .Select(element => element.FirstElementChild.FirstElementChild.Attributes[4].Value)
+                    .Select(element => element.FirstElementChild.FirstElementChild.Attributes[2].Value)
                     .ToArray();
 
                 string videoUrl = null;
@@ -194,13 +211,12 @@ namespace RecipeLibrary.Parser.ParserRecipe.povarenok.ru
             #endregion
 
 
-            RecipeFull recipeFull = new RecipeFull(Title, TitlePicture, Description, IngredientsBoxes, StepRecipesBoxes,
+            RecipeFull recipeFull = new RecipeFull(Url, Title, TitlePicture, Description, IngredientsBoxes,
+                StepRecipesBoxes,
                 Additional);
 
             return recipeFull;
         }
-
-        // TODO: ПРАВКА ДОПОЛНИТЕЛЬНОГО ТЕКСТА И ССЫЛОК НА ФОТКИ
-        // TODO: Подумать насчёт энергетической ценности.
+        
     }
 }

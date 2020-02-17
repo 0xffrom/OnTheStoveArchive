@@ -22,8 +22,7 @@ namespace WebServer.Controllers
             _logger = logger;
         }
 
-        // RESPONSE: ?section=<section>&recipeName=<recipe>&page=<page>
-        //           ?recipeName=<recipe>&section=<section>&page=<page>
+
         [HttpGet("getPage")]
         public IEnumerable<RecipeShort> Get(string section, string page = "1", string recipeName = null)
         {

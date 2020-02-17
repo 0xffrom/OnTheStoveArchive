@@ -21,16 +21,15 @@ namespace WebServer.Controllers
         {
             _logger = logger;
         }
-
-        // RESPONSE: ?section=<section>&recipeName=<recipe>&page=<page>
-        //           ?recipeName=<recipe>&section=<section>&page=<page>
+        
         [HttpGet("getRecipe")]
         public IEnumerable<RecipeFull> Get(string url)
         {
             Console.WriteLine(url);
-            GetData getData = new GetData();
             try
             {
+                GetData getData = new GetData();
+
                 getData.GetRecipe(url);
                 while (!getData.IsCompleted)
                 {
@@ -46,7 +45,7 @@ namespace WebServer.Controllers
                 Console.WriteLine(exp);
 
                 return Enumerable.Range(1, 1)
-                    .Select(index => new RecipeFull(null,null,null,null, null))
+                    .Select(index => new RecipeFull(null, null, null, null, null, null))
                     .ToArray();
             }
         }
