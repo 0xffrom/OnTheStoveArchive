@@ -10,7 +10,6 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
         public string SuffixNew { get; set; } = "~{PageId}/?sort=new&order=desc";
         public string SuffixPopular { get; set; } = "~{PageId}/?sort=rating&order=desc";
         public string SuffixRecipe { get; set; } = "search/~{PageId}/?name={RecipeName}#searchformtop";
-        public string SuffixId { get; set; } = "~{PageId}/";
         public string Section { get; set; }
         public int MaxPageId { get; set; } = 9234;
         public int PageId { get; set; }

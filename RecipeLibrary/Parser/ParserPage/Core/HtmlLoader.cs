@@ -38,7 +38,7 @@ namespace RecipeLibrary.Parser.ParserPage.Core
                     currentUrl += _settings.SuffixRecipe;
                     break;
                 default:
-                    currentUrl += _settings.SuffixId;
+                    currentUrl += _settings.SuffixNew;
                     break;
             }
             currentUrl = currentUrl
