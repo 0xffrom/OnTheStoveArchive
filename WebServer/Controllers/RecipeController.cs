@@ -21,7 +21,7 @@ namespace WebServer.Controllers
         {
             _logger = logger;
         }
-        
+
         [HttpGet("getRecipe")]
         public IEnumerable<RecipeFull> Get(string url)
         {
@@ -29,8 +29,8 @@ namespace WebServer.Controllers
             try
             {
                 GetData getData = new GetData();
-
                 getData.GetRecipe(url);
+                
                 while (!getData.IsCompleted)
                 {
                     // TODO: Переделать этот ужасный костыль.
@@ -42,10 +42,11 @@ namespace WebServer.Controllers
             }
             catch (Exception exp)
             {
-                Console.WriteLine(exp);
+                _logger.LogError($"{exp.Message}");
 
                 return Enumerable.Range(1, 1)
-                    .Select(index => new RecipeFull(null, null, null, null, null, null))
+                    .Select(index => new RecipeFull(null, null, null,
+                        null, null, null))
                     .ToArray();
             }
         }
