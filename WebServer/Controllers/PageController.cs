@@ -24,7 +24,7 @@ namespace WebServer.Controllers
 
 
         [HttpGet("getPage")]
-        public IEnumerable<RecipeShort> Get(string section, string page = "1", string recipeName = null)
+        public IEnumerable<RecipeShort> Get(string section, int page = 1, string recipeName = null)
         {
             if (recipeName == null)
                 recipeName = string.Empty;
@@ -32,7 +32,7 @@ namespace WebServer.Controllers
             GetData getData = new GetData();
             try
             {
-                getData.GetPage(section, int.Parse(page), recipeName.ToLower());
+                getData.GetPage(section, page, recipeName.ToLower());
                 while (!getData.IsCompleted)
                 {
                     // TODO: Переделать этот ужасный костыль.
