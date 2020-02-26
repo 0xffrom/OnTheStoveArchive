@@ -28,6 +28,17 @@ namespace RecipeLibrary
             povar.StartParsePage();
 
             #endregion
+
+
+            #region Edimdoma
+
+            ParserPage<RecipeShort[]> edimdoma = new ParserPage<RecipeShort[]>
+                (new EdimDomaPageParser(), new EdimDomaPageSettings(section, page, findName));
+
+            edimdoma.OnNewData += Parser_OnNewData;
+            edimdoma.StartParsePage();
+
+            #endregion
         }
     }
 }

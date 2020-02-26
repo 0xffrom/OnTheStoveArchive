@@ -10,7 +10,7 @@ namespace RecipeLibrary
         public RecipeFull RecipeFull;
         public List<RecipeShort> RecipeShorts { get; private set; } = new List<RecipeShort>();
         public bool IsCompleted = false;
-        private const int CountOfSites = 2;
+        private const int CountOfSites = 3;
 
         private void Parser_OnNewData(object arg, RecipeFull recipeFull)
         {
