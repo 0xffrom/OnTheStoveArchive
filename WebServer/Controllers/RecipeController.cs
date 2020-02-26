@@ -31,10 +31,10 @@ namespace WebServer.Controllers
                 GetData getData = new GetData();
                 getData.GetRecipe(url);
                 
-                while (!getData.IsCompleted)
-                {
-                    // TODO: Переделать этот ужасный костыль.
-                }
+                // while (!getData.IsCompleted)
+                // {
+                //     // TODO: Переделать этот ужасный костыль.
+                // }
 
                 return Enumerable.Range(1, 1)
                     .Select(index => getData.RecipeFull)

@@ -38,7 +38,7 @@ namespace RecipeLibrary
             catch (Exception e)
             {
                 Console.WriteLine($"Exception. Message: {e.Message}. Source: {e.Source}");
-                IsCompleted = true;
+                // IsCompleted = true;
             }
 
             #endregion

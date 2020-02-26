@@ -1,4 +1,6 @@
-﻿using RecipeLibrary.Objects;
+﻿using System;
+using System.Threading.Tasks;
+using RecipeLibrary.Objects;
 using RecipeLibrary.Parser.ParserPage.Core;
 using RecipeLibrary.Parser.ParserPage.WebSites;
 
@@ -6,7 +8,7 @@ namespace RecipeLibrary
 {
     public partial class GetData
     {
-        public void GetPage(string section, int page, string findName = null)
+        public async Task<RecipeShort[]> GetPage(string section, int page, string findName = null)
         {
             #region Povarenok.ru
 
@@ -39,6 +41,15 @@ namespace RecipeLibrary
             edimdoma.StartParsePage();
 
             #endregion
+
+            IsCompleted += GetRecipeShort;
+
+            return await GetRecipeShort;
+        }
+
+        private Task GetRecipeShort()
+        {
+            throw new NotImplementedException();
         }
     }
 }

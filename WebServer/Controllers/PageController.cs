@@ -24,7 +24,7 @@ namespace WebServer.Controllers
 
 
         [HttpGet("getPage")]
-        public IEnumerable<RecipeShort> Get(string section, int page = 1, string recipeName = null)
+        public async Task<IEnumerable<RecipeShort>> Get(string section, int page = 1, string recipeName = null)
         {
             if (recipeName == null)
                 recipeName = string.Empty;
@@ -32,13 +32,9 @@ namespace WebServer.Controllers
             GetData getData = new GetData();
             try
             {
-                getData.GetPage(section, page, recipeName.ToLower());
-                while (!getData.IsCompleted)
-                {
-                    // TODO: Переделать этот ужасный костыль.
-                }
+                var recipeShorts =  await getData.GetPage(section, page, recipeName.ToLower());
 
-                return Enumerable.Range(1, getData.RecipeShorts.Count).Select(index => getData.RecipeShorts[index - 1])
+                return Enumerable.Range(1, recipeShorts.Length).Select(index => recipeShorts[index - 1])
                     .ToArray();
             }
             catch (Exception exp)
