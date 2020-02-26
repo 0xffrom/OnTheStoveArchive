@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -13,6 +14,7 @@ namespace RecipeLibrary.Parser.ParserPage.Core
         private readonly string url;
 
         private IParserPageSettings _settings;
+
         public HtmlLoader(IParserPageSettings settings)
         {
             _settings = settings;
