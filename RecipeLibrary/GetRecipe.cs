@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using RecipeLibrary.Objects;
 using RecipeLibrary.Parser;
 using RecipeLibrary.Parser.ParserRecipe.Core;
@@ -8,7 +9,7 @@ namespace RecipeLibrary
 {
     public partial class GetData
     {
-        public void GetRecipe(string url)
+        public async Task<RecipeFull> GetRecipe(string url)
         {
             #region Povarenok.ru
 
@@ -40,8 +41,17 @@ namespace RecipeLibrary
                 Console.WriteLine($"Exception. Message: {e.Message}. Source: {e.Source}");
                 // IsCompleted = true;
             }
-
+            
             #endregion
+            
+            IsCompleted += GetCompleted;
+
+            while (!_isCompleted)
+            {
+                //
+            }
+
+            return RecipeFull;
         }
     }
 }

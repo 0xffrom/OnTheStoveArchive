@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using RecipeLibrary.Objects;
 using RecipeLibrary.Parser.ParserPage.Core;
@@ -30,8 +33,7 @@ namespace RecipeLibrary
             povar.StartParsePage();
 
             #endregion
-
-
+            
             #region Edimdoma
 
             ParserPage<RecipeShort[]> edimdoma = new ParserPage<RecipeShort[]>
@@ -42,14 +44,20 @@ namespace RecipeLibrary
 
             #endregion
 
-            IsCompleted += GetRecipeShort;
+            IsCompleted += GetCompleted;
 
-            return await GetRecipeShort;
+            while (!_isCompleted)
+            {
+                //
+            }
+
+            return RecipeShorts.ToArray();
         }
 
-        private Task GetRecipeShort()
+        private bool _isCompleted;
+        private void GetCompleted(object obj, EventArgs eventArgs)
         {
-            throw new NotImplementedException();
+            _isCompleted = true;
         }
     }
 }
