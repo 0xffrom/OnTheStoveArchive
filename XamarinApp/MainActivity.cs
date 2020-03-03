@@ -6,7 +6,8 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-
+using RecipesAndroid;
+using RecipesAndroid.Objects;
 namespace XamarinApp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
@@ -18,6 +19,12 @@ namespace XamarinApp
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_search);
+
+            var data = HttpGet.GetRecipes();
+
+            var adapter = new ArrayAdapter<RecipeShort>(this, Android.Resource.Layout.SimpleListItem1, data);
+
+
         }
        
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

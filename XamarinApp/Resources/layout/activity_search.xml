@@ -58,8 +58,10 @@
         </FrameLayout>
     </android.support.v7.widget.Toolbar>
 
-    <include
-        layout="@layout/content_main" />
+    <ListView
+          android:id = "@+id/listView1"
+          android:layout_width=""
+          android:layout_height=""/>
 
 
 </android.support.design.widget.CoordinatorLayout>
