@@ -11,7 +11,7 @@ namespace RecipesAndroid
     {
         private static async Task<string> GetSource()
         {
-            string currentUrl = "http://45.132.17.35/getPage?section=new";
+            string currentUrl = "http://45.132.17.35/getPage?section=random";
 
             var client = new HttpClient();
 

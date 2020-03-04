@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
@@ -8,11 +10,14 @@ using Android.Views;
 using Android.Widget;
 using RecipesAndroid;
 using RecipesAndroid.Objects;
+using RecipesAndroid.Objects.Boxes.Elements;
+
 namespace XamarinApp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        private ListView _listView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -20,9 +25,16 @@ namespace XamarinApp
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_search);
 
-            var data = HttpGet.GetRecipes();
+            List<RecipeShort> list = new List<RecipeShort>()
+            {
+                new RecipeShort("Тут титле", new Picture("Пикча"), "url"),
+                new RecipeShort("Тут титле", new Picture("Пикча"), "url")
+            };
 
-            var adapter = new ArrayAdapter<RecipeShort>(this, Android.Resource.Layout.SimpleListItem1, data);
+            _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
+            
+            RecipeShortAdapter adapter = new RecipeShortAdapter(this, list);
+            _listView.Adapter = adapter;
 
 
         }
