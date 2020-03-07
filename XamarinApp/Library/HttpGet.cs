@@ -1,19 +1,13 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿
+using Newtonsoft.Json;
 using RecipesAndroid.Objects;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Xamarin.Android.Net;
-using Xamarin.Forms;
 
 namespace RecipesAndroid
 {
-    // Android
-    public class HttpClientService
-    {
-        public HttpClient Client { get; } = new HttpClient(new AndroidClientHandler());
-    }
 
     public static class HttpGet
     {
@@ -21,11 +15,11 @@ namespace RecipesAndroid
         { 
             string currentUrl = "http://45.132.17.35/getPage?section=random";
 
-            var client = DependencyService.Get<HttpClientService>().Client;
-
-            string source = string.Empty;
+            var client = new HttpClient(new Xamarin.Android.Net.AndroidClientHandler());
 
             var response = await client.GetAsync(currentUrl);
+
+            string source = string.Empty;
 
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();

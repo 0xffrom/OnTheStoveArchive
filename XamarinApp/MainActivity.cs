@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
@@ -19,25 +21,38 @@ namespace XamarinApp
     {
         private ListView _listView;
 
+        private List<RecipeShort> recipes;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
             SetContentView(Resource.Layout.activity_search);
 
-            List<RecipeShort> list = new List<RecipeShort>()
-            {
-                new RecipeShort("Тут титле", new Picture("Пикча"), "url"),
-                new RecipeShort("Тут титле", new Picture("Пикча"), "url")
-            };
-
-            _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
-            
-            RecipeShortAdapter adapter = new RecipeShortAdapter(this, list);
-            _listView.Adapter = adapter;
-
+            UpdateListView();
 
         }
+
+        private async Task DoIt()
+        {
+            await Task.Run(() =>
+            {
+                recipes = HttpGet.GetRecipes();
+            });
+        }
+
+        private async void UpdateListView()
+        {
+            await DoIt();
+
+            _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
+
+            RecipeShortAdapter adapter = new RecipeShortAdapter(this, recipes);
+
+            _listView.Adapter = adapter;
+        }
+
        
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

@@ -4,33 +4,20 @@ using RecipesAndroid.Objects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Xamarin.Android.Net;
-using Xamarin.Forms;
 
 namespace RecipesAndroid
 {
-    // Android
-    public class HttpClientService
-    {
-        public HttpClient Client { get; } = new HttpClient(new AndroidClientHandler());
-    }
-
     public static class HttpGet
     {
         private static async Task<string> GetSource()
         { 
             string currentUrl = "http://45.132.17.35/getPage?section=random";
 
-            var client = DependencyService.Get<HttpClientService>().Client;
+            var client = new HttpClient();
 
             string source = string.Empty;
 
-            var response = await client.GetAsync(currentUrl);
-
-            if (response != null && response.StatusCode == HttpStatusCode.OK)
-                source = await response.Content.ReadAsStringAsync();
-
-            return source;
+            return await client.GetStringAsync(currentUrl);
         }
 
         public static List<RecipeShort> GetRecipes()
