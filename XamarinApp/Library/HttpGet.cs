@@ -27,9 +27,9 @@ namespace RecipesAndroid
             return source;
         }
 
-        public static List<RecipeShort> GetRecipes()
+        public static List<RecipeShort> GetRecipes(string query)
         {
-            string source = GetSource("getPage?section=random").Result;
+            string source = GetSource(query).Result;
 
             List<RecipeShort> recipes = JsonConvert.DeserializeObject<List<RecipeShort>>(source);
 

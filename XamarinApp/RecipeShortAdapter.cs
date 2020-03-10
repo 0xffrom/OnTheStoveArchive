@@ -46,18 +46,17 @@ namespace XamarinApp
                        + url.Split('/')[^1];
 
             if (!File.Exists(path))
-            {
-                using var client = new WebClient();
-                client.DownloadFile(url, path);
-            }
+                DownloadPicture(new WebClient(), url, path);
 
-            var uri = Uri.Parse(path);
+                var uri = Uri.Parse(path);
 
             imageView.SetImageURI(uri);
 
             return view;
         }
 
+        private async void DownloadPicture(WebClient client, string url, string path) =>
+            await client.DownloadFileTaskAsync(url, path);
         public override int Count => _list.Count;
 
         public override RecipeShort this[int position] => _list[position];

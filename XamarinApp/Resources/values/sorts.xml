@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sort_prompt">По популярности</string>
+    <string-array name="sort_array">
+        <item>По популярности</item>
+        <item>По новизне</item>
+        <item>По случайности</item>
+    </string-array>
+</resources> 

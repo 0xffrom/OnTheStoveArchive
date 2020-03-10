@@ -60,11 +60,20 @@
         </FrameLayout>
     </GridLayout>
 
+    <Spinner
+            android:text="CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_gravity="left"
+            android:background="#FEB22C"
+            android:prompt="@string/sort_prompt"
+    />
     <ListView
         android:id="@+id/listRecipeShorts"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="670dp">
+        android:layout_height="match_parent">
     </ListView>
 
 </LinearLayout>

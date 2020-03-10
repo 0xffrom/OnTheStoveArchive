@@ -1,8 +1,8 @@
-﻿namespace XamarinApp.Resources
+﻿namespace XamarinApp
 {
     public class RoundRectCornerImageView extends ImageView {
 
-    private float radius = 18.0f;
+    private float radius = 32.0f;
     private Path path;
     private RectF rect;
 

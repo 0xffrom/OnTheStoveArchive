@@ -31,25 +31,51 @@ namespace XamarinApp
 
             SetContentView(Resource.Layout.activity_search);
             
+            Spinner spinner = FindViewById <Spinner> (Resource.Id.spinner);  
+            spinner.ItemSelected += new EventHandler < AdapterView.ItemSelectedEventArgs > (spinner_ItemSelected);  
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Android.Resource.Layout.SimpleSpinnerItem);  
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);  
+            spinner.Adapter = adapter;  
+            
             UpdateListView();
-
         }
 
-        private async Task UpdateCollectionRecipes()
+        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e) {  
+            Spinner spinner = (Spinner) sender;
+            var item = spinner.GetItemAtPosition(e.Position);
+            
+            switch (item.ToString())
+            {
+                case "По популярности":
+                    UpdateListView("getPage?section=popular");
+                    break;
+                case "По случайности":
+                    UpdateListView("getPage?section=random");
+                    break;
+                case "По новизне":
+                    UpdateListView("getPage?section=new");
+                    break;
+            }
+            
+
+            string toast = $"Сортировка {spinner.GetItemAtPosition(e.Position).ToString().ToLower()}";  
+            Toast.MakeText(this, toast, ToastLength.Long).Show();  
+        } 
+        
+        private async Task UpdateCollectionRecipes(string query)
         {
             await Task.Run(() =>
             {
-                recipes = HttpGet.GetRecipes();
+                recipes = HttpGet.GetRecipes(query);
             });
         }
-        private async void UpdateListView()
+        private async void UpdateListView(string query = "getPage?section=popular")
         {
-            await UpdateCollectionRecipes();
+            await UpdateCollectionRecipes(query);
 
             _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
-
-            if (adapter == null)
-                adapter = new RecipeShortAdapter(this, recipes);
+            
+            adapter = new RecipeShortAdapter(this, recipes);
 
             _listView.Adapter = adapter;
         }
