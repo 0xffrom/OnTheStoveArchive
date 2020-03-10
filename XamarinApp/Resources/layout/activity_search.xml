@@ -66,7 +66,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinner"
             android:layout_gravity="left"
-            android:background="#FEB22C"
+            android:background="#00000"
+            android:text
+            
             android:prompt="@string/sort_prompt"
     />
     <ListView
