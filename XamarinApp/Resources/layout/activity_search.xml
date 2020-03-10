@@ -61,14 +61,11 @@
     </GridLayout>
 
     <Spinner
-            android:text="CheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinner"
             android:layout_gravity="left"
             android:background="#00000"
-            android:text
-            
             android:prompt="@string/sort_prompt"
     />
     <ListView
