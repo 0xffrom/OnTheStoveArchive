@@ -44,7 +44,7 @@ namespace RecipeLibrary
             
             #endregion
             
-            IsCompleted += GetCompleted;
+            
 
             while (!_isCompleted)
             {

@@ -32,8 +32,8 @@ namespace WebServer.Controllers
             GetData getData = new GetData();
             try
             {
-                var recipeShorts =  await getData.GetPage(section, page, recipeName.ToLower());
-
+                RecipeShort[] recipeShorts =  getData.GetPage(section, page, recipeName.ToLower());
+                Console.WriteLine("Вернул");
                 return Enumerable.Range(1, recipeShorts.Length).Select(index => recipeShorts[index - 1])
                     .ToArray();
             }

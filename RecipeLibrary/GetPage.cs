@@ -11,7 +11,7 @@ namespace RecipeLibrary
 {
     public partial class GetData
     {
-        public async Task<RecipeShort[]> GetPage(string section, int page, string findName = null)
+        public RecipeShort[] GetPage(string section, int page, string findName = null)
         {
             #region Povarenok.ru
 
@@ -44,18 +44,16 @@ namespace RecipeLibrary
 
             #endregion
 
-            IsCompleted += GetCompleted;
-
             while (!_isCompleted)
             {
-                //
+                Thread.Sleep(100);
             }
 
             return RecipeShorts.ToArray();
         }
 
-        private bool _isCompleted;
-        private void GetCompleted(object obj, EventArgs eventArgs)
+        private bool _isCompleted = false;
+        private void GetCompleted()
         {
             _isCompleted = true;
         }
