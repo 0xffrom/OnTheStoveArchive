@@ -13,7 +13,7 @@ namespace XamarinApp
     public class RecipeShortAdapter : BaseAdapter<RecipeShort>
     {
         private readonly List<RecipeShort> _list;
-        private Context _context;
+        private readonly Context _context;
 
         public RecipeShortAdapter(Context context, List<RecipeShort> list)
         {
@@ -33,30 +33,24 @@ namespace XamarinApp
             //if (view == null)
             view = LayoutInflater.From(_context).Inflate(Resource.Layout.list_item, null, false);
 
-            TextView textView = view.FindViewById<TextView>(Resource.Id.title);
+            var textView = view.FindViewById<TextView>(Resource.Id.title);
             textView.Text = _list[position].Title;
 
-
-
-            TextView textLink = view.FindViewById<TextView>(Resource.Id.textLink);
+            var textLink = view.FindViewById<TextView>(Resource.Id.textLink);
             textLink.Text = _list[position].Url.Split('/')[2];
 
-            ImageView imageView = view.FindViewById<ImageView>(Resource.Id.imageTitle);
-
-            string url = _list[position].Picture.Url;
-            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData)
-            + url.Split('/')[^1];
+            var imageView = view.FindViewById<ImageView>(Resource.Id.imageTitle);
+            var url = _list[position].Picture.Url;
+            var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData)
+                       + url.Split('/')[^1];
 
             if (!File.Exists(path))
             {
-                using (WebClient client = new WebClient())
-                {
-                    client.DownloadFile(url, path);
-                }
+                using var client = new WebClient();
+                client.DownloadFile(url, path);
             }
 
-            Uri uri;
-            uri = Uri.Parse(path);
+            var uri = Uri.Parse(path);
 
             imageView.SetImageURI(uri);
 

@@ -11,9 +11,9 @@ namespace RecipesAndroid
 
     public static class HttpGet
     {
-        private static async Task<string> GetSource()
+        private static async Task<string> GetSource(string query)
         { 
-            string currentUrl = "http://194.87.103.195/getPage?section=random";
+            string currentUrl = "http://194.87.103.195/" + query;
 
             var client = new HttpClient(new Xamarin.Android.Net.AndroidClientHandler());
 
@@ -29,7 +29,7 @@ namespace RecipesAndroid
 
         public static List<RecipeShort> GetRecipes()
         {
-            string source = GetSource().Result;
+            string source = GetSource("getPage?section=random").Result;
 
             List<RecipeShort> recipes = JsonConvert.DeserializeObject<List<RecipeShort>>(source);
 

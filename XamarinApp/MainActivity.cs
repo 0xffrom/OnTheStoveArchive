@@ -17,11 +17,12 @@ using RecipesAndroid.Objects.Boxes.Elements;
 namespace XamarinApp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    
     public class MainActivity : AppCompatActivity
     {
         private ListView _listView;
-
         private List<RecipeShort> recipes;
+        private RecipeShortAdapter adapter;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,26 +30,26 @@ namespace XamarinApp
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_search);
-
+            
             UpdateListView();
 
         }
 
-        private async Task DoIt()
+        private async Task UpdateCollectionRecipes()
         {
             await Task.Run(() =>
             {
                 recipes = HttpGet.GetRecipes();
             });
         }
-
         private async void UpdateListView()
         {
-            await DoIt();
+            await UpdateCollectionRecipes();
 
             _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
 
-            RecipeShortAdapter adapter = new RecipeShortAdapter(this, recipes);
+            if (adapter == null)
+                adapter = new RecipeShortAdapter(this, recipes);
 
             _listView.Adapter = adapter;
         }
