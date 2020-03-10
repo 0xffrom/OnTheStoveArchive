@@ -6,6 +6,7 @@ using Android.Content;
 using Android.Net;
 using Android.Views;
 using Android.Widget;
+using Java.Interop;
 using RecipesAndroid.Objects;
 
 namespace XamarinApp
@@ -53,7 +54,6 @@ namespace XamarinApp
             var uri = Uri.Parse(path);
 
             imageView.SetImageURI(uri);
-
 
             return view;
         }
