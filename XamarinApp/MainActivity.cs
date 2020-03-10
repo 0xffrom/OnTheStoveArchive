@@ -27,6 +27,10 @@ namespace XamarinApp
         {
             base.OnCreate(savedInstanceState);
 
+            // TODO: Доделать спиннер: поработать над дизайном.
+            // TODO: Доделать поиск.
+            // TODO: Сделать автозагрузку.
+            // TODO: Сделать переход по рецепту.
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_search);
