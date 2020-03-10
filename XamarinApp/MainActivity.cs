@@ -16,7 +16,7 @@ using RecipesAndroid.Objects.Boxes.Elements;
 
 namespace XamarinApp
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon", MainLauncher = true)]
     
     public class MainActivity : AppCompatActivity
     {
