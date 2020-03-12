@@ -13,7 +13,7 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
         public RecipeShort[] Parse(IHtmlDocument document)
         {
             var recipesList = document.QuerySelectorAll("article")
-                .Where(item => item.ClassName != null && item.ClassName.Contains("item-bl"));
+                .Where(item => item.ClassName != null && item.ClassName == ("item-bl"));
 
             var recipeBlocks = recipesList as IElement[] ?? recipesList.ToArray();
 
