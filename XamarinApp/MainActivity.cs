@@ -45,7 +45,7 @@ namespace XamarinApp
                 if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
                 {
                     UpdateListView($"getPage?section=recipe&recipeName={edittext.Text}");
-                    Toast.MakeText(this, "Загрузка.", ToastLength.Short).Show();
+                    Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
                     e.Handled = true;
                 }
             };

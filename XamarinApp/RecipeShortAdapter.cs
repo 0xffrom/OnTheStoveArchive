@@ -42,13 +42,13 @@ namespace XamarinApp
 
             var imageView = view.FindViewById<ImageView>(Resource.Id.imageTitle);
             var url = _list[position].Picture.Url;
-            var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData)
+            var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
                        + url.Split('/')[^1];
 
             if (!File.Exists(path))
                 DownloadPicture(new WebClient(), url, path);
 
-                var uri = Uri.Parse(path);
+            var uri = Uri.Parse(path);
 
             imageView.SetImageURI(uri);
 
@@ -57,6 +57,7 @@ namespace XamarinApp
 
         private async void DownloadPicture(WebClient client, string url, string path) =>
             await client.DownloadFileTaskAsync(url, path);
+
         public override int Count => _list.Count;
 
         public override RecipeShort this[int position] => _list[position];
