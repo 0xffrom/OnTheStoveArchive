@@ -29,6 +29,9 @@ namespace WebServer.Controllers
             if (recipeName == null)
                 recipeName = string.Empty;
 
+            
+            // TODO: реализваоть нормальный callback
+            // TODO: Отлавливать ошибки.
             GetData getData = new GetData();
             try
             {
