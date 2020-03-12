@@ -28,12 +28,28 @@ namespace XamarinApp
             base.OnCreate(savedInstanceState);
 
             // TODO: Доделать спиннер: поработать над дизайном.
-            // TODO: Доделать поиск.
+            // TODO: Попроавить шрифт при большом тексте.
+            // TODO: Отлавливать Exception + повторные запросы.
             // TODO: Сделать автозагрузку.
             // TODO: Сделать переход по рецепту.
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
+
             SetContentView(Resource.Layout.activity_search);
+            
+            EditText edittext = FindViewById<EditText>(Resource.Id.TextFind);
+            
+            edittext.KeyPress += (object sender, View.KeyEventArgs e) =>
+            {
+                e.Handled = false;
+                if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
+                {
+                    UpdateListView($"getPage?section=recipe&recipeName={edittext.Text}");
+                    Toast.MakeText(this, "Загрузка.", ToastLength.Short).Show();
+                    e.Handled = true;
+                }
+            };
+
             
             Spinner spinner = FindViewById <Spinner> (Resource.Id.spinner);  
             spinner.ItemSelected += new EventHandler < AdapterView.ItemSelectedEventArgs > (spinner_ItemSelected);  
@@ -41,7 +57,6 @@ namespace XamarinApp
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);  
             spinner.Adapter = adapter;  
             
-            UpdateListView();
         }
 
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e) {  
