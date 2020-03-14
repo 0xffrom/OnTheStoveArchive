@@ -33,7 +33,7 @@ namespace WebServer.Controllers
             {
                 return GetData.GetPage(section, page, recipeName.ToLower()).Result;
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 return new List<RecipeShort> {new RecipeShort("error", new Picture("error"), "error")};
             }

@@ -30,7 +30,7 @@ namespace WebServer.Controllers
             {
                 return GetData.GetRecipe(url).Result;
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 return new RecipeFull(null, null, null,
                     null, null, null);

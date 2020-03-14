@@ -269,6 +269,7 @@
     <AndroidResource Include="Resources\layout\content_main.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\recipe_main.xsl" />
     <AndroidResource Include="Resources\RoundRectCornerImageView.cs" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\dimens.xml" />

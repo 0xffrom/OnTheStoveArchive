@@ -32,6 +32,7 @@ namespace XamarinApp
             // TODO: Отлавливать Exception + повторные запросы.
             // TODO: Сделать автозагрузку.
             // TODO: Сделать переход по рецепту.
+            
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
 
