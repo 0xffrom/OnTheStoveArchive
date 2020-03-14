@@ -4269,16 +4269,19 @@ namespace XamarinApp
 			public const int notification_template_part_time = 2131492927;
 			
 			// aapt resource value: 0x7F0C0040
-			public const int select_dialog_item_material = 2131492928;
+			public const int recipe_main = 2131492928;
 			
 			// aapt resource value: 0x7F0C0041
-			public const int select_dialog_multichoice_material = 2131492929;
+			public const int select_dialog_item_material = 2131492929;
 			
 			// aapt resource value: 0x7F0C0042
-			public const int select_dialog_singlechoice_material = 2131492930;
+			public const int select_dialog_multichoice_material = 2131492930;
 			
 			// aapt resource value: 0x7F0C0043
-			public const int support_simple_spinner_dropdown_item = 2131492931;
+			public const int select_dialog_singlechoice_material = 2131492931;
+			
+			// aapt resource value: 0x7F0C0044
+			public const int support_simple_spinner_dropdown_item = 2131492932;
 			
 			static Layout()
 			{

@@ -10,7 +10,7 @@
     <GridLayout
             android:id="@+id/rectangle_2"
             android:layout_width="match_parent"
-            android:layout_height="63dp"
+            android:layout_height="64dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:columnCount="2"

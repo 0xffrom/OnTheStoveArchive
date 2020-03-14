@@ -250,6 +250,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable\icon_back.xml" />
     <AndroidResource Include="Resources\drawable\rectangle_3.xml" />
     <Compile Include="RecipeShortAdapter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

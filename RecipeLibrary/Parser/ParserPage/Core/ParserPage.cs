@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 
 namespace RecipeLibrary.Parser.ParserPage.Core
@@ -48,7 +49,7 @@ namespace RecipeLibrary.Parser.ParserPage.Core
             var domParser = new HtmlParser();
 
             var document = await domParser.ParseDocumentAsync(source);
-
+            
             var result = Parser.Parse(document);
 
             return result;
