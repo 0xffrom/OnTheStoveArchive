@@ -8,16 +8,16 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
 {
     public class HtmlLoader
     {
-        private readonly HttpClient client;
+        private readonly HttpClient _client;
         public HtmlLoader(IParserRecipeSettings settings)
         {
-            client = new HttpClient();
+            _client = new HttpClient();
         }
 
         internal async Task<string> GetSource(string url)
         {
             var currentUrl = url;
-            var response = await client.GetAsync(currentUrl);
+            var response = await _client.GetAsync(currentUrl);
 
             string source;
             

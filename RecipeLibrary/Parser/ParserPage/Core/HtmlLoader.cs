@@ -10,46 +10,37 @@ namespace RecipeLibrary.Parser.ParserPage.Core
 {
     public class HtmlLoader
     {
-        private readonly HttpClient client;
-        private readonly string url;
+        private readonly HttpClient _client;
+        private readonly string _url;
 
-        private IParserPageSettings _settings;
+        private readonly IParserPageSettings _settings;
 
         public HtmlLoader(IParserPageSettings settings)
         {
             _settings = settings;
-            client = new HttpClient();
-            url = settings.Url;
+            _client = new HttpClient();
+            _url = settings.Url;
         }
 
         public async Task<string> GetSource(int idPage, string recipeName)
         {
-            string currentUrl;
+            var currentUrl = _url;
 
-            currentUrl = url;
-
-            switch (_settings.Section)
+            currentUrl += _settings.Section switch
             {
-                case("new"):
-                    currentUrl += _settings.SuffixNew;
-                    break;
-                case("popular"):
-                    currentUrl += _settings.SuffixPopular;
-                    break;
-                case("recipe"):
-                    currentUrl += _settings.SuffixRecipe;
-                    break;
-                default:
-                    currentUrl += _settings.SuffixNew;
-                    break;
-            }
+                ("new") => _settings.SuffixNew,
+                ("popular") => _settings.SuffixPopular,
+                ("recipe") => _settings.SuffixRecipe,
+                _ => _settings.SuffixNew
+            };
+            
             currentUrl = currentUrl
                 .Replace("{PageId}", idPage.ToString())
                 .Replace("{RecipeName}", recipeName);
 
             Console.WriteLine($"Parsing URL: {currentUrl}");
 
-            var response = await client.GetAsync(currentUrl);
+            var response = await _client.GetAsync(currentUrl);
 
             string source;
 

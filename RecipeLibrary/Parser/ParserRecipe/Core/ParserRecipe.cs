@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AngleSharp.Html.Parser;
 
 namespace RecipeLibrary.Parser.ParserRecipe.Core
@@ -34,13 +35,8 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
         {
             Settings = parserSettings;
         }
-
-
-        internal event Action<object, T> OnNewData;
-
-        internal void StartParseRecipe() => Worker();
-
-        private async void Worker()
+        
+        internal async Task<T> Worker()
         {
             try
             {
@@ -51,12 +47,12 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
 
                 var result = parser.Parse(document);
 
-                OnNewData?.Invoke(this, result);
+                return result;
+
             }
             catch(Exception e)
             {
-                Console.WriteLine($"Exception. Message: {e.Message}. Source: {e.Source}");
-                OnNewData?.Invoke(this, null);
+               throw  new ParserException("Ошибка при парсинге страницы: " + e.Message);
             }
 
         }

@@ -1,68 +1,57 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AngleSharp.Html.Parser;
 
 namespace RecipeLibrary.Parser.ParserPage.Core
 {
     internal class ParserPage<T> where T : class
     {
-        IParserPage<T> parser;
-        IParserPageSettings parserSettings;
+        private IParserPageSettings _parserSettings;
 
-        HtmlLoader loader;
+        private HtmlLoader _loader;
+        private IParserPage<T> Parser { get; }
 
-        internal IParserPage<T> Parser
+        private IParserPageSettings Settings
         {
-            get => parser;
-            set => parser = value;
-        }
-
-        internal IParserPageSettings Settings
-        {
-            get => parserSettings;
+            get => _parserSettings;
             set
             {
-                parserSettings = value;
-                loader = new HtmlLoader(value);
+                _parserSettings = value;
+                _loader = new HtmlLoader(value);
             }
         }
 
-        internal ParserPage(IParserPage<T> parser)
+        private ParserPage(IParserPage<T> parser)
         {
             Parser = parser;
         }
 
         internal ParserPage(IParserPage<T> parser, IParserPageSettings parserSettings) : this(parser)
         {
-            this.Settings = parserSettings;
+            Settings = parserSettings;
         }
 
-        internal event EventHandler<T> OnNewData;
+        private static readonly Random Random = new Random();
+        private static int GetPageId(int maxPage) => Random.Next(1, maxPage + 1);
 
-        internal void StartParsePage() => Worker();
-
-        private static readonly Random random = new Random();
-        private static int GetPageId(int maxPage) => random.Next(1, maxPage + 1);
-
-        private async void Worker()
+        internal async Task<T> Worker()
         {
-            int pageId = Settings.PageId;
+            var pageId = Settings.PageId;
 
             if (Settings.Section == "random")
                 pageId = GetPageId(Settings.MaxPageId);
 
-            string recipeName;
-            recipeName = Settings.RecipeName;
+            var recipeName = Settings.RecipeName;
 
-            string source;
-            source = await loader.GetSource(pageId, recipeName);
+            var source = await _loader.GetSource(pageId, recipeName);
 
             var domParser = new HtmlParser();
 
             var document = await domParser.ParseDocumentAsync(source);
 
-            var result = parser.Parse(document);
+            var result = Parser.Parse(document);
 
-            OnNewData?.Invoke(this, result);
+            return result;
         }
     }
 }

@@ -19,11 +19,11 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
 
             return (from recipeBlock in recipeBlocks
                 let url = recipeBlock.QuerySelectorAll("div")
-                    .Where(item => item.ClassName != null && item.ClassName.Contains("m-img desktop-img conima"))
+                    .Where(item => item.ClassName != null && item.ClassName == ("m-img desktop-img conima"))
                     .Select(item => item.FirstElementChild.Attributes[0].Value)
                     .ToArray()[0]
                 let urlPicture = recipeBlock.QuerySelectorAll("div")
-                    .Where(item => item.ClassName != null && item.ClassName.Contains("m-img desktop-img conima"))
+                    .Where(item => item.ClassName != null && item.ClassName == ("m-img desktop-img conima"))
                     .Select(item => item.FirstElementChild.FirstElementChild.Attributes[0].Value)
                     .ToArray()[0]
                 let picture = new Picture(urlPicture)

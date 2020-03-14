@@ -23,27 +23,17 @@ namespace WebServer.Controllers
         }
 
         [HttpGet("getRecipe")]
-        public IEnumerable<RecipeFull> Get(string url)
+        public RecipeFull Get(string url)
         {
             Console.WriteLine(url);
             try
             {
-                var getData = new GetData();
-                
-                getData.GetRecipe(url);
-                
-                return Enumerable.Range(1, 1)
-                    .Select(index => getData.RecipeFull)
-                    .ToArray();
+                return GetData.GetRecipe(url).Result;
             }
             catch (Exception exp)
             {
-                _logger.LogError($"{exp.Message}");
-
-                return Enumerable.Range(1, 1)
-                    .Select(index => new RecipeFull(null, null, null,
-                        null, null, null))
-                    .ToArray();
+                return new RecipeFull(null, null, null,
+                    null, null, null);
             }
         }
     }

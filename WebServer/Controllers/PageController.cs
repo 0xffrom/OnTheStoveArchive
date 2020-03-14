@@ -24,29 +24,18 @@ namespace WebServer.Controllers
 
 
         [HttpGet("getPage")]
-        public async Task<IEnumerable<RecipeShort>> Get(string section, int page = 1, string recipeName = null)
+        public List<RecipeShort> Get(string section, int page = 1, string recipeName = null)
         {
             if (recipeName == null)
                 recipeName = string.Empty;
-
             
-            // TODO: реализваоть нормальный callback
-            // TODO: Отлавливать ошибки.
-            GetData getData = new GetData();
             try
             {
-                RecipeShort[] recipeShorts =  getData.GetPage(section, page, recipeName.ToLower());
-                Console.WriteLine("Вернул");
-                return Enumerable.Range(1, recipeShorts.Length).Select(index => recipeShorts[index - 1])
-                    .ToArray();
+                return GetData.GetPage(section, page, recipeName.ToLower()).Result;
             }
             catch (Exception exp)
             {
-                Console.WriteLine(exp);
-
-                return Enumerable.Range(1, 1)
-                    .Select(index => new RecipeShort("error", new Picture("error"), "error"))
-                    .ToArray();
+                return new List<RecipeShort> {new RecipeShort("error", new Picture("error"), "error")};
             }
         }
     }

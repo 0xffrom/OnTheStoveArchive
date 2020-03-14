@@ -62,8 +62,16 @@
       <HintPath>..\packages\Xamarin.Forms.4.5.0.356\lib\MonoAndroid90\FormsViewGroup.dll</HintPath>
     </Reference>
     <Reference Include="Java.Interop" />
+    <Reference Include="MaterialSpinner, Version=1.1.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MaterialSpinner-Xamarin.1.1.1\lib\MonoAndroid\MaterialSpinner.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NineOldAndroids, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.NineOldAndroids.0.0.1\lib\MonoAndroid\NineOldAndroids.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -254,6 +262,7 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\spinner_boarder.xml" />
     <AndroidResource Include="Resources\layout\activity_search.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -311,11 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\list_item.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rectangle_1.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
