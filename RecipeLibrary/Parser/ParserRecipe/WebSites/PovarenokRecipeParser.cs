@@ -22,6 +22,8 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         {
             #region Url
 
+            // TODO: дописать поиск URL.
+            
             #endregion
 
             var recipeBody = document.QuerySelectorAll("article")
