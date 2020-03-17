@@ -16,7 +16,7 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
             var recipesBody = document.QuerySelectorAll("div")
                 .Where(item => item.ClassName != null && item.ClassName == "recipe"
                                                       && item.ParentElement != null &&
-                                                      item.ParentElement.ClassName.Contains("recipe_list")).ToArray();
+                                                      item.ParentElement.ClassName == ("recipe_list")).ToArray();
 
             return (from recipe in recipesBody
                 let anyBody = recipe.QuerySelector("h3").QuerySelector("a")

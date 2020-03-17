@@ -26,8 +26,7 @@ namespace WebServer.Controllers
         [HttpGet("getPage")]
         public List<RecipeShort> Get(string section, int page = 1, string recipeName = null)
         {
-            if (recipeName == null)
-                recipeName = string.Empty;
+            recipeName ??= string.Empty;
             
             try
             {

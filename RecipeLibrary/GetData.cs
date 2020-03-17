@@ -12,7 +12,7 @@ using RecipeLibrary.Parser.ParserRecipe.WebSites;
 
 namespace RecipeLibrary
 {
-    public partial class GetData
+    public  class GetData
     {
         private static readonly Random Rng =
             new Random((int) DateTime.Now.Ticks & 0x0000FFFF);
@@ -29,7 +29,7 @@ namespace RecipeLibrary
                 (new PovarPageParser(), new PovarPageSettings(section, page, findName));
 
             ParserPage<RecipeShort[]> edimdoma = new ParserPage<RecipeShort[]>
-                (new EdimDomaPageParser(), new EdimDomaPageSettings(section, page, findName));
+                (new EdimDomaPageParser(), parserSettings: new EdimDomaPageSettings(section, page, findName));
 
             await Task.WhenAll(ParseRecipe(edimdoma, recipeShorts), ParseRecipe(povarenok, recipeShorts), ParseRecipe(povar, recipeShorts));
 
