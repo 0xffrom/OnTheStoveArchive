@@ -37,40 +37,40 @@
 
     </LinearLayout>
     <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:paddingTop="18dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <GridLayout 
-                android:layout_marginTop="17dp"
-                android:layout_width="match_parent"
-                android:layout_height="28dp">
-            <Button 
-                    android:layout_column="0"
-                    android:text="Описание"
-                    android:layout_marginLeft="21dp"
-                    android:textSize="14dp"
-                    android:gravity="top"
-                    android:layout_width="82dp" 
-                    android:layout_height="20dp"/>
-            <Button
-                    android:layout_column="1"
-                    android:text="Ингридиенты"
-                    android:layout_marginLeft="21dp"
-                    android:textSize="14dp"
-                    android:gravity="top"
-                    android:layout_width="95dp"
-                    android:layout_height="20dp"/>
-            <Button
-                    android:layout_column="2"
-                    android:text="Рецепт"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="21dp"
-                    android:textSize="14dp"
-                    android:gravity="top"
-                    android:layout_width="82dp"
-                    android:layout_height="20dp"/>
-        </GridLayout>
+            android:layout_height="40dp">
+        <Button
+                android:text="Описание"
+                android:layout_marginLeft="21dp"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="20dp"/>
+        <Button
+                android:text="Ингридиенты"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="95dp"
+                android:layout_height="20dp"/>
+        <Button
+                android:text="Рецепт"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginRight="21dp"
+                android:textSize="16dp"
+                android:layout_width="82dp"
+                android:layout_height="20dp"/>
+
     </LinearLayout>
+    <LinearLayout
+            tools:src="@layout/recipe_description"
+            
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
 
-
+    </LinearLayout>
 </LinearLayout>
