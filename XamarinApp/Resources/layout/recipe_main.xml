@@ -53,13 +53,15 @@
         />
         
         <TextView
-                android:text="Ингридиенты"
+                android:id="@+id/textViewMainIngredients"
+                android:text="Ингредиенты"
                 android:textSize="17dp"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="110dp"
                 android:layout_height="30dp"/>
         <TextView
+                android:id="@+id/textViewMainRecipe"
                 android:text="Рецепт"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -73,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp">
         <View
-                android:id="@+id/rectangle_1"
+                android:id="@+id/rectangleMainDescription"
                 android:layout_width="95dp"
                 android:gravity="center"
                 android:layout_marginLeft="21dp"
@@ -82,16 +84,15 @@
                 android:background="@drawable/rectangle_1"
         />
         <View
-                android:id="@+id/rectangle_1"
+                android:id="@+id/rectangleMainIngredients"
                 android:layout_width="105dp"
                 android:gravity="center"
                 android:layout_height="2dp"
-
                 android:layout_weight="1"
                 android:background="@drawable/rectangle_1"
         />
         <View
-                android:id="@+id/rectangle_1"
+                android:id="@+id/rectangleMainRecipe"
                 android:layout_width="95dp"
                 android:gravity="center"
                 android:layout_height="2dp"
@@ -100,5 +101,6 @@
                 android:background="@drawable/rectangle_1"
         />
     </LinearLayout>
-    <include layout="@layout/recipe_description"/>
+    <include android:id="@+id/frameRecipe" 
+            layout="@layout/recipe_description"/>
 </LinearLayout>
