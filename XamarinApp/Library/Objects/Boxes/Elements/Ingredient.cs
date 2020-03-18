@@ -1,4 +1,4 @@
-﻿namespace RecipesAndroid.Objects.Boxes.Elements
+﻿namespace XamarinApp.Library.Objects.Boxes.Elements
 {
     /// <summary>
     /// Объект, который представляет собой ингредиент с названием и единицей измерения.

@@ -241,7 +241,7 @@
     <Compile Include="Library\Objects\Boxes\Elements\Picture.cs" />
     <Compile Include="Library\Objects\Boxes\Elements\Video.cs" />
     <Compile Include="Library\Objects\Boxes\IngredientBox.cs" />
-    <Compile Include="Library\Objects\Boxes\PictureBox.cs" />
+    <Compile Include="Library\Objects\Boxes\RecipeBox.cs" />
     <Compile Include="Library\Objects\Boxes\StepRecipeBox.cs" />
     <Compile Include="Library\Objects\RecipeFull.cs" />
     <Compile Include="Library\Objects\RecipeShort.cs" />
@@ -252,6 +252,7 @@
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\icon_back.xml" />
     <AndroidResource Include="Resources\drawable\rectangle_3.xml" />
+    <Compile Include="RecipeActivity.cs" />
     <Compile Include="RecipeShortAdapter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

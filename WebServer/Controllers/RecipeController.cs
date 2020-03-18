@@ -28,10 +28,12 @@ namespace WebServer.Controllers
             Console.WriteLine(url);
             try
             {
+                // TODO: Починить рецепт 5659 поварёнок.
                 return GetData.GetRecipe(url).Result;
             }
-            catch (Exception)
+            catch (Exception e )
             {
+                Console.WriteLine(e);
                 return new RecipeFull(null, null, null,
                     null, null, null);
             }

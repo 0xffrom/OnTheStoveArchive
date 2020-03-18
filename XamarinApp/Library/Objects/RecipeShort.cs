@@ -1,13 +1,9 @@
-﻿using RecipesAndroid.Objects.Boxes.Elements;
+﻿using XamarinApp.Library.Objects.Boxes.Elements;
+using XamarinApp.Library.Objects.Boxes;
 
-namespace RecipesAndroid.Objects
+namespace XamarinApp.Library.Objects
 {
-    /// <summary>
-    /// Объект, который представляет собой короткое описание рецепта.
-    /// В краткое представление рецепта входит:
-    /// а) Картинка.
-    /// б) Название рецепта.
-    /// </summary>
+// TODO: add comments
     public class RecipeShort
     {
         public string Title { get; }

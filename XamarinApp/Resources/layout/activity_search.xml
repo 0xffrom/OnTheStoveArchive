@@ -62,7 +62,7 @@
     </GridLayout>
 
     <RelativeLayout
-            android:layout_width="wrap_content" 
+            android:layout_width="wrap_content"
             android:layout_height="30dp">
         <Spinner
                 android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                 android:layout_centerVertical="true"
                 android:spinnerMode="dropdown"
                 android:prompt="@string/sort_prompt"/>
-        
+
     </RelativeLayout>
     <ListView
             android:id="@+id/listRecipeShorts"

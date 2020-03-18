@@ -1,6 +1,6 @@
-﻿using RecipesAndroid.Objects.Boxes.Elements;
+﻿using XamarinApp.Library.Objects.Boxes.Elements;
 
-namespace RecipesAndroid.Objects.Boxes
+namespace XamarinApp.Library.Objects.Boxes
 {
     /// <summary>
     /// Объект, который представляет собой набор ингредиентов для какого-то конкретного блюда.

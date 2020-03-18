@@ -58,7 +58,8 @@ namespace RecipeLibrary
             }
             else
                 throw new ParserException("Неизвестный сайт.");
-
+            #endregion
+            
             try
             {
                 var recipe = new ParserRecipe<RecipeFull>(obj, settings);
@@ -69,7 +70,7 @@ namespace RecipeLibrary
                 throw new ParserException("Произошла ошибка при парсинге рецепта. Подробности: " + e.Message);
             }
 
-            #endregion
+            
         }
     }
 }

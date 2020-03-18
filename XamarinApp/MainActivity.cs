@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -12,7 +13,8 @@ using Android.Views;
 using Android.Widget;
 using RecipesAndroid;
 using RecipesAndroid.Objects;
-using RecipesAndroid.Objects.Boxes.Elements;
+using XamarinApp.Library;
+using XamarinApp.Library.Objects;
 
 namespace XamarinApp
 {
@@ -23,6 +25,7 @@ namespace XamarinApp
         private ListView _listView;
         private List<RecipeShort> recipes;
         private RecipeShortAdapter adapter;
+        public static string lastUrl;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -38,6 +41,15 @@ namespace XamarinApp
 
             SetContentView(Resource.Layout.activity_search);
             
+            _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
+            
+            _listView.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs args)
+            {
+                lastUrl = recipes[int.Parse(args.Id.ToString())].Url;
+                Intent intent = new Intent(this, typeof(RecipeActivity));
+                StartActivity(intent);
+            };
+
             EditText edittext = FindViewById<EditText>(Resource.Id.TextFind);
             
             edittext.KeyPress += (object sender, View.KeyEventArgs e) =>
@@ -51,9 +63,10 @@ namespace XamarinApp
                 }
             };
 
-            
             Spinner spinner = FindViewById <Spinner> (Resource.Id.spinner);  
             spinner.ItemSelected += new EventHandler < AdapterView.ItemSelectedEventArgs > (spinner_ItemSelected);  
+            
+            
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Android.Resource.Layout.SimpleSpinnerItem);  
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);  
             spinner.Adapter = adapter;  

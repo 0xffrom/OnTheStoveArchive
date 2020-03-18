@@ -1,19 +1,12 @@
-using RecipesAndroid.Objects.Boxes;
-using RecipesAndroid.Objects.Boxes.Elements;
+п»їusing XamarinApp.Library.Objects.Boxes;
+using XamarinApp.Library.Objects.Boxes.Elements;
 
-namespace RecipesAndroid.Objects
+namespace XamarinApp.Library.Objects
 {
-    /// <summary>
-    /// Объект представляет из себя представление полного кулинарного рецепта, в который входят:
-    /// а) Заголовок.
-    /// б) Заголовочная картинка.
-    /// в) Коллекция объектов, представляющие ингредиенты составляющих блюд.
-    /// г) Коллекция объектов, представляющие шаги кулинарного рецепта.
-    /// д) Дополнительное описание рецепта.
-    /// </summary>
+    
+    // TODO: add comments
     public class RecipeFull
     {
-        public string Url { get; }
         public string Title { get; }
         public Picture TitlePicture { get; }
         public string Description { get; }
@@ -21,22 +14,22 @@ namespace RecipesAndroid.Objects
         public StepRecipeBox[] StepRecipesBoxes { get; }
         public AdditionalBox Additional { get; }
 
-        public RecipeFull(string url,
+        public RecipeFull(
             string title,
-            Picture picture,
+            Picture titlePicture,
             string description,
             IngredientBox[] ingredientsBoxes,
             StepRecipeBox[] stepRecipeBoxes,
             AdditionalBox additional = null)
 
         {
-            Url = url;
             Title = title;
-            TitlePicture = picture;
+            TitlePicture = titlePicture;
             Description = description;
             IngredientsBoxes = ingredientsBoxes;
             StepRecipesBoxes = stepRecipeBoxes;
             Additional = additional;
         }
     }
+    
 }

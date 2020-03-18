@@ -7,30 +7,29 @@ namespace RecipeLibrary.Objects
     // TODO: add comments
     public class RecipeFull
     {
-        private string Url { get; }
-        private string Title { get; }
-        private Picture TitlePicture { get; }
-        private string Description { get; }
-        private IngredientBox[] IngredientsBoxes { get; }
-        private StepRecipeBox[] StepRecipesBoxes { get; }
-        private AdditionalBox Additional { get; }
+        public string Title { get; }
+        public Picture TitlePicture { get; }
+        public string Description { get; }
+        public IngredientBox[] IngredientsBoxes { get; }
+        public StepRecipeBox[] StepRecipesBoxes { get; }
+        public AdditionalBox Additional { get; }
 
-        public RecipeFull(string url,
+        public RecipeFull(
             string title,
-            Picture picture,
+            Picture titlePicture,
             string description,
             IngredientBox[] ingredientsBoxes,
             StepRecipeBox[] stepRecipeBoxes,
             AdditionalBox additional = null)
 
         {
-            Url = url;
             Title = title;
-            TitlePicture = picture;
+            TitlePicture = titlePicture;
             Description = description;
             IngredientsBoxes = ingredientsBoxes;
             StepRecipesBoxes = stepRecipeBoxes;
             Additional = additional;
         }
     }
+    
 }

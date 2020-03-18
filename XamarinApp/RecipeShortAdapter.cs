@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using RecipesAndroid.Objects;
+using XamarinApp.Library.Objects;
 
 namespace XamarinApp
 {
@@ -15,7 +16,6 @@ namespace XamarinApp
     {
         private readonly List<RecipeShort> _list;
         private readonly Context _context;
-
         public RecipeShortAdapter(Context context, List<RecipeShort> list)
         {
             this._list = list;

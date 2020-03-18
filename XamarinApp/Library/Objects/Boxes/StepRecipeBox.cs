@@ -1,5 +1,6 @@
-﻿
-namespace RecipesAndroid.Objects.Boxes
+﻿using RecipesAndroid.Objects.Boxes;
+
+namespace XamarinApp.Library.Objects.Boxes
 {
     /// <summary>
     /// Объект, который представляет собой некий шаг рецепта. Он содержит

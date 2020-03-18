@@ -10,7 +10,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 {
     public class PovarenokRecipeParser : IParserRecipe<RecipeFull>
     {
-        private string Url { get; set; }
         private string Title { get; set; }
         private Picture TitlePicture { get; set; }
         private string Description { get; set; }
@@ -20,12 +19,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
         public RecipeFull Parse(IHtmlDocument document)
         {
-            #region Url
-
-            // TODO: дописать поиск URL.
-            
-            #endregion
-
             var recipeBody = document.QuerySelectorAll("article")
                 .Where(element => element.ClassName != null && element.ClassName == "item-bl item-about")
                 .ToArray()[0];
@@ -213,7 +206,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #endregion
 
 
-            RecipeFull recipeFull = new RecipeFull(Url, Title, TitlePicture, Description, IngredientsBoxes,
+            RecipeFull recipeFull = new RecipeFull(Title, TitlePicture, Description, IngredientsBoxes,
                 StepRecipesBoxes,
                 Additional);
 

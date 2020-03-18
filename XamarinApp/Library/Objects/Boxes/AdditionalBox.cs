@@ -1,7 +1,8 @@
-﻿using RecipesAndroid.Objects.Boxes.Elements;
+﻿using RecipesAndroid.Objects.Boxes;
+using XamarinApp.Library.Objects.Boxes.Elements;
 
 
-namespace RecipesAndroid.Objects.Boxes
+namespace XamarinApp.Library.Objects.Boxes
 {
     /// <summary>
     /// Данный объект представляет собый набор из дополнительной информации для рецепта.
