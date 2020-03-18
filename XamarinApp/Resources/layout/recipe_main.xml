@@ -37,43 +37,68 @@
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
-            android:paddingTop="18dp"
+            android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="40dp">
-        <FrameLayout
-                android:layout_weight="1"
-                android:layout_width="82dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="21dp"
-        >
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <TextView
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Описание"
-                    android:gravity="center"
-                    android:textSize="16dp"/>
-        </FrameLayout>
-        <Button
-                android:text="Ингридиенты"
-                android:textSize="16dp"
-                android:gravity="center"
+        <TextView
+                android:id="@+id/textViewMainDescription"
+                android:layout_centerInParent="true" 
                 android:layout_weight="1"
                 android:layout_width="95dp"
-                android:layout_height="20dp"/>
-        <Button
+                android:layout_height="30dp"
+                android:layout_marginLeft="21dp"
+                android:text="Описание"
+                android:gravity="center"
+                android:textSize="17dp"
+        />
+        
+        <TextView
+                android:text="Ингридиенты"
+                android:textSize="17dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="110dp"
+                android:layout_height="30dp"/>
+        <TextView
                 android:text="Рецепт"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_marginRight="21dp"
-                android:textSize="16dp"
-                android:layout_width="82dp"
-                android:layout_height="20dp"/>
+                android:textSize="17dp"
+                android:layout_width="95dp"
+                android:layout_height="30dp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp">
+        <View
+                android:id="@+id/rectangle_1"
+                android:layout_width="95dp"
+                android:gravity="center"
+                android:layout_marginLeft="21dp"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_1"
+        />
+        <View
+                android:id="@+id/rectangle_1"
+                android:layout_width="105dp"
+                android:gravity="center"
+                android:layout_height="2dp"
 
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_1"
+        />
+        <View
+                android:id="@+id/rectangle_1"
+                android:layout_width="95dp"
+                android:gravity="center"
+                android:layout_height="2dp"
+                android:layout_marginRight="21dp"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_1"
+        />
     </LinearLayout>
     <include layout="@layout/recipe_description"/>
 </LinearLayout>
