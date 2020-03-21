@@ -44,19 +44,22 @@ namespace XamarinApp
             var url = _list[position].Picture.Url;
             var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
                        + url.Split('/')[^1];
-
-            if (!File.Exists(path))
-                DownloadPicture(new WebClient(), url, path);
-
+            
             var uri = Uri.Parse(path);
-
-            imageView.SetImageURI(uri);
+            if (!File.Exists(path))
+                DownloadPicture(new WebClient(), url, path, uri, imageView);
+            else
+                imageView.SetImageURI(uri);
 
             return view;
         }
 
-        private async void DownloadPicture(WebClient client, string url, string path) =>
+        private async void DownloadPicture(WebClient client, string url, string path, Android.Net.Uri uri, ImageView imageView)
+        {
             await client.DownloadFileTaskAsync(url, path);
+            imageView.SetImageURI(uri);
+        }
+        
 
         public override int Count => _list.Count;
 

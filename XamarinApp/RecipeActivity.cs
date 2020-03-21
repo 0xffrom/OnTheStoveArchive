@@ -26,7 +26,6 @@ namespace XamarinApp
         private string _url;
         private RecipeFull _recipeFull;
 
-        private View _frameRecipe;
         // #FEB22C: 254 178 44
         Color colorFEB22C = new Color(254, 178, 44);
 
@@ -66,9 +65,12 @@ namespace XamarinApp
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.recipe_main);
-
-            _frameRecipe = FindViewById<View>(Resource.Id.frameRecipe);
             
+            var frameDescription = FindViewById<View>(Resource.Id.frameDescription);
+            var frameIngredients = FindViewById<View>(Resource.Id.frameIngredients);
+            var frameSteps =FindViewById<View>(Resource.Id.frameSteps);
+
+
             #region delegates
 
             var textViewMainDescription = FindViewById<TextView>(Resource.Id.textViewMainDescription);
@@ -86,6 +88,10 @@ namespace XamarinApp
             {
                 SetColorStart(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
                     rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
+                
+                frameDescription.Visibility = ViewStates.Visible;
+                frameSteps.Visibility = ViewStates.Invisible;
+                frameIngredients.Visibility = ViewStates.Invisible;
             };
 
             textViewMainIngredients.Click += (sender, args) =>
@@ -95,6 +101,10 @@ namespace XamarinApp
                 
                 textViewMainIngredients.SetTextColor(colorFEB22C);
                 rectangleMainIngredients.SetBackgroundColor(colorFEB22C);
+                
+                frameDescription.Visibility = ViewStates.Invisible;
+                frameIngredients.Visibility = ViewStates.Visible;
+                frameSteps.Visibility = ViewStates.Invisible;
             };
             
             textViewMainRecipe.Click += (sender, args) =>
@@ -104,6 +114,10 @@ namespace XamarinApp
                 
                 textViewMainRecipe.SetTextColor(colorFEB22C);
                 rectangleMainRecipe.SetBackgroundColor(colorFEB22C);
+                
+                frameDescription.Visibility = ViewStates.Invisible;
+                frameIngredients.Visibility = ViewStates.Invisible;
+                frameSteps.Visibility = ViewStates.Visible;
             };
             #endregion
 
@@ -125,6 +139,17 @@ namespace XamarinApp
         private async void UpdateView()
         {
             _recipeFull = await UpdateCollectionRecipes(_url);
+            
+            var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
+            var adapterIngredents = new IngredientsAdapter(this, _recipeFull);
+            listIngredients.Adapter = adapterIngredents;
+
+            var listSteps = FindViewById<ListView>(Resource.Id.listSteps);
+            var adapterStep = new StepAdapter(this, _recipeFull);
+            listSteps.Adapter = adapterStep;
+
+
+            
             var title = FindViewById<TextView>(Resource.Id.titleRecipe);
             title.Text = _recipeFull.Title;
 
@@ -147,14 +172,12 @@ namespace XamarinApp
 
             var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
             description.Text = _recipeFull.Description;
+            description.Selected = true;
         }
 
         private void DownloadPicture(WebClient client, string url, string path) =>
             client.DownloadFile(url, path);
 
-        private async Task<RecipeFull> UpdateCollectionRecipes(string url)
-        {
-            return await Task.Run(() => HttpGet.GetPage(url));
-        }
+        private static async Task<RecipeFull> UpdateCollectionRecipes(string url) => await Task.Run(() => HttpGet.GetPage(url));
     }
 }

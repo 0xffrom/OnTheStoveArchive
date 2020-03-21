@@ -19,7 +19,7 @@ namespace XamarinApp.Library.Objects
             Picture titlePicture,
             string description,
             IngredientBox[] ingredientsBoxes,
-            StepRecipeBox[] stepRecipeBoxes,
+            StepRecipeBox[] stepRecipesBoxes,
             AdditionalBox additional = null)
 
         {
@@ -27,7 +27,7 @@ namespace XamarinApp.Library.Objects
             TitlePicture = titlePicture;
             Description = description;
             IngredientsBoxes = ingredientsBoxes;
-            StepRecipesBoxes = stepRecipeBoxes;
+            StepRecipesBoxes = stepRecipesBoxes;
             Additional = additional;
         }
     }

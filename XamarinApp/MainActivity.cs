@@ -31,11 +31,9 @@ namespace XamarinApp
             base.OnCreate(savedInstanceState);
 
             // TODO: Доделать спиннер: поработать над дизайном.
-            // TODO: Попроавить шрифт при большом тексте.
             // TODO: Отлавливать Exception + повторные запросы.
-            // TODO: Сделать автозагрузку.
-            // TODO: Сделать переход по рецепту.
-            
+            // TODO: Добавить менюшку.
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
 
