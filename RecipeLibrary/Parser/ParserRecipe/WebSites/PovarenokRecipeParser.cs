@@ -107,11 +107,11 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     //   .Replace("/", String.Empty);
 
                     string name = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
-                            item.Attributes[0] != null && item.Attributes[0].Value.Contains("name"))
+                            item.Attributes[0] != null && item.Attributes[0].Value == ("name"))
                         .Select(item => item.TextContent).First();
 
                     string unit = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
-                            item.Attributes[0] != null && item.Attributes[0].Value.Contains("amount"))
+                            item.Attributes[0] != null && item.Attributes[0].Value == ("amount"))
                         .Select(item => item.TextContent).First();
 
                     name += ingredientsArray[j].TextContent.Replace(name, string.Empty)
@@ -136,7 +136,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #region StepRecipeBox
 
             var recipesArray = recipeBody.QuerySelectorAll("div")
-                .Where(item => item.ClassName != null && item.ClassName.Contains("cooking-bl"))
+                .Where(item => item.ClassName != null && item.ClassName == ("cooking-bl"))
                 .ToArray();
 
             int countRecipes = recipesArray.Length;
@@ -164,7 +164,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             var additionalBody = recipeBody.QuerySelectorAll("div")
                 .LastOrDefault(element =>
                     element.NextElementSibling?.ClassName != null &&
-                    element.NextElementSibling.ClassName.Contains("article-tags"));
+                    element.NextElementSibling.ClassName == ("article-tags"));
 
             if (additionalBody != null)
             {
@@ -189,7 +189,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     .Replace(whiteSpaceBug, String.Empty);
 
                 var videoArray = recipeBody.QuerySelectorAll("div")
-                    .Where(element => element.ClassName != null && element.ClassName.Contains("video-bl"))
+                    .Where(element => element.ClassName != null && element.ClassName == ("video-bl"))
                     .Select(element => element.FirstElementChild.FirstElementChild.Attributes[2].Value)
                     .ToArray();
 
