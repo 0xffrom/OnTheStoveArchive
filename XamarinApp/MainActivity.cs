@@ -30,10 +30,15 @@ namespace XamarinApp
         {
             base.OnCreate(savedInstanceState);
 
-            // TODO: Доделать спиннер: поработать над дизайном.
-            // TODO: Отлавливать Exception + повторные запросы.
+            // TODO: Доделать спиннер: поработать над дизайном. <-----
+           
             // TODO: Добавить менюшку.
-
+            // TODO: Тотальный рефакторинг.
+            // TODO: Добавь сохранение
+            // TODO: Кнопка "Поделиться"
+            // TODO: Загрузка доп.рецептов при прокрутке.
+            // TODO: Отлавливать Exception + повторные запросы.
+            
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
 
@@ -41,7 +46,7 @@ namespace XamarinApp
             
             _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
             
-            _listView.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs args)
+            _listView.ItemClick += delegate(object sender, AdapterView.ItemClickEventArgs args)
             {
                 lastUrl = recipes[int.Parse(args.Id.ToString())].Url;
                 Intent intent = new Intent(this, typeof(RecipeActivity));

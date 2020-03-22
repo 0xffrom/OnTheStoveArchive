@@ -74,6 +74,18 @@
       <HintPath>..\packages\Xamarin.NineOldAndroids.0.0.1\lib\MonoAndroid\NineOldAndroids.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Plugin.MaterialDesignControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Plugin.MaterialDesignControls.1.6.8\lib\MonoAndroid10\Plugin.MaterialDesignControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.MaterialDesignControls.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Plugin.MaterialDesignControls.1.6.8\lib\MonoAndroid10\Plugin.MaterialDesignControls.Android.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Refractored.Controls.CircleImageView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Refractored.Controls.CircleImageView.1.2.0-beta\lib\MonoAndroid10\Refractored.Controls.CircleImageView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />

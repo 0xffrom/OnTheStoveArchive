@@ -14,6 +14,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Refractored.Controls;
 using XamarinApp.Library;
 using XamarinApp.Library.Objects;
 using Picture = XamarinApp.Library.Objects.Boxes.Elements.Picture;
@@ -154,9 +155,7 @@ namespace XamarinApp
             title.Text = _recipeFull.Title;
 
             var imageView = FindViewById<ImageView>(Resource.Id.imageMainRecipe);
-
-            Toast.MakeText(this, $"{_recipeFull.TitlePicture}...", ToastLength.Short).Show();
-
+            
             Picture picture = _recipeFull.TitlePicture;
             var url = picture.Url;
 
@@ -169,7 +168,11 @@ namespace XamarinApp
             var uri = Android.Net.Uri.Parse(path);
 
             imageView.SetImageURI(uri);
-
+            
+            // TODO: Сделать фотографию с закруглёныни уголками.
+           
+            
+            
             var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
             description.Text = _recipeFull.Description;
             description.Selected = true;

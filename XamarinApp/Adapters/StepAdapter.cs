@@ -52,16 +52,17 @@ namespace XamarinApp
 
             var uri = Uri.Parse(path);
             if (!File.Exists(path))
-                DownloadPicture(new WebClient(), url, path, uri, imageView);
+                DownloadPicture(url, path, uri, imageView);
             else
                 imageView.SetImageURI(uri);
 
             return view;
         }
 
-        private async void DownloadPicture(WebClient client, string url, string path, Android.Net.Uri uri,
+        private async void DownloadPicture(string url, string path, Android.Net.Uri uri,
             ImageView imageView)
         {
+            WebClient client = new WebClient();
             await client.DownloadFileTaskAsync(url, path);
             imageView.SetImageURI(uri);
         }
