@@ -71,4 +71,3 @@ namespace XamarinApp
 
         public override RecipeFull this[int position] => _recipeFull;
     }
-}
