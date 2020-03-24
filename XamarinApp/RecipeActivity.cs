@@ -169,10 +169,8 @@ namespace XamarinApp
 
             imageView.SetImageURI(uri);
             
-            // TODO: Сделать фотографию с закруглёныни уголками.
-           
-            
-            
+            // TODO: Сделать фотографию с закруглёныни уголками
+
             var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
             description.Text = _recipeFull.Description;
             description.Selected = true;
