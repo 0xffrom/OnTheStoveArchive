@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">XamarinApp</string>
+    <string-array name="sort_array">
+        <item>По популярности</item>
+        <item>По новизне</item>
+        <item>По случайности</item>
+    </string-array>
+    
+    <string name="app_name">На плите</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
 </resources>

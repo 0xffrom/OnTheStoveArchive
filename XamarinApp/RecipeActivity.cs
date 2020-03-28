@@ -30,7 +30,7 @@ namespace XamarinApp
         // #FEB22C: 254 178 44
         Color colorFEB22C = new Color(254, 178, 44);
 
-        // #C4C4C4: 196 196 196
+        // #C4C4C4: 196 196 196 
         Color colorC4C4C4 = new Color(196, 196, 196);
         
       

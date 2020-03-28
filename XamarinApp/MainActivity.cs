@@ -8,8 +8,11 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Support.V4.View;
+using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using RecipesAndroid;
 using RecipesAndroid.Objects;
@@ -20,7 +23,7 @@ namespace XamarinApp
 {
     [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon", MainLauncher = true)]
     
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
         private ListView _listView;
         private List<RecipeShort> recipes;
@@ -31,7 +34,7 @@ namespace XamarinApp
             base.OnCreate(savedInstanceState);
 
             // TODO: Доделать спиннер: поработать над дизайном. <-----
-           
+            // TODO: Пофиксить загрузку.
             // TODO: Добавить менюшку.
             // TODO: Тотальный рефакторинг.
             // TODO: Добавь сохранение
@@ -40,21 +43,82 @@ namespace XamarinApp
             // TODO: Отлавливать Exception + повторные запросы.
             
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-
-
+            
             SetContentView(Resource.Layout.activity_search);
             
-            _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
+            SetListView();
             
-            _listView.ItemClick += delegate(object sender, AdapterView.ItemClickEventArgs args)
-            {
-                lastUrl = recipes[int.Parse(args.Id.ToString())].Url;
-                Intent intent = new Intent(this, typeof(RecipeActivity));
-                StartActivity(intent);
-            };
+            SetPlateRecipe();
+            
+            SetSpinner();
+            
+            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
+            drawer.AddDrawerListener(toggle);
+            toggle.SyncState();
 
-            EditText edittext = FindViewById<EditText>(Resource.Id.TextFind);
+            NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            navigationView.SetNavigationItemSelectedListener(this);
             
+            var buttonMenu = FindViewById<Button>(Resource.Id.menu_button);
+
+            
+            buttonMenu.Click += delegate(object sender, EventArgs args)
+            {
+                DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+                
+                drawer.OpenDrawer(GravityCompat.Start);
+                
+                var menu_buttonM = FindViewById<Button>(Resource.Id.menu_buttonM);
+                menu_buttonM.Animation = new RotateAnimation(0, 180); 
+                menu_buttonM.Click += delegate(object sender, EventArgs args)
+                {
+
+                    if (drawer.IsDrawerOpen(GravityCompat.Start))
+                        OnBackPressed();
+                };
+                
+            };
+            
+            
+        }
+
+        
+        public override void OnBackPressed()
+        {
+            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            if(drawer.IsDrawerOpen(GravityCompat.Start))
+            {
+                drawer.CloseDrawer(GravityCompat.Start);
+            }
+            else
+            {
+                base.OnBackPressed();
+            }
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+            return true;
+        }
+        
+        private void SetSpinner()
+        {
+            Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner);
+            spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
+
+
+            var adapter =
+                ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Android.Resource.Layout.SimpleSpinnerItem);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinner.Adapter = adapter;
+        }
+
+        private void SetPlateRecipe()
+        {
+            EditText edittext = FindViewById<EditText>(Resource.Id.TextFind);
+
             edittext.KeyPress += (object sender, View.KeyEventArgs e) =>
             {
                 e.Handled = false;
@@ -65,15 +129,18 @@ namespace XamarinApp
                     e.Handled = true;
                 }
             };
+        }
 
-            Spinner spinner = FindViewById <Spinner> (Resource.Id.spinner);  
-            spinner.ItemSelected += new EventHandler < AdapterView.ItemSelectedEventArgs > (spinner_ItemSelected);  
-            
-            
-            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Android.Resource.Layout.SimpleSpinnerItem);  
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);  
-            spinner.Adapter = adapter;  
-            
+        private void SetListView()
+        {
+            _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
+
+            _listView.ItemClick += delegate(object sender, AdapterView.ItemClickEventArgs args)
+            {
+                lastUrl = recipes[int.Parse(args.Id.ToString())].Url;
+                Intent intent = new Intent(this, typeof(RecipeActivity));
+                StartActivity(intent);
+            };
         }
 
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e) {  
@@ -123,6 +190,13 @@ namespace XamarinApp
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-	}
+
+        public bool OnNavigationItemSelected(IMenuItem menuItem)
+        {
+            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            drawer.CloseDrawer(GravityCompat.Start);
+            return true;
+        }
+    }
 }
 

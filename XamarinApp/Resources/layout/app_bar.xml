@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/rectangle_2"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:columnCount="2"
+        android:rowCount="1"
+        android:background="@drawable/rectangle_2">
+    <Button
+            android:layout_width="30dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/icon_menu"
+            android:id="@+id/menu_button"
+            android:layout_marginRight="15.6dp"
+            android:layout_marginLeft="13.8dp"
+    />
+    <FrameLayout
+            android:id="@+id/rectangle_3"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginRight="81.1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rectangle_3"
+            android:elevation="4dp">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center_vertical|right"
+                android:background="@drawable/vector"
+                android:id="@+id/imageButton2"/>
+        <EditText
+                android:imeOptions="actionGo"
+                android:layout_gravity="center_vertical|left"
+                android:inputType="text"
+                android:scrollbars="none"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLength="25"
+                android:textSize="14dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:hint="Поиск рецепта..."
+                android:textColor="#ffc4c4c4"
+                android:contentDescription="Поиск..."
+                android:layout_centerInParent="true"
+                android:id="@+id/TextFind"/>
+    </FrameLayout>
+</GridLayout>

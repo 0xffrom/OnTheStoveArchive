@@ -1,69 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                                        xmlns:tools="http://schemas.android.com/tools"
+                                        android:id="@+id/drawer_layout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fitsSystemWindows="true"
+                                        tools:openDrawer="start">
 
-    <GridLayout
-            android:id="@+id/rectangle_2"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:columnCount="2"
-            android:rowCount="1"
-            android:background="@drawable/rectangle_2">
-        <Button
-                android:layout_width="30dp"
-                android:layout_height="22dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/icon_menu"
-                android:id="@+id/button2"
-                android:layout_marginRight="15.6dp"
-                android:layout_marginLeft="13.8dp"
-        />
-        <FrameLayout
-                android:id="@+id/rectangle_3"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_gravity="left"
-                android:layout_marginRight="81.1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/rectangle_3"
-                android:elevation="4dp">
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical|right"
-                    android:background="@drawable/vector"
-                    android:id="@+id/imageButton2"/>
-            <EditText
-                    android:imeOptions="actionGo"
-                    android:layout_gravity="center_vertical|left"
-                    android:inputType="text"
-                    android:scrollbars="none"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:maxLength="25"
-                    android:textSize="14dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:hint="Поиск рецепта..."
-                    android:textColor="#ffc4c4c4"
-                    android:contentDescription="Поиск..."
-                    android:layout_centerInParent="true"
-                    android:id="@+id/TextFind"/>
-        </FrameLayout>
-    </GridLayout>
+    <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        
+        <include layout="@layout/app_bar"/>
 
-    <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="30dp">
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -74,15 +25,23 @@
                 android:layout_gravity="left"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:spinnerMode="dropdown"
-                android:prompt="@string/sort_prompt"/>
+                android:spinnerMode="dropdown"/>
 
-    </RelativeLayout>
-    <ListView
-            android:id="@+id/listRecipeShorts"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-    </ListView>
+        <ListView
+                android:id="@+id/listRecipeShorts"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </ListView>
+        
+    </LinearLayout>
+    <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header_main"
+            app:menu="@menu/activity_main_drawer" />
 
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>
