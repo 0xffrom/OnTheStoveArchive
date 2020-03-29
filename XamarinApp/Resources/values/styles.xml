@@ -14,6 +14,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">#FEB22C</item>
+    </style>
+    
     <style name="NavigationViewStyle">
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:textSize">18dp</item> <!-- menu item text size-->

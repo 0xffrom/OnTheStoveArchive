@@ -33,7 +33,7 @@ namespace XamarinApp
         {
             base.OnCreate(savedInstanceState);
             // Цели на ночь:
-            // TODO: Переделать МЕНЮ.
+            // TODO: Переделать МЕНЮ - OK
             // TODO: Передать спиннер.
             // TODO: Пофиксить баги с открытием.
             // TODO: Добавить кнопки на рецептах.
@@ -111,8 +111,8 @@ namespace XamarinApp
 
 
             var adapter =
-                ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Android.Resource.Layout.SimpleSpinnerItem);
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+                ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
+            adapter.SetDropDownViewResource(Resource.Layout.spinner_text);
             spinner.Adapter = adapter;
         }
 

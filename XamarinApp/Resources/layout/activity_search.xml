@@ -17,14 +17,12 @@
 
         <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
+                android:layout_height="wrap_content"
+                android:background="#FEB22C"
                 android:id="@+id/spinner"
-                android:textColor="#ffc4c4c4"
                 android:popupBackground="#FEB22C"
-                android:layout_gravity="left"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
+                android:layout_gravity="left|center_vertical"
+                style="@style/SpinnerTheme"
                 android:spinnerMode="dropdown"/>
 
         <ListView

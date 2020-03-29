@@ -247,7 +247,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bg_spinner.xml" />
     <AndroidResource Include="Resources\drawable\pan.png" />
+    <AndroidResource Include="Resources\drawable\arrow_down_gray.png" />
+    <AndroidResource Include="Resources\layout\spinner_text.xml" />
     <AndroidResource Include="Resources\values-v21\styles.xml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
