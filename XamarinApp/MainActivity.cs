@@ -32,18 +32,17 @@ namespace XamarinApp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
+            // Цели на ночь:
             // TODO: Переделать МЕНЮ.
+            // TODO: Передать спиннер.
+            // TODO: Пофиксить баги с открытием.
+            // TODO: Добавить кнопки на рецептах.
+            // TODO: Добавить сохранение
+            // TODO: Поработать над сохранением картинок.
             
-            // TODO: Доделать спиннер: поработать над дизайном. <-----
-            // TODO: Пофиксить загрузку.
-            // TODO: Добавить менюшку.
             // TODO: Тотальный рефакторинг.
-            // TODO: Добавь сохранение
-            // TODO: Кнопка "Поделиться"
             // TODO: Загрузка доп.рецептов при прокрутке.
-            // TODO: Отлавливать Exception + повторные запросы.
-            
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             
             SetContentView(Resource.Layout.activity_search);

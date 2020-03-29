@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <!--<group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
@@ -21,7 +21,6 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
     </group>
-
     <item android:title="Communicate">
         <menu>
             <item
@@ -33,6 +32,22 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Send" />
         </menu>
-    </item>
-
+    </item>-->
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_find_recipe"
+                android:title="Найти рецепт"/>
+        <item
+                android:id="@+id/nav_ingredient"
+                android:title="Найти по ингредиенту"/>
+        <item
+                android:id="@+id/nav_article"
+                android:title="Статьи"/>
+        <item
+                android:id="@+id/nav_cart"
+                android:title="Корзина продуктов"/>
+        <item
+                android:id="@+id/nav_favorite"
+                android:title="Избранное"/>
+    </group>
 </menu>
