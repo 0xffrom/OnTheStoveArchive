@@ -32,7 +32,9 @@ namespace XamarinApp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            
+            // TODO: Переделать МЕНЮ.
+            
             // TODO: Доделать спиннер: поработать над дизайном. <-----
             // TODO: Пофиксить загрузку.
             // TODO: Добавить менюшку.
