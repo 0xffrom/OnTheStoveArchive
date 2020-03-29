@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,15 +9,20 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Java.IO;
+using Java.Net;
 using Refractored.Controls;
+using Square.Picasso;
 using XamarinApp.Library;
 using XamarinApp.Library.Objects;
+using File = System.IO.File;
 using Picture = XamarinApp.Library.Objects.Boxes.Elements.Picture;
 
 namespace XamarinApp
@@ -158,26 +164,19 @@ namespace XamarinApp
             
             Picture picture = _recipeFull.TitlePicture;
             var url = picture.Url;
-
-            var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
-                       + _url.Replace('/', '_').Replace(':', '_');
-
-            if (!File.Exists(path))
-                DownloadPicture(new WebClient(), url, path);
-
-            var uri = Android.Net.Uri.Parse(path);
-
-            imageView.SetImageURI(uri);
             
+            Picasso.With(this)
+                .Load(url)
+                .Into(imageView);
+
+
             // TODO: Сделать фотографию с закруглёныни уголками
 
             var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
             description.Text = _recipeFull.Description;
             description.Selected = true;
         }
-
-        private void DownloadPicture(WebClient client, string url, string path) =>
-            client.DownloadFile(url, path);
+        
 
         private static async Task<RecipeFull> UpdateCollectionRecipes(string url) => await Task.Run(() => HttpGet.GetPage(url));
     }

@@ -34,7 +34,7 @@ namespace XamarinApp
             base.OnCreate(savedInstanceState);
             // Цели на ночь:
             // TODO: Переделать МЕНЮ - OK
-            // TODO: Передать спиннер.
+            // TODO: Передать спиннер - OK.
             // TODO: Пофиксить баги с открытием.
             // TODO: Добавить кнопки на рецептах.
             // TODO: Добавить сохранение

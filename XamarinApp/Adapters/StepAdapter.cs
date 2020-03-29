@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -6,6 +7,7 @@ using Android.Content;
 using Android.Net;
 using Android.Views;
 using Android.Widget;
+using Square.Picasso;
 using XamarinApp.Library.Objects;
 using XamarinApp.Library.Objects.Boxes;
 using XamarinApp.Library.Objects.Boxes.Elements;
@@ -47,26 +49,13 @@ namespace XamarinApp
             // TODO: Сделать несколько фоток, PictureBox.
             var url = _stepRecipeBoxes[position].PictureBox.Pictures.First().Url;
 
-            var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
-                       + url.Split('/')[^1];
-
-            var uri = Uri.Parse(path);
-            if (!File.Exists(path))
-                DownloadPicture(url, path, uri, imageView);
-            else
-                imageView.SetImageURI(uri);
+            Picasso.With(_context)
+                .Load(url)
+                .Into(imageView);
 
             return view;
         }
-
-        private async void DownloadPicture(string url, string path, Android.Net.Uri uri,
-            ImageView imageView)
-        {
-            WebClient client = new WebClient();
-            await client.DownloadFileTaskAsync(url, path);
-            imageView.SetImageURI(uri);
-        }
-
+        
         public override int Count => _stepRecipeBoxes.Count;
 
         public override RecipeFull this[int position] => _recipeFull;

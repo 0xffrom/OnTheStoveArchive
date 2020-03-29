@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using RecipesAndroid.Objects;
+using Square.Picasso;
 using XamarinApp.Library.Objects;
 
 namespace XamarinApp
@@ -42,22 +44,12 @@ namespace XamarinApp
 
             var imageView = view.FindViewById<ImageView>(Resource.Id.imageTitle);
             var url = _list[position].Picture.Url;
-            var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
-                       + url.Split('/')[^1];
+
+            Picasso.With(_context)
+                .Load(url)
+                .Into(imageView);
             
-            var uri = Uri.Parse(path);
-            if (!File.Exists(path))
-                DownloadPicture(new WebClient(), url, path, uri, imageView);
-            else
-                imageView.SetImageURI(uri);
-
             return view;
-        }
-
-        private async void DownloadPicture(WebClient client, string url, string path, Android.Net.Uri uri, ImageView imageView)
-        {
-            await client.DownloadFileTaskAsync(url, path);
-            imageView.SetImageURI(uri);
         }
         
 
