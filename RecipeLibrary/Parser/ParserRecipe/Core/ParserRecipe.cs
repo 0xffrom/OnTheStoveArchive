@@ -52,7 +52,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.Core
             }
             catch(Exception e)
             {
-               throw  new ParserException("Ошибка при парсинге страницы: " + e.Message);
+               throw  new ParserException("Ошибка при парсинге страницы: " + e);
             }
 
         }

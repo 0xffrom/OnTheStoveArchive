@@ -66,27 +66,30 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 // "Время приготовления" и "Количество порций".
                 int count = 0;
 
-                var p = ingredientBody.QuerySelectorAll("p")
+                var p = ingredientBody?.QuerySelectorAll("p")
                     .Select(item => item.TextContent).ToArray();
 
-                if (p.Any(element => element.Contains("Время приготовления:")))
-                    count++;
-                if (p.Any(element => element.Contains("Количество порций:")))
-                    count++;
+                if (p.Length != 0)
+                {
+                    if (p.Any(element => element.Contains("Время приготовления:")))
+                        count++;
+                    if (p.Any(element => element.Contains("Количество порций:")))
+                        count++;
+                }
 
 
                 string titleIngredient;
 
-                var titleBody = ingredientBody.QuerySelectorAll("p").ToArray();
+                var titleBody = ingredientBody?.QuerySelectorAll("p").ToArray();
                 if (titleBody.Length - count == 0)
                     titleIngredient = Title;
 
                 else
-                    titleIngredient = ingredientBody.QuerySelectorAll("p")
+                    titleIngredient = ingredientBody?.QuerySelectorAll("p")
                         .Select(item => item.TextContent).ToArray()[i];
 
 
-                var ingredientsArray = ingredientBody.QuerySelectorAll("ul")
+                var ingredientsArray = ingredientBody?.QuerySelectorAll("ul")
                     .ToArray()[i]
                     .QuerySelectorAll("li")
                     .ToArray();
@@ -97,17 +100,17 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 {
                     string name = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
                             item.Attributes[0] != null && item.Attributes[0].Value == ("name"))
-                        .Select(item => item.TextContent).First();
+                        .Select(item => item.TextContent).FirstOrDefault();
 
                     string unit = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
                             item.Attributes[0] != null && item.Attributes[0].Value == ("amount"))
-                        .Select(item => item.TextContent).First();
+                        .Select(item => item.TextContent).FirstOrDefault();
 
-                    name += ingredientsArray[j].TextContent.Replace(name, string.Empty)
-                        .Replace(unit, string.Empty)
+                    name += ingredientsArray[j].TextContent.Replace(name ?? "А тут может и ничего не быть.", string.Empty)
+                        .Replace(unit ?? "А тут может и ничего не быть.", string.Empty)
                         .Replace("\n", string.Empty)
                         .Replace(WhiteSpaceBug, string.Empty)
-                        .Replace("—", String.Empty);
+                        .Replace("—", string.Empty);
 
                     Ingredient ingredient = new Ingredient(name, unit);
                     ingredients[j] = ingredient;

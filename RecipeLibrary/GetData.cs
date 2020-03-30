@@ -78,7 +78,7 @@ namespace RecipeLibrary
             }
             catch (Exception e)
             {
-                throw new ParserException("Произошла ошибка при парсинге рецепта. Подробности: " + e.Message);
+                throw new ParserException("Произошла ошибка при парсинге рецепта. Подробности: " + e);
             }
 
             
