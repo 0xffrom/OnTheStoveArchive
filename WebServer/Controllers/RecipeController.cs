@@ -29,7 +29,9 @@ namespace WebServer.Controllers
             try
             {
                 // TODO: Починить рецепт 5659 поварёнок.
-                return GetData.GetRecipe(url).Result;
+                var recipe = GetData.GetRecipe(url).Result;
+                recipe.Url = url;
+                return recipe;
             }
             catch (Exception e )
             {

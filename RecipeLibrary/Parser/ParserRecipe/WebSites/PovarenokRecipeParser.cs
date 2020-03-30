@@ -206,7 +206,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #endregion
 
 
-            RecipeFull recipeFull = new RecipeFull(Title, TitlePicture, Description, IngredientsBoxes,
+            RecipeFull recipeFull = new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientsBoxes,
                 StepRecipesBoxes,
                 Additional);
 

@@ -7,6 +7,7 @@ namespace RecipeLibrary.Objects
     // TODO: add comments
     public class RecipeFull
     {
+        public string Url { get; set; }
         public string Title { get; }
         public Picture TitlePicture { get; }
         public string Description { get; }
@@ -15,6 +16,7 @@ namespace RecipeLibrary.Objects
         public AdditionalBox Additional { get; }
 
         public RecipeFull(
+            string url,
             string title,
             Picture titlePicture,
             string description,
@@ -23,6 +25,7 @@ namespace RecipeLibrary.Objects
             AdditionalBox additional = null)
 
         {
+            Url = url;
             Title = title;
             TitlePicture = titlePicture;
             Description = description;

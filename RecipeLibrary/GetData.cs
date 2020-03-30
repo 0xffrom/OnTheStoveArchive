@@ -37,7 +37,20 @@ namespace RecipeLibrary
         }
 
         private static async Task ParseRecipe(ParserPage<RecipeShort[]> T, List<RecipeShort> recipeShorts)
-            => recipeShorts.AddRange(await T.Worker());
+        {
+            try
+            {
+                recipeShorts.AddRange(await T.Worker());
+            }
+            catch (ParserException exp)
+            {
+                Console.WriteLine($"Возникла ошибка при парсинге сайта {exp.WebSite}");
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine($"Возникла ошибка: {exp}");
+            }
+        }
 
         public static async Task<RecipeFull> GetRecipe(string url)
         {
