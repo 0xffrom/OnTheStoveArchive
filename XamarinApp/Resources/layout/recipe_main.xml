@@ -101,12 +101,12 @@
                 android:background="@drawable/rectangle_1"
         />
     </LinearLayout>
-    
+
     <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-        
-            <include android:visibility="visible"
-                     android:id="@+id/frameDescription"
-                     layout="@layout/recipe_description"/>
+
+        <include android:visibility="visible"
+                 android:id="@+id/frameDescription"
+                 layout="@layout/recipe_description"/>
 
         <include android:id="@+id/frameIngredients"
                  android:visibility="invisible"

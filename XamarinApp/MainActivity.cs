@@ -27,9 +27,11 @@ namespace XamarinApp
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
         private ListView _listView;
-        private List<RecipeShort> recipes;
-        public static string lastUrl;
-        private DrawerLayout drawer;
+        private List<RecipeShort> _recipes;
+        private DrawerLayout _drawer;
+        
+        public static string LastUrl { get; private set; }
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -42,6 +44,9 @@ namespace XamarinApp
             // TODO: Загрузка доп.рецептов при прокрутке.
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
+            
+   
             
             SetContentView(Resource.Layout.activity_search);
             
@@ -51,9 +56,9 @@ namespace XamarinApp
             
             SetSpinner();
             
-            drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            var toggle = new ActionBarDrawerToggle(this, drawer, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
-            drawer.AddDrawerListener(toggle);
+            _drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            var toggle = new ActionBarDrawerToggle(this, _drawer, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
+            _drawer.AddDrawerListener(toggle);
             toggle.SyncState();
 
             var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
@@ -64,14 +69,14 @@ namespace XamarinApp
             
             buttonMenu.Click += delegate(object sender, EventArgs args)
             {
-                drawer.OpenDrawer(GravityCompat.Start);
+                _drawer.OpenDrawer(GravityCompat.Start);
                 
                 var menu_buttonM = FindViewById<Button>(Resource.Id.menu_buttonM);
                 menu_buttonM.Animation = new RotateAnimation(0, 180); 
                 menu_buttonM.Click += delegate(object sender, EventArgs args)
                 {
 
-                    if (drawer.IsDrawerOpen(GravityCompat.Start))
+                    if (_drawer.IsDrawerOpen(GravityCompat.Start))
                         OnBackPressed();
                 };
                 
@@ -83,9 +88,9 @@ namespace XamarinApp
         
         public override void OnBackPressed()
         {
-            if(drawer.IsDrawerOpen(GravityCompat.Start))
+            if(_drawer.IsDrawerOpen(GravityCompat.Start))
             {
-                drawer.CloseDrawer(GravityCompat.Start);
+                _drawer.CloseDrawer(GravityCompat.Start);
             }
             else
             {
@@ -133,7 +138,7 @@ namespace XamarinApp
 
             _listView.ItemClick += (sender, args) =>
             {
-                lastUrl = recipes[int.Parse(args.Id.ToString())].Url;
+                LastUrl = _recipes[int.Parse(args.Id.ToString())].Url;
                 Intent intent = new Intent(this, typeof(RecipeActivity));
                 StartActivity(intent);
             };
@@ -163,7 +168,7 @@ namespace XamarinApp
         } 
         
         private async Task<List<RecipeShort>> UpdateCollectionRecipes(string query) =>  
-            await Task.Run(function: () => recipes = HttpGet.GetRecipes(query));
+            await Task.Run(function: () => _recipes = HttpGet.GetRecipes(query));
         
         private async void UpdateListView(string query = "getPage?section=popular") =>
             FindViewById<ListView>(Resource.Id.listRecipeShorts).Adapter = 
@@ -179,7 +184,7 @@ namespace XamarinApp
 
         public bool OnNavigationItemSelected(IMenuItem menuItem) =>
             // Закрывает отрисовщик и возвращает, закрыт ли он или нет.
-            CLoseDrawer(drawer).IsDrawerOpen(GravityCompat.Start);
+            CLoseDrawer(_drawer).IsDrawerOpen(GravityCompat.Start);
 
         private static DrawerLayout CLoseDrawer(DrawerLayout drawerLayout)
         {

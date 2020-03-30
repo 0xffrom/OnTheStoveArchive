@@ -2,22 +2,28 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:colorPrimary">@color/colorOrange</item>
+        <item name="android:colorPrimaryDark">@color/colorOrange</item>
+        <item name="android:colorAccent">@color/colorOrange</item>
+        <item name="android:colorActivatedHighlight">@color/colorOrange</item>
+        <item name="android:colorControlActivated">@color/colorOrange</item>
+        <item name="android:colorControlActivated">@color/colorOrange</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBarOverlay">false</item>
+        <item name="android:panelColorBackground">@color/colorOrange</item>
+        <item name="android:windowActionBarOverlay">@color/colorOrange</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="android:windowLightNavigationBar">true</item>
-        <item name="android:windowFullscreen">false</item>
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
-        
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:background">#FEB22C</item>
     </style>

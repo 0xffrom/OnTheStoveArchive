@@ -337,10 +337,6 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\side_nav_bar.xml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\spinner_boarder.xml" />
     <AndroidResource Include="Resources\layout\activity_search.xml">
       <SubType>Designer</SubType>

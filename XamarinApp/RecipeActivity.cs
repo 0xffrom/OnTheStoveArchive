@@ -33,43 +33,14 @@ namespace XamarinApp
     {
         private string _url;
         private RecipeFull _recipeFull;
-
-        // #FEB22C: 254 178 44
-        Color colorFEB22C = new Color(254, 178, 44);
-
-        // #C4C4C4: 196 196 196 
-        Color colorC4C4C4 = new Color(196, 196, 196);
         
-      
+        public readonly Color ColorFeb22C = new Color(254, 178, 44);
+        public readonly Color ColorC4C4C4 = new Color(196, 196, 196);
         
-        private void SetColorDefault(TextView textViewMainDescription, TextView textViewMainIngredients,
-            TextView textViewMainRecipe,
-            View rectangleMainDescription, View rectangleMainIngredients, View rectangleMainRecipe)
-        {
-            textViewMainDescription.SetTextColor(colorC4C4C4);
-            textViewMainIngredients.SetTextColor(colorC4C4C4);
-            textViewMainRecipe.SetTextColor(colorC4C4C4);
-
-            rectangleMainDescription.SetBackgroundColor(colorC4C4C4);
-            rectangleMainIngredients.SetBackgroundColor(colorC4C4C4);
-            rectangleMainRecipe.SetBackgroundColor(colorC4C4C4);
-        }
-
-        private void SetColorStart(TextView textViewMainDescription, TextView textViewMainIngredients,
-            TextView textViewMainRecipe,
-            View rectangleMainDescription, View rectangleMainIngredients, View rectangleMainRecipe)
-        {
-            SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
-                rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-                
-            textViewMainDescription.SetTextColor(colorFEB22C);
-            rectangleMainDescription.SetBackgroundColor(colorFEB22C);
-        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-
+            
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.recipe_main);
@@ -107,8 +78,8 @@ namespace XamarinApp
                 SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
                     rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
                 
-                textViewMainIngredients.SetTextColor(colorFEB22C);
-                rectangleMainIngredients.SetBackgroundColor(colorFEB22C);
+                textViewMainIngredients.SetTextColor(ColorFeb22C);
+                rectangleMainIngredients.SetBackgroundColor(ColorFeb22C);
                 
                 frameDescription.Visibility = ViewStates.Invisible;
                 frameIngredients.Visibility = ViewStates.Visible;
@@ -120,8 +91,8 @@ namespace XamarinApp
                 SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
                     rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
                 
-                textViewMainRecipe.SetTextColor(colorFEB22C);
-                rectangleMainRecipe.SetBackgroundColor(colorFEB22C);
+                textViewMainRecipe.SetTextColor(ColorFeb22C);
+                rectangleMainRecipe.SetBackgroundColor(ColorFeb22C);
                 
                 frameDescription.Visibility = ViewStates.Invisible;
                 frameIngredients.Visibility = ViewStates.Invisible;
@@ -131,7 +102,7 @@ namespace XamarinApp
 
 
            
-            _url = MainActivity.lastUrl;
+            _url = MainActivity.LastUrl;
 
             var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
 
@@ -142,6 +113,30 @@ namespace XamarinApp
             });
 
             UpdateView();
+        }
+        
+        private void SetColorDefault(TextView textViewMainDescription, TextView textViewMainIngredients,
+            TextView textViewMainRecipe,
+            View rectangleMainDescription, View rectangleMainIngredients, View rectangleMainRecipe)
+        {
+            textViewMainDescription.SetTextColor(ColorC4C4C4);
+            textViewMainIngredients.SetTextColor(ColorC4C4C4);
+            textViewMainRecipe.SetTextColor(ColorC4C4C4);
+
+            rectangleMainDescription.SetBackgroundColor(ColorC4C4C4);
+            rectangleMainIngredients.SetBackgroundColor(ColorC4C4C4);
+            rectangleMainRecipe.SetBackgroundColor(ColorC4C4C4);
+        }
+
+        private void SetColorStart(TextView textViewMainDescription, TextView textViewMainIngredients,
+            TextView textViewMainRecipe,
+            View rectangleMainDescription, View rectangleMainIngredients, View rectangleMainRecipe)
+        {
+            SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
+                rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
+                
+            textViewMainDescription.SetTextColor(ColorFeb22C);
+            rectangleMainDescription.SetBackgroundColor(ColorFeb22C);
         }
 
         private async void UpdateView()
@@ -180,6 +175,12 @@ namespace XamarinApp
             description.Selected = true;
         }
         
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
 
         private static async Task<RecipeFull> UpdateCollectionRecipes(string url) => await Task.Run(() => HttpGet.GetPage(url));
     }

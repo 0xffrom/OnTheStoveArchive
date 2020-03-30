@@ -43,14 +43,15 @@ namespace XamarinApp
             view = LayoutInflater.From(_context).Inflate(Resource.Layout.list_item, null, false);
             
             var textView = view.FindViewById<TextView>(Resource.Id.title);
-            textView.Text = _list[position].Title;
+            textView.Text = _list[position]?.Title;
             
             var textLink = view.FindViewById<TextView>(Resource.Id.textLink);
-            textLink.Text = _list[position].Url.Split('/')[2];
-            
+            var urlArray = _list[position]?.Url.Split('/');
+            if (urlArray != null && urlArray.Length >= 2)
+                textLink.Text = urlArray[2];
 
             var imageView = view.FindViewById<ImageView>(Resource.Id.imageTitle);
-            var url = _list[position].Picture.Url;
+            var url = _list[position]?.Picture.Url;
             
 
             
