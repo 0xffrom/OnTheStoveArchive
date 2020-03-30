@@ -32,13 +32,10 @@ namespace XamarinApp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            // Цели на ночь:
-            // TODO: Переделать МЕНЮ - OK
-            // TODO: Передать спиннер - OK.
-            // TODO: Пофиксить баги с открытием.
+            // TODO: Расширение картинки? 
+            
             // TODO: Добавить кнопки на рецептах.
             // TODO: Добавить сохранение
-            // TODO: Поработать над сохранением картинок.
             
             // TODO: Тотальный рефакторинг.
             // TODO: Загрузка доп.рецептов при прокрутке.

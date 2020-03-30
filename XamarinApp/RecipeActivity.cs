@@ -27,7 +27,7 @@ using Picture = XamarinApp.Library.Objects.Boxes.Elements.Picture;
 
 namespace XamarinApp
 {
-    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon")]
+    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon", MainLauncher = true)]
     public class RecipeActivity : AppCompatActivity
     {
         private string _url;
@@ -149,7 +149,8 @@ namespace XamarinApp
             
             var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
             var adapterIngredents = new IngredientsAdapter(this, _recipeFull);
-            listIngredients.Adapter = adapterIngredents;
+            if (adapterIngredents.GetCount > 0) 
+                listIngredients.Adapter = adapterIngredents;
 
             var listSteps = FindViewById<ListView>(Resource.Id.listSteps);
             var adapterStep = new StepAdapter(this, _recipeFull);
@@ -162,16 +163,18 @@ namespace XamarinApp
 
             var imageView = FindViewById<ImageView>(Resource.Id.imageMainRecipe);
             
+            imageView.LayoutParameters.Height
+            
             Picture picture = _recipeFull.TitlePicture;
-            var url = picture.Url;
+            var url = picture?.Url;
+            
             
             Picasso.With(this)
                 .Load(url)
                 .Into(imageView);
 
 
-            // TODO: Сделать фотографию с закруглёныни уголками
-
+                
             var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
             description.Text = _recipeFull.Description;
             description.Selected = true;

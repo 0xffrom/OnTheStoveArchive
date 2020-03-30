@@ -17,17 +17,19 @@ namespace XamarinApp
         private readonly RecipeFull _recipeFull;
         private readonly Context _context;
         private readonly List<Ingredient> _ingredients;
-
+        
         public IngredientsAdapter(Context context, RecipeFull recipeFull)
         {
             this._recipeFull = recipeFull;
             _context = context;
             
             _ingredients = new List<Ingredient>();
-            foreach (var ingredientBox in recipeFull.IngredientsBoxes)
-                _ingredients.AddRange(ingredientBox.Ingredients);
+            if (recipeFull.IngredientsBoxes != null)
+                foreach (var ingredientBox in recipeFull.IngredientsBoxes)
+                    _ingredients.AddRange(ingredientBox.Ingredients);
         }
 
+        public int GetCount => _ingredients.Count;
         public override long GetItemId(int position)
         {
             return position;
