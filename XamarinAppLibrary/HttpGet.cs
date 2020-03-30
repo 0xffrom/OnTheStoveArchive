@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using XamarinApp.Library.Objects;
 
-namespace XamarinApp.Library
+namespace XamarinAppLibrary
 {
+    
     public static class HttpGet
     {
+        private const string ipAdress = "http://194.87.103.195/";
         private static async Task<string> GetSource(string query)
         {
-            string currentUrl = "http://194.87.103.195/" + query;
+            string currentUrl = ipAdress + query;
 
             var client = new HttpClient(new Xamarin.Android.Net.AndroidClientHandler());
 

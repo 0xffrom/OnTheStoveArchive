@@ -18,6 +18,7 @@ using RecipesAndroid;
 using RecipesAndroid.Objects;
 using XamarinApp.Library;
 using XamarinApp.Library.Objects;
+using XamarinAppLibrary;
 
 namespace XamarinApp
 {
@@ -27,13 +28,13 @@ namespace XamarinApp
     {
         private ListView _listView;
         private List<RecipeShort> recipes;
-        private RecipeShortAdapter adapter;
         public static string lastUrl;
+        private DrawerLayout drawer;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             // TODO: Расширение картинки? 
-            
+            // TODO: Добавить шрифты.
             // TODO: Добавить кнопки на рецептах.
             // TODO: Добавить сохранение
             
@@ -50,12 +51,12 @@ namespace XamarinApp
             
             SetSpinner();
             
-            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
+            drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            var toggle = new ActionBarDrawerToggle(this, drawer, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
             drawer.AddDrawerListener(toggle);
             toggle.SyncState();
 
-            NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             navigationView.SetNavigationItemSelectedListener(this);
             
             var buttonMenu = FindViewById<Button>(Resource.Id.menu_button);
@@ -63,8 +64,6 @@ namespace XamarinApp
             
             buttonMenu.Click += delegate(object sender, EventArgs args)
             {
-                DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-                
                 drawer.OpenDrawer(GravityCompat.Start);
                 
                 var menu_buttonM = FindViewById<Button>(Resource.Id.menu_buttonM);
@@ -84,7 +83,6 @@ namespace XamarinApp
         
         public override void OnBackPressed()
         {
-            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             if(drawer.IsDrawerOpen(GravityCompat.Start))
             {
                 drawer.CloseDrawer(GravityCompat.Start);
@@ -103,14 +101,14 @@ namespace XamarinApp
         
         private void SetSpinner()
         {
-            Spinner spinner = FindViewById<Spinner>(Resource.Id.spinner);
+            var spinner = FindViewById<Spinner>(Resource.Id.spinner);
             spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
 
 
-            var adapter =
+            var spinnerAdapter =
                 ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
-            adapter.SetDropDownViewResource(Resource.Layout.spinner_text);
-            spinner.Adapter = adapter;
+            spinnerAdapter.SetDropDownViewResource(Resource.Layout.spinner_text);
+            spinner.Adapter = spinnerAdapter;
         }
 
         private void SetPlateRecipe()
@@ -120,12 +118,12 @@ namespace XamarinApp
             edittext.KeyPress += (object sender, View.KeyEventArgs e) =>
             {
                 e.Handled = false;
-                if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
-                {
-                    UpdateListView($"getPage?section=recipe&recipeName={edittext.Text}");
-                    Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
-                    e.Handled = true;
-                }
+                
+                if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter) return;
+                
+                UpdateListView($"getPage?section=recipe&recipeName={edittext.Text}");
+                Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
+                e.Handled = true;
             };
         }
 
@@ -133,7 +131,7 @@ namespace XamarinApp
         {
             _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
 
-            _listView.ItemClick += delegate(object sender, AdapterView.ItemClickEventArgs args)
+            _listView.ItemClick += (sender, args) =>
             {
                 lastUrl = recipes[int.Parse(args.Id.ToString())].Url;
                 Intent intent = new Intent(this, typeof(RecipeActivity));
@@ -142,7 +140,8 @@ namespace XamarinApp
         }
 
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e) {  
-            Spinner spinner = (Spinner) sender;
+            
+            var spinner = (Spinner) sender;
             var item = spinner.GetItemAtPosition(e.Position);
             
             switch (item.ToString())
@@ -159,29 +158,18 @@ namespace XamarinApp
             }
             
 
-            string toast = $"Сортировка {spinner.GetItemAtPosition(e.Position).ToString().ToLower()}";  
+            var toast = $"Сортировка {spinner.GetItemAtPosition(e.Position).ToString().ToLower()}";  
             Toast.MakeText(this, toast, ToastLength.Long).Show();  
         } 
         
-        private async Task UpdateCollectionRecipes(string query)
-        {
-            await Task.Run(() =>
-            {
-                recipes = HttpGet.GetRecipes(query);
-            });
-        }
-        private async void UpdateListView(string query = "getPage?section=popular")
-        {
-            await UpdateCollectionRecipes(query);
+        private async Task<List<RecipeShort>> UpdateCollectionRecipes(string query) =>  
+            await Task.Run(function: () => recipes = HttpGet.GetRecipes(query));
+        
+        private async void UpdateListView(string query = "getPage?section=popular") =>
+            FindViewById<ListView>(Resource.Id.listRecipeShorts).Adapter = 
+                new RecipeShortAdapter(this, await UpdateCollectionRecipes(query));
 
-            _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
-            
-            adapter = new RecipeShortAdapter(this, recipes);
 
-            _listView.Adapter = adapter;
-        }
-
-       
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -189,11 +177,14 @@ namespace XamarinApp
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        public bool OnNavigationItemSelected(IMenuItem menuItem)
+        public bool OnNavigationItemSelected(IMenuItem menuItem) =>
+            // Закрывает отрисовщик и возвращает, закрыт ли он или нет.
+            CLoseDrawer(drawer).IsDrawerOpen(GravityCompat.Start);
+
+        private static DrawerLayout CLoseDrawer(DrawerLayout drawerLayout)
         {
-            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            drawer.CloseDrawer(GravityCompat.Start);
-            return true;
+            drawerLayout.CloseDrawer(GravityCompat.Start);
+            return drawerLayout;
         }
     }
 }

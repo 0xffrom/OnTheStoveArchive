@@ -2153,6 +2153,8 @@ namespace XamarinApp
 			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_tileMode = global::XamarinApp.Resource.Styleable.GradientColor_android_tileMode;
 			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_type = global::XamarinApp.Resource.Styleable.GradientColor_android_type;
 			global::Xamarin.Essentials.Resource.Xml.xamarin_essentials_fileprovider_file_paths = global::XamarinApp.Resource.Xml.xamarin_essentials_fileprovider_file_paths;
+			global::XamarinAppLibrary.Resource.String.app_name = global::XamarinApp.Resource.String.app_name;
+			global::XamarinAppLibrary.Resource.String.hello = global::XamarinApp.Resource.String.hello;
 		}
 		
 		public partial class Animation
@@ -6595,40 +6597,43 @@ namespace XamarinApp
 			public const int fab_transformation_sheet_behavior = 2131689518;
 			
 			// aapt resource value: 0x7F0F002F
-			public const int hide_bottom_view_on_scroll_behavior = 2131689519;
+			public const int hello = 2131689519;
 			
 			// aapt resource value: 0x7F0F0030
-			public const int library_name = 2131689520;
+			public const int hide_bottom_view_on_scroll_behavior = 2131689520;
 			
 			// aapt resource value: 0x7F0F0031
-			public const int mtrl_chip_close_icon_content_description = 2131689521;
+			public const int library_name = 2131689521;
 			
 			// aapt resource value: 0x7F0F0032
-			public const int navigation_drawer_close = 2131689522;
+			public const int mtrl_chip_close_icon_content_description = 2131689522;
 			
 			// aapt resource value: 0x7F0F0033
-			public const int navigation_drawer_open = 2131689523;
+			public const int navigation_drawer_close = 2131689523;
 			
 			// aapt resource value: 0x7F0F0034
-			public const int password_toggle_content_description = 2131689524;
+			public const int navigation_drawer_open = 2131689524;
 			
 			// aapt resource value: 0x7F0F0035
-			public const int path_password_eye = 2131689525;
+			public const int password_toggle_content_description = 2131689525;
 			
 			// aapt resource value: 0x7F0F0036
-			public const int path_password_eye_mask_strike_through = 2131689526;
+			public const int path_password_eye = 2131689526;
 			
 			// aapt resource value: 0x7F0F0037
-			public const int path_password_eye_mask_visible = 2131689527;
+			public const int path_password_eye_mask_strike_through = 2131689527;
 			
 			// aapt resource value: 0x7F0F0038
-			public const int path_password_strike_through = 2131689528;
+			public const int path_password_eye_mask_visible = 2131689528;
 			
 			// aapt resource value: 0x7F0F0039
-			public const int search_menu_title = 2131689529;
+			public const int path_password_strike_through = 2131689529;
 			
 			// aapt resource value: 0x7F0F003A
-			public const int status_bar_notification_info_overflow = 2131689530;
+			public const int search_menu_title = 2131689530;
+			
+			// aapt resource value: 0x7F0F003B
+			public const int status_bar_notification_info_overflow = 2131689531;
 			
 			static String()
 			{

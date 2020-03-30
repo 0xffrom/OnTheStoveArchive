@@ -294,16 +294,6 @@
     <Compile Include="Adapters\IngredientsAdapter.cs" />
     <Compile Include="Adapters\RecipeShortAdapter.cs" />
     <Compile Include="Adapters\StepAdapter.cs" />
-    <Compile Include="Library\HttpGet.cs" />
-    <Compile Include="Library\Objects\Boxes\AdditionalBox.cs" />
-    <Compile Include="Library\Objects\Boxes\Elements\Ingredient.cs" />
-    <Compile Include="Library\Objects\Boxes\Elements\Picture.cs" />
-    <Compile Include="Library\Objects\Boxes\Elements\Video.cs" />
-    <Compile Include="Library\Objects\Boxes\IngredientBox.cs" />
-    <Compile Include="Library\Objects\Boxes\RecipeBox.cs" />
-    <Compile Include="Library\Objects\Boxes\StepRecipeBox.cs" />
-    <Compile Include="Library\Objects\RecipeFull.cs" />
-    <Compile Include="Library\Objects\RecipeShort.cs" />
     <Compile Include="MainActivity.cs" />
     <AndroidResource Include="Resources\drawable-v21\ic_menu_camera.xml">
       <SubType>Designer</SubType>
@@ -419,6 +409,12 @@
     <AndroidResource Include="Resources\layout\list_item.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XamarinAppLibrary\XamarinAppLibrary.csproj">
+      <Project>{dea1a7d3-7fa8-4e62-9efd-22f3cd415979}</Project>
+      <Name>XamarinAppLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Annotations.targets')" />

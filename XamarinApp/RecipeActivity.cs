@@ -22,12 +22,13 @@ using Refractored.Controls;
 using Square.Picasso;
 using XamarinApp.Library;
 using XamarinApp.Library.Objects;
+using XamarinAppLibrary;
 using File = System.IO.File;
 using Picture = XamarinApp.Library.Objects.Boxes.Elements.Picture;
 
 namespace XamarinApp
 {
-    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon", MainLauncher = true)]
+    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon")]
     public class RecipeActivity : AppCompatActivity
     {
         private string _url;
@@ -163,7 +164,6 @@ namespace XamarinApp
 
             var imageView = FindViewById<ImageView>(Resource.Id.imageMainRecipe);
             
-            imageView.LayoutParameters.Height
             
             Picture picture = _recipeFull.TitlePicture;
             var url = picture?.Url;
