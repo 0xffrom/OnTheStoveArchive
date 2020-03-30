@@ -54,8 +54,6 @@ namespace RecipeLibrary
 
         public static async Task<RecipeFull> GetRecipe(string url)
         {
-            #region Povarenok.ru
-
             IParserRecipe<RecipeFull> obj = null;
             IParserRecipeSettings settings = null;
 
@@ -64,14 +62,14 @@ namespace RecipeLibrary
                 obj = new PovarenokRecipeParser();
                 settings = new PovarenokRecipeSettings(url);
             }
-            else if (url.Contains("htpps://povar.ru"))
+            else if (url.Contains("https://povar.ru"))
             {
-                // obj = new PovarRecipeParser();
-                // settings = new PovarRecipeSettings(url);
+                 obj = new PovarRecipeParser();
+                 settings = new PovarRecipeSettings(url);
             }
             else
                 throw new ParserException("Неизвестный сайт.");
-            #endregion
+            
             
             try
             {

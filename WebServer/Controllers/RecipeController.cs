@@ -36,8 +36,7 @@ namespace WebServer.Controllers
             catch (Exception e )
             {
                 Console.WriteLine(e);
-                return new RecipeFull(null, null, null,
-                    null, null, null);
+                return new RecipeFull();
             }
         }
     }

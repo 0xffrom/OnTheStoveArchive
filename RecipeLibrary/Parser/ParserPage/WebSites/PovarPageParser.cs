@@ -9,7 +9,6 @@ using RecipeLibrary.Parser.ParserPage.Core;
 namespace RecipeLibrary.Parser.ParserPage.WebSites
 {
     
-    [assembly: AssemblyTitle("povar.ru")]
     class PovarPageParser : IParserPage<RecipeShort[]>
     {
         

@@ -13,7 +13,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         private string Title { get; set; }
         private Picture TitlePicture { get; set; }
         private string Description { get; set; }
-        private IngredientBox[] IngredientsBoxes { get; set; }
+        private IngredientBox[] IngredientBoxes { get; set; }
         private StepRecipeBox[] StepRecipesBoxes { get; set; }
         private AdditionalBox Additional { get; set; }
 
@@ -27,9 +27,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             // recipeBody =>  главный фрейм с рецептом, если он существует - работаем с ним, иначе - рецепта не сущесвует.
             if (recipeBody == null)
-                return new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientsBoxes,
-                    StepRecipesBoxes,
-                    Additional);
+                return new RecipeFull();
 
 
             #region Title
@@ -119,7 +117,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
                 ingredientBoxes[i] = ingredientBox;
 
-                IngredientsBoxes = ingredientBoxes;
+                IngredientBoxes = ingredientBoxes;
             }
 
             #endregion
@@ -158,7 +156,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     element.NextElementSibling.ClassName == ("article-tags"));
 
             if (additionalBody == null)
-                return new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientsBoxes,
+                return new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientBoxes,
                     StepRecipesBoxes,
                     Additional);
 
@@ -190,7 +188,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #endregion
 
 
-            return new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientsBoxes,
+            return new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientBoxes,
                 StepRecipesBoxes,
                 Additional);
             ;

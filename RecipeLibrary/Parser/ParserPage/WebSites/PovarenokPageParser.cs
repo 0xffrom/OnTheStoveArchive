@@ -9,7 +9,6 @@ using RecipeLibrary.Parser.ParserPage.Core;
 
 namespace RecipeLibrary.Parser.ParserPage.WebSites
 {
-    [assembly: AssemblyTitle("povarenok.ru")]
     class PovarenokPageParser : IParserPage<RecipeShort[]>
     {
         public RecipeShort[] Parse(IHtmlDocument document)

@@ -8,7 +8,6 @@ using RecipeLibrary.Parser.ParserPage.Core;
 
 namespace RecipeLibrary.Parser.ParserPage.WebSites
 {
-    [assembly: AssemblyTitle("edimdoma.ru")]
     class EdimDomaPageParser : IParserPage<RecipeShort[]>
     {
         public RecipeShort[] Parse(IHtmlDocument document)

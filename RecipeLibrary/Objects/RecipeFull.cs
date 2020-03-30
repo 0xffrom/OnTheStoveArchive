@@ -33,6 +33,11 @@ namespace RecipeLibrary.Objects
             StepRecipesBoxes = stepRecipeBoxes;
             Additional = additional;
         }
+
+        public RecipeFull()
+        {
+            // (0-.oo)
+        }
     }
     
 }
