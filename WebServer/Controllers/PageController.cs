@@ -28,12 +28,17 @@ namespace WebServer.Controllers
         {
             recipeName ??= string.Empty;
             
+            DateTime startTime = DateTime.Now;
+            Console.WriteLine($"Запрос на парсинг страницы с рецептами ===> {section}");
+            
             try
             {
+                Console.WriteLine($"Запрос выполнен успешно за {(DateTime.Now - startTime).Milliseconds} миллисекунд.");
                 return GetData.GetPage(section, page, recipeName.ToLower()).Result;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine($"Запрос выполнен неудачно. Ошибка: {e}");
                 return new List<RecipeShort> {new RecipeShort("error", new Picture("error"), "error")};
             }
         }

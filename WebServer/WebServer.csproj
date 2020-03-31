@@ -8,5 +8,9 @@
       <ProjectReference Include="..\RecipeLibrary\RecipeLibrary.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MySql.Data" Version="8.0.19" />
+    </ItemGroup>
+
 
 </Project>

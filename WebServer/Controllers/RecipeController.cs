@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using WebServer.DataBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RecipeLibrary.Objects;
@@ -25,17 +26,18 @@ namespace WebServer.Controllers
         [HttpGet("getRecipe")]
         public RecipeFull Get(string url)
         {
-            Console.WriteLine(url);
+            DateTime startTime = DateTime.Now;
+            Console.WriteLine($"Запрос на парсинг старницы рецепта ===> {url}");
             try
             {
-                // TODO: Починить рецепт 5659 поварёнок.
                 var recipe = GetData.GetRecipe(url).Result;
                 recipe.Url = url;
+                Console.WriteLine($"Запрос выполнен успешно за {(DateTime.Now - startTime).Milliseconds} миллисекунд.");
                 return recipe;
             }
             catch (Exception e )
             {
-                Console.WriteLine(e);
+                Console.WriteLine($"Запрос выполнен неудачно. Ошибка: {e}");
                 return new RecipeFull();
             }
         }

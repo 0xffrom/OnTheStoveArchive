@@ -37,9 +37,7 @@ namespace RecipeLibrary.Parser.ParserPage.Core
             currentUrl = currentUrl
                 .Replace("{PageId}", idPage.ToString())
                 .Replace("{RecipeName}", recipeName);
-
-            Console.WriteLine($"Parsing URL: {currentUrl}");
-
+            
             var response = await _client.GetAsync(currentUrl);
 
             string source;
