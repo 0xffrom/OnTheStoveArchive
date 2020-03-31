@@ -1,8 +1,8 @@
-﻿namespace RecipeLibrary.Objects.Boxes.Elements
+﻿using System;
+
+namespace RecipeLibrary.Objects.Boxes.Elements
 {
-    /// <summary>
-    /// Объект, который представляет собой ингредиент с названием и единицей измерения.
-    /// </summary>
+    [Serializable]
     public class Ingredient
     {
         public Ingredient(string name, string unit)
@@ -11,7 +11,7 @@
             Unit = unit;
         }
 
-        public string Name { get; }
-        public string Unit { get; }
+        public string Name { get; set; }
+        public string Unit { get; set; }
     }
 }

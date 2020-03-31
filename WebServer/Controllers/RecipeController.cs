@@ -30,9 +30,20 @@ namespace WebServer.Controllers
             Console.WriteLine($"Запрос на парсинг старницы рецепта ===> {url}");
             try
             {
-                var recipe = GetData.GetRecipe(url).Result;
+                var conn = Database.GetConnection();
+                
+                conn.Open();
+                
+                RecipeFull recipe;
+                if (Database.IsNeedUpdate(url, conn))
+                    Database.AddRecipe(url, recipe = GetData.GetRecipe(url).Result, conn);
+                else
+                    recipe = Database.GetRecipe(url, conn);
+                
+                conn.Close();
+                
                 recipe.Url = url;
-                Console.WriteLine($"Запрос выполнен успешно за {(DateTime.Now - startTime).Milliseconds} миллисекунд.");
+                Console.WriteLine($"Запрос выполнен успешно за {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
                 return recipe;
             }
             catch (Exception e )

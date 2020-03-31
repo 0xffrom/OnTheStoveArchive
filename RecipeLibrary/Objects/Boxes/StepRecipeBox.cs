@@ -1,15 +1,13 @@
 ﻿
+using System;
+
 namespace RecipeLibrary.Objects.Boxes
 {
-    /// <summary>
-    /// Объект, который представляет собой некий шаг рецепта. Он содержит
-    /// а) Описание шага.
-    /// б) Представление шага в виде коллекции картинок.
-    /// </summary>
+    [Serializable]
     public class StepRecipeBox
     {
-        public PictureBox PictureBox { get; }
-        public string Description { get; }
+        public PictureBox PictureBox { get; set; }
+        public string Description { get; set; }
 
         public StepRecipeBox(string description, PictureBox pictureBox)
         {

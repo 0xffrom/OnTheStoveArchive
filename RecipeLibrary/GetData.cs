@@ -56,7 +56,7 @@ namespace RecipeLibrary
         {
             IParserRecipe<RecipeFull> obj = null;
             IParserRecipeSettings settings = null;
-
+            
             if (url.Contains("https://www.povarenok.ru"))
             {
                 obj = new PovarenokRecipeParser();

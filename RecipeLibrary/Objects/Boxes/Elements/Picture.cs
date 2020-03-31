@@ -1,11 +1,11 @@
-﻿namespace RecipeLibrary.Objects.Boxes.Elements
+﻿using System;
+
+namespace RecipeLibrary.Objects.Boxes.Elements
 {
-    /// <summary>
-    /// Объект, который представляет собой представление картинки в виде url.
-    /// </summary>
+    [Serializable]
     public class Picture
     {
-        public string Url { get; }
+        public string Url { get; set; }
 
         public Picture(string url)
         {

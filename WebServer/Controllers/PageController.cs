@@ -33,7 +33,7 @@ namespace WebServer.Controllers
             
             try
             {
-                Console.WriteLine($"Запрос выполнен успешно за {(DateTime.Now - startTime).Milliseconds} миллисекунд.");
+                Console.WriteLine($"Запрос выполнен успешно за {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
                 return GetData.GetPage(section, page, recipeName.ToLower()).Result;
             }
             catch (Exception e)

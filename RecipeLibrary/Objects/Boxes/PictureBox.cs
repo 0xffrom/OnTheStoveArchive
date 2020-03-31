@@ -1,14 +1,13 @@
-﻿using RecipeLibrary.Objects.Boxes.Elements;
+﻿using System;
+using RecipeLibrary.Objects.Boxes.Elements;
 
 
 namespace RecipeLibrary.Objects.Boxes
 {
-    /// <summary>
-    /// Объект, который представляет собой набор картинок.
-    /// </summary>
+    [Serializable]
     public class PictureBox
     {
-        public Picture[] Pictures { get; }
+        public Picture[] Pictures { get; set; }
 
         public PictureBox(Picture[] pictures)
         {

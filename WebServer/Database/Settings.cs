@@ -9,7 +9,7 @@ namespace WebServer.DataBase
  
          public const string Port = "3306";
  
-         public const string User = "server";
+         public const string User = "root";
  
          public const string Password = "password";
  

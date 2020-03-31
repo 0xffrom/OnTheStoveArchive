@@ -1,22 +1,16 @@
-﻿using RecipeLibrary.Objects.Boxes.Elements;
+﻿using System;
+using RecipeLibrary.Objects.Boxes.Elements;
 
 
 namespace RecipeLibrary.Objects.Boxes
 {
-    /// <summary>
-    /// Данный объект представляет собый набор из дополнительной информации для рецепта.
-    /// В доп.информацию входят:
-    /// а) Описание рецепта
-    /// б) Набор картинок.
-    /// с) Видео.
-    /// 
-    /// Замечание: любой из подобъектов является необязательным.
-    /// </summary>
+
+    [Serializable]
     public class AdditionalBox
     {
-        public string Description { get; }
-        public PictureBox PictureBox { get; }
-        public Video Video { get; }
+        public string Description { get; set; }
+        public PictureBox PictureBox { get; set; }
+        public Video Video { get; set; }
 
         public AdditionalBox(string description = null, PictureBox pictureBox = null, Video video = null)
         {

@@ -1,19 +1,20 @@
+using System;
 using RecipeLibrary.Objects.Boxes;
 using RecipeLibrary.Objects.Boxes.Elements;
 
 namespace RecipeLibrary.Objects
 {
     
-    // TODO: add comments
+    [Serializable]
     public class RecipeFull
     {
         public string Url { get; set; }
-        public string Title { get; }
-        public Picture TitlePicture { get; }
-        public string Description { get; }
-        public IngredientBox[] IngredientsBoxes { get; }
-        public StepRecipeBox[] StepRecipesBoxes { get; }
-        public AdditionalBox Additional { get; }
+        public string Title { get; set; }
+        public Picture TitlePicture { get;set; }
+        public string Description { get; set;}
+        public IngredientBox[] IngredientsBoxes { get; set;}
+        public StepRecipeBox[] StepRecipesBoxes { get; set;}
+        public AdditionalBox Additional { get;set; }
 
         public RecipeFull(
             string url,
@@ -21,7 +22,7 @@ namespace RecipeLibrary.Objects
             Picture titlePicture,
             string description,
             IngredientBox[] ingredientsBoxes,
-            StepRecipeBox[] stepRecipeBoxes,
+            StepRecipeBox[] stepRecipesBoxes,
             AdditionalBox additional = null)
 
         {
@@ -30,7 +31,7 @@ namespace RecipeLibrary.Objects
             TitlePicture = titlePicture;
             Description = description;
             IngredientsBoxes = ingredientsBoxes;
-            StepRecipesBoxes = stepRecipeBoxes;
+            StepRecipesBoxes = stepRecipesBoxes;
             Additional = additional;
         }
 
