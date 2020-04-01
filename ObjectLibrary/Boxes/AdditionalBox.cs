@@ -1,8 +1,8 @@
 ﻿using System;
-using RecipeLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary.Objects.Boxes.Elements;
 
 
-namespace RecipeLibrary.Objects.Boxes
+namespace ObjectsLibrary.Objects.Boxes
 {
 
     [Serializable]

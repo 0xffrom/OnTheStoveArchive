@@ -1,6 +1,6 @@
-﻿using RecipeLibrary.Parser.ParserPage.Core;
+﻿using ObjectsLibrary.Parser.ParserPage.Core;
 
-namespace RecipeLibrary.Parser.ParserPage.WebSites
+namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {
     internal class EdimDomaPageSettings : IParserPageSettings
     {

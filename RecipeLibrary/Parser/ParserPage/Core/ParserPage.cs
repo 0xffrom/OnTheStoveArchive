@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 
-namespace RecipeLibrary.Parser.ParserPage.Core
+namespace ObjectsLibrary.Parser.ParserPage.Core
 {
     internal class ParserPage<T> where T : class
     {

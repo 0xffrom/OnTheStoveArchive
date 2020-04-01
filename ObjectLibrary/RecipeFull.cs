@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.Serialization;
-using RecipeLibrary.Objects.Boxes;
-using RecipeLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary.Objects.Boxes;
+using ObjectsLibrary.Objects.Boxes.Elements;
 
-namespace RecipeLibrary.Objects
+namespace ObjectsLibrary.Objects
 {
     
     [Serializable]
@@ -13,8 +13,8 @@ namespace RecipeLibrary.Objects
         public string Title { get; set; }
         public Picture TitlePicture { get;set; }
         public string Description { get; set;}
-        public IngredientBox[] IngredientsBoxes { get; set;}
-        public StepRecipeBox[] StepRecipesBoxes { get; set;}
+        public Ingredient[] Ingredients{ get; set;}
+        public StepRecipeBox[] StepRecipesBoxes { get; set; }
         public AdditionalBox Additional { get; set; }
         
         public RecipeFull(
@@ -22,7 +22,7 @@ namespace RecipeLibrary.Objects
             string title,
             Picture titlePicture,
             string description,
-            IngredientBox[] ingredientsBoxes,
+            Ingredient[] ingredients,
             StepRecipeBox[] stepRecipesBoxes,
             AdditionalBox additional = null)
 
@@ -31,7 +31,7 @@ namespace RecipeLibrary.Objects
             Title = title;
             TitlePicture = titlePicture;
             Description = description;
-            IngredientsBoxes = ingredientsBoxes;
+            Ingredients = ingredients;
             StepRecipesBoxes = stepRecipesBoxes;
             Additional = additional;
         }

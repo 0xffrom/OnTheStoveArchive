@@ -6,9 +6,9 @@ using Android.Content;
 using Android.Net;
 using Android.Views;
 using Android.Widget;
-using XamarinApp.Library.Objects;
-using XamarinApp.Library.Objects.Boxes;
-using XamarinApp.Library.Objects.Boxes.Elements;
+using ObjectsLibrary.Objects;
+using ObjectsLibrary.Objects.Boxes;
+using ObjectsLibrary.Objects.Boxes.Elements;
 
 namespace XamarinApp
 {
@@ -16,20 +16,16 @@ namespace XamarinApp
     {
         private readonly RecipeFull _recipeFull;
         private readonly Context _context;
-        private readonly List<Ingredient> _ingredients;
+        private readonly Ingredient[] _ingredients;
         
         public IngredientsAdapter(Context context, RecipeFull recipeFull)
         {
             this._recipeFull = recipeFull;
             _context = context;
-            
-            _ingredients = new List<Ingredient>();
-            if (recipeFull.IngredientsBoxes != null)
-                foreach (var ingredientBox in recipeFull.IngredientsBoxes)
-                    _ingredients.AddRange(ingredientBox.Ingredients);
+
+            _ingredients = recipeFull.Ingredients;
         }
 
-        public int GetCount => _ingredients.Count;
         public override long GetItemId(int position)
         {
             return position;
@@ -46,14 +42,16 @@ namespace XamarinApp
             var ingredientUnit = view.FindViewById<TextView>(Resource.Id.ingredientUnit);
             ingredientUnit.Text = _ingredients[position].Unit;
             
+            /*
             var ingredientCategory = view.FindViewById<TextView>(Resource.Id.ingredientCategory);
             ingredientCategory.Text = _recipeFull.IngredientsBoxes.First(x=> 
                 x.Ingredients.Contains(_ingredients[position])).Title;
+                */
 
             return view;
         }
 
-        public override int Count => _ingredients.Count;
+        public override int Count => _ingredients.Length;
 
         public override RecipeFull this[int position] => _recipeFull;
     }

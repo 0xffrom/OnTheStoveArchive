@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using RecipeLibrary.Objects;
-using RecipeLibrary.Parser;
-using RecipeLibrary.Parser.ParserPage.Core;
-using RecipeLibrary.Parser.ParserPage.WebSites;
-using RecipeLibrary.Parser.ParserRecipe.Core;
-using RecipeLibrary.Parser.ParserRecipe.WebSites;
+using ObjectsLibrary.Objects;
+using ObjectsLibrary.Parser;
+using ObjectsLibrary.Parser.ParserPage.Core;
+using ObjectsLibrary.Parser.ParserPage.WebSites;
+using ObjectsLibrary.Parser.ParserRecipe.Core;
+using ObjectsLibrary.Parser.ParserRecipe.WebSites;
 
-namespace RecipeLibrary
+namespace ObjectsLibrary
 {
     public  class GetData
     {

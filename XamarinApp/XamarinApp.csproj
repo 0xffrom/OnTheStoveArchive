@@ -407,6 +407,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ObjectLibrary\ObjectsLibrary.csproj">
+      <Project>{2e71f618-7dfd-4161-83d0-ed114448827e}</Project>
+      <Name>ObjectsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XamarinAppLibrary\XamarinAppLibrary.csproj">
       <Project>{dea1a7d3-7fa8-4e62-9efd-22f3cd415979}</Project>
       <Name>XamarinAppLibrary</Name>

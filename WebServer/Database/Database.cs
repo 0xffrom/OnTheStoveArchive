@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using MySql.Data.MySqlClient;
-using RecipeLibrary.Objects;
+using ObjectsLibrary.Objects;
 
 namespace WebServer.DataBase
 {

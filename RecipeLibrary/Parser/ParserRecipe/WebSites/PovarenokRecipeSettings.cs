@@ -1,6 +1,6 @@
-﻿using RecipeLibrary.Parser.ParserRecipe.Core;
+﻿using ObjectsLibrary.Parser.ParserRecipe.Core;
 
-namespace RecipeLibrary.Parser.ParserRecipe.WebSites
+namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 {
     public class PovarenokRecipeSettings : IParserRecipeSettings
     {

@@ -4,9 +4,9 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using RecipeLibrary.Parser.ParserPage.Core;
+using ObjectsLibrary.Parser.ParserPage.Core;
 
-namespace RecipeLibrary.Parser.ParserPage.Core
+namespace ObjectsLibrary.Parser.ParserPage.Core
 {
     public class HtmlLoader
     {

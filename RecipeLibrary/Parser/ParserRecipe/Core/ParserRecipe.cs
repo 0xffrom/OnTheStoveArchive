@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AngleSharp.Html.Parser;
 
-namespace RecipeLibrary.Parser.ParserRecipe.Core
+namespace ObjectsLibrary.Parser.ParserRecipe.Core
 {
     internal class ParserRecipe<T> where T : class
     {

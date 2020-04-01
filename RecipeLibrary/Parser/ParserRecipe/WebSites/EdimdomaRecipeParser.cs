@@ -1,19 +1,19 @@
 using System;
 using System.Linq;
 using AngleSharp.Html.Dom;
-using RecipeLibrary.Objects;
-using RecipeLibrary.Objects.Boxes;
-using RecipeLibrary.Objects.Boxes.Elements;
-using RecipeLibrary.Parser.ParserRecipe.Core;
+using ObjectsLibrary.Objects;
+using ObjectsLibrary.Objects.Boxes;
+using ObjectsLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary.Parser.ParserRecipe.Core;
 
-namespace RecipeLibrary.Parser.ParserRecipe.WebSites
+namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 {
     public class EdimdomaRecipeParser : IParserRecipe<RecipeFull>
     {
         private string Title { get; set; }
         private Picture TitlePicture { get; set; }
         private string Description { get; set; }
-        private IngredientBox[] IngredientsBoxes { get; set; }
+        private Ingredient[] Ingredients{ get; set; }
         private StepRecipeBox[] StepRecipesBoxes { get; set; }
         private AdditionalBox AdditionalBox { get; set; }
         public RecipeFull Parse(IHtmlDocument document)
@@ -23,7 +23,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             
             
 
-            return new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientsBoxes,
+            return new RecipeFull(string.Empty, Title, TitlePicture, Description, Ingredients,
                 StepRecipesBoxes,
                 AdditionalBox);
         }

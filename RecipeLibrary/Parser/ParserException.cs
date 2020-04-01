@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace RecipeLibrary.Parser
+namespace ObjectsLibrary.Parser
 {
     [Serializable]
     internal class ParserException : System.Net.WebException

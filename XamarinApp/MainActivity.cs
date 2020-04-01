@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -14,10 +12,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
-using RecipesAndroid;
-using RecipesAndroid.Objects;
-using XamarinApp.Library;
-using XamarinApp.Library.Objects;
+using ObjectsLibrary.Objects;
 using XamarinAppLibrary;
 
 namespace XamarinApp

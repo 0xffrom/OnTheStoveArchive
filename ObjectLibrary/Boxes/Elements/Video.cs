@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RecipeLibrary.Objects.Boxes.Elements
+namespace ObjectsLibrary.Objects.Boxes.Elements
 {
     /// <summary>
     /// Объект, который представляет собой url на видеоконтент.

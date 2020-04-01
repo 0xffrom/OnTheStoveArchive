@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RecipeLibrary.Objects.Boxes.Elements
+namespace ObjectsLibrary.Objects.Boxes.Elements
 {
     [Serializable]
     public class Ingredient

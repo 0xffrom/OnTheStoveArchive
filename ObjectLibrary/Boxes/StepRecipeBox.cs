@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace RecipeLibrary.Objects.Boxes
+namespace ObjectsLibrary.Objects.Boxes
 {
     [Serializable]
     public class StepRecipeBox

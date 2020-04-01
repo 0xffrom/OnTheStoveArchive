@@ -1,30 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using Java.IO;
-using Java.Net;
-using Refractored.Controls;
 using Square.Picasso;
-using XamarinApp.Library;
-using XamarinApp.Library.Objects;
+using ObjectsLibrary.Objects;
 using XamarinAppLibrary;
-using File = System.IO.File;
-using Picture = XamarinApp.Library.Objects.Boxes.Elements.Picture;
+using Picture = ObjectsLibrary.Objects.Boxes.Elements.Picture;
 
 namespace XamarinApp
 {
@@ -145,7 +131,7 @@ namespace XamarinApp
             
             var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
             var adapterIngredents = new IngredientsAdapter(this, _recipeFull);
-            if (adapterIngredents.GetCount > 0) 
+            if (adapterIngredents.Count > 0) 
                 listIngredients.Adapter = adapterIngredents;
 
             var listSteps = FindViewById<ListView>(Resource.Id.listSteps);

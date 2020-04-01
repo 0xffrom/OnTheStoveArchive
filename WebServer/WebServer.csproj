@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ObjectLibrary\ObjectsLibrary.csproj" />
       <ProjectReference Include="..\RecipeLibrary\RecipeLibrary.csproj" />
     </ItemGroup>
 

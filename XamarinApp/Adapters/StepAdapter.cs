@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Net;
 using Android.Content;
-using Android.Net;
 using Android.Views;
 using Android.Widget;
 using Square.Picasso;
-using XamarinApp.Library.Objects;
-using XamarinApp.Library.Objects.Boxes;
-using XamarinApp.Library.Objects.Boxes.Elements;
+using ObjectsLibrary.Objects;
+using ObjectsLibrary.Objects.Boxes;
+using ObjectsLibrary.Objects.Boxes.Elements;
 
 namespace XamarinApp
 {

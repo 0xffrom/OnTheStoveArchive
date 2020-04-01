@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Reflection;
 using AngleSharp.Html.Dom;
-using RecipeLibrary.Objects;
-using RecipeLibrary.Objects.Boxes.Elements;
-using RecipeLibrary.Parser.ParserPage.Core;
+using ObjectsLibrary.Objects;
+using ObjectsLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary.Parser.ParserPage.Core;
 
-namespace RecipeLibrary.Parser.ParserPage.WebSites
+namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {
     
     class PovarPageParser : IParserPage<RecipeShort[]>

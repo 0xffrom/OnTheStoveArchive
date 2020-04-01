@@ -1,19 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AngleSharp.Html.Dom;
-using RecipeLibrary.Objects;
-using RecipeLibrary.Objects.Boxes;
-using RecipeLibrary.Objects.Boxes.Elements;
-using RecipeLibrary.Parser.ParserRecipe.Core;
+using ObjectsLibrary.Objects;
+using ObjectsLibrary.Objects.Boxes;
+using ObjectsLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary.Parser.ParserRecipe.Core;
 
-namespace RecipeLibrary.Parser.ParserRecipe.WebSites
+namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 {
     public class PovarenokRecipeParser : IParserRecipe<RecipeFull>
     {
         private string Title { get; set; }
         private Picture TitlePicture { get; set; }
         private string Description { get; set; }
-        private IngredientBox[] IngredientBoxes { get; set; }
+        private Ingredient[] Ingredients { get; set; }
         private StepRecipeBox[] StepRecipesBoxes { get; set; }
         private AdditionalBox Additional { get; set; }
 
@@ -59,7 +60,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             int countIngredientTitles = ingredientBody?.QuerySelectorAll("ul").Length ?? 0;
 
-            var ingredientBoxes = new IngredientBox[countIngredientTitles];
+            var ingredientsList = new List<Ingredient>();
 
             for (int i = 0; i < countIngredientTitles; i++)
             {
@@ -94,34 +95,38 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     .QuerySelectorAll("li")
                     .ToArray();
 
-                Ingredient[] ingredients = new Ingredient[ingredientsArray.Length];
-
-                for (int j = 0; j < ingredientsArray.Length; j++)
+                if (ingredientsArray != null)
                 {
-                    string name = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
-                            item.Attributes[0] != null && item.Attributes[0].Value == ("name"))
-                        .Select(item => item.TextContent).FirstOrDefault();
+                    Ingredient[] ingredients = new Ingredient[ingredientsArray.Length];
 
-                    string unit = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
-                            item.Attributes[0] != null && item.Attributes[0].Value == ("amount"))
-                        .Select(item => item.TextContent).FirstOrDefault();
+                    for (int j = 0; j < ingredientsArray.Length; j++)
+                    {
+                        string name = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
+                                item.Attributes[0] != null && item.Attributes[0].Value == ("name"))
+                            .Select(item => item.TextContent).FirstOrDefault();
 
-                    name += ingredientsArray[j].TextContent.Replace(name ?? "А тут может и ничего не быть.", string.Empty)
-                        .Replace(unit ?? "А тут может и ничего не быть.", string.Empty)
-                        .Replace("\n", string.Empty)
-                        .Replace(WhiteSpaceBug, string.Empty)
-                        .Replace("—", string.Empty);
+                        string unit = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
+                                item.Attributes[0] != null && item.Attributes[0].Value == ("amount"))
+                            .Select(item => item.TextContent).FirstOrDefault();
 
-                    Ingredient ingredient = new Ingredient(name, unit);
-                    ingredients[j] = ingredient;
+                        name += ingredientsArray[j].TextContent.Replace(name ?? "А тут может и ничего не быть.", string.Empty)
+                            .Replace(unit ?? "А тут может и ничего не быть.", string.Empty)
+                            .Replace("\n", string.Empty)
+                            .Replace(WhiteSpaceBug, string.Empty)
+                            .Replace("—", string.Empty);
+
+                        if (titleIngredient != Title)
+                            name += $" ({titleIngredient})";
+                    
+                        Ingredient ingredient = new Ingredient(name, unit);
+                        ingredients[j] = ingredient;
+                    }
+
+                    ingredientsList.AddRange(ingredients);
                 }
-
-                IngredientBox ingredientBox = new IngredientBox(titleIngredient, ingredients);
-
-                ingredientBoxes[i] = ingredientBox;
-
-                IngredientBoxes = ingredientBoxes;
             }
+
+            Ingredients = ingredientsList.ToArray();
 
             #endregion
 
@@ -159,7 +164,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     element.NextElementSibling.ClassName == ("article-tags"));
 
             if (additionalBody == null)
-                return new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientBoxes,
+                return new RecipeFull(string.Empty, Title, TitlePicture, Description, Ingredients,
                     StepRecipesBoxes,
                     Additional);
 
@@ -191,7 +196,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #endregion
 
 
-            return new RecipeFull(string.Empty, Title, TitlePicture, Description, IngredientBoxes,
+            return new RecipeFull(string.Empty, Title, TitlePicture, Description, Ingredients,
                 StepRecipesBoxes,
                 Additional);
             ;

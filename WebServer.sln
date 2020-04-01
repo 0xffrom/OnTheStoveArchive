@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinApp", "XamarinApp\Xa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinAppLibrary", "XamarinAppLibrary\XamarinAppLibrary.csproj", "{DEA1A7D3-7FA8-4E62-9EFD-22F3CD415979}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectsLibrary", "ObjectLibrary\ObjectsLibrary.csproj", "{2E71F618-7DFD-4161-83D0-ED114448827E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{DEA1A7D3-7FA8-4E62-9EFD-22F3CD415979}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEA1A7D3-7FA8-4E62-9EFD-22F3CD415979}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEA1A7D3-7FA8-4E62-9EFD-22F3CD415979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E71F618-7DFD-4161-83D0-ED114448827E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E71F618-7DFD-4161-83D0-ED114448827E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E71F618-7DFD-4161-83D0-ED114448827E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E71F618-7DFD-4161-83D0-ED114448827E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

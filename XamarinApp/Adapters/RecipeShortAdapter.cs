@@ -12,9 +12,8 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using Java.Lang;
-using RecipesAndroid.Objects;
 using Square.Picasso;
-using XamarinApp.Library.Objects;
+using ObjectsLibrary.Objects;
 using Toolbar = Android.Widget.Toolbar;
 
 namespace XamarinApp
