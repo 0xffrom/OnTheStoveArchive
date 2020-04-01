@@ -67,6 +67,11 @@ namespace RecipeLibrary
                  obj = new PovarRecipeParser();
                  settings = new PovarRecipeSettings(url);
             }
+            else if (url.Contains("https://www.edimdoma.ru"))
+            {
+                obj = new EdimdomaRecipeParser();
+                settings = new EdimdomaRecipeSettings(url);
+            }
             else
                 throw new ParserException("Неизвестный сайт.");
             
