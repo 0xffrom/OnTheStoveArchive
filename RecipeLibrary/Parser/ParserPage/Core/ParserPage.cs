@@ -50,7 +50,7 @@ namespace RecipeLibrary.Parser.ParserPage.Core
 
             var document = await domParser.ParseDocumentAsync(source);
             
-            var result = Parser.Parse(document);
+            var result = Parser.Parse(document, _parserSettings);
 
             return result;
         }

@@ -14,6 +14,8 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
         public int MaxPageId { get; set; } = 9234;
         public int PageId { get; set; }
         public string RecipeName { get; }
+        public double IndexPopularity { get; set; } = 95;
+        public double IndexStep { get; set; } = 2;
 
 
         public PovarenokPageSettings(string section, int pageId)

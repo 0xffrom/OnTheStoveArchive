@@ -14,6 +14,8 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
         public int MaxPageId { get; set; } = 1788;
         public int PageId { get; set; }
         public string RecipeName { get; }
+        public double IndexPopularity { get; set; } = 100;
+        public double IndexStep { get; set; } = 1;
 
 
         public PovarPageSettings(string section, int pageId)

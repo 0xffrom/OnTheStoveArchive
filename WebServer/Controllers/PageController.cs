@@ -24,7 +24,7 @@ namespace WebServer.Controllers
 
 
         [HttpGet("getPage")]
-        public List<RecipeShort> Get(string section, int page = 1, string recipeName = null)
+        public RecipeShort[] Get(string section, int page = 1, string recipeName = null)
         {
             recipeName ??= string.Empty;
             
@@ -39,7 +39,7 @@ namespace WebServer.Controllers
             catch (Exception e)
             {
                 Console.WriteLine($"Запрос выполнен неудачно. Ошибка: {e}");
-                return new List<RecipeShort> {new RecipeShort("error", new Picture("error"), "error")};
+                return new RecipeShort[] {new RecipeShort()};
             }
         }
     }

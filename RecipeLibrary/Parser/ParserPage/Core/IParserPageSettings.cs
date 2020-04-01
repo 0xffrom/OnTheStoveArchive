@@ -9,6 +9,9 @@
         string SuffixRecipe { get; set; }
         int MaxPageId { get; set; }
         int PageId { get; set; }
+        double IndexPopularity { get; set; }
+        double IndexStep { get; set; }
+        
         string RecipeName { get; }
     }
 }

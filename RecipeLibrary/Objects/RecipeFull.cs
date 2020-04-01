@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 using RecipeLibrary.Objects.Boxes;
 using RecipeLibrary.Objects.Boxes.Elements;
 
@@ -14,8 +15,8 @@ namespace RecipeLibrary.Objects
         public string Description { get; set;}
         public IngredientBox[] IngredientsBoxes { get; set;}
         public StepRecipeBox[] StepRecipesBoxes { get; set;}
-        public AdditionalBox Additional { get;set; }
-
+        public AdditionalBox Additional { get; set; }
+        
         public RecipeFull(
             string url,
             string title,
@@ -34,7 +35,7 @@ namespace RecipeLibrary.Objects
             StepRecipesBoxes = stepRecipesBoxes;
             Additional = additional;
         }
-
+        
         public RecipeFull()
         {
             // (0-.oo)

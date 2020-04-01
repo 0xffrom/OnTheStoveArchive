@@ -12,7 +12,7 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
     class PovarPageParser : IParserPage<RecipeShort[]>
     {
         
-        public RecipeShort[] Parse(IHtmlDocument document)
+        public RecipeShort[] Parse(IHtmlDocument document, IParserPageSettings settings)
         {
             try
             {
@@ -20,14 +20,17 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
                     .Where(item => item.ClassName != null && item.ClassName == "recipe"
                                                           && item.ParentElement != null &&
                                                           item.ParentElement.ClassName == ("recipe_list")).ToArray();
-
+                
+                double indexStartPopularity = settings.IndexPopularity;
+                
                 return (from recipe in recipesBody
                     let anyBody = recipe.QuerySelector("h3").QuerySelector("a")
-                    let name = anyBody.TextContent
+                    let title = anyBody.TextContent
                     let url = "https://povar.ru" + anyBody.Attributes[0].Value
                     let pictureBody = recipe.QuerySelector("img")
                     let pictureUrl = pictureBody.Attributes[0].Value
-                    select new RecipeShort(name, new Picture(pictureUrl), url)).ToArray();
+                    let indexPopularity = indexStartPopularity -= settings.IndexStep
+                    select new RecipeShort(title, new Picture(pictureUrl), url,indexPopularity)).ToArray();
             }
             catch (Exception exp)
             {

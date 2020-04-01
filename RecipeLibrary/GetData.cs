@@ -18,7 +18,7 @@ namespace RecipeLibrary
             new Random((int) DateTime.Now.Ticks & 0x0000FFFF);
 
 
-        public static async Task<List<RecipeShort>> GetPage(string section, int page, string findName = null)
+        public static async Task<RecipeShort[]> GetPage(string section, int page, string findName = null)
         {
             List<RecipeShort> recipeShorts = new List<RecipeShort>();
 
@@ -33,7 +33,7 @@ namespace RecipeLibrary
 
             await Task.WhenAll(ParseRecipe(edimdoma, recipeShorts), ParseRecipe(povarenok, recipeShorts), ParseRecipe(povar, recipeShorts));
 
-            return recipeShorts;
+            return recipeShorts.OrderByDescending(x => x.IndexPopularity).ToArray();
         }
 
         private static async Task ParseRecipe(ParserPage<RecipeShort[]> T, List<RecipeShort> recipeShorts)
