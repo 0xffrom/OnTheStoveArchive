@@ -66,7 +66,7 @@ namespace WebServer.DataBase
             var command = new MySqlCommand(sqlCommand, conn);
 
             // Добавляем в поле json бинарное представление объекта RecipeFull.
-            command.Parameters.Add("?json", MySqlDbType.TinyBlob).Value = buffer;
+            command.Parameters.Add("?json", MySqlDbType.Blob).Value = buffer;
             command.ExecuteNonQuery();
         }
 
