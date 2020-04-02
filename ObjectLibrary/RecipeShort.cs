@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using ObjectsLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary.Components;
 
-namespace ObjectsLibrary.Objects
+namespace ObjectsLibrary
 {
-    
+    /// <summary>Краткое описание рецепта, полученное со страницы поиска кулинарного сайта.</summary>
     [Serializable]
     public class RecipeShort
     {
+        /// <value>Название рецепта.</value>
         public string Title { get; set; }
-        public Picture Picture { get; set; }
+        /// <value>Изображение рецепта.</value>
+        /// /// <see cref="Image"/>
+        public Image Image { get; set; }
+        /// <value>Интернет адрес рецепта.</value>
+        
         public string Url { get; set; }
-        [IgnoreDataMember] 
+        
+        /// <value>Индекс популярности рецепта.</value>
+        /// <remarks>Используется для сортировки рецептов сервером.</remarks>
+        [IgnoreDataMember]
         public double IndexPopularity { get; set; }
 
-        public RecipeShort(string title, Picture picture, string url) : this()
+        public RecipeShort(string title, Image image, string url) : this()
         {
             Title = title;
-            Picture = picture;
+            Image = image;
             Url = url;
         }
 
-        public RecipeShort(string title, Picture picture, string url, double indexPopularity) : this(title, picture, url)
+        public RecipeShort(string title, Image image, string url, double indexPopularity) : this(title, image, url)
         {
             IndexPopularity = indexPopularity;
         }
