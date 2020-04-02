@@ -8,6 +8,8 @@
                                         android:fitsSystemWindows="true"
                                         tools:openDrawer="start">
 
+
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -45,4 +47,19 @@
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/activity_main_drawer"/>
 
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        />
+
+</RelativeLayout>
 </android.support.v4.widget.DrawerLayout>

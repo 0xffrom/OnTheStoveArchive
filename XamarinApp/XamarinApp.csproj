@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Xamarin.Forms.4.5.0.356\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.4.5.0.356\build\Xamarin.Forms.props')" />
+  <Import Project="..\packages\Xamarin.Forms.4.5.0.530\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.4.5.0.530\build\Xamarin.Forms.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -59,7 +59,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.4.5.0.356\lib\MonoAndroid90\FormsViewGroup.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.4.5.0.530\lib\MonoAndroid90\FormsViewGroup.dll</HintPath>
     </Reference>
     <Reference Include="Java.Interop" />
     <Reference Include="MaterialSpinner, Version=1.1.1.0, Culture=neutral, PublicKeyToken=null">
@@ -86,13 +86,11 @@
       <HintPath>..\packages\Refractored.Controls.CircleImageView.1.2.0-beta\lib\MonoAndroid10\Refractored.Controls.CircleImageView.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Square.OkHttp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Square.OkHttp.2.4.0.0\lib\MonoAndroid\Square.OkHttp.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Square.OkHttp, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Square.OkHttp.2.7.5.1\lib\monoandroid44\Square.OkHttp.dll</HintPath>
     </Reference>
-    <Reference Include="Square.OkIO, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Square.OkIO.1.5.0.0\lib\MonoAndroid\Square.OkIO.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Square.OkIO, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Square.OkIO.2.4.1\lib\monoandroid90\Square.OkIO.dll</HintPath>
     </Reference>
     <Reference Include="Square.Picasso, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Square.Picasso.2.5.2.2\lib\monoandroid44\Square.Picasso.dll</HintPath>
@@ -151,6 +149,9 @@
     <Reference Include="Xamarin.Android.Support.Compat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Android.Support.Compat.28.0.0.3\lib\monoandroid90\Xamarin.Android.Support.Compat.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Constraint.Layout, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.Constraint.Layout.1.1.2\lib\MonoAndroid70\Xamarin.Android.Support.Constraint.Layout.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.Constraint.Layout.Solver, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.Constraint.Layout.Solver.1.1.2\lib\MonoAndroid70\Xamarin.Android.Support.Constraint.Layout.Solver.dll</HintPath>
@@ -253,9 +254,35 @@
       <HintPath>..\packages\Xamarin.Android.Support.ViewPager.28.0.0.3\lib\monoandroid90\Xamarin.Android.Support.ViewPager.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Essentials, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Xamarin.Essentials.1.5.0\lib\monoandroid90\Xamarin.Essentials.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Xamarin.AndroidX.ConstraintLayout, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.AndroidX.ConstraintLayout.1.1.3\lib\monoandroid90\Xamarin.AndroidX.ConstraintLayout.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.AndroidX.ConstraintLayout.Solver, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.AndroidX.ConstraintLayout.Solver.1.1.3\lib\monoandroid90\Xamarin.AndroidX.ConstraintLayout.Solver.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Essentials, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Essentials.1.5.2\lib\monoandroid90\Xamarin.Essentials.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.4.5.0.530\lib\MonoAndroid90\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.4.5.0.530\lib\MonoAndroid90\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.4.5.0.530\lib\MonoAndroid90\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.4.5.0.530\lib\MonoAndroid90\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Jetbrains.Annotations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Jetbrains.Annotations.13.0.0\lib\monoandroid90\Xamarin.Jetbrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Kotlin.StdLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Kotlin.StdLib.1.3.50\lib\monoandroid90\Xamarin.Kotlin.StdLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Kotlin.StdLib.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Kotlin.StdLib.Common.1.3.50\lib\monoandroid90\Xamarin.Kotlin.StdLib.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -293,7 +320,6 @@
     </AndroidResource>
     <Compile Include="Adapters\IngredientsAdapter.cs" />
     <Compile Include="Adapters\RecipeAdapter.cs" />
-    <Compile Include="Adapters\RecipeShortAdapter.cs" />
     <Compile Include="Adapters\StepAdapter.cs" />
     <Compile Include="MainActivity.cs" />
     <AndroidResource Include="Resources\drawable-v21\ic_menu_camera.xml">
@@ -460,8 +486,13 @@
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.CustomTabs.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.CustomTabs.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.CustomTabs.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.CustomTabs.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Media.Compat.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Media.Compat.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Media.Compat.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Media.Compat.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.v4.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.v4.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.v4.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.v4.targets'))" />
-    <Error Condition="!Exists('..\packages\Xamarin.Forms.4.5.0.356\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.5.0.356\build\Xamarin.Forms.props'))" />
-    <Error Condition="!Exists('..\packages\Xamarin.Forms.4.5.0.356\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.5.0.356\build\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.4.5.0.530\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.5.0.530\build\Xamarin.Forms.props'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.4.5.0.530\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.5.0.530\build\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Jetbrains.Annotations.13.0.0\build\monoandroid90\Xamarin.Jetbrains.Annotations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Jetbrains.Annotations.13.0.0\build\monoandroid90\Xamarin.Jetbrains.Annotations.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Kotlin.StdLib.Common.1.3.50\build\monoandroid90\Xamarin.Kotlin.StdLib.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Kotlin.StdLib.Common.1.3.50\build\monoandroid90\Xamarin.Kotlin.StdLib.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Kotlin.StdLib.1.3.50\build\monoandroid90\Xamarin.Kotlin.StdLib.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Kotlin.StdLib.1.3.50\build\monoandroid90\Xamarin.Kotlin.StdLib.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.AndroidX.ConstraintLayout.Solver.1.1.3\build\monoandroid90\Xamarin.AndroidX.ConstraintLayout.Solver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.AndroidX.ConstraintLayout.Solver.1.1.3\build\monoandroid90\Xamarin.AndroidX.ConstraintLayout.Solver.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.AndroidX.ConstraintLayout.1.1.3\build\monoandroid90\Xamarin.AndroidX.ConstraintLayout.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.AndroidX.ConstraintLayout.1.1.3\build\monoandroid90\Xamarin.AndroidX.ConstraintLayout.targets'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Android.Arch.Core.Common.1.1.1.3\build\monoandroid90\Xamarin.Android.Arch.Core.Common.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Core.Common.1.1.1.3\build\monoandroid90\Xamarin.Android.Arch.Core.Common.targets')" />
   <Import Project="..\packages\Xamarin.Android.Arch.Core.Runtime.1.1.1.3\build\monoandroid90\Xamarin.Android.Arch.Core.Runtime.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Core.Runtime.1.1.1.3\build\monoandroid90\Xamarin.Android.Arch.Core.Runtime.targets')" />
@@ -499,7 +530,12 @@
   <Import Project="..\packages\Xamarin.Android.Support.CustomTabs.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.CustomTabs.targets" Condition="Exists('..\packages\Xamarin.Android.Support.CustomTabs.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.CustomTabs.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Media.Compat.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Media.Compat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Media.Compat.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Media.Compat.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.v4.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.v4.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v4.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.v4.targets')" />
-  <Import Project="..\packages\Xamarin.Forms.4.5.0.356\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.5.0.356\build\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.4.5.0.530\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.5.0.530\build\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Jetbrains.Annotations.13.0.0\build\monoandroid90\Xamarin.Jetbrains.Annotations.targets" Condition="Exists('..\packages\Xamarin.Jetbrains.Annotations.13.0.0\build\monoandroid90\Xamarin.Jetbrains.Annotations.targets')" />
+  <Import Project="..\packages\Xamarin.Kotlin.StdLib.Common.1.3.50\build\monoandroid90\Xamarin.Kotlin.StdLib.Common.targets" Condition="Exists('..\packages\Xamarin.Kotlin.StdLib.Common.1.3.50\build\monoandroid90\Xamarin.Kotlin.StdLib.Common.targets')" />
+  <Import Project="..\packages\Xamarin.Kotlin.StdLib.1.3.50\build\monoandroid90\Xamarin.Kotlin.StdLib.targets" Condition="Exists('..\packages\Xamarin.Kotlin.StdLib.1.3.50\build\monoandroid90\Xamarin.Kotlin.StdLib.targets')" />
+  <Import Project="..\packages\Xamarin.AndroidX.ConstraintLayout.Solver.1.1.3\build\monoandroid90\Xamarin.AndroidX.ConstraintLayout.Solver.targets" Condition="Exists('..\packages\Xamarin.AndroidX.ConstraintLayout.Solver.1.1.3\build\monoandroid90\Xamarin.AndroidX.ConstraintLayout.Solver.targets')" />
+  <Import Project="..\packages\Xamarin.AndroidX.ConstraintLayout.1.1.3\build\monoandroid90\Xamarin.AndroidX.ConstraintLayout.targets" Condition="Exists('..\packages\Xamarin.AndroidX.ConstraintLayout.1.1.3\build\monoandroid90\Xamarin.AndroidX.ConstraintLayout.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">
