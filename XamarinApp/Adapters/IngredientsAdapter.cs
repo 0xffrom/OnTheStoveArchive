@@ -23,7 +23,8 @@ namespace XamarinApp
             this._recipeFull = recipeFull;
             _context = context;
 
-            _ingredients = recipeFull.Ingredients;
+            if (recipeFull.Ingredients != null)
+                _ingredients = recipeFull.Ingredients;
         }
 
         public override long GetItemId(int position)

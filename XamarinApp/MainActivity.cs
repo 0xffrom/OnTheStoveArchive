@@ -9,6 +9,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
@@ -18,15 +19,14 @@ using XamarinAppLibrary;
 namespace XamarinApp
 {
     [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon", MainLauncher = true)]
-    
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
-        private ListView _listView;
-        private List<RecipeShort> _recipes;
+        private RecyclerView _listView;
+        private RecipeShort[] _recipes;
         private DrawerLayout _drawer;
-        
+
         public static string LastUrl { get; private set; }
-        
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -34,56 +34,70 @@ namespace XamarinApp
             // TODO: Добавить шрифты.
             // TODO: Добавить кнопки на рецептах.
             // TODO: Добавить сохранение
-            
+
             // TODO: Тотальный рефакторинг.
             // TODO: Загрузка доп.рецептов при прокрутке.
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
-            
-   
-            
+
             SetContentView(Resource.Layout.activity_search);
-            
-            SetListView();
-            
-            SetPlateRecipe();
-            
-            SetSpinner();
-            
+
+            _listView = FindViewById<RecyclerView>(Resource.Id.listRecipeShorts);
+            _listView.HasFixedSize = true;
+
+            UpdateListView();
+
+
+             SetPlateRecipe();
+ 
+             SetSpinner();
+
             _drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            var toggle = new ActionBarDrawerToggle(this, _drawer, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
+            var toggle = new ActionBarDrawerToggle(this, _drawer, Resource.String.navigation_drawer_open,
+                Resource.String.navigation_drawer_close);
             _drawer.AddDrawerListener(toggle);
             toggle.SyncState();
 
             var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             navigationView.SetNavigationItemSelectedListener(this);
-            
+
             var buttonMenu = FindViewById<Button>(Resource.Id.menu_button);
 
-            
+
             buttonMenu.Click += delegate(object sender, EventArgs args)
             {
                 _drawer.OpenDrawer(GravityCompat.Start);
-                
+
                 var menu_buttonM = FindViewById<Button>(Resource.Id.menu_buttonM);
-                menu_buttonM.Animation = new RotateAnimation(0, 180); 
+                menu_buttonM.Animation = new RotateAnimation(0, 180);
                 menu_buttonM.Click += delegate(object sender, EventArgs args)
                 {
-
                     if (_drawer.IsDrawerOpen(GravityCompat.Start))
                         OnBackPressed();
                 };
-                
             };
+
             
-            
+           
         }
 
-        
+        private async void UpdateListView(string query = "getPage?section=popular")
+        {
+            var mLayoutManager = new LinearLayoutManager(this);
+            _listView.SetLayoutManager(mLayoutManager);
+            var adapter = new RecipeAdapter(await UpdateCollectionRecipes(query), this);
+            adapter.ItemClick += OnItemClick;
+
+            _listView.SetAdapter(adapter);
+            
+            /* FindViewById<RecyclerView>(Resource.Id.listRecipeShorts).Adapter =
+                 new RecipeShortAdapter(this, await UpdateCollectionRecipes(query));*/
+        }
+
         public override void OnBackPressed()
         {
-            if(_drawer.IsDrawerOpen(GravityCompat.Start))
+            if (_drawer.IsDrawerOpen(GravityCompat.Start))
             {
                 _drawer.CloseDrawer(GravityCompat.Start);
             }
@@ -98,7 +112,7 @@ namespace XamarinApp
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
             return true;
         }
-        
+
         private void SetSpinner()
         {
             var spinner = FindViewById<Spinner>(Resource.Id.spinner);
@@ -118,32 +132,28 @@ namespace XamarinApp
             edittext.KeyPress += (object sender, View.KeyEventArgs e) =>
             {
                 e.Handled = false;
-                
+
                 if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter) return;
-                
+
                 UpdateListView($"getPage?section=recipe&recipeName={edittext.Text}");
                 Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
                 e.Handled = true;
             };
         }
 
-        private void SetListView()
+        void OnItemClick(object sender, int position)
         {
-            _listView = FindViewById<ListView>(Resource.Id.listRecipeShorts);
-
-            _listView.ItemClick += (sender, args) =>
-            {
-                LastUrl = _recipes[int.Parse(args.Id.ToString())].Url;
-                Intent intent = new Intent(this, typeof(RecipeActivity));
-                StartActivity(intent);
-            };
+            LastUrl = _recipes[position].Url;
+            Intent intent = new Intent(this, typeof(RecipeActivity));
+            StartActivity(intent);
         }
 
-        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e) {  
-            
+
+        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
             var spinner = (Spinner) sender;
             var item = spinner.GetItemAtPosition(e.Position);
-            
+
             switch (item.ToString())
             {
                 case "По популярности":
@@ -156,21 +166,21 @@ namespace XamarinApp
                     UpdateListView("getPage?section=new");
                     break;
             }
-            
 
-            var toast = $"Сортировка {spinner.GetItemAtPosition(e.Position).ToString().ToLower()}";  
-            Toast.MakeText(this, toast, ToastLength.Long).Show();  
-        } 
-        
-        private async Task<List<RecipeShort>> UpdateCollectionRecipes(string query) =>  
+
+            var toast = $"Сортировка {spinner.GetItemAtPosition(e.Position).ToString().ToLower()}";
+            Toast.MakeText(this, toast, ToastLength.Long).Show();
+        }
+
+        private async Task<RecipeShort[]> UpdateCollectionRecipes(string query) =>
             await Task.Run(function: () => _recipes = HttpGet.GetRecipes(query));
-        
-        private async void UpdateListView(string query = "getPage?section=popular") =>
-            FindViewById<ListView>(Resource.Id.listRecipeShorts).Adapter = 
-                new RecipeShortAdapter(this, await UpdateCollectionRecipes(query));
+
+        private RecipeShort[] GetRecipes(string query) => UpdateCollectionRecipes(query).Result;
 
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
+            [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -188,4 +198,3 @@ namespace XamarinApp
         }
     }
 }
-

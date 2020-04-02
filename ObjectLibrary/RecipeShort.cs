@@ -8,11 +8,11 @@ namespace ObjectsLibrary.Objects
     [Serializable]
     public class RecipeShort
     {
-        public string Title { get; }
-        public Picture Picture { get; }
-        public string Url { get; }
+        public string Title { get; set; }
+        public Picture Picture { get; set; }
+        public string Url { get; set; }
         [IgnoreDataMember] 
-        public double IndexPopularity { get; }
+        public double IndexPopularity { get; set; }
 
         public RecipeShort(string title, Picture picture, string url) : this()
         {

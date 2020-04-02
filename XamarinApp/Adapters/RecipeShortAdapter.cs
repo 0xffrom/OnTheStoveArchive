@@ -20,10 +20,10 @@ namespace XamarinApp
 {
     public class RecipeShortAdapter : BaseAdapter<RecipeShort>
     {
-        private readonly List<RecipeShort> _list;
+        private readonly RecipeShort[] _list;
         private readonly Context _context;
 
-        public RecipeShortAdapter(Context context, List<RecipeShort> list)
+        public RecipeShortAdapter(Context context, RecipeShort[] list)
         {
             this._list = list;
             _context = context;
@@ -63,7 +63,7 @@ namespace XamarinApp
         }
         
         
-        public override int Count => _list.Count;
+        public override int Count => _list.Length;
 
         public override RecipeShort this[int position] => _list[position];
     }

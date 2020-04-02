@@ -292,6 +292,7 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
     <Compile Include="Adapters\IngredientsAdapter.cs" />
+    <Compile Include="Adapters\RecipeAdapter.cs" />
     <Compile Include="Adapters\RecipeShortAdapter.cs" />
     <Compile Include="Adapters\StepAdapter.cs" />
     <Compile Include="MainActivity.cs" />

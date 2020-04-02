@@ -27,8 +27,8 @@ namespace XamarinAppLibrary
             return source;
         }
 
-        public static List<RecipeShort> GetRecipes(string query) =>
-            JsonConvert.DeserializeObject<List<RecipeShort>>(GetSource(query).Result);
+        public static RecipeShort[] GetRecipes(string query) =>
+            JsonConvert.DeserializeObject<RecipeShort[]>(GetSource(query).Result);
 
         public static RecipeFull GetPage(string url) =>
             JsonConvert.DeserializeObject<RecipeFull>
