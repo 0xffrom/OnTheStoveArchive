@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AngleSharp.Html.Dom;
 using ObjectsLibrary.Objects;
@@ -89,22 +90,41 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 .QuerySelectorAll("div")
                 .FirstOrDefault(el => el.Attributes.Length == 3 && el.Attributes[0].Value == "recipeInstructions");
 
-            var stepCollection = stepRecipeBody.QuerySelectorAll("div").Where(
-                x => x.ClassName != null && x.ClassName == "detailed_step_photo_big")
-                .Select(x => x.FirstElementChild).ToArray();
+            var stepCollection = stepRecipeBody
+                .QuerySelectorAll("div")
+                .Where(x=> x.ClassName != null)
+                .ToArray();
+            
+            List<StepRecipeBox> stepRecipesBoxes = new List<StepRecipeBox>(stepCollection.Length / 3);
 
-            int countSteps = stepCollection.Count();
-            StepRecipesBoxes = new StepRecipeBox[countSteps];
-            for (int i = 0; i < countSteps; i++)
+            foreach (var step in stepCollection)
             {
-                string description = stepCollection[i].Attributes[0].Value;
-                
-                string pictureUrl = stepCollection[i].Attributes[3].Value;
-                
-                StepRecipesBoxes[i] =
-                    new StepRecipeBox(description, new PictureBox(new Picture[1] {new Picture(pictureUrl)}));
+                switch (step.ClassName)
+                {
+                    case "detailed_step_photo_big":
+                    {
+                        var firstEl = step.FirstElementChild;
+                        
+                        string description = firstEl.Attributes[0].Value;
+
+                        string pictureUrl = firstEl.Attributes[3].Value;
+
+                        stepRecipesBoxes.Add(new StepRecipeBox(description,
+                            new PictureBox(new Picture[1] {new Picture(pictureUrl)})));
+                        break;
+                    }
+                    case "detailed_step_description_big noPhotoStep":
+                    {
+                        string description = step.TextContent;
+                        stepRecipesBoxes.Add(new StepRecipeBox(description,
+                            new PictureBox(new Picture[1] {new Picture("none picture")})));
+                        break;
+                    }
+                }
             }
 
+            StepRecipesBoxes = stepRecipesBoxes.ToArray();
+            
             #endregion
 
             #region Additional
