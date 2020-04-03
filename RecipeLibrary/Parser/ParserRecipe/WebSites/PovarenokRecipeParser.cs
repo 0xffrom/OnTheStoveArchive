@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using AngleSharp.Html.Dom;
-using ObjectsLibrary.Objects;
-using ObjectsLibrary.Objects.Boxes;
-using ObjectsLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary;
+using ObjectsLibrary.Components;
 using ObjectsLibrary.Parser.ParserRecipe.Core;
 
-namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
+namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 {
     public class PovarenokRecipeParser : IParserRecipe<RecipeFull>
     {
         private string Title { get; set; }
-        private Picture TitlePicture { get; set; }
+        private Image TitlePicture { get; set; }
         private string Description { get; set; }
         private Ingredient[] Ingredients { get; set; }
         private StepRecipe[] StepRecipesBoxes { get; set; }
-        private AdditionalBox Additional { get; set; }
+        private Additional Additional { get; set; }
 
         private const string WhiteSpaceBug = "  ";
 
@@ -35,7 +34,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             Title = recipeBody.QuerySelector("h1").TextContent;
 
-            TitlePicture = new Picture(recipeBody.QuerySelectorAll("div")
+            TitlePicture = new Image(recipeBody.QuerySelectorAll("div")
                 .Where(element => element.ClassName != null && element.ClassName == "m-img")
                 .Select(element => element.FirstElementChild?.Attributes[1]?.Value)
                 .FirstOrDefault());
@@ -70,7 +69,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 var p = ingredientBody?.QuerySelectorAll("p")
                     .Select(item => item.TextContent).ToArray();
 
-                if (p.Length != 0)
+                if (p?.Length != 0)
                 {
                     if (p.Any(element => element.Contains("Время приготовления:")))
                         count++;
@@ -82,7 +81,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 string titleIngredient;
 
                 var titleBody = ingredientBody?.QuerySelectorAll("p").ToArray();
-                if (titleBody.Length - count == 0)
+                if (titleBody?.Length - count == 0)
                     titleIngredient = Title;
 
                 else
@@ -142,12 +141,12 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             for (int i = 0; i < countRecipes; i++)
             {
-                string pictureUrl = recipesArray[i]?.FirstElementChild?.FirstElementChild?.Attributes[2]?.Value;
+                string imageUrl = recipesArray[i]?.FirstElementChild?.FirstElementChild?.Attributes[2]?.Value;
                 string description = recipesArray[i]?.LastElementChild?.FirstElementChild?.TextContent;
 
-                var pictureBox = new PictureBox(new Picture[1] {new Picture(pictureUrl)});
+                var image = new Image(imageUrl);
 
-                var stepRecipeBox = new StepRecipe(description, pictureBox);
+                var stepRecipeBox = new StepRecipe(description, image);
 
                 stepRecipeBoxes[i] = stepRecipeBox;
             }
@@ -156,42 +155,13 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             #endregion
 
-            #region AdditionalBox
+            #region Additional
 
-            var additionalBody = recipeBody.QuerySelectorAll("div")
-                .LastOrDefault(element =>
-                    element.NextElementSibling?.ClassName != null &&
-                    element.NextElementSibling.ClassName == ("article-tags"));
+            // author name
+            // КБЖУ
+            // оличество минут
+            // Количество порций
 
-            if (additionalBody == null)
-                return new RecipeFull(string.Empty, Title, TitlePicture, Description, Ingredients,
-                    StepRecipesBoxes,
-                    Additional);
-
-
-            var imagesArray = additionalBody.QuerySelectorAll("a")
-                .ToArray();
-
-            Picture[] pictures = new Picture[imagesArray.Length];
-
-            for (int i = 0; i < imagesArray.Length; i++)
-            {
-                Picture picture = new Picture("http://www.povarenok.ru" + imagesArray[i].Attributes[0].Value);
-
-                pictures[i] = picture;
-            }
-
-            PictureBox picturesBox = new PictureBox(pictures);
-
-            string textAdditional = additionalBody.TextContent
-                .Replace(WhiteSpaceBug, String.Empty);
-
-            Video video = new Video(recipeBody.QuerySelectorAll("div")
-                .Where(element => element.ClassName != null && element.ClassName == ("video-bl"))
-                .Select(element => element.FirstElementChild.FirstElementChild.Attributes[2].Value)
-                .FirstOrDefault());
-
-            Additional = new AdditionalBox(textAdditional, picturesBox, video);
 
             #endregion
 

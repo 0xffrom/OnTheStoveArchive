@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
-using ObjectsLibrary.Objects;
-using ObjectsLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary.Components;
 using ObjectsLibrary.Parser.ParserPage.Core;
 
 namespace ObjectsLibrary.Parser.ParserPage.WebSites
@@ -31,10 +29,10 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
                         .Where(item => item.ClassName != null && item.ClassName == ("m-img desktop-img conima"))
                         .Select(item => item.FirstElementChild.FirstElementChild.Attributes[0].Value)
                         .ToArray()[0]
-                    let picture = new Picture(urlPicture)
-                    let title = recipeBlock.QuerySelector("h2").QuerySelector("a").TextContent
+                    let picture = new Image(urlPicture)
+                    let image = recipeBlock.QuerySelector("h2").QuerySelector("a").TextContent
                     let indexPopularity = indexStartPopularity -= settings.IndexStep
-                    select new RecipeShort(title, picture, url, indexStartPopularity)).ToArray();
+                    select new RecipeShort(image, picture, url, indexStartPopularity)).ToArray();
             }
             catch (Exception exp)
             {

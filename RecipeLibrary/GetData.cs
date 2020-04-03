@@ -9,6 +9,8 @@ using ObjectsLibrary.Parser.ParserPage.Core;
 using ObjectsLibrary.Parser.ParserPage.WebSites;
 using ObjectsLibrary.Parser.ParserRecipe.Core;
 using ObjectsLibrary.Parser.ParserRecipe.WebSites;
+using RecipeLibrary.Parser.ParserPage.WebSites;
+using RecipeLibrary.Parser.ParserRecipe.WebSites;
 
 namespace ObjectsLibrary
 {
@@ -56,8 +58,7 @@ namespace ObjectsLibrary
             IParserRecipeSettings settings = null;
             
             if (url.Contains("https://www.povarenok.ru"))
-            {
-                obj = new PovarenokRecipeParser();
+            { obj = new PovarenokRecipeParser();
                 settings = new PovarenokRecipeSettings(url);
             }
             else if (url.Contains("https://povar.ru"))

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using AngleSharp.Html.Dom;
-using ObjectsLibrary.Objects;
-using ObjectsLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary;
+using ObjectsLibrary.Components;
+using ObjectsLibrary.Parser;
 using ObjectsLibrary.Parser.ParserPage.Core;
 
-namespace ObjectsLibrary.Parser.ParserPage.WebSites
+namespace RecipeLibrary.Parser.ParserPage.WebSites
 {
     
     class PovarPageParser : IParserPage<RecipeShort[]>
@@ -28,9 +28,9 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
                     let title = anyBody.TextContent
                     let url = "https://povar.ru" + anyBody.Attributes[0].Value
                     let pictureBody = recipe.QuerySelector("img")
-                    let pictureUrl = pictureBody.Attributes[0].Value
+                    let imageUrl = pictureBody.Attributes[0].Value
                     let indexPopularity = indexStartPopularity -= settings.IndexStep
-                    select new RecipeShort(title, new Picture(pictureUrl), url,indexPopularity)).ToArray();
+                    select new RecipeShort(title, new Image(imageUrl), url,indexPopularity)).ToArray();
             }
             catch (Exception exp)
             {

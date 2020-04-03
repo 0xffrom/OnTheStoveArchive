@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using AngleSharp.Html.Dom;
-using ObjectsLibrary.Objects;
-using ObjectsLibrary.Objects.Boxes.Elements;
+using ObjectsLibrary.Components;
 using ObjectsLibrary.Parser.ParserPage.Core;
 
 namespace ObjectsLibrary.Parser.ParserPage.WebSites
@@ -24,9 +22,9 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
                     let url = "https://www.edimdoma.ru/" + recipeCard.Attributes[0].Value
                     let title = recipeCard.FirstElementChild.FirstElementChild.Attributes[1].Value
                     let pictureUrl = recipeCard.FirstElementChild.FirstElementChild.Attributes[2].Value
-                    let picture = new Picture(pictureUrl)
+                    let image = new Image(pictureUrl)
                     let indexPopularity = indexStartPopularity -= settings.IndexStep
-                    select new RecipeShort(title, picture, url, indexStartPopularity)).ToArray();
+                    select new RecipeShort(title, image, url, indexStartPopularity)).ToArray();
             }
             catch (Exception exp)
             {
