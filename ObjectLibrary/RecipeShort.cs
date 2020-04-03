@@ -11,7 +11,7 @@ namespace ObjectsLibrary
         /// <value>Название рецепта.</value>
         public string Title { get; set; }
         /// <value>Изображение рецепта.</value>
-        /// /// <see cref="Image"/>
+        /// /// <see cref="Image"/>ИК
         public Image Image { get; set; }
         /// <value>Интернет адрес рецепта.</value>
         
