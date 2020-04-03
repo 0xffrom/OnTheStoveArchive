@@ -69,7 +69,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 var p = ingredientBody?.QuerySelectorAll("p")
                     .Select(item => item.TextContent).ToArray();
 
-                if (p?.Length != 0)
+                if (p.Length != 0)
                 {
                     if (p.Any(element => element.Contains("Время приготовления:")))
                         count++;
@@ -157,18 +157,44 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             #region Additional
 
-            // author name
-            // КБЖУ
-            // оличество минут
-            // Количество порций
+            string authorName = recipeBody.QuerySelectorAll("p")
+                .FirstOrDefault(x => x.Attributes[1] != null && x.Attributes[1].Value == "Профиль пользователя")
+                ?.TextContent;
 
+            var ingredientBodyP = ingredientBody.QuerySelectorAll("p");
+            
+            double prepMinutes = Additional.ConvertToMinutes(ingredientBodyP
+                .Where(x => x.FirstElementChild.TextContent.Contains("Время приготовления"))
+                .Select(x => x.LastElementChild.TextContent).FirstOrDefault());
+
+            int countPortions = int.Parse(ingredientBodyP
+                .Where(x => x.FirstElementChild.TextContent.Contains("Количество порций:"))
+                .Select(x => x.TextContent).FirstOrDefault()?.Replace("Количество порций:", string.Empty) ?? "0");
+
+
+            var tableCPFC = recipeBody
+                .QuerySelectorAll("div").FirstOrDefault(x => x.ClassName != null && x.ClassName == "nae-value-bl")
+                ?.LastElementChild?.FirstElementChild?.Children[3]?.QuerySelectorAll("strong").Select(x => x.TextContent).ToArray();
+
+            CPFC CPFC = null;
+            
+            if (tableCPFC != null)
+            {
+                double calories = double.Parse(tableCPFC[0].Replace(" ккал", string.Empty));
+                double protein = double.Parse(tableCPFC[1].Replace(" г", string.Empty));
+                double fats = double.Parse(tableCPFC[2].Replace(" г", string.Empty));
+                double carbohydrates = double.Parse(tableCPFC[3].Replace(" г", string.Empty));
+
+                CPFC = new CPFC(calories, protein, fats, carbohydrates);
+            }
+
+            Additional = new Additional(authorName, countPortions, prepMinutes, CPFC);
 
             #endregion
 
 
             return new RecipeFull(string.Empty, Title, TitlePicture, Description, Ingredients,
-                StepRecipesBoxes,
-                Additional);
+                StepRecipesBoxes, Additional);
             ;
         }
     }
