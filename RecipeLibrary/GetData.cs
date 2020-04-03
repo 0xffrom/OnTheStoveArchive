@@ -14,8 +14,6 @@ namespace ObjectsLibrary
 {
     public  class GetData
     {
-        private static readonly Random Rng =
-            new Random((int) DateTime.Now.Ticks & 0x0000FFFF);
 
 
         public static async Task<RecipeShort[]> GetPage(string section, int page, string findName = null)

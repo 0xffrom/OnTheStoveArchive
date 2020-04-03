@@ -15,7 +15,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
         private Picture TitlePicture { get; set; }
         private string Description { get; set; }
         private Ingredient[] Ingredients { get; set; }
-        private StepRecipeBox[] StepRecipesBoxes { get; set; }
+        private StepRecipe[] StepRecipesBoxes { get; set; }
         private AdditionalBox AdditionalBox { get; set; }
         
         private const string WhiteSpaceBug = "                                 - ";
@@ -95,7 +95,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 .Where(x=> x.ClassName != null)
                 .ToArray();
             
-            List<StepRecipeBox> stepRecipesBoxes = new List<StepRecipeBox>(stepCollection.Length / 3);
+            List<StepRecipe> stepRecipesBoxes = new List<StepRecipe>(stepCollection.Length / 3);
 
             foreach (var step in stepCollection)
             {
@@ -109,14 +109,14 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
                         string pictureUrl = firstEl.Attributes[3].Value;
 
-                        stepRecipesBoxes.Add(new StepRecipeBox(description,
+                        stepRecipesBoxes.Add(new StepRecipe(description,
                             new PictureBox(new Picture[1] {new Picture(pictureUrl)})));
                         break;
                     }
                     case "detailed_step_description_big noPhotoStep":
                     {
                         string description = step.TextContent;
-                        stepRecipesBoxes.Add(new StepRecipeBox(description,
+                        stepRecipesBoxes.Add(new StepRecipe(description,
                             new PictureBox(new Picture[1] {new Picture("none picture")})));
                         break;
                     }

@@ -15,7 +15,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
         private Picture TitlePicture { get; set; }
         private string Description { get; set; }
         private Ingredient[] Ingredients { get; set; }
-        private StepRecipeBox[] StepRecipesBoxes { get; set; }
+        private StepRecipe[] StepRecipesBoxes { get; set; }
         private AdditionalBox Additional { get; set; }
 
         private const string WhiteSpaceBug = "  ";
@@ -138,7 +138,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             int countRecipes = recipesArray.Length;
 
-            StepRecipeBox[] stepRecipeBoxes = new StepRecipeBox[countRecipes];
+            StepRecipe[] stepRecipeBoxes = new StepRecipe[countRecipes];
 
             for (int i = 0; i < countRecipes; i++)
             {
@@ -147,7 +147,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
                 var pictureBox = new PictureBox(new Picture[1] {new Picture(pictureUrl)});
 
-                var stepRecipeBox = new StepRecipeBox(description, pictureBox);
+                var stepRecipeBox = new StepRecipe(description, pictureBox);
 
                 stepRecipeBoxes[i] = stepRecipeBox;
             }

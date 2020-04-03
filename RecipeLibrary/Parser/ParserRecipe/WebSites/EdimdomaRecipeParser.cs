@@ -14,7 +14,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
         private Picture TitlePicture { get; set; }
         private string Description { get; set; }
         private Ingredient[] Ingredients{ get; set; }
-        private StepRecipeBox[] StepRecipesBoxes { get; set; }
+        private StepRecipe[] StepRecipesBoxes { get; set; }
         private AdditionalBox AdditionalBox { get; set; }
         public RecipeFull Parse(IHtmlDocument document)
         {
