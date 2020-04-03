@@ -38,6 +38,9 @@ namespace ObjectsLibrary.Components
         /// <returns>Извлечённое из входной строки количество минут.</returns>
         public static double ConvertToMinutes(string inputLine)
         {
+            if (inputLine == null)
+                return double.NaN;
+            
             // 1 час и 10 минут.
             inputLine = inputLine.Replace(" и", String.Empty);
 
