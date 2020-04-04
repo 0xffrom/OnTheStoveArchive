@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ObjectsLibrary.Components;
+using System;
 using System.Runtime.Serialization;
-using ObjectsLibrary.Components;
 
 namespace ObjectsLibrary
 {
@@ -14,9 +14,9 @@ namespace ObjectsLibrary
         /// /// <see cref="Image"/>ИК
         public Image Image { get; set; }
         /// <value>Интернет адрес рецепта.</value>
-        
+
         public string Url { get; set; }
-        
+
         /// <value>Индекс популярности рецепта.</value>
         /// <remarks>Используется для сортировки рецептов сервером.</remarks>
         [IgnoreDataMember]
@@ -33,7 +33,7 @@ namespace ObjectsLibrary
         {
             IndexPopularity = indexPopularity;
         }
-        
+
         public RecipeShort()
         {
             //

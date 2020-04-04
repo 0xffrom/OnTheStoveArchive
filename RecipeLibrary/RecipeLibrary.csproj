@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Parser\ParserRecipe\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ObjectLibrary\ObjectsLibrary.csproj" />
   </ItemGroup>
 

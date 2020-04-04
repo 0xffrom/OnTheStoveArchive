@@ -1,26 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AngleSharp.Html.Dom;
+﻿using AngleSharp.Html.Dom;
 using ObjectsLibrary;
 using ObjectsLibrary.Components;
 using ObjectsLibrary.Parser.ParserRecipe.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 {
     public class PovarenokRecipeParser : IParserRecipe<RecipeFull>
     {
+
+        /// <see cref="RecipeFull.Url"/>
+        private string Url { get; set; }
+
+        /// <see cref="RecipeFull.Title"/>
         private string Title { get; set; }
-        private Image TitlePicture { get; set; }
+
+        /// <see cref="RecipeFull.TitleImage"/>
+        private Image TitleImage { get; set; }
+
+        /// <see cref="RecipeFull.Description"/>
         private string Description { get; set; }
+
+        /// <see cref="RecipeFull.Ingredients"/>
         private Ingredient[] Ingredients { get; set; }
+
+        /// <see cref="RecipeFull.StepRecipesBoxes"/>
         private StepRecipe[] StepRecipesBoxes { get; set; }
+
+        /// <see cref="RecipeFull.Additional"/>
         private Additional Additional { get; set; }
 
         private const string WhiteSpaceBug = "  ";
 
-        public RecipeFull Parse(IHtmlDocument document)
+
+        /// <see cref="IParserRecipe{T}.Parse(IHtmlDocument, IParserRecipeSettings)"/>
+        public RecipeFull Parse(IHtmlDocument document, IParserRecipeSettings parserRecipeSettings)
         {
+            Url = parserRecipeSettings.Url;
+
             var recipeBody = document
                 .QuerySelectorAll("article")
                 .FirstOrDefault(element => element.ClassName != null && element.ClassName == "item-bl item-about");
@@ -34,7 +53,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Title = recipeBody.QuerySelector("h1").TextContent;
 
-            TitlePicture = new Image(recipeBody.QuerySelectorAll("div")
+            TitleImage = new Image(recipeBody.QuerySelectorAll("div")
                 .Where(element => element.ClassName != null && element.ClassName == "m-img")
                 .Select(element => element.FirstElementChild?.Attributes[1]?.Value)
                 .FirstOrDefault());
@@ -116,7 +135,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
                         if (titleIngredient != Title)
                             name += $" ({titleIngredient})";
-                    
+
                         Ingredient ingredient = new Ingredient(name, unit);
                         ingredients[j] = ingredient;
                     }
@@ -157,13 +176,13 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             #region Additional
 
-            string authorName = recipeBody.QuerySelectorAll("p")
+            string authorName = recipeBody.QuerySelectorAll("a")
                 .FirstOrDefault(x => x.Attributes[1] != null && x.Attributes[1].Value == "Профиль пользователя")
                 ?.TextContent;
 
             var ingredientBodyP = ingredientBody.QuerySelectorAll("p");
-            
-            double prepMinutes = Additional.ConvertToMinutes(ingredientBodyP
+
+            double prepMinutes = ConvertToMinutes(ingredientBodyP
                 .Where(x => x.FirstElementChild.TextContent.Contains("Время приготовления"))
                 .Select(x => x.LastElementChild.TextContent).FirstOrDefault());
 
@@ -173,11 +192,17 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
 
             var tableCPFC = recipeBody
-                .QuerySelectorAll("div").FirstOrDefault(x => x.ClassName != null && x.ClassName == "nae-value-bl")
-                ?.LastElementChild?.FirstElementChild?.Children[3]?.QuerySelectorAll("strong").Select(x => x.TextContent).ToArray();
+                .QuerySelectorAll("div")
+                .FirstOrDefault(x => x.ClassName != null && x.ClassName == "nae-value-bl")?
+                .LastElementChild?
+                .FirstElementChild?
+                .QuerySelectorAll("tr")[3]
+                .QuerySelectorAll("strong")
+                .Select(x => x.TextContent)
+                .ToArray();
 
             CPFC CPFC = null;
-            
+
             if (tableCPFC != null)
             {
                 double calories = double.Parse(tableCPFC[0].Replace(" ккал", string.Empty));
@@ -193,9 +218,33 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #endregion
 
 
-            return new RecipeFull(string.Empty, Title, TitlePicture, Description, Ingredients,
-                StepRecipesBoxes, Additional);
-            ;
+            return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepRecipesBoxes, Additional);
+        }
+
+        /// <see cref="IParserRecipe{T}.ConvertToMinutes(string)"/>
+        public double ConvertToMinutes(string inputLine)
+        {
+            if (inputLine == null)
+                return double.NaN;
+
+            // 40 минут, 80 минут, 10 минут.
+
+            inputLine = inputLine.Replace(" и", String.Empty);
+
+            string[] arrayWords = inputLine.Split(' ');
+
+            double minutes = 0;
+
+
+            for (int i = 1; i < arrayWords.Length; i += 2)
+            {
+                if (arrayWords[i].Contains("м"))
+                    minutes += int.Parse(arrayWords[i - 1]);
+                else if (arrayWords[i].Contains("ч"))
+                    minutes += int.Parse(arrayWords[i - 1]) * 60;
+            }
+
+            return minutes;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ObjectsLibrary.Parser.ParserPage.Core;
+using System.Collections.Generic;
 using System.Linq;
-using ObjectsLibrary.Parser.ParserPage.Core;
 
 namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {

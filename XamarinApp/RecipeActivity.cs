@@ -1,16 +1,15 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using ObjectsLibrary;
 using Square.Picasso;
-using ObjectsLibrary.Objects;
+using System;
+using System.Threading.Tasks;
 using XamarinAppLibrary;
-using Picture = ObjectsLibrary.Objects.Boxes.Elements.Picture;
 
 namespace XamarinApp
 {
@@ -19,21 +18,21 @@ namespace XamarinApp
     {
         private string _url;
         private RecipeFull _recipeFull;
-        
+
         public readonly Color ColorFeb22C = new Color(254, 178, 44);
         public readonly Color ColorC4C4C4 = new Color(196, 196, 196);
-        
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.recipe_main);
-            
+
             var frameDescription = FindViewById<View>(Resource.Id.frameDescription);
             var frameIngredients = FindViewById<View>(Resource.Id.frameIngredients);
-            var frameSteps =FindViewById<View>(Resource.Id.frameSteps);
+            var frameSteps = FindViewById<View>(Resource.Id.frameSteps);
 
 
             #region delegates
@@ -53,7 +52,7 @@ namespace XamarinApp
             {
                 SetColorStart(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
                     rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-                
+
                 frameDescription.Visibility = ViewStates.Visible;
                 frameSteps.Visibility = ViewStates.Invisible;
                 frameIngredients.Visibility = ViewStates.Invisible;
@@ -63,23 +62,23 @@ namespace XamarinApp
             {
                 SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
                     rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-                
+
                 textViewMainIngredients.SetTextColor(ColorFeb22C);
                 rectangleMainIngredients.SetBackgroundColor(ColorFeb22C);
-                
+
                 frameDescription.Visibility = ViewStates.Invisible;
                 frameIngredients.Visibility = ViewStates.Visible;
                 frameSteps.Visibility = ViewStates.Invisible;
             };
-            
+
             textViewMainRecipe.Click += (sender, args) =>
             {
                 SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
                     rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-                
+
                 textViewMainRecipe.SetTextColor(ColorFeb22C);
                 rectangleMainRecipe.SetBackgroundColor(ColorFeb22C);
-                
+
                 frameDescription.Visibility = ViewStates.Invisible;
                 frameIngredients.Visibility = ViewStates.Invisible;
                 frameSteps.Visibility = ViewStates.Visible;
@@ -87,7 +86,7 @@ namespace XamarinApp
             #endregion
 
 
-           
+
             _url = MainActivity.LastUrl;
 
             var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
@@ -100,7 +99,7 @@ namespace XamarinApp
 
             UpdateView();
         }
-        
+
         private void SetColorDefault(TextView textViewMainDescription, TextView textViewMainIngredients,
             TextView textViewMainRecipe,
             View rectangleMainDescription, View rectangleMainIngredients, View rectangleMainRecipe)
@@ -120,7 +119,7 @@ namespace XamarinApp
         {
             SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
                 rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-                
+
             textViewMainDescription.SetTextColor(ColorFeb22C);
             rectangleMainDescription.SetBackgroundColor(ColorFeb22C);
         }
@@ -128,10 +127,10 @@ namespace XamarinApp
         private async void UpdateView()
         {
             _recipeFull = await UpdateCollectionRecipes(_url);
-            
+
             var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
             var adapterIngredents = new IngredientsAdapter(this, _recipeFull);
-            if (adapterIngredents.Count > 0) 
+            if (adapterIngredents.Count > 0)
                 listIngredients.Adapter = adapterIngredents;
 
             var listSteps = FindViewById<ListView>(Resource.Id.listSteps);
@@ -139,28 +138,47 @@ namespace XamarinApp
             listSteps.Adapter = adapterStep;
 
 
-            
-            var title = FindViewById<TextView>(Resource.Id.titleRecipe);
-            title.Text = _recipeFull.Title;
+            #region Первая страница.
 
             var imageView = FindViewById<ImageView>(Resource.Id.imageMainRecipe);
-            
-            
-            Picture picture = _recipeFull.TitlePicture;
-            var url = picture?.Url;
-            
-            
+            var title = FindViewById<TextView>(Resource.Id.titleRecipe);
+            var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
+            var CPFCRecipe = FindViewById<TextView>(Resource.Id.CPFCRecipe);
+            var authorNameRecipe = FindViewById<TextView>(Resource.Id.authorNameRecipe);
+            var additionalInfoRecipe = FindViewById<TextView>(Resource.Id.additionalInfoRecipe);
+            var urlRecipe = FindViewById<TextView>(Resource.Id.urlRecipe);
+
+            title.Text = _recipeFull.Title;
+
             Picasso.With(this)
-                .Load(url)
+                .Load(_recipeFull.TitleImage.ImageUrl)
                 .Into(imageView);
 
+            description.Text += $"\tОписание рецепта\t{System.Environment.NewLine}{_recipeFull.Description.Replace('\t',' ')}";
 
-                
-            var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
-            description.Text = _recipeFull.Description;
-            description.Selected = true;
+            if (_recipeFull.Additional.CPFC != null)
+            {
+                if (_recipeFull.Additional.CPFC.Calories != 0)
+                    CPFCRecipe.Text += $"Калории: {_recipeFull.Additional.CPFC.Calories} Ккал.{System.Environment.NewLine}";
+                if(_recipeFull.Additional.CPFC.Protein != 0)
+                    CPFCRecipe.Text += $"Белки: {_recipeFull.Additional.CPFC.Protein} г.{System.Environment.NewLine}";
+                if (_recipeFull.Additional.CPFC.Fats != 0)
+                    CPFCRecipe.Text += $"Жиры: {_recipeFull.Additional.CPFC.Fats} г.{System.Environment.NewLine}";
+                if (_recipeFull.Additional.CPFC.Carbohydrates != 0)
+                    CPFCRecipe.Text += $"Углеводы: {_recipeFull.Additional.CPFC.Carbohydrates} г.{System.Environment.NewLine}";
+            }
+
+            authorNameRecipe.Text = $"Рецепт от: {_recipeFull.Additional.AuthorName}";
+
+            if (_recipeFull.Additional.CountPortions != 0)
+                additionalInfoRecipe.Text += $"Количество порций: {_recipeFull.Additional.CountPortions}.{System.Environment.NewLine}";
+            if (_recipeFull.Additional.PrepMinutes != 0)
+                additionalInfoRecipe.Text += $"Количество минут на готовку: {_recipeFull.Additional.PrepMinutes} мин.";
+
+            urlRecipe.Text = $"Ссылка на рецепт: {_recipeFull.Url}";
+            #endregion
         }
-        
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

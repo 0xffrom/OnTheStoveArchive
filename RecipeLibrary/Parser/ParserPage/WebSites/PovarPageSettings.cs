@@ -1,6 +1,4 @@
 ﻿using ObjectsLibrary.Parser.ParserPage.Core;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {
@@ -28,7 +26,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
         {
             RecipeName = recipeName;
         }
-        
+
 
     }
 }

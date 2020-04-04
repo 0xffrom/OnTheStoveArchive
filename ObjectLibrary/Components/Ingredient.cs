@@ -10,8 +10,12 @@ namespace ObjectsLibrary.Components
         public string Name { get; set; }
         /// <value>Количество и мера измерения.</value>
         public string Unit { get; set; }
-        
-        public Ingredient(string name, string unit)
+
+        public Ingredient()
+        {
+
+        }
+        public Ingredient(string name, string unit) : this()
         {
             Name = name;
             Unit = unit;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ObjectsLibrary.Objects;
+﻿using ObjectsLibrary;
 using ObjectsLibrary.Parser;
 using ObjectsLibrary.Parser.ParserPage.Core;
 using ObjectsLibrary.Parser.ParserPage.WebSites;
@@ -11,10 +6,14 @@ using ObjectsLibrary.Parser.ParserRecipe.Core;
 using ObjectsLibrary.Parser.ParserRecipe.WebSites;
 using RecipeLibrary.Parser.ParserPage.WebSites;
 using RecipeLibrary.Parser.ParserRecipe.WebSites;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ObjectsLibrary
+namespace RecipeLibrary
 {
-    public  class GetData
+    public class GetData
     {
 
 
@@ -56,15 +55,16 @@ namespace ObjectsLibrary
         {
             IParserRecipe<RecipeFull> obj = null;
             IParserRecipeSettings settings = null;
-            
+
             if (url.Contains("https://www.povarenok.ru"))
-            { obj = new PovarenokRecipeParser();
+            {
+                obj = new PovarenokRecipeParser();
                 settings = new PovarenokRecipeSettings(url);
             }
             else if (url.Contains("https://povar.ru"))
             {
-                 obj = new PovarRecipeParser();
-                 settings = new PovarRecipeSettings(url);
+                obj = new PovarRecipeParser();
+                settings = new PovarRecipeSettings(url);
             }
             else if (url.Contains("https://www.edimdoma.ru"))
             {
@@ -73,8 +73,8 @@ namespace ObjectsLibrary
             }
             else
                 throw new ParserException("Неизвестный сайт.");
-            
-            
+
+
             try
             {
                 var recipe = new ParserRecipe<RecipeFull>(obj, settings);
@@ -85,7 +85,7 @@ namespace ObjectsLibrary
                 throw new ParserException("Произошла ошибка при парсинге рецепта. Подробности: " + e);
             }
 
-            
+
         }
     }
 }

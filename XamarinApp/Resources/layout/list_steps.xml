@@ -1,40 +1,36 @@
 ﻿<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
->
-    <android.support.v7.widget.CardView
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            android:layout_margin="5dp"
-            android:elevation="10dp">
-        <LinearLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_gravity="top|center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:id="@+id/stepImage"
-                    android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:id="@+id/stepImage"   
             />
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:ems="10"
-                    android:textSize="18dp"
-                    android:id="@+id/stepDescription"
-                    android:layout_weight="1"
-                    android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:ems="10"
+                android:textSize="18dp"
+                android:gravity="left"
+                android:id="@+id/stepDescription"
+                android:textColor="@android:color/black"
             />
         </LinearLayout>
     </android.support.v7.widget.CardView>

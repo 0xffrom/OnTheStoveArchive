@@ -1,7 +1,6 @@
-﻿using System;
+﻿using AngleSharp.Html.Parser;
+using System;
 using System.Threading.Tasks;
-using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
 
 namespace ObjectsLibrary.Parser.ParserPage.Core
 {
@@ -15,8 +14,7 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
         private IParserPageSettings Settings
         {
             get => _parserSettings;
-            set
-            {
+            set {
                 _parserSettings = value;
                 _loader = new HtmlLoader(value);
             }
@@ -49,7 +47,7 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
             var domParser = new HtmlParser();
 
             var document = await domParser.ParseDocumentAsync(source);
-            
+
             var result = Parser.Parse(document, _parserSettings);
 
             return result;

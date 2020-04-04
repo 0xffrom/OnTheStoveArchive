@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +19,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
             var response = await _client.GetAsync(currentUrl);
 
             string source;
-            
+
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             if (response != null && response.StatusCode == HttpStatusCode.OK)

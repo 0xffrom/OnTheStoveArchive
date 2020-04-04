@@ -11,7 +11,7 @@
         int PageId { get; set; }
         double IndexPopularity { get; set; }
         double IndexStep { get; set; }
-        
+
         string RecipeName { get; }
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using ObjectsLibrary.Parser.ParserPage.Core;
 
 namespace ObjectsLibrary.Parser.ParserPage.Core
 {
@@ -33,11 +30,11 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
                 ("recipe") => _settings.SuffixRecipe,
                 _ => _settings.SuffixNew
             };
-            
+
             currentUrl = currentUrl
                 .Replace("{PageId}", idPage.ToString())
                 .Replace("{RecipeName}", recipeName);
-            
+
             var response = await _client.GetAsync(currentUrl);
 
             string source;

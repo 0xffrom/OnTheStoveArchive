@@ -8,13 +8,13 @@ namespace ObjectsLibrary.Components
     {
         /// <value>Количество калорий.</value>
         public double Calories { get; set; }
-        
+
         /// <value>Количество белка.</value>
         public double Protein { get; set; }
-        
+
         /// <value>Количество жиров.</value>
         public double Fats { get; set; }
-        
+
         /// <value>Количество углеводов.</value>
         public double Carbohydrates { get; set; }
 

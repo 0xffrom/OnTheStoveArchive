@@ -1,13 +1,12 @@
-using System.Collections.Generic;
+using Newtonsoft.Json;
+using ObjectsLibrary;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using ObjectsLibrary.Objects;
 
 namespace XamarinAppLibrary
 {
-    
+
     public static class HttpGet
     {
         private const string ipAdress = "http://194.87.103.195/";

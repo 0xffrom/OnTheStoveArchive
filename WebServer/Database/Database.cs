@@ -1,8 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using ObjectsLibrary;
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using MySql.Data.MySqlClient;
-using ObjectsLibrary.Objects;
 
 namespace WebServer.DataBase
 {
@@ -19,7 +19,7 @@ namespace WebServer.DataBase
             MySqlCommand command = new MySqlCommand(sqlCommand, conn);
 
             // Получение бинарного представления объекта из БД.
-            byte[] result = (byte[]) command.ExecuteScalar();
+            byte[] result = (byte[])command.ExecuteScalar();
 
             return ByteArrayToRecipe(result);
         }
@@ -33,7 +33,7 @@ namespace WebServer.DataBase
 
             BinaryFormatter binForm = new BinaryFormatter();
 
-            RecipeFull recipeFull = (RecipeFull) binForm.Deserialize(memStream);
+            RecipeFull recipeFull = (RecipeFull)binForm.Deserialize(memStream);
 
             return recipeFull;
         }
@@ -44,10 +44,10 @@ namespace WebServer.DataBase
                 return null;
 
             using MemoryStream ms = new MemoryStream();
-            
+
             var bf = new BinaryFormatter();
             bf.Serialize(ms, obj);
-            
+
             return ms.ToArray();
         }
 
@@ -81,7 +81,7 @@ namespace WebServer.DataBase
             // Если такой строки не существует - требуется обновление.
             if (!resultExists)
                 return true;
-            
+
             string sqlCommand = $"SELECT date FROM {Settings.Table} WHERE url = '{url}';";
 
             MySqlCommand command = new MySqlCommand(sqlCommand, conn);

@@ -9,7 +9,7 @@ namespace ObjectsLibrary.Components
         /// <value>Изображение шага кулинарного рецепта.</value>
         /// <see cref="Image"/>
         public Image Image { get; set; }
-        
+
         /// <value>Описание шага кулинарного рецепта.</value>
         public string Description { get; set; }
 
@@ -18,6 +18,6 @@ namespace ObjectsLibrary.Components
             Description = description;
             Image = image;
         }
-        
+
     }
 }

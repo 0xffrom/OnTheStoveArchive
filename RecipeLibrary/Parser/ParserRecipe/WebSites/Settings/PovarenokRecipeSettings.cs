@@ -6,6 +6,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
     {
         public string Url { get; }
 
+
         public PovarenokRecipeSettings(string url)
         {
             Url = url;

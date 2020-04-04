@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 
 namespace ObjectsLibrary.Parser
 {
@@ -20,7 +19,7 @@ namespace ObjectsLibrary.Parser
         {
             WebSite = webSite;
         }
-        
+
         public ParserException(string message, Exception inner) : base(message, inner)
         {
         }

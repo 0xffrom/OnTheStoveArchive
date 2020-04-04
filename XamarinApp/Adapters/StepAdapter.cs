@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Android.Content;
+﻿using Android.Content;
 using Android.Views;
 using Android.Widget;
+using ObjectsLibrary;
+using ObjectsLibrary.Components;
 using Square.Picasso;
-using ObjectsLibrary.Objects;
-using ObjectsLibrary.Objects.Boxes;
-using ObjectsLibrary.Objects.Boxes.Elements;
+using System.Collections.Generic;
 
 namespace XamarinApp
 {
@@ -14,13 +12,13 @@ namespace XamarinApp
     {
         private readonly RecipeFull _recipeFull;
         private readonly Context _context;
-        private readonly List<StepRecipeBox> _stepRecipeBoxes;
+        private readonly List<StepRecipe> _stepRecipeBoxes;
 
         public StepAdapter(Context context, RecipeFull recipeFull)
         {
             _context = context;
             _recipeFull = recipeFull;
-            _stepRecipeBoxes = new List<StepRecipeBox>();
+            _stepRecipeBoxes = new List<StepRecipe>();
             if (recipeFull.StepRecipesBoxes != null)
                 _stepRecipeBoxes.AddRange(recipeFull.StepRecipesBoxes);
         }
@@ -33,8 +31,7 @@ namespace XamarinApp
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            View view = convertView;
-            view = LayoutInflater.From(_context).Inflate(Resource.Layout.list_steps, null, false);
+            View view = LayoutInflater.From(_context).Inflate(Resource.Layout.list_steps, null, false);
 
 
             var stepDescription = view.FindViewById<TextView>(Resource.Id.stepDescription);
@@ -42,8 +39,8 @@ namespace XamarinApp
 
 
             var imageView = view.FindViewById<ImageView>(Resource.Id.stepImage);
-            // TODO: Сделать несколько фоток, PictureBox.
-            var url = _stepRecipeBoxes[position].PictureBox.Pictures.First().Url;
+            
+            var url = _stepRecipeBoxes[position].Image.ImageUrl;
 
             Picasso.With(_context)
                 .Load(url)
@@ -51,7 +48,7 @@ namespace XamarinApp
 
             return view;
         }
-        
+
         public override int Count => _stepRecipeBoxes.Count;
 
         public override RecipeFull this[int position] => _recipeFull;

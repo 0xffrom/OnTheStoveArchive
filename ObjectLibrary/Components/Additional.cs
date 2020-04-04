@@ -8,13 +8,13 @@ namespace ObjectsLibrary.Components
     {
         /// <value>Имя автора.</value>
         public string AuthorName { get; set; }
-        
-         /// <value>Количество порций.</value>
+
+        /// <value>Количество порций.</value>
         public int CountPortions { get; set; }
-         
-         /// <value>Количество минут для приготовления блюда.</value>
+
+        /// <value>Количество минут для приготовления блюда.</value>
         public double PrepMinutes { get; set; }
-         
+
         /// <see cref="CPFC"/>
         public CPFC CPFC { get; set; }
 
@@ -31,32 +31,6 @@ namespace ObjectsLibrary.Components
             CPFC = cpfc;
         }
 
-        /// <summary>
-        /// Метод, извлекающий из строки количество минут.
-        /// </summary>
-        /// <param name="inputLine">Входная строка</param>
-        /// <returns>Извлечённое из входной строки количество минут.</returns>
-        public static double ConvertToMinutes(string inputLine)
-        {
-            if (inputLine == null)
-                return double.NaN;
-            
-            // 1 час и 10 минут.
-            inputLine = inputLine.Replace(" и", String.Empty);
 
-            string[] arrayWords = inputLine.Split(' ');
-
-            double minutes = 0;
-
-            for (int i = 0; i < arrayWords.Length; i += 2)
-            {
-                if (arrayWords[i].Contains("мин"))
-                    minutes += int.Parse(arrayWords[i + 1]);
-                else if (arrayWords[i].Contains("час"))
-                    minutes += int.Parse(arrayWords[i + 1]) * 60;
-            }
-
-            return minutes;
-        }
     }
 }

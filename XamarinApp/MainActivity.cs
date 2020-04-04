@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -13,7 +10,9 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
-using ObjectsLibrary.Objects;
+using ObjectsLibrary;
+using System;
+using System.Threading.Tasks;
 using XamarinAppLibrary;
 
 namespace XamarinApp
@@ -48,7 +47,7 @@ namespace XamarinApp
             progressBar = FindViewById<ProgressBar>(Resource.Id.loadingProgressBar);
 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.listRecipeShorts);
-          
+
             recyclerView.HasFixedSize = true;
 
             UpdateListView();
@@ -112,6 +111,7 @@ namespace XamarinApp
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+
             return true;
         }
 
@@ -180,8 +180,10 @@ namespace XamarinApp
             Toast.MakeText(this, toast, ToastLength.Long).Show();
         }
 
-        private async Task<RecipeShort[]> UpdateCollectionRecipes(string query) =>
-            await Task.Run(function: () => _recipes = HttpGet.GetRecipes(query));
+        private async Task<RecipeShort[]> UpdateCollectionRecipes(string query)
+        {
+            return await Task.Run(function: () => _recipes = HttpGet.GetRecipes(query));
+        }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
             [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -191,9 +193,11 @@ namespace XamarinApp
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        public bool OnNavigationItemSelected(IMenuItem menuItem) =>
+        public bool OnNavigationItemSelected(IMenuItem menuItem)
+        {
             // Закрывает отрисовщик и возвращает, закрыт ли он или нет.
-            CLoseDrawer(_drawer).IsDrawerOpen(GravityCompat.Start);
+            return CLoseDrawer(_drawer).IsDrawerOpen(GravityCompat.Start);
+        }
 
         private static DrawerLayout CLoseDrawer(DrawerLayout drawerLayout)
         {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using AngleSharp.Html.Parser;
+using System;
 using System.Threading.Tasks;
-using AngleSharp.Html.Parser;
 
 namespace ObjectsLibrary.Parser.ParserRecipe.Core
 {
-    internal class ParserRecipe<T> where T : class
+    internal class ParserRecipe<T> where T : RecipeFull
     {
         IParserRecipe<T> parser;
         IParserRecipeSettings parserSettings;
@@ -35,7 +35,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
         {
             Settings = parserSettings;
         }
-        
+
         internal async Task<T> Worker()
         {
             try
@@ -45,14 +45,14 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
                 var domParser = new HtmlParser();
                 var document = await domParser.ParseDocumentAsync(source);
 
-                var result = parser.Parse(document);
+                var result = parser.Parse(document, parserSettings);
 
                 return result;
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-               throw  new ParserException("Ошибка при парсинге страницы: " + e);
+                throw new ParserException("Ошибка при парсинге страницы: " + e);
             }
 
         }
