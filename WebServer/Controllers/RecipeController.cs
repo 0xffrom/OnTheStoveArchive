@@ -25,6 +25,7 @@ namespace WebServer.Controllers
             Console.WriteLine($"Запрос на парсинг старницы рецепта ===> {url}");
             try
             {
+#if RELEASE
                 var conn = Database.GetConnection();
 
                 conn.Open();
@@ -37,7 +38,12 @@ namespace WebServer.Controllers
 
                 conn.Close();
 
-                recipe.Url = url;
+#endif
+#if DEBUG
+                RecipeFull recipe;
+                recipe = GetData.GetRecipe(url).Result;
+#endif
+
                 Console.WriteLine($"Запрос выполнен успешно за {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
                 return recipe;
             }

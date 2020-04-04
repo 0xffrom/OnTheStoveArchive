@@ -53,7 +53,6 @@ namespace WebServer.DataBase
 
         public static void AddRecipe(string url, RecipeFull recipeFull, MySqlConnection conn)
         {
-            recipeFull.Url = url;
 
             byte[] buffer = RecipeToByteArray(recipeFull);
 

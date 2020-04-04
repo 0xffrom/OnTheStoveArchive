@@ -190,10 +190,9 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Where(x => x.FirstElementChild.TextContent.Contains("Количество порций:"))
                 .Select(x => x.TextContent).FirstOrDefault()?.Replace("Количество порций:", string.Empty) ?? "0");
 
-
             var tableCPFC = recipeBody
                 .QuerySelectorAll("div")
-                .FirstOrDefault(x => x.ClassName != null && x.ClassName == "nae-value-bl")?
+                .FirstOrDefault(x => x.Attributes[0] != null && x.Attributes[0].Value == "nae-value-bl")?
                 .LastElementChild?
                 .FirstElementChild?
                 .QuerySelectorAll("tr")[3]
@@ -205,10 +204,10 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             if (tableCPFC != null)
             {
-                double calories = double.Parse(tableCPFC[0].Replace(" ккал", string.Empty));
-                double protein = double.Parse(tableCPFC[1].Replace(" г", string.Empty));
-                double fats = double.Parse(tableCPFC[2].Replace(" г", string.Empty));
-                double carbohydrates = double.Parse(tableCPFC[3].Replace(" г", string.Empty));
+                double calories = double.Parse(tableCPFC[0].Replace(" ккал", string.Empty).Replace('.',','));
+                double protein = double.Parse(tableCPFC[1].Replace(" г", string.Empty).Replace('.', ','));
+                double fats = double.Parse(tableCPFC[2].Replace(" г", string.Empty).Replace('.', ','));
+                double carbohydrates = double.Parse(tableCPFC[3].Replace(" г", string.Empty).Replace('.', ','));
 
                 CPFC = new CPFC(calories, protein, fats, carbohydrates);
             }
@@ -225,7 +224,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         public double ConvertToMinutes(string inputLine)
         {
             if (inputLine == null)
-                return double.NaN;
+                return 0;
 
             // 40 минут, 80 минут, 10 минут.
 
