@@ -154,7 +154,7 @@ namespace XamarinApp
                 .Load(_recipeFull.TitleImage.ImageUrl)
                 .Into(imageView);
 
-            description.Text += $"\tОписание рецепта\t{System.Environment.NewLine}{_recipeFull.Description.Replace('\t',' ')}";
+            description.Text += $"{_recipeFull.Description.Replace("  ",string.Empty)}";
 
             if (_recipeFull.Additional.CPFC != null)
             {

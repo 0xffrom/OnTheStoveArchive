@@ -181,7 +181,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             #endregion
 
-            return new RecipeFull(string.Empty, Title, TitleImage, Description, Ingredients,
+            return new RecipeFull(Url, Title, TitleImage, Description, Ingredients,
                 StepRecipesBoxes,
                 Additional);
         }
@@ -192,5 +192,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             // Format: PT<min>M
             return double.Parse(inputLine[2..^1]);
         }
+        ,
     }
 }
