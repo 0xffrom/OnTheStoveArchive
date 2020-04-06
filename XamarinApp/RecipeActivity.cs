@@ -89,7 +89,7 @@ namespace XamarinApp
 
             _url = MainActivity.LastUrl;
 
-            var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
+            var buttonBack = FindViewById<LinearLayout>(Resource.Id.buttonBack);
 
             buttonBack.Click += new EventHandler((sender, args) =>
             {
@@ -97,8 +97,16 @@ namespace XamarinApp
                 base.OnBackPressed();
             });
 
+            var buttonStar = FindViewById<Button>(Resource.Id.starRecipe);
+            buttonStar.Click += new EventHandler((sender, args) =>
+            {
+                buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
+            });
+
+            var dir = FilesDir;
             UpdateView();
         }
+
 
         private void SetColorDefault(TextView textViewMainDescription, TextView textViewMainIngredients,
             TextView textViewMainRecipe,

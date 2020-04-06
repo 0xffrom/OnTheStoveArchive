@@ -192,6 +192,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             // Format: PT<min>M
             return double.Parse(inputLine[2..^1]);
         }
-        ,
+        
     }
 }
