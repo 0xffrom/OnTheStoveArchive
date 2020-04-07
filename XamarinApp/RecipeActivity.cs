@@ -22,6 +22,7 @@ namespace XamarinApp
         public readonly Color ColorFeb22C = new Color(254, 178, 44);
         public readonly Color ColorC4C4C4 = new Color(196, 196, 196);
 
+        Button buttonStar;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -97,13 +98,23 @@ namespace XamarinApp
                 base.OnBackPressed();
             });
 
-            var buttonStar = FindViewById<Button>(Resource.Id.starRecipe);
+            buttonStar = FindViewById<Button>(Resource.Id.starRecipe);
+
             buttonStar.Click += new EventHandler((sender, args) =>
             {
-                buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
+                if (!LocalRecipe.ExistsRecipe(_url))
+                {
+                    LocalRecipe.SaveRecipe(_url, _recipeFull);
+                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
+                }
+                else
+                {
+                    LocalRecipe.DeleteRecipe(_url);
+                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_white_star", "drawable", PackageName));
+                }
             });
 
-            var dir = FilesDir;
+
             UpdateView();
         }
 
@@ -134,13 +145,18 @@ namespace XamarinApp
 
         private async void UpdateView()
         {
-            _recipeFull = await UpdateCollectionRecipes(_url);
+            if (LocalRecipe.ExistsRecipe(_url))
+            {
+                _recipeFull = LocalRecipe.GetRecipe(_url);
+                buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
+            }
+            else
+                _recipeFull = await UpdateCollectionRecipes(_url);
 
             var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
             var adapterIngredents = new IngredientsAdapter(this, _recipeFull);
             if (adapterIngredents.Count > 0)
                 listIngredients.Adapter = adapterIngredents;
-
             var listSteps = FindViewById<ListView>(Resource.Id.listSteps);
             var adapterStep = new StepAdapter(this, _recipeFull);
             listSteps.Adapter = adapterStep;

@@ -170,7 +170,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             int countPortions = 0;
 
             if (portions != null)
-                countPortions = int.Parse(portions[0]);
+                countPortions = int.Parse(RemoveSymbols(portions[0]));
             
             // На повар.ру нет информации(
             CPFC CPFC = null;
@@ -184,6 +184,19 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients,
                 StepRecipesBoxes,
                 Additional);
+        }
+
+        private string RemoveSymbols(string line)
+        {
+            string newLine = string.Empty;
+
+            foreach (var item in line)
+            {
+                if (char.IsDigit(item))
+                    newLine += item;
+            }
+
+            return newLine;
         }
 
         /// <see cref="IParserRecipe{T}.ConvertToMinutes(string)"/>
