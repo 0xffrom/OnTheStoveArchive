@@ -31,12 +31,48 @@ namespace XamarinApp
 
             SetContentView(Resource.Layout.recipe_main);
 
+            DrawerLayout();
+
+            _url = MainActivity.LastUrl;
+
+            var relativeLayoutBack = FindViewById<RelativeLayout>(Resource.Id.relativeLayoutBack);
+            var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
+            relativeLayoutBack.Click += new EventHandler((sender, args) =>
+            {
+                //  StartActivity(new Intent(this, typeof(MainActivity)));
+                base.OnBackPressed();
+            });
+            buttonBack.Click += new EventHandler((sender, args) =>
+            {
+                //  StartActivity(new Intent(this, typeof(MainActivity)));
+                base.OnBackPressed();
+            });
+
+            buttonStar = FindViewById<Button>(Resource.Id.starRecipe);
+
+            buttonStar.Click += new EventHandler((sender, args) =>
+            {
+                if (!LocalRecipe.ExistsRecipe(_url))
+                {
+                    LocalRecipe.SaveRecipe(_url, _recipeFull);
+                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
+                }
+                else
+                {
+                    LocalRecipe.DeleteRecipe(_url);
+                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_white_star", "drawable", PackageName));
+                }
+            });
+
+
+            UpdateView();
+        }
+
+        private void DrawerLayout()
+        {
             var frameDescription = FindViewById<View>(Resource.Id.frameDescription);
             var frameIngredients = FindViewById<View>(Resource.Id.frameIngredients);
             var frameSteps = FindViewById<View>(Resource.Id.frameSteps);
-
-
-            #region delegates
 
             var textViewMainDescription = FindViewById<TextView>(Resource.Id.textViewMainDescription);
             var textViewMainIngredients = FindViewById<TextView>(Resource.Id.textViewMainIngredients);
@@ -84,40 +120,7 @@ namespace XamarinApp
                 frameIngredients.Visibility = ViewStates.Invisible;
                 frameSteps.Visibility = ViewStates.Visible;
             };
-            #endregion
-
-
-
-            _url = MainActivity.LastUrl;
-
-            var buttonBack = FindViewById<LinearLayout>(Resource.Id.buttonBack);
-
-            buttonBack.Click += new EventHandler((sender, args) =>
-            {
-                //  StartActivity(new Intent(this, typeof(MainActivity)));
-                base.OnBackPressed();
-            });
-
-            buttonStar = FindViewById<Button>(Resource.Id.starRecipe);
-
-            buttonStar.Click += new EventHandler((sender, args) =>
-            {
-                if (!LocalRecipe.ExistsRecipe(_url))
-                {
-                    LocalRecipe.SaveRecipe(_url, _recipeFull);
-                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
-                }
-                else
-                {
-                    LocalRecipe.DeleteRecipe(_url);
-                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_white_star", "drawable", PackageName));
-                }
-            });
-
-
-            UpdateView();
         }
-
 
         private void SetColorDefault(TextView textViewMainDescription, TextView textViewMainIngredients,
             TextView textViewMainRecipe,
