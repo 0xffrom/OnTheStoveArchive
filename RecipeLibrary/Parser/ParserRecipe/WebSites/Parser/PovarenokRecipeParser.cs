@@ -26,8 +26,8 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         /// <see cref="RecipeFull.Ingredients"/>
         private Ingredient[] Ingredients { get; set; }
 
-        /// <see cref="RecipeFull.StepRecipesBoxes"/>
-        private StepRecipe[] StepRecipesBoxes { get; set; }
+        /// <see cref="RecipeFull.StepsRecipe"/>
+        private StepRecipe[] StepsRecipe { get; set; }
 
         /// <see cref="RecipeFull.Additional"/>
         private Additional Additional { get; set; }
@@ -42,7 +42,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             var recipeBody = document
                 .QuerySelectorAll("article")
-                .FirstOrDefault(element => element.ClassName != null && element.ClassName == "item-bl item-about");
+                .FirstOrDefault(element => element.ClassName == "item-bl item-about");
 
             // recipeBody =>  главный фрейм с рецептом, если он существует - работаем с ним, иначе - рецепта не сущесвует.
             if (recipeBody == null)
@@ -54,7 +54,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             Title = recipeBody.QuerySelector("h1").TextContent;
 
             TitleImage = new Image(recipeBody.QuerySelectorAll("div")
-                .Where(element => element.ClassName != null && element.ClassName == "m-img")
+                .Where(element => element.ClassName == "m-img")
                 .Select(element => element.FirstElementChild?.Attributes[1]?.Value)
                 .FirstOrDefault());
 
@@ -63,7 +63,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #region Description
 
             Description = document.QuerySelectorAll("div")
-                .Where(element => element.ClassName != null && element.ClassName == "article-text")
+                .Where(element => element.ClassName == "article-text")
                 .Select(element => element.TextContent).ToArray()[0]
                 .Replace("\n", String.Empty)
                 .Replace("  ", String.Empty);
@@ -74,7 +74,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             var ingredientBody = recipeBody
                 .QuerySelectorAll("div")
-                .FirstOrDefault(element => element.ClassName != null && element.ClassName == "ingredients-bl");
+                .FirstOrDefault(element => element.ClassName == "ingredients-bl");
 
             int countIngredientTitles = ingredientBody?.QuerySelectorAll("ul").Length ?? 0;
 
@@ -151,7 +151,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #region StepRecipeBox
 
             var recipesArray = recipeBody.QuerySelectorAll("div")
-                .Where(item => item.ClassName != null && item.ClassName == ("cooking-bl"))
+                .Where(item => item.ClassName == ("cooking-bl"))
                 .ToArray();
 
             int countRecipes = recipesArray.Length;
@@ -170,7 +170,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 stepRecipeBoxes[i] = stepRecipeBox;
             }
 
-            StepRecipesBoxes = stepRecipeBoxes;
+            StepsRecipe = stepRecipeBoxes;
 
             #endregion
 
@@ -204,7 +204,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             if (tableCPFC != null)
             {
-                double calories = double.Parse(tableCPFC[0].Replace(" ккал", string.Empty).Replace('.',','));
+                double calories = double.Parse(tableCPFC[0].Replace(" ккал", string.Empty).Replace('.', ','));
                 double protein = double.Parse(tableCPFC[1].Replace(" г", string.Empty).Replace('.', ','));
                 double fats = double.Parse(tableCPFC[2].Replace(" г", string.Empty).Replace('.', ','));
                 double carbohydrates = double.Parse(tableCPFC[3].Replace(" г", string.Empty).Replace('.', ','));
@@ -217,7 +217,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #endregion
 
 
-            return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepRecipesBoxes, Additional);
+            return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }
 
         /// <see cref="IParserRecipe{T}.ConvertToMinutes(string)"/>
@@ -237,10 +237,13 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             for (int i = 1; i < arrayWords.Length; i += 2)
             {
-                if (arrayWords[i].Contains("м"))
+                if (arrayWords[i].Contains('м'))
                     minutes += int.Parse(arrayWords[i - 1]);
-                else if (arrayWords[i].Contains("ч"))
+                else if (arrayWords[i].Contains('ч'))
                     minutes += int.Parse(arrayWords[i - 1]) * 60;
+                else if (arrayWords[i].Contains('д'))
+                    // 60 * 24 = 1440‬
+                    minutes += int.Parse(arrayWords[i - 1]) * 1440;
             }
 
             return minutes;

@@ -10,11 +10,11 @@ namespace WebServer.DataBase
     {
         public static MySqlConnection GetConnection() => new MySqlConnection(Settings.GetStringConnection());
 
-        //TABLE recipes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, url TEXT NOT NULL, date DATETIME, json TEXT);
+        //TABLE recipes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, url TEXT NOT NULL, date DATETIME, recipe BLOB);
 
         public static RecipeFull GetRecipe(string url, MySqlConnection conn)
         {
-            string sqlCommand = $"SELECT json FROM {Settings.Table} WHERE url = '{url}';";
+            string sqlCommand = $"SELECT recipe FROM {Settings.Table} WHERE url = '{url}';";
 
             MySqlCommand command = new MySqlCommand(sqlCommand, conn);
 
@@ -26,14 +26,15 @@ namespace WebServer.DataBase
 
         private static RecipeFull ByteArrayToRecipe(byte[] arrBytes)
         {
-            MemoryStream memStream = new MemoryStream();
+            MemoryStream memoryStream = new MemoryStream();
 
-            memStream.Write(arrBytes, 0, arrBytes.Length);
-            memStream.Seek(0, SeekOrigin.Begin);
+            memoryStream.Write(arrBytes, 0, arrBytes.Length);
+            memoryStream.Seek(0, SeekOrigin.Begin);
 
-            BinaryFormatter binForm = new BinaryFormatter();
+            NFX.Serialization.Slim.SlimSerializer slimSerializer = 
+                new NFX.Serialization.Slim.SlimSerializer();
 
-            RecipeFull recipeFull = (RecipeFull)binForm.Deserialize(memStream);
+            RecipeFull recipeFull = (RecipeFull) slimSerializer.Deserialize(memoryStream);
 
             return recipeFull;
         }
@@ -43,12 +44,12 @@ namespace WebServer.DataBase
             if (obj == null)
                 return null;
 
-            using MemoryStream ms = new MemoryStream();
+            using MemoryStream memoryStream = new MemoryStream();
 
-            var bf = new BinaryFormatter();
-            bf.Serialize(ms, obj);
+            NFX.Serialization.Slim.SlimSerializer slimSerializer = new NFX.Serialization.Slim.SlimSerializer();
+            slimSerializer.Serialize(memoryStream, obj);
 
-            return ms.ToArray();
+            return memoryStream.ToArray();
         }
 
         public static void AddRecipe(string url, RecipeFull recipeFull, MySqlConnection conn)
@@ -59,13 +60,13 @@ namespace WebServer.DataBase
             var resultExists = IsExists(url, conn);
 
             var sqlCommand = !resultExists
-                ? $"INSERT INTO {Settings.Table} VALUES (0,'{url}','{DateTime.Now:yyyy-MM-dd HH:mm:ss}',?json);"
-                : $"UPDATE {Settings.Table} SET date = '{DateTime.Now:yyyy-MM-dd HH:mm:ss}', json = ?json WHERE url = '{url}';";
+                ? $"INSERT INTO {Settings.Table} VALUES (0,'{url}','{DateTime.Now:yyyy-MM-dd HH:mm:ss}',?recipe);"
+                : $"UPDATE {Settings.Table} SET date = '{DateTime.Now:yyyy-MM-dd HH:mm:ss}', recipe = ?recipe WHERE url = '{url}';";
 
             var command = new MySqlCommand(sqlCommand, conn);
 
-            // Добавляем в поле json бинарное представление объекта RecipeFull.
-            command.Parameters.Add("?json", MySqlDbType.Blob).Value = buffer;
+            // Добавляем в поле recipe бинарное представление объекта RecipeFull.
+            command.Parameters.Add("?recipe", MySqlDbType.Blob).Value = buffer;
             command.ExecuteNonQuery();
         }
 

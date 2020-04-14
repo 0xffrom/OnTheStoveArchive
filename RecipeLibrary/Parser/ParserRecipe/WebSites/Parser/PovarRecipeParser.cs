@@ -25,8 +25,8 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         /// <see cref="RecipeFull.Ingredients"/>
         private Ingredient[] Ingredients { get; set; }
 
-        /// <see cref="RecipeFull.StepRecipesBoxes"/>
-        private StepRecipe[] StepRecipesBoxes { get; set; }
+        /// <see cref="RecipeFull.StepsRecipe"/>
+        private StepRecipe[] StepsRecipe { get; set; }
 
         /// <see cref="RecipeFull.Additional"/>
         private Additional Additional { get; set; }
@@ -38,7 +38,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             var recipeBody = document
                 .QuerySelectorAll("div")
-                .FirstOrDefault(el => el.ClassName != null && el.ClassName == "cont_area");
+                .FirstOrDefault(el => el.ClassName == "cont_area");
 
             if (recipeBody is null)
                 return new RecipeFull();
@@ -46,8 +46,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #region Title
 
             Title = recipeBody.QuerySelectorAll("h1")
-                .Where(el => el.ClassName != null
-                             && el.ClassName == "detailed"
+                .Where(el => el.ClassName == "detailed"
                              && el.Attributes[1] != null
                              && el.Attributes[1].Value == "name")
                 .Select(el => el.TextContent)
@@ -55,7 +54,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             TitleImage = new Image(recipeBody
                 .QuerySelectorAll("div")
-                .FirstOrDefault(el => el.ClassName != null && el.ClassName == "bigImgBox")
+                .FirstOrDefault(el => el.ClassName == "bigImgBox")
                 ?.QuerySelector("a")
                 .FirstElementChild.Attributes[0].Value);
 
@@ -67,7 +66,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             foreach (var textLine in recipeBody
                 .QuerySelectorAll("span")
-                .Where(el => el.ClassName != null && el.ClassName == "detailed_full")
+                .Where(el => el.ClassName == "detailed_full")
                 .Select(x => x.TextContent))
             {
                 Description += Environment.NewLine + textLine;
@@ -78,7 +77,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             var ingredientsBody = recipeBody
                 .QuerySelectorAll("ul")
-                .First(x => x.ClassName != null && x.ClassName == "detailed_ingredients")
+                .First(x => x.ClassName == "detailed_ingredients")
                 .QuerySelectorAll("li")
                 .ToArray();
 
@@ -139,7 +138,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 }
             }
 
-            StepRecipesBoxes = stepRecipesBoxes.ToArray();
+            StepsRecipe = stepRecipesBoxes.ToArray();
 
             #endregion
 
@@ -147,7 +146,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             var rcpAuthorTimeBody = recipeBody
                 .QuerySelectorAll("div")
-                .FirstOrDefault(x => x.ClassName != null && x.ClassName == "rcpAuthorTime");
+                .FirstOrDefault(x => x.ClassName == "rcpAuthorTime");
 
             string authorName = rcpAuthorTimeBody
                 .QuerySelectorAll("span")
@@ -171,7 +170,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             if (portions != null)
                 countPortions = int.Parse(RemoveSymbols(portions[0]));
-            
+
             // На повар.ру нет информации(
             CPFC CPFC = null;
 
@@ -182,7 +181,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             #endregion
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients,
-                StepRecipesBoxes,
+                StepsRecipe,
                 Additional);
         }
 
@@ -205,6 +204,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             // Format: PT<min>M
             return double.Parse(inputLine[2..^1]);
         }
-        
+
     }
 }

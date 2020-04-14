@@ -19,8 +19,8 @@ namespace XamarinApp
             _context = context;
             _recipeFull = recipeFull;
             _stepRecipeBoxes = new List<StepRecipe>();
-            if (recipeFull.StepRecipesBoxes != null)
-                _stepRecipeBoxes.AddRange(recipeFull.StepRecipesBoxes);
+            if (recipeFull.StepsRecipe != null)
+                _stepRecipeBoxes.AddRange(recipeFull.StepsRecipe);
         }
 
         public override long GetItemId(int position)

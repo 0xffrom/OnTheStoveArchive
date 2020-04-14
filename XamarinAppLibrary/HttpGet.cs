@@ -9,7 +9,8 @@ namespace XamarinAppLibrary
 
     public static class HttpGet
     {
-        private const string ipAdress = "http://194.87.103.195/";
+        //http://51.77.58.18/
+        private const string ipAdress = "http://51.77.58.18/";
         private static async Task<string> GetSource(string query)
         {
             string currentUrl = ipAdress + query;

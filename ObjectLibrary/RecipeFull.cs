@@ -25,7 +25,7 @@ namespace ObjectsLibrary
 
         /// <value>Шаги приготовления рецепта.</value>
         /// <see cref="StepRecipe"/>
-        public StepRecipe[] StepRecipesBoxes { get; set; }
+        public StepRecipe[] StepsRecipe { get; set; }
 
         /// <value>Дополнительное описание рецепта.</value>
         /// <see cref="Additional"/>
@@ -46,7 +46,7 @@ namespace ObjectsLibrary
             TitleImage = image;
             Description = description;
             Ingredients = ingredients;
-            StepRecipesBoxes = stepRecipesBoxes;
+            StepsRecipe = stepRecipesBoxes;
             Additional = additional;
         }
 
