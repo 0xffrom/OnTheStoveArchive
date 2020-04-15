@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -23,11 +24,10 @@ namespace XamarinApp
         private RecyclerView recyclerView;
         private RecipeShort[] _recipes;
         private DrawerLayout _drawer;
-        private ProgressBar progressBar;
-
+        private SwipeRefreshLayout swipeRefreshLayout;
 
         private int page = 1;
-        private const string message = "Идёт загрузка рецептов, подождите, пожалуйста.";
+        private string lastQuery;
         public static string LastUrl { get; private set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -43,9 +43,18 @@ namespace XamarinApp
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_search);
-            progressBar = FindViewById<ProgressBar>(Resource.Id.loadingProgressBar);
-
             recyclerView = FindViewById<RecyclerView>(Resource.Id.listRecipeShorts);
+
+            swipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout);
+            swipeRefreshLayout.SetColorSchemeColors(Color.Orange, Color.DarkOrange);
+            swipeRefreshLayout.Refresh += delegate (object sender, System.EventArgs e)
+            {
+                if (lastQuery == null)
+                    UpdateListView();
+                else
+                    UpdateListView(lastQuery);
+            };
+
 
             recyclerView.HasFixedSize = true;
 
@@ -84,7 +93,12 @@ namespace XamarinApp
 
         private async void UpdateListView(string query = "getPage?section=popular")
         {
-            progressBar.Visibility = ViewStates.Visible;
+            swipeRefreshLayout.Post(() =>
+            {
+                swipeRefreshLayout.Refreshing = true;
+                recyclerView.Clickable = false;
+            });
+
 
             var mLayoutManager = new LinearLayoutManager(this);
             recyclerView.SetLayoutManager(mLayoutManager);
@@ -92,7 +106,11 @@ namespace XamarinApp
             adapter.ItemClick += OnItemClick;
             recyclerView.SetAdapter(adapter);
 
-            progressBar.Visibility = ViewStates.Invisible;
+            swipeRefreshLayout.Post(() => {
+                swipeRefreshLayout.Refreshing = false;
+                recyclerView.Clickable = true;
+            });
+
         }
 
         public override void OnBackPressed()
@@ -120,8 +138,7 @@ namespace XamarinApp
             spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(SelectedItemSpinner);
 
 
-            var spinnerAdapter =
-                ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
+            var spinnerAdapter =ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
             spinnerAdapter.SetDropDownViewResource(Resource.Layout.spinner_text);
             spinner.Adapter = spinnerAdapter;
         }
@@ -161,22 +178,25 @@ namespace XamarinApp
 
             page = 1;
 
+            string query = null; 
+
             switch (item.ToString())
             {
                 case "По популярности":
-                    UpdateListView($"getPage?page={page}&section=popular");
+                    query = $"getPage?page={page}&section=popular";
+                    UpdateListView(query);
                     break;
                 case "По случайности":
-                    UpdateListView($"getPage?page={page}&section=random");
+                    query = $"getPage?page={page}&section=random"; 
+                    UpdateListView(query);
                     break;
                 case "По новизне":
-                    UpdateListView($"getPage?page={page}&section=new");
+                    query = $"getPage?page={page}&section=new";
+                    UpdateListView(query);
                     break;
             }
 
-
-            var toast = $"Сортировка {spinner.GetItemAtPosition(e.Position).ToString().ToLower()}";
-            Toast.MakeText(this, toast, ToastLength.Long).Show();
+            lastQuery = query;
         }
 
         private async Task<RecipeShort[]> UpdateCollectionRecipes(string query)

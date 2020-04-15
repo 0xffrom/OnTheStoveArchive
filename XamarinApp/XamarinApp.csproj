@@ -319,7 +319,7 @@
     <Compile Include="Adapters\IngredientsAdapter.cs" />
     <Compile Include="Adapters\RecipeAdapter.cs" />
     <Compile Include="Adapters\StepAdapter.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="Activity\MainActivity.cs" />
     <AndroidResource Include="Resources\drawable-v21\ic_menu_camera.xml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -351,7 +351,7 @@
     <AndroidResource Include="Resources\drawable\icon_back.xml" />
     <AndroidResource Include="Resources\drawable\rectangle_1.xml" />
     <AndroidResource Include="Resources\drawable\rectangle_3.xml" />
-    <Compile Include="RecipeActivity.cs" />
+    <Compile Include="Activity\RecipeActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -455,6 +455,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="General\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Annotations.targets')" />
