@@ -13,6 +13,7 @@ using Android.Views.Animations;
 using Android.Widget;
 using ObjectsLibrary;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using XamarinAppLibrary;
 
@@ -22,9 +23,10 @@ namespace XamarinApp
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
         private RecyclerView recyclerView;
-        private RecipeShort[] _recipes;
+        private RecipeShort[] recipeShorts;
         private DrawerLayout _drawer;
         private SwipeRefreshLayout swipeRefreshLayout;
+        private LinearLayoutManager linearLayoutManager;
 
         private int page = 1;
         private string lastQuery;
@@ -57,6 +59,16 @@ namespace XamarinApp
 
 
             recyclerView.HasFixedSize = true;
+            linearLayoutManager = new LinearLayoutManager(this);
+
+
+            var onScrollListener = new RecipeListener(linearLayoutManager);
+            recyclerView.AddOnScrollListener(onScrollListener);
+            onScrollListener.LoadMoreEvent += (object sender, EventArgs e) =>
+            {
+                string query = lastQuery.Substring(0, lastQuery.IndexOf("page=") + 1) + (++page);
+                UpdateListView(query, recipeShorts);
+            };
 
             UpdateListView();
 
@@ -91,7 +103,7 @@ namespace XamarinApp
 
         }
 
-        private async void UpdateListView(string query = "getPage?section=popular")
+        private async void UpdateListView(string query = "getPage?section=popular", RecipeShort[] recipeShorts = null)
         {
             swipeRefreshLayout.Post(() =>
             {
@@ -99,10 +111,19 @@ namespace XamarinApp
                 recyclerView.Clickable = false;
             });
 
+            recyclerView.SetLayoutManager(linearLayoutManager);
+            if(recipeShorts == null)
+                this.recipeShorts = await UpdateCollectionRecipes(query);
+            else
+            {
+                List<RecipeShort> localRecipes = new List<RecipeShort>();
+                localRecipes.AddRange(recipeShorts);
+                localRecipes.AddRange(await UpdateCollectionRecipes(query));
+                recipeShorts = localRecipes.ToArray();
+            }
 
-            var mLayoutManager = new LinearLayoutManager(this);
-            recyclerView.SetLayoutManager(mLayoutManager);
-            var adapter = new RecipeAdapter(await UpdateCollectionRecipes(query), this);
+            var adapter = new RecipeAdapter(this.recipeShorts, this);
+
             adapter.ItemClick += OnItemClick;
             recyclerView.SetAdapter(adapter);
 
@@ -155,7 +176,7 @@ namespace XamarinApp
 
                 if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter) return;
 
-                UpdateListView($"getPage?page={page}&section=recipe&recipeName={edittext.Text}");
+                UpdateListView($"getPage?section=recipe&recipeName={edittext.Text}&page={page}");
                 Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
 
 
@@ -165,7 +186,7 @@ namespace XamarinApp
 
         void OnItemClick(object sender, int position)
         {
-            LastUrl = _recipes[position].Url;
+            LastUrl = recipeShorts[position].Url;
             Intent intent = new Intent(this, typeof(RecipeActivity));
             StartActivity(intent);
         }
@@ -183,15 +204,15 @@ namespace XamarinApp
             switch (item.ToString())
             {
                 case "По популярности":
-                    query = $"getPage?page={page}&section=popular";
+                    query = $"getPage?section=popular&page={page}";
                     UpdateListView(query);
                     break;
                 case "По случайности":
-                    query = $"getPage?page={page}&section=random"; 
+                    query = $"getPage?section=random&page={page}"; 
                     UpdateListView(query);
                     break;
                 case "По новизне":
-                    query = $"getPage?page={page}&section=new";
+                    query = $"getPage?section=new&page={page}";
                     UpdateListView(query);
                     break;
             }
@@ -201,7 +222,7 @@ namespace XamarinApp
 
         private async Task<RecipeShort[]> UpdateCollectionRecipes(string query)
         {
-            return await Task.Run(function: () => _recipes = HttpGet.GetRecipes(query));
+            return await Task.Run(function: () => HttpGet.GetRecipes(query));
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions,

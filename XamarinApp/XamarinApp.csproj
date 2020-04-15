@@ -352,6 +352,7 @@
     <AndroidResource Include="Resources\drawable\rectangle_1.xml" />
     <AndroidResource Include="Resources\drawable\rectangle_3.xml" />
     <Compile Include="Activity\RecipeActivity.cs" />
+    <Compile Include="RecipeListener.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
