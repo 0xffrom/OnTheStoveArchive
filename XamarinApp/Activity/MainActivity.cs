@@ -30,7 +30,6 @@ namespace XamarinApp
 
         private int page = 1;
         private string lastQuery;
-        public static string LastUrl { get; private set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -58,7 +57,7 @@ namespace XamarinApp
             };
 
 
-            recyclerView.HasFixedSize = true;
+            recyclerView.HasFixedSize = false;
             linearLayoutManager = new LinearLayoutManager(this);
 
 
@@ -66,7 +65,7 @@ namespace XamarinApp
             recyclerView.AddOnScrollListener(onScrollListener);
             onScrollListener.LoadMoreEvent += (object sender, EventArgs e) =>
             {
-                string query = lastQuery.Substring(0, lastQuery.IndexOf("page=") + 1) + (++page);
+                string query = lastQuery.Substring(0, lastQuery.IndexOf("page=") + 5) + (++page);
                 UpdateListView(query, recipeShorts);
             };
 
@@ -94,7 +93,7 @@ namespace XamarinApp
             _drawer.OpenDrawer(GravityCompat.Start);
 
             var menu_buttonM = FindViewById<Button>(Resource.Id.menu_buttonM);
-            menu_buttonM.Animation = new RotateAnimation(0, 180);
+
             menu_buttonM.Click += delegate (object sender, EventArgs args)
             {
                 if (_drawer.IsDrawerOpen(GravityCompat.Start))
@@ -112,22 +111,29 @@ namespace XamarinApp
             });
 
             recyclerView.SetLayoutManager(linearLayoutManager);
-            if(recipeShorts == null)
+
+            int position = 0;
+
+            if (recipeShorts == null)
                 this.recipeShorts = await UpdateCollectionRecipes(query);
             else
             {
                 List<RecipeShort> localRecipes = new List<RecipeShort>();
                 localRecipes.AddRange(recipeShorts);
+                position = localRecipes.Count - 4;
                 localRecipes.AddRange(await UpdateCollectionRecipes(query));
-                recipeShorts = localRecipes.ToArray();
+                this.recipeShorts = localRecipes.ToArray();
             }
 
             var adapter = new RecipeAdapter(this.recipeShorts, this);
-
             adapter.ItemClick += OnItemClick;
-            recyclerView.SetAdapter(adapter);
 
-            swipeRefreshLayout.Post(() => {
+            
+            recyclerView.SetAdapter(adapter);
+            recyclerView.ScrollToPosition(position);
+           
+            swipeRefreshLayout.Post(() =>
+            {
                 swipeRefreshLayout.Refreshing = false;
                 recyclerView.Clickable = true;
             });
@@ -159,7 +165,7 @@ namespace XamarinApp
             spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(SelectedItemSpinner);
 
 
-            var spinnerAdapter =ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
+            var spinnerAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
             spinnerAdapter.SetDropDownViewResource(Resource.Layout.spinner_text);
             spinner.Adapter = spinnerAdapter;
         }
@@ -176,7 +182,8 @@ namespace XamarinApp
 
                 if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter) return;
 
-                UpdateListView($"getPage?section=recipe&recipeName={edittext.Text}&page={page}");
+                lastQuery = $"getPage?section=recipe&recipeName={edittext.Text}&page={page}";
+                UpdateListView(lastQuery);
                 Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
 
 
@@ -186,8 +193,10 @@ namespace XamarinApp
 
         void OnItemClick(object sender, int position)
         {
-            LastUrl = recipeShorts[position].Url;
             Intent intent = new Intent(this, typeof(RecipeActivity));
+            intent.PutExtra("url", recipeShorts[position].Url);
+            intent.PutExtra("recipeShort", Data.RecipeToByteArray(recipeShorts[position]));
+
             StartActivity(intent);
         }
 
@@ -199,7 +208,7 @@ namespace XamarinApp
 
             page = 1;
 
-            string query = null; 
+            string query = null;
 
             switch (item.ToString())
             {
@@ -208,7 +217,7 @@ namespace XamarinApp
                     UpdateListView(query);
                     break;
                 case "По случайности":
-                    query = $"getPage?section=random&page={page}"; 
+                    query = $"getPage?section=random&page={page}";
                     UpdateListView(query);
                     break;
                 case "По новизне":
@@ -236,6 +245,14 @@ namespace XamarinApp
         public bool OnNavigationItemSelected(IMenuItem menuItem)
         {
             // Закрывает отрисовщик и возвращает, закрыт ли он или нет.
+            int id = menuItem.ItemId;
+
+            if (id == Resource.Id.nav_favorite)
+            {
+               Intent intent = new Intent(this, typeof(SavedRecipesActivity));
+                StartActivity(intent);
+            }
+
             return CLoseDrawer(_drawer).IsDrawerOpen(GravityCompat.Start);
         }
 

@@ -35,14 +35,8 @@
     </item>-->
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_find_recipe"
-                android:title="Найти рецепт"/>
-        <item
                 android:id="@+id/nav_ingredient"
                 android:title="Найти по ингредиенту"/>
-        <item
-                android:id="@+id/nav_article"
-                android:title="Статьи"/>
         <item
                 android:id="@+id/nav_cart"
                 android:title="Корзина продуктов"/>

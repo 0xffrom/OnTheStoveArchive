@@ -5,35 +5,43 @@ using Android.Widget;
 using ObjectsLibrary;
 using Square.Picasso;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using XamarinApp.Listeners;
 
 namespace XamarinApp
 {
-    public class RecipeAdapter : RecyclerView.Adapter
+    public class RecipeAdapter : RecyclerView.Adapter, IFilterable
     {
-        private RecipeShort[] _recipeShorts;
+
+        internal List<RecipeShort> _originalData;
+        internal List<RecipeShort> _items;
         private Activity _activity;
-
         public event EventHandler<int> ItemClick;
-
+        public override int ItemCount => _items.Count;
+        public Filter Filter { get; private set; }
 
         public RecipeAdapter(RecipeShort[] recipeShorts, Activity activity)
         {
-            _recipeShorts = recipeShorts;
             _activity = activity;
+
+            _items = recipeShorts.ToList();
+
+            Filter = new RecipesFilter(this);
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             RecipeViewHolder vh = holder as RecipeViewHolder;
 
-            vh.Title.Text = _recipeShorts[position]?.Title;
+            vh.Title.Text = _items[position]?.Title;
 
-            var urlArray = _recipeShorts[position]?.Url.Split('/');
+            var urlArray = _items[position]?.Url.Split('/');
 
             if (urlArray != null && urlArray.Length >= 2)
                 vh.Link.Text = urlArray[2];
 
-            var url = _recipeShorts[position]?.Image.ImageUrl;
+            var url = _items[position]?.Image.ImageUrl;
 
             Picasso.With(_activity)
                  .Load(url)
@@ -49,7 +57,6 @@ namespace XamarinApp
             return vh;
         }
 
-        public override int ItemCount => _recipeShorts.Length;
 
         void OnClick(int position)
         {

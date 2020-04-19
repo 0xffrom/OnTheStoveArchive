@@ -8,8 +8,6 @@
                                         android:fitsSystemWindows="true"
                                         tools:openDrawer="start">
 
-
-
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

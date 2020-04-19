@@ -17,7 +17,8 @@ namespace XamarinApp
     public class RecipeActivity : AppCompatActivity
     {
         private string _url;
-        private RecipeFull _recipeFull;
+        private RecipeFull recipeFull;
+        private RecipeShort recipeShort;
 
         public readonly Color ColorFeb22C = new Color(254, 178, 44);
         public readonly Color ColorC4C4C4 = new Color(196, 196, 196);
@@ -29,22 +30,23 @@ namespace XamarinApp
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
+            _url = Intent.GetStringExtra("url");
+            recipeShort = Data.ByteArrayToObject<RecipeShort>(Intent.GetByteArrayExtra("recipeShort"));
+
             SetContentView(Resource.Layout.recipe_main);
 
             DrawerLayout();
 
-            _url = MainActivity.LastUrl;
-
             var relativeLayoutBack = FindViewById<RelativeLayout>(Resource.Id.relativeLayoutBack);
             var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
+
             relativeLayoutBack.Click += new EventHandler((sender, args) =>
             {
-                //  StartActivity(new Intent(this, typeof(MainActivity)));
                 base.OnBackPressed();
             });
+
             buttonBack.Click += new EventHandler((sender, args) =>
             {
-                //  StartActivity(new Intent(this, typeof(MainActivity)));
                 base.OnBackPressed();
             });
 
@@ -52,14 +54,14 @@ namespace XamarinApp
 
             buttonStar.Click += new EventHandler((sender, args) =>
             {
-                if (!LocalRecipe.ExistsRecipe(_url))
+                if (!RecipeData.ExistsRecipe(_url))
                 {
-                    LocalRecipe.SaveRecipe(_url, _recipeFull);
+                    RecipeData.SaveRecipe(_url, recipeShort);
                     buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
                 }
                 else
                 {
-                    LocalRecipe.DeleteRecipe(_url);
+                    RecipeData.DeleteRecipe(_url);
                     buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_white_star", "drawable", PackageName));
                 }
             });
@@ -148,20 +150,18 @@ namespace XamarinApp
 
         private async void UpdateView()
         {
-            if (LocalRecipe.ExistsRecipe(_url))
-            {
-                _recipeFull = LocalRecipe.GetRecipe(_url);
+            if (RecipeData.ExistsRecipe(_url))
                 buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
-            }
-            else
-                _recipeFull = await UpdateCollectionRecipes(_url);
+
+            recipeFull = await UpdateCollectionRecipes(_url);
+
 
             var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
-            var adapterIngredents = new IngredientsAdapter(this, _recipeFull);
+            var adapterIngredents = new IngredientsAdapter(this, recipeFull);
             if (adapterIngredents.Count > 0)
                 listIngredients.Adapter = adapterIngredents;
             var listSteps = FindViewById<ListView>(Resource.Id.listSteps);
-            var adapterStep = new StepAdapter(this, _recipeFull);
+            var adapterStep = new StepAdapter(this, recipeFull);
             listSteps.Adapter = adapterStep;
 
 
@@ -175,34 +175,34 @@ namespace XamarinApp
             var additionalInfoRecipe = FindViewById<TextView>(Resource.Id.additionalInfoRecipe);
             var urlRecipe = FindViewById<TextView>(Resource.Id.urlRecipe);
 
-            title.Text = _recipeFull.Title;
+            title.Text = recipeFull.Title;
 
             Picasso.With(this)
-                .Load(_recipeFull.TitleImage.ImageUrl)
+                .Load(recipeFull.TitleImage.ImageUrl)
                 .Into(imageView);
 
-            description.Text += $"{_recipeFull.Description.Replace("  ",string.Empty)}";
+            description.Text += $"{recipeFull.Description.Replace("  ",string.Empty)}";
 
-            if (_recipeFull.Additional.CPFC != null)
+            if (recipeFull.Additional.CPFC != null)
             {
-                if (_recipeFull.Additional.CPFC.Calories != 0)
-                    CPFCRecipe.Text += $"Калории: {_recipeFull.Additional.CPFC.Calories} Ккал.{System.Environment.NewLine}";
-                if(_recipeFull.Additional.CPFC.Protein != 0)
-                    CPFCRecipe.Text += $"Белки: {_recipeFull.Additional.CPFC.Protein} г.{System.Environment.NewLine}";
-                if (_recipeFull.Additional.CPFC.Fats != 0)
-                    CPFCRecipe.Text += $"Жиры: {_recipeFull.Additional.CPFC.Fats} г.{System.Environment.NewLine}";
-                if (_recipeFull.Additional.CPFC.Carbohydrates != 0)
-                    CPFCRecipe.Text += $"Углеводы: {_recipeFull.Additional.CPFC.Carbohydrates} г.{System.Environment.NewLine}";
+                if (recipeFull.Additional.CPFC.Calories != 0)
+                    CPFCRecipe.Text += $"Калории: {recipeFull.Additional.CPFC.Calories} Ккал.{System.Environment.NewLine}";
+                if(recipeFull.Additional.CPFC.Protein != 0)
+                    CPFCRecipe.Text += $"Белки: {recipeFull.Additional.CPFC.Protein} г.{System.Environment.NewLine}";
+                if (recipeFull.Additional.CPFC.Fats != 0)
+                    CPFCRecipe.Text += $"Жиры: {recipeFull.Additional.CPFC.Fats} г.{System.Environment.NewLine}";
+                if (recipeFull.Additional.CPFC.Carbohydrates != 0)
+                    CPFCRecipe.Text += $"Углеводы: {recipeFull.Additional.CPFC.Carbohydrates} г.{System.Environment.NewLine}";
             }
 
-            authorNameRecipe.Text = $"Рецепт от: {_recipeFull.Additional.AuthorName}";
+            authorNameRecipe.Text = $"Рецепт от: {recipeFull.Additional.AuthorName}";
 
-            if (_recipeFull.Additional.CountPortions != 0)
-                additionalInfoRecipe.Text += $"Количество порций: {_recipeFull.Additional.CountPortions}.{System.Environment.NewLine}";
-            if (_recipeFull.Additional.PrepMinutes != 0)
-                additionalInfoRecipe.Text += $"Количество минут на готовку: {_recipeFull.Additional.PrepMinutes} мин.";
+            if (recipeFull.Additional.CountPortions != 0)
+                additionalInfoRecipe.Text += $"Количество порций: {recipeFull.Additional.CountPortions}.{System.Environment.NewLine}";
+            if (recipeFull.Additional.PrepMinutes != 0)
+                additionalInfoRecipe.Text += $"Количество минут на готовку: {recipeFull.Additional.PrepMinutes} мин.";
 
-            urlRecipe.Text = $"Ссылка на рецепт: {_recipeFull.Url}";
+            urlRecipe.Text = $"Ссылка на рецепт: {recipeFull.Url}";
             #endregion
         }
 
