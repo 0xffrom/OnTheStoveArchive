@@ -11,7 +11,7 @@ namespace XamarinAppLibrary
     {
         private static string path =
             System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-        private static string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),"onstove.db3");
+        private static string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "onstove.db3");
         private static string GetFileRecipeName(string url)
         {
             // Пример: https://www.povarenok.ru/recipes/show/163893/
@@ -40,7 +40,7 @@ namespace XamarinAppLibrary
         public static RecipeShort GetRecipe(string url)
         {
             string fileName = GetFileRecipeName(url);
-            
+
             var db = new SQLiteConnection(dbPath);
             byte[] recipe = db.Table<RecipeTable>().First(x => x.Name == fileName).Recipe;
 
@@ -78,9 +78,10 @@ namespace XamarinAppLibrary
                 return false;
 
             return db.Table<RecipeTable>().FirstOrDefault(x => x.Name == fileName) == null ? false : true;
+
         }
 
-      
+
         public static void DeleteRecipe(string url)
         {
             string fileName = GetFileRecipeName(url);
@@ -109,10 +110,10 @@ namespace XamarinAppLibrary
             recipeTable.Recipe = Data.RecipeToByteArray(recipeShort);
 
             db.Insert(recipeTable);
-              
+
         }
 
-     
+
 
     }
 }

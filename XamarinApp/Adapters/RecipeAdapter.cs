@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;

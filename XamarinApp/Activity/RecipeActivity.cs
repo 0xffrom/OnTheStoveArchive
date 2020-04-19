@@ -213,6 +213,6 @@ namespace XamarinApp
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        private static async Task<RecipeFull> UpdateCollectionRecipes(string url) => await Task.Run(() => HttpGet.GetPage(url));
+        private static async Task<RecipeFull> UpdateCollectionRecipes(string url) => await Task.Run(() => HttpGet.GetRecipe(url));
     }
 }

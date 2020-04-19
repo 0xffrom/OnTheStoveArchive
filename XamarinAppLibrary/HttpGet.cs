@@ -24,14 +24,15 @@ namespace XamarinAppLibrary
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();
 
+            
             return source;
         }
 
-        public static RecipeShort[] GetRecipes(string query) =>
-            JsonConvert.DeserializeObject<RecipeShort[]>(GetSource(query).Result);
+        public static RecipeShort[] GetPages(string query) =>
+            JsonConvert.DeserializeObject<RecipeShort[]>(GetSource("page/get?" + query).Result);
 
-        public static RecipeFull GetPage(string url) =>
+        public static RecipeFull GetRecipe(string url) =>
             JsonConvert.DeserializeObject<RecipeFull>
-                (GetSource("getRecipe?url=" + url).Result);
+                (GetSource("recipe/get?url=" + url).Result);
     }
 }

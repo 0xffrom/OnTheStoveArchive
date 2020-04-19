@@ -102,7 +102,7 @@ namespace XamarinApp
 
         }
 
-        private async void UpdateListView(string query = "getPage?section=popular", RecipeShort[] recipeShorts = null)
+        private async void UpdateListView(string query = "section=popular", RecipeShort[] recipeShorts = null)
         {
             swipeRefreshLayout.Post(() =>
             {
@@ -182,7 +182,7 @@ namespace XamarinApp
 
                 if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter) return;
 
-                lastQuery = $"getPage?section=recipe&recipeName={edittext.Text}&page={page}";
+                lastQuery = $"section=recipe&recipeName={edittext.Text}&page={page}";
                 UpdateListView(lastQuery);
                 Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
 
@@ -213,15 +213,15 @@ namespace XamarinApp
             switch (item.ToString())
             {
                 case "По популярности":
-                    query = $"getPage?section=popular&page={page}";
+                    query = $"section=popular&page={page}";
                     UpdateListView(query);
                     break;
                 case "По случайности":
-                    query = $"getPage?section=random&page={page}";
+                    query = $"section=random&page={page}";
                     UpdateListView(query);
                     break;
                 case "По новизне":
-                    query = $"getPage?section=new&page={page}";
+                    query = $"section=new&page={page}";
                     UpdateListView(query);
                     break;
             }
@@ -231,7 +231,7 @@ namespace XamarinApp
 
         private async Task<RecipeShort[]> UpdateCollectionRecipes(string query)
         {
-            return await Task.Run(function: () => HttpGet.GetRecipes(query));
+            return await Task.Run(function: () => HttpGet.GetPages(query));
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions,

@@ -3,15 +3,11 @@
 namespace XamarinAppLibrary
 {
     [Table("Recipe")]
-    class RecipeTable
+    public class RecipeTable
     {
-        [PrimaryKey, AutoIncrement, Column("_id")]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-
-        [MaxLength(16), Column("_name")]
         public string Name { get; set; }
-
-        [Column("_recipe")]
         public byte[] Recipe { get; set; }
 
         public RecipeTable()
