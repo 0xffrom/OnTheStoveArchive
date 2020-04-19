@@ -7,33 +7,48 @@ using System;
 namespace WebServer.Controllers
 {
     [ApiController]
-    //[Route("[controller]")]
+    // Переадресация на {ip adress}/page/
+    [Route("page")]
     public class PageController : ControllerBase
     {
         private readonly ILogger<PageController> _logger;
-
         public PageController(ILogger<PageController> logger)
         {
             _logger = logger;
+            
         }
 
 
-        [HttpGet("getPage")]
+        /// <summary>
+        /// Метод, возвращающий по GET запросу коллекцию кратких описаний кулинарных рецептов. <see cref="RecipeShort"/>
+        /// Маршрут: "{ip adress}/page/get?section={section}&page={page}&recipeName={recipeName}"
+        /// Параметры "page" и "recipeName" является необязательными.
+        /// </summary>
+        /// <param name="url">URL адрес рецепта.</param>
+        /// <param name="page">Номер страницы.</param>
+        /// <param name="recipeName">Название рецепта.</param>
+        /// <returns>Объект типа RecipeShort[]</returns>
+        [HttpGet("get")]
         public RecipeShort[] Get(string section, int page = 1, string recipeName = null)
         {
             recipeName ??= string.Empty;
 
             DateTime startTime = DateTime.Now;
-            Console.WriteLine($"Запрос на парсинг страницы с рецептами ===> {section}");
+
+            _logger.LogInformation($"[{DateTime.Now}]: Получен запрос на парсинг страницы с рецептами ==> " +
+                $"section: {section}, page: {page}, recipeName: {recipeName}");
 
             try
             {
-                Console.WriteLine($"Запрос выполнен успешно за {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                return GetData.GetPage(section, page, recipeName.ToLower()).Result;
+                RecipeShort[] recipes = GetData.GetPage(section, page, recipeName.ToLower()).Result;
+                _logger.LogInformation($"[{DateTime.Now}]: Запрос успешно выполнен.");
+                _logger.LogDebug($"[{DateTime.Now}] Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                return recipes;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Запрос выполнен неудачно. Ошибка: {e}");
+                _logger.LogError(e, $"[{DateTime.Now}]: Запрос выполнен неудачно.");
+                _logger.LogWarning($"[{DateTime.Now}]: Возврат нулевого рецепта.");
                 return new RecipeShort[] { new RecipeShort() };
             }
         }

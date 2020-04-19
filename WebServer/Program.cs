@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace WebServer
 {
@@ -11,7 +12,17 @@ namespace WebServer
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+         Host.CreateDefaultBuilder(args)
+        .ConfigureLogging(logging =>
+        {
+        logging.ClearProviders();
+        logging.AddConsole();
+        logging.AddDebug();
+        logging.SetMinimumLevel(LogLevel.Debug);
+        })
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Startup>();
+        });
     }
 }

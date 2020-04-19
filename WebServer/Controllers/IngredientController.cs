@@ -10,11 +10,11 @@ namespace WebServer.Controllers
     [ApiController]
     // Переадресация на {ip adress}/recipe/
     [Route("recipe")]
-    public class RecipeController : ControllerBase
+    public class IngredientController : ControllerBase
     {
         private readonly ILogger<PageController> _logger;
 
-        public RecipeController(ILogger<PageController> logger)
+        public IngredientController(ILogger<PageController> logger)
         {
             _logger = logger;
         }
@@ -32,7 +32,7 @@ namespace WebServer.Controllers
             _logger.LogInformation($"[{DateTime.Now}]: Запрос на парсинг старницы рецепта ===> {url}");
             try
             {
-                
+
                 var conn = Database.GetConnection();
 
                 conn.Open();

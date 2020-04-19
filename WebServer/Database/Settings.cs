@@ -13,11 +13,14 @@
 
         public const string Database = "recipes";
 
+        // Таблица вида:
+        // TABLE recipesFull (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, url TEXT NOT NULL, date DATETIME, recipe BLOB);
         public const string Table = "recipesFull";
 
-        // Период обновления рецепта.
+        // Период обновления рецепта в часах.
         public const int HourDiff = 24;
 
+        // Строка подключения к базе данных MySQL.
         public static string GetStringConnection() => "Server=" + Host + ";Database=" + Database + ";port=" + Port +
                                                       ";User Id=" + User + ";password=" + Password + ";charset=utf8;";
     }
