@@ -9,12 +9,12 @@ namespace WebServer.Controllers
 {
     [ApiController]
     // Переадресация на {ip adress}/recipe/
-    [Route("recipe")]
+    [Route("ingredient")]
     public class IngredientController : ControllerBase
     {
-        private readonly ILogger<PageController> _logger;
+        private readonly ILogger<IngredientController> _logger;
 
-        public IngredientController(ILogger<PageController> logger)
+        public IngredientController(ILogger<IngredientController> logger)
         {
             _logger = logger;
         }
