@@ -12,9 +12,9 @@ namespace WebServer.Controllers
     [Route("recipe")]
     public class RecipeController : ControllerBase
     {
-        private readonly ILogger<PageController> _logger;
+        private readonly ILogger<RecipeController> _logger;
 
-        public RecipeController(ILogger<PageController> logger)
+        public RecipeController(ILogger<RecipeController> logger)
         {
             _logger = logger;
         }
