@@ -11,9 +11,9 @@
 
         public const string Password = "password";
 
-        public const string Database = "Recipes";
+        public const string Database = "recipes";
 
-        public const string Table = "RecipesFull";
+        public const string Table = "recipesFull";
 
         // Период обновления рецепта.
         public const int HourDiff = 24;
