@@ -24,9 +24,9 @@
 
     <Button
             android:layout_weight="0.01"
-            android:layout_width="30dp"
-            android:layout_height="22dp"
-            android:background="@drawable/icon_menu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/round_menu_24"
             android:id="@+id/menu_buttonM"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15.6dp"

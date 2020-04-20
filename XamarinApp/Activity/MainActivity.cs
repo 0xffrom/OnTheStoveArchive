@@ -85,6 +85,7 @@ namespace XamarinApp
             navigationView.SetNavigationItemSelectedListener(this);
 
             var buttonMenu = FindViewById<Button>(Resource.Id.menu_button);
+            buttonMenu.SetBackgroundResource(Resources.GetIdentifier("round_menu_24", "drawable", PackageName));
             buttonMenu.Click += SetButtonClick;
         }
 

@@ -18,6 +18,7 @@
         <item name="android:windowActionBarOverlay">@color/colorOrange</item>
     </style>
 
+  
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>

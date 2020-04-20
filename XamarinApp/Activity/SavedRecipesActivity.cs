@@ -38,7 +38,9 @@ namespace XamarinApp
             SetContentView(Resource.Layout.activity_savedRecipes);
 
             var relativeLayoutBack = FindViewById<RelativeLayout>(Resource.Id.relativeLayoutBack);
+
             var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
+            buttonBack.SetBackgroundResource(Resources.GetIdentifier("round_arrow_back_ios_24", "drawable", PackageName));
 
             relativeLayoutBack.Click += new EventHandler((sender, args) =>
             {

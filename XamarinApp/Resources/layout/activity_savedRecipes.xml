@@ -26,13 +26,13 @@
                 android:layout_height="match_parent"
                 android:id="@+id/relativeLayoutBack">
                 <Button
-                    android:layout_width="18dp"
-                    android:layout_height="22dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                     android:layout_gravity="right"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/buttonBack"
-                    android:background="@drawable/icon_back"/>
+                    android:background="@drawable/round_arrow_back_ios_24"/>
             </RelativeLayout>
             <android.support.v7.widget.SearchView
                 android:layout_width="match_parent"

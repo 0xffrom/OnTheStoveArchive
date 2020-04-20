@@ -1,8 +1,11 @@
 ﻿using Android.App;
+using Android.Content;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ObjectsLibrary;
@@ -33,36 +36,57 @@ namespace XamarinApp
             _url = Intent.GetStringExtra("url");
             recipeShort = Data.ByteArrayToObject<RecipeShort>(Intent.GetByteArrayExtra("recipeShort"));
 
+
             SetContentView(Resource.Layout.recipe_main);
 
             DrawerLayout();
 
+            var buttonShare = FindViewById<Button>(Resource.Id.shareRecipe);
+            buttonShare.Click += new EventHandler((sender, args) =>
+            {
+                Intent intent = new Intent(Intent.ActionSend);
+                intent.SetType("text/plain");
+                String textToSend = $"Мне понравился рецепт приготовления блюда под названием '{recipeFull.Title}'. " +
+                $"Ссылка на блюдо: {recipeFull.Url}. " +
+                $"А также не забудь попробовать приложение 'На плите'!";
+                intent.PutExtra(Intent.ExtraText, textToSend);
+                try
+                {
+                    StartActivity(Intent.CreateChooser(intent, "Поделиться рецептом."));
+                }
+                catch (Android.Content.ActivityNotFoundException ex)
+                {
+                    Toast.MakeText(ApplicationContext, "Some error", ToastLength.Short).Show();
+                }
+            });
             var relativeLayoutBack = FindViewById<RelativeLayout>(Resource.Id.relativeLayoutBack);
-            var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
 
             relativeLayoutBack.Click += new EventHandler((sender, args) =>
             {
                 base.OnBackPressed();
             });
 
+            var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
+
             buttonBack.Click += new EventHandler((sender, args) =>
             {
                 base.OnBackPressed();
             });
+            
+
 
             buttonStar = FindViewById<Button>(Resource.Id.starRecipe);
-
             buttonStar.Click += new EventHandler((sender, args) =>
             {
                 if (!RecipeData.ExistsRecipe(_url))
                 {
                     RecipeData.SaveRecipe(_url, recipeShort);
-                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
+                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
                 }
                 else
                 {
                     RecipeData.DeleteRecipe(_url);
-                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_white_star", "drawable", PackageName));
+                    buttonStar.SetBackgroundResource(Resources.GetIdentifier("round_star_border_white_24", "drawable", PackageName));
                 }
             });
 
@@ -151,7 +175,7 @@ namespace XamarinApp
         private async void UpdateView()
         {
             if (RecipeData.ExistsRecipe(_url))
-                buttonStar.SetBackgroundResource(Resources.GetIdentifier("recipe_yellow_star", "drawable", PackageName));
+                buttonStar.SetBackgroundResource(Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
 
             recipeFull = await UpdateCollectionRecipes(_url);
 
