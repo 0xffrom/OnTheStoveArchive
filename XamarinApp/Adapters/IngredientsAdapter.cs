@@ -3,6 +3,7 @@ using Android.Views;
 using Android.Widget;
 using ObjectsLibrary;
 using ObjectsLibrary.Components;
+using XamarinAppLibrary;
 
 namespace XamarinApp
 {
@@ -37,8 +38,28 @@ namespace XamarinApp
             var ingredientUnit = view.FindViewById<TextView>(Resource.Id.ingredientUnit);
             ingredientUnit.Text = _ingredients[position].Unit;
 
+            var checkBox = view.FindViewById<CheckBox>(Resource.Id.ingredientCheck);
+            checkBox.CheckedChange += (sender, e) =>
+                 {
+                     if (e.IsChecked)
+                     {
+                         IngredientData.SaveIngredient(_ingredients[position], _recipeFull.Title);
+                     }
+                     else
+                     {
+                         IngredientData.DeleteIngredient(_ingredients[position], _recipeFull.Title);
+                     }
+                 };
+
+            if (IngredientData.ExistsIngredient(_ingredients[position], _recipeFull.Title))
+                checkBox.Checked = true;
+            else
+                checkBox.Checked = false;
+
             return view;
         }
+
+
 
         public override int Count => _ingredients.Length;
 

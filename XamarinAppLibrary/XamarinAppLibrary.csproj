@@ -45,9 +45,10 @@
   <ItemGroup>
     <Compile Include="Data.cs" />
     <Compile Include="IngredientData.cs" />
+    <Compile Include="Tables\IngredientTable.cs" />
     <Compile Include="RecipeData.cs" />
     <Compile Include="HttpGet.cs" />
-    <Compile Include="RecipeTable.cs" />
+    <Compile Include="Tables\RecipeTable.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

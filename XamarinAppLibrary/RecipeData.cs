@@ -9,8 +9,6 @@ namespace XamarinAppLibrary
 {
     public static class RecipeData
     {
-        private static string path =
-            System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         private static string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "onstove.db3");
         private static string GetFileRecipeName(string url)
         {
@@ -37,17 +35,6 @@ namespace XamarinAppLibrary
             return url[8..^1];
         }
 
-        public static RecipeShort GetRecipe(string url)
-        {
-            string fileName = GetFileRecipeName(url);
-
-            var db = new SQLiteConnection(dbPath);
-            byte[] recipe = db.Table<RecipeTable>().First(x => x.Name == fileName).Recipe;
-
-            return Data.ByteArrayToObject<RecipeShort>(recipe);
-
-        }
-
         public static RecipeShort[] GetArrayRecipes()
         {
             var db = new SQLiteConnection(dbPath);
@@ -69,18 +56,11 @@ namespace XamarinAppLibrary
         {
             string fileName = GetFileRecipeName(url);
 
-            Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
-
             var db = new SQLiteConnection(dbPath);
             db.CreateTable<RecipeTable>();
 
-            if (db.Table<RecipeTable>().Count() == 0)
-                return false;
-
             return db.Table<RecipeTable>().FirstOrDefault(x => x.Name == fileName) == null ? false : true;
-
         }
-
 
         public static void DeleteRecipe(string url)
         {
@@ -92,16 +72,13 @@ namespace XamarinAppLibrary
             int id = db.Table<RecipeTable>().First(x => x.Name == fileName).Id;
 
             db.Delete<RecipeTable>(id);
-
         }
 
 
         public static void SaveRecipe(string url, RecipeShort recipeShort)
         {
             string fileName = GetFileRecipeName(url);
-
             var db = new SQLiteConnection(dbPath);
-
             db.CreateTable<RecipeTable>();
 
             RecipeTable recipeTable = new RecipeTable();

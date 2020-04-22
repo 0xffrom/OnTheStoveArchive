@@ -54,7 +54,7 @@ namespace XamarinApp
                 {
                     StartActivity(Intent.CreateChooser(intent, "Поделиться рецептом."));
                 }
-                catch (Android.Content.ActivityNotFoundException ex)
+                catch (Android.Content.ActivityNotFoundException)
                 {
                     Toast.MakeText(ApplicationContext, "Some error", ToastLength.Short).Show();
                 }

@@ -386,7 +386,6 @@
     <Compile Include="General\JavaHolder.cs" />
     <Compile Include="General\ObjectExtensions.cs" />
     <Compile Include="Listeners\RecipeListener.cs" />
-    <Compile Include="Listeners\RecipesFilter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,11 +8,10 @@ using Square.Picasso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using XamarinApp.Listeners;
 
 namespace XamarinApp
 {
-    public class RecipeAdapter : RecyclerView.Adapter, IFilterable
+    public class RecipeAdapter : RecyclerView.Adapter
     {
 
         internal List<RecipeShort> _originalData;
@@ -20,7 +19,6 @@ namespace XamarinApp
         private Activity _activity;
         public event EventHandler<int> ItemClick;
         public override int ItemCount => _items.Count;
-        public Filter Filter { get; private set; }
 
         public RecipeAdapter(RecipeShort[] recipeShorts, Activity activity)
         {
@@ -28,7 +26,6 @@ namespace XamarinApp
 
             _items = recipeShorts.ToList();
 
-            Filter = new RecipesFilter(this);
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
