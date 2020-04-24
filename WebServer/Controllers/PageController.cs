@@ -24,7 +24,7 @@ namespace WebServer.Controllers
         /// Маршрут: "{ip adress}/page/get?section={section}&page={page}&recipeName={recipeName}"
         /// Параметры "page" и "recipeName" является необязательными.
         /// </summary>
-        /// <param name="url">URL адрес рецепта.</param>
+        /// <param name="section">Раздел рецепта.</param>
         /// <param name="page">Номер страницы.</param>
         /// <param name="recipeName">Название рецепта.</param>
         /// <returns>Объект типа RecipeShort[]</returns>
