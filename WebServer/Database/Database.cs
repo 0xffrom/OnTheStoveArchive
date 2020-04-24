@@ -97,7 +97,7 @@ namespace WebServer.DataBase
         /// <param name="url">URL рецепта.</param>
         /// <param name="conn">Подключение к базе данных MySQL <see cref="MySqlConnection"/></param>
         /// <returns></returns>
-        private static bool IsExists(string url, MySqlConnection conn)
+        public static bool IsExists(string url, MySqlConnection conn)
         {
             string sqlCommand = $"SELECT EXISTS(SELECT id FROM {Settings.Table} WHERE url = '{url}');";
 

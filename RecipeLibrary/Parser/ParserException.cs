@@ -3,7 +3,7 @@
 namespace ObjectsLibrary.Parser
 {
     [Serializable]
-    internal class ParserException : System.Net.WebException
+    public class ParserException : System.Net.WebException
     {
         public string WebSite { get; }
         public override string Message { get; }
