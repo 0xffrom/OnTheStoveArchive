@@ -41,7 +41,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         {
             Url = parserRecipeSettings.Url;
             
-            var recipeBody = document.QuerySelector("article[class='item-bl item-about']");
+            var recipeBody = document.QuerySelector("article.item-bl item-about");
             // recipeBody =>  главный фрейм с рецептом, если он существует - работаем с ним, иначе - рецепта не сущесвует.
             if (recipeBody == null)
                 return new RecipeFull();
@@ -54,7 +54,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Replace("\n", String.Empty)
                 .Replace("  ", String.Empty);
 
-            var ingredientBody = recipeBody.QuerySelector("div[class='ingredients-bl']");
+            var ingredientBody = recipeBody.QuerySelector("div.ingredients-bl");
 
             int countIngredientTitles = ingredientBody?.QuerySelectorAll("ul").Length ?? 0;
 
@@ -125,7 +125,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             
             #region StepRecipeBox
 
-            var recipesArray = recipeBody.QuerySelectorAll("div[class='cooking-bl']");
+            var recipesArray = recipeBody.QuerySelectorAll("div.cooking-bl");
 
             int countRecipes = recipesArray.Length;
 

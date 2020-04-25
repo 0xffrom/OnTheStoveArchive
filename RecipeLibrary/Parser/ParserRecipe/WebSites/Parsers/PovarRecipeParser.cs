@@ -37,21 +37,15 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             Url = parserRecipeSettings.Url;
 
             var recipeBody = document
-                .QuerySelectorAll("div")
-                .FirstOrDefault(el => el.ClassName == "cont_area");
+                .QuerySelector("div.cont_area");
 
             if (recipeBody is null)
                 return new RecipeFull();
 
             #region Title
 
-            Title = recipeBody.QuerySelectorAll("h1")
-                .Where(el => el.ClassName == "detailed"
-                             && el.Attributes[1] != null
-                             && el.Attributes[1].Value == "name")
-                .Select(el => el.TextContent)
-                .FirstOrDefault();
-
+            Title = recipeBody.QuerySelector("h1.detailed[itemprop='name']").TextContent;
+            
             TitleImage = new Image(recipeBody
                 .QuerySelectorAll("div")
                 .FirstOrDefault(el => el.ClassName == "bigImgBox")
