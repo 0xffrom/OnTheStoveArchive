@@ -157,7 +157,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Select(x => x.TextContent)
                 .ToArray();
 
-            CPFC CPFC;
+            CPFC CPFC = null;
 
             if (tableCPFC != null)
             {
