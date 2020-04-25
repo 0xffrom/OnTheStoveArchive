@@ -1,4 +1,5 @@
-﻿namespace ObjectsLibrary.Parser.ParserPage.Core
+﻿using System.Collections.Generic;
+namespace ObjectsLibrary.Parser.ParserPage.Core
 {
     public interface IParserPageSettings
     {
@@ -11,7 +12,8 @@
         int PageId { get; set; }
         double IndexPopularity { get; set; }
         double IndexStep { get; set; }
-
+        
+        Dictionary<string, string> Sections { get; set; }
         string RecipeName { get; }
     }
 }

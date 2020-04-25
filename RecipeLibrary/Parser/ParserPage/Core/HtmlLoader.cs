@@ -23,13 +23,28 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
         {
             var currentUrl = _url;
 
-            currentUrl += _settings.Section switch
+            switch (_settings.Section)
             {
-                ("new") => _settings.SuffixNew,
-                ("popular") => _settings.SuffixPopular,
-                ("recipe") => _settings.SuffixRecipe,
-                _ => _settings.SuffixNew
-            };
+                case ("new"):
+                    currentUrl = _settings.SuffixNew;
+                    break;
+                case ("popular"):
+                    currentUrl = _settings.SuffixPopular;
+                    break;
+                case ("recipe"):
+                    currentUrl = _settings.SuffixRecipe;
+                    break;
+                default:
+                    // Если есть поиск по тегу:
+                    if (_settings.Sections.ContainsKey(_settings.Section))
+                    {
+                        currentUrl = _settings.Sections[_settings.Section];
+                        break;
+                    }
+                    
+                    currentUrl = _settings.SuffixNew;
+                    break;
+            }
 
             currentUrl = currentUrl
                 .Replace("{PageId}", idPage.ToString())
@@ -45,7 +60,7 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
                 source = await response.Content.ReadAsStringAsync();
 
             else
-                throw new ParserException("Error loading page");
+                throw new ParserException("Произошла ошибка при загрузке сайта");
 
             return source;
         }

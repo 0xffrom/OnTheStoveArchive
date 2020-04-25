@@ -15,8 +15,6 @@ namespace RecipeLibrary
 {
     public class GetData
     {
-
-
         public static async Task<RecipeShort[]> GetPage(string section, int page, string findName = null)
         {
             List<RecipeShort> recipeShorts = new List<RecipeShort>();
@@ -27,8 +25,8 @@ namespace RecipeLibrary
             var povar = new ParserPage<RecipeShort[]>
                 (new PovarPageParser(), new PovarPageSettings(section, page, findName));
 
-            ParserPage<RecipeShort[]> edimdoma = new ParserPage<RecipeShort[]>
-                (new EdimDomaPageParser(), parserSettings: new EdimDomaPageSettings(section, page, findName));
+            var edimdoma = new ParserPage<RecipeShort[]>
+                (new EdimDomaPageParser(), new EdimDomaPageSettings(section, page, findName));
 
             await Task.WhenAll(ParseRecipe(edimdoma, recipeShorts), ParseRecipe(povarenok, recipeShorts), ParseRecipe(povar, recipeShorts));
 
@@ -36,54 +34,34 @@ namespace RecipeLibrary
         }
 
         private static async Task ParseRecipe(ParserPage<RecipeShort[]> T, List<RecipeShort> recipeShorts)
-        {
-            try
-            {
-                recipeShorts.AddRange(await T.Worker());
-            }
-            catch (ParserException exp)
-            {
-                Console.WriteLine($"Возникла ошибка при парсинге сайта {exp.WebSite}");
-            }
-            catch (Exception exp)
-            {
-                Console.WriteLine($"Возникла ошибка: {exp}");
-            }
-        }
+            => recipeShorts.AddRange(await T.Worker());
 
         public static async Task<RecipeFull> GetRecipe(string url)
         {
             IParserRecipe<RecipeFull> obj = null;
             IParserRecipeSettings settings = null;
 
-            if (url.Contains("https://www.povarenok.ru"))
+            if (url.Contains("www.povarenok.ru"))
             {
                 obj = new PovarenokRecipeParser();
                 settings = new PovarenokRecipeSettings(url);
             }
-            else if (url.Contains("https://povar.ru"))
+            else if (url.Contains("povar.ru"))
             {
                 obj = new PovarRecipeParser();
                 settings = new PovarRecipeSettings(url);
             }
-            else if (url.Contains("https://www.edimdoma.ru"))
+            else if (url.Contains("www.edimdoma.ru"))
             {
                 obj = new EdimdomaRecipeParser();
                 settings = new EdimdomaRecipeSettings(url);
             }
             else
                 throw new ParserException("Неизвестный сайт.");
-
-
-            try
-            {
-                var recipe = new ParserRecipe<RecipeFull>(obj, settings);
-                return await recipe.Worker();
-            }
-            catch (Exception e)
-            {
-                throw new ParserException("Произошла ошибка при парсинге рецепта. Подробности: " + e);
-            }
+            
+            var recipe = new ParserRecipe<RecipeFull>(obj, settings);
+            return await recipe.Worker();
+            
 
 
         }

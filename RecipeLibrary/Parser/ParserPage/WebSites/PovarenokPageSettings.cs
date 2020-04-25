@@ -17,7 +17,16 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
         public double IndexPopularity { get; set; } = 95;
         public double IndexStep { get; set; } = 2;
 
-
+        public Dictionary<string, string> Sections { get; set; } = new Dictionary<string,string>()
+        {
+            {"горячее", "category/6/~{PageId}/"},
+            {"супы", "category/2/~{PageId}/"},
+            {"салаты", "category/12/~{PageId}/"},
+            {"закуски", "category/15/~{PageId}/"},
+            {"выпечка", "category/25/~{PageId}/"},
+            {"десерты", "category/30/~{PageId}/"},
+            {"соусы", "category/23/~{PageId}/"}
+        };
         public PovarenokPageSettings(string section, int pageId)
         {
             Section = section;

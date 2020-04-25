@@ -146,9 +146,10 @@ namespace WebServer.Controllers
         }
 
         /// <summary>
-        /// Логгирование выдачи рецепта.
+        /// Логирование выдачи рецепта.
         /// </summary>
         /// <param name="startTime">Стартовое время.</param>
+        /// <param name="recipe">Рецепт, который нужно вернуть.</param>
         /// <param name="isError">Была ли ошибка?</param>
         /// <returns>Тот же самый <param name="recipe"/></returns>
         private RecipeFull ReturnRecipe(DateTime startTime, RecipeFull recipe, bool isError = false)
