@@ -88,7 +88,6 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             double prepMinutes = ConvertToMinutes(recipeBody.QuerySelector("div.entry-stats__value").TextContent);
 
-            #region CPFC
             var cpfcDiv = recipeBody.QuerySelector("div.nutritional-value__leftside");
 
             double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value").TextContent, out double calories);

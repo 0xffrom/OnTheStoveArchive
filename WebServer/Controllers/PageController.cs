@@ -29,7 +29,7 @@ namespace WebServer.Controllers
         /// <param name="recipeName">Название рецепта.</param>
         /// <returns>Объект типа RecipeShort[]</returns>
         [HttpGet("get")]
-        public RecipeShort[] Get(string section, int page = 1, string recipeName = null)
+        public async System.Threading.Tasks.Task<RecipeShort[]> Get(string section, int page = 1, string recipeName = null)
         {
             recipeName ??= string.Empty;
 
@@ -40,7 +40,8 @@ namespace WebServer.Controllers
 
             try
             {
-                RecipeShort[] recipes = GetData.GetPage(section, page, recipeName.ToLower()).Result;
+                RecipeShort[] recipes = await GetData.GetPage(section.ToLower(), page, recipeName.ToLower());
+
                 _logger.LogInformation($"[{DateTime.Now}]: Запрос успешно выполнен.");
                 _logger.LogDebug($"[{DateTime.Now}] Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
                 return recipes;

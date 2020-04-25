@@ -45,7 +45,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Title = recipeBody.QuerySelector("h1.detailed[itemprop='name']").TextContent;
             TitleImage = new Image(recipeBody.QuerySelector("div.bigImgBox")?
-                .QuerySelector("a:first-child").Attributes[0].Value);
+                .QuerySelector("a").FirstElementChild.Attributes[0].Value);
 
             Description = String.Empty;
 

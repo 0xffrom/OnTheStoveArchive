@@ -76,7 +76,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                         count++;
                 }
 
-
                 string titleIngredient;
 
                 var titleBody = ingredientBody?.QuerySelectorAll("p").ToArray();
@@ -86,7 +85,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 else
                     titleIngredient = ingredientBody?.QuerySelectorAll("p")
                         .Select(item => item.TextContent).ToArray()[i];
-
 
                 var ingredientsArray = ingredientBody?.QuerySelectorAll("ul")
                     .ToArray()[i]
@@ -99,13 +97,13 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
                     for (int j = 0; j < ingredientsArray.Length; j++)
                     {
-                        string name = ingredientsArray[j].QuerySelector("span[itemprop='name']").TextContent;
+                        string name = ingredientsArray[j].QuerySelector("span[itemprop='name']")?.TextContent;
 
-                        string unit = ingredientsArray[j].QuerySelector("span[itemprop='amount']").TextContent;
+                        string unit = ingredientsArray[j].QuerySelector("span[itemprop='amount']")?.TextContent;
 
                         name += ingredientsArray[j].TextContent
-                            .Replace(name ?? string.Empty, string.Empty)
-                            .Replace(unit ?? string.Empty, string.Empty)
+                            .Replace(name ?? "old_value", string.Empty)
+                            .Replace(unit ?? "old_value", string.Empty)
                             .Replace("\n", string.Empty)
                             .Replace(WhiteSpaceBug, string.Empty)
                             .Replace("—", string.Empty);
@@ -123,10 +121,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Ingredients = ingredientsList.ToArray();
             
-            #region StepRecipeBox
-
             var recipesArray = recipeBody.QuerySelectorAll("div.cooking-bl");
-
             int countRecipes = recipesArray.Length;
 
             StepRecipe[] stepRecipeBoxes = new StepRecipe[countRecipes];
@@ -143,7 +138,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             StepsRecipe = stepRecipeBoxes;
 
             string authorName = recipeBody.QuerySelector("a[title='Профиль пользователя']")?.TextContent;
-
             var ingredientBodyP = ingredientBody.QuerySelectorAll("p");
 
             double prepMinutes = ConvertToMinutes(ingredientBodyP
@@ -163,7 +157,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Select(x => x.TextContent)
                 .ToArray();
 
-            CPFC CPFC = null;
+            CPFC CPFC;
 
             if (tableCPFC != null)
             {
@@ -177,7 +171,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Additional = new Additional(authorName, countPortions, prepMinutes, CPFC);
 
-            #endregion
 
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);

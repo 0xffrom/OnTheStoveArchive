@@ -4,6 +4,7 @@ using ObjectsLibrary;
 using ObjectsLibrary.Parser;
 using RecipeLibrary;
 using System;
+using System.Threading.Tasks;
 using WebServer.DataBase;
 namespace WebServer.Controllers
 {
@@ -26,8 +27,9 @@ namespace WebServer.Controllers
         /// <param name="url">URL адрес рецепта.</param>
         /// <returns>Объект типа RecipeFull</returns>
         [HttpGet("get")]
-        public RecipeFull Get(string url)
+        public async Task<RecipeFull> Get(string url)
         {
+
             DateTime startTime = DateTime.Now;
             MySql.Data.MySqlClient.MySqlConnection conn = Database.GetConnection();
             _logger.LogInformation($"[{DateTime.Now}]: Запрос на парсинг старницы рецепта. Url: {url}");
@@ -53,7 +55,7 @@ namespace WebServer.Controllers
                     try
                     {
                         // Пытаемся запарсить рецепт:
-                        recipe = GetData.GetRecipe(url).Result;
+                        recipe = await GetData.GetRecipe(url);
                     }
                     // Если случается ошибка при парсинге сайта:
                     catch (Exception exp)
@@ -123,7 +125,7 @@ namespace WebServer.Controllers
                     try
                     {
                         // Пытаемся запарсить рецепт:
-                        recipe = GetData.GetRecipe(url).Result;
+                        recipe = await GetData.GetRecipe(url);
                         _logger.LogDebug($"[{DateTime.Now}]: Рецепт получен.");
                     }
                     // Если случается ошибка при парсинге сайта:
