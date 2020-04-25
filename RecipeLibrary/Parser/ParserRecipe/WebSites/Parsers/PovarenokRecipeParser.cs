@@ -5,6 +5,7 @@ using ObjectsLibrary.Parser.ParserRecipe.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AngleSharp.Dom;
 
 namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 {
@@ -39,42 +40,21 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         public RecipeFull Parse(IHtmlDocument document, IParserRecipeSettings parserRecipeSettings)
         {
             Url = parserRecipeSettings.Url;
-
-            var recipeBody = document
-                .QuerySelectorAll("article")
-                .FirstOrDefault(element => element.ClassName == "item-bl item-about");
-
+            
+            var recipeBody = document.QuerySelector("article[class='item-bl item-about']");
             // recipeBody =>  главный фрейм с рецептом, если он существует - работаем с ним, иначе - рецепта не сущесвует.
             if (recipeBody == null)
                 return new RecipeFull();
 
-
-            #region Title
-
             Title = recipeBody.QuerySelector("h1").TextContent;
-
-            TitleImage = new Image(recipeBody.QuerySelectorAll("div")
-                .Where(element => element.ClassName == "m-img")
-                .Select(element => element.FirstElementChild?.Attributes[1]?.Value)
-                .FirstOrDefault());
-
-            #endregion
-
-            #region Description
-
-            Description = document.QuerySelectorAll("div")
-                .Where(element => element.ClassName == "article-text")
-                .Select(element => element.TextContent).ToArray()[0]
+            TitleImage = new Image(recipeBody.QuerySelector("div[class='m-img']").FirstElementChild?.Attributes[1]?.Value);
+            
+            Description = document.QuerySelector("div[class='article-text']")
+                .TextContent
                 .Replace("\n", String.Empty)
                 .Replace("  ", String.Empty);
 
-            #endregion
-
-            #region IngredientBox
-
-            var ingredientBody = recipeBody
-                .QuerySelectorAll("div")
-                .FirstOrDefault(element => element.ClassName == "ingredients-bl");
+            var ingredientBody = recipeBody.QuerySelector("div[class='ingredients-bl']");
 
             int countIngredientTitles = ingredientBody?.QuerySelectorAll("ul").Length ?? 0;
 
@@ -119,16 +99,13 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
                     for (int j = 0; j < ingredientsArray.Length; j++)
                     {
-                        string name = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
-                                item.Attributes[0] != null && item.Attributes[0].Value == ("name"))
-                            .Select(item => item.TextContent).FirstOrDefault();
+                        string name = ingredientsArray[j].QuerySelector("span[itemprop='name']").TextContent;
 
-                        string unit = ingredientsArray[j].QuerySelectorAll("span").Where(item =>
-                                item.Attributes[0] != null && item.Attributes[0].Value == ("amount"))
-                            .Select(item => item.TextContent).FirstOrDefault();
+                        string unit = ingredientsArray[j].QuerySelector("span[itemprop='amount']").TextContent;
 
-                        name += ingredientsArray[j].TextContent.Replace(name ?? "А тут может и ничего не быть.", string.Empty)
-                            .Replace(unit ?? "А тут может и ничего не быть.", string.Empty)
+                        name += ingredientsArray[j].TextContent
+                            .Replace(name ?? string.Empty, string.Empty)
+                            .Replace(unit ?? string.Empty, string.Empty)
                             .Replace("\n", string.Empty)
                             .Replace(WhiteSpaceBug, string.Empty)
                             .Replace("—", string.Empty);
@@ -145,14 +122,10 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             }
 
             Ingredients = ingredientsList.ToArray();
-
-            #endregion
-
+            
             #region StepRecipeBox
 
-            var recipesArray = recipeBody.QuerySelectorAll("div")
-                .Where(item => item.ClassName == ("cooking-bl"))
-                .ToArray();
+            var recipesArray = recipeBody.QuerySelectorAll("div[class='cooking-bl']");
 
             int countRecipes = recipesArray.Length;
 
@@ -162,23 +135,14 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             {
                 string imageUrl = recipesArray[i]?.FirstElementChild?.FirstElementChild?.Attributes[2]?.Value;
                 string description = recipesArray[i]?.LastElementChild?.FirstElementChild?.TextContent;
-
                 var image = new Image(imageUrl);
-
                 var stepRecipeBox = new StepRecipe(description, image);
-
                 stepRecipeBoxes[i] = stepRecipeBox;
             }
 
             StepsRecipe = stepRecipeBoxes;
 
-            #endregion
-
-            #region Additional
-
-            string authorName = recipeBody.QuerySelectorAll("a")
-                .FirstOrDefault(x => x.Attributes[1] != null && x.Attributes[1].Value == "Профиль пользователя")
-                ?.TextContent;
+            string authorName = recipeBody.QuerySelector("a[title='Профиль пользователя']")?.TextContent;
 
             var ingredientBodyP = ingredientBody.QuerySelectorAll("p");
 
@@ -191,8 +155,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Select(x => x.TextContent).FirstOrDefault()?.Replace("Количество порций:", string.Empty) ?? "0");
 
             var tableCPFC = recipeBody
-                .QuerySelectorAll("div")
-                .FirstOrDefault(x => x.Attributes[0] != null && x.Attributes[0].Value == "nae-value-bl")?
+                .QuerySelector("div[id='nae-value-bl']")
                 .LastElementChild?
                 .FirstElementChild?
                 .QuerySelectorAll("tr")[3]
