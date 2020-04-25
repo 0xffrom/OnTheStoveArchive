@@ -33,26 +33,18 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
         public RecipeFull Parse(IHtmlDocument document, IParserRecipeSettings parserRecipeSettings)
         {
             Url = parserRecipeSettings.Url;
-            #region MainInfo
-            var recipeBody = document.QuerySelectorAll("div").FirstOrDefault(element =>
-            element.ClassName == "grid-three-column__column grid-three-column__column_center onthe_data") ??
-            throw new ParserException("Не найдено главное тело рецепта.", "edimdoma.ru");
 
-            var divs = recipeBody.QuerySelectorAll("div") ??
-                throw new ParserException("Не найдены теги 'div' в теле рецепта.", "edimdoma.ru");
+            var recipeBody = document.QuerySelector("div[class='grid-three-column__column grid-three-column__column_center onthe_data']") 
+                ?? throw new ParserException("Не найдено главное тело рецепта.", "edimdoma.ru");
 
             Title = recipeBody.Attributes[5].Value;
 
             TitleImage = new Image(recipeBody.QuerySelector("img").Attributes[2].Value);
 
-            Description = divs.FirstOrDefault(element => element.ClassName == "recipe_description").TextContent;
-            #endregion
-            #region IngredientsRecipe
-            var ingredientBody = divs.FirstOrDefault(element => element.Attributes[0] != null && element.Attributes[0].Value == "recipe_ingredients_block");
+            Description = recipeBody.QuerySelector("div[class='recipe_description']").TextContent;
 
-            var inputArray = ingredientBody?.QuerySelectorAll("input")?
-                .Where(element => element.ClassName == "checkbox__input recipe_ingredient_checkbox")?
-                .ToArray();
+            var ingredientBody = recipeBody.QuerySelector("div[id='recipe_ingredients_block']");
+            var inputArray = ingredientBody?.QuerySelectorAll("input[class='checkbox__input recipe_ingredient_checkbox']");
 
             if (inputArray != null)
             {
@@ -70,70 +62,26 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
                 Ingredients = ingredients.ToArray();
             }
-            #endregion
-            #region StepsRecipe
-            var stepsBody = divs.FirstOrDefault(element => element.ClassName == "recipe_steps") ??
+
+            var stepsBody = recipeBody.QuerySelector("div[class='recipe_steps']") ??
                 throw new ParserException("Не найден блок с шагами.", "edimdoma.ru");
 
-            var recipeArray = stepsBody.QuerySelectorAll("div")?
-                .Where(element => element.ClassName == "content-box recipe_step")?
-                .ToArray();
+            var recipeArray = stepsBody.QuerySelectorAll("div[class='content-box recipe_step']");
 
             if (recipeArray != null)
             {
                 List<StepRecipe> stepsRecipe = new List<StepRecipe>(recipeArray.Length);
-
-                foreach (var stepBlock in recipeArray)
-                {
-                    Image stepImage = new Image("https://www.edimdoma.ru" + stepBlock.QuerySelector("img")?.Attributes[0]?.Value ?? "/assets/default/recipe_steps/ed4_thumb-2c862fbcf2e544709c77a80ead4a3f58cd9a80e6b65f0ad18839af30ec9a2a5a.png");
-                    string stepDescription = stepBlock
-                        .QuerySelectorAll("div")
-                        .Where(element => element.ClassName == "plain-text recipe_step_text")
-                        .FirstOrDefault()
-                        .TextContent;
-
-                    stepsRecipe.Add(new StepRecipe(stepDescription, stepImage));
-                }
+                
+                stepsRecipe.AddRange(from stepBlock in recipeArray 
+                    let stepImage = new Image("https://www.edimdoma.ru" + stepBlock.QuerySelector("img")?.Attributes[0]?.Value ?? 
+                                              "/assets/default/recipe_steps/ed4_thumb-2c862fbcf2e544709c77a80ead4a3f58cd9a80e6b65f0ad18839af30ec9a2a5a.png") 
+                    let stepDescription = stepBlock.QuerySelector("div[class='plain-text recipe_step_text']")?.TextContent 
+                    select new StepRecipe(stepDescription, stepImage));
 
                 StepsRecipe = stepsRecipe.ToArray();
             }
-            #endregion
-            #region Additional
-            string authorName = divs.FirstOrDefault(element => element.ClassName == "person__name").TextContent;
-
-            int.TryParse(divs.FirstOrDefault(element => element.ClassName == "field__container")
-                .FirstElementChild?.Attributes[3].Value ?? "0", out int countPortions);
-
-            double prepMinutes = ConvertToMinutes(divs.FirstOrDefault(element => element.ClassName == "entry-stats__value").TextContent);
-
-            #region CPFC
-            var cpfcDiv = divs.FirstOrDefault(element => element.ClassName == "nutritional-value__leftside");
-
-            double.TryParse(cpfcDiv.QuerySelectorAll("div")
-                .FirstOrDefault(element => element.ClassName == "kkal-meter__value").TextContent, out double calories);
-
-            var tablePFC = cpfcDiv.QuerySelectorAll("div")
-                .FirstOrDefault(element => element.ClassName == "nutritional-value__nutritional-list")
-                .QuerySelectorAll("table");
-
-            double.TryParse(tablePFC[0].QuerySelectorAll("td")
-                .FirstOrDefault(element => element.ClassName == "definition-list-table__td definition-list-table__td_value")
-                .TextContent.Replace(" г", string.Empty) ?? "0", out double protein);
-
-            double.TryParse(tablePFC[1].QuerySelectorAll("td")
-                .FirstOrDefault(element => element.ClassName == "definition-list-table__td definition-list-table__td_value")
-                .TextContent.Replace(" г", string.Empty) ?? "0", out double fats);
-
-            double.TryParse(tablePFC[2].QuerySelectorAll("td")
-                .FirstOrDefault(element => element.ClassName == "definition-list-table__td definition-list-table__td_value")
-                .TextContent.Replace(" г", string.Empty) ?? "0", out double carbohydrates);
-            #endregion
-            Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC(calories, protein, fats, carbohydrates));
-            #endregion
-
-            return new RecipeFull(Url, Title, TitleImage, Description, Ingredients,
-                StepsRecipe,
-                Additional);
+            
+            return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }
 
         public double ConvertToMinutes(string inputLine)
