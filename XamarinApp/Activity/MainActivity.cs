@@ -23,11 +23,13 @@ namespace XamarinApp
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
         private RecyclerView recyclerView;
+        private RecipeAdapter recipeAdapter;
         private RecipeShort[] recipeShorts;
         private DrawerLayout _drawer;
         private SwipeRefreshLayout swipeRefreshLayout;
         private LinearLayoutManager linearLayoutManager;
-
+        private NavigationView navigationView;
+        private Button buttonMenu;
         private int page = 1;
         private string lastQuery;
 
@@ -35,18 +37,20 @@ namespace XamarinApp
         {
             base.OnCreate(savedInstanceState);
 
-            // TODO: Сделать в менюшке раздел "Сохранённые рецепты"
-            // TODO: Кнопка "Поделится"
-            // TODO: Поиск по ингредиентам
             // TODO: Тотальный рефакторинг.
-            // TODO: Загрузка доп.рецептов при прокрутке.
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_search);
-            recyclerView = FindViewById<RecyclerView>(Resource.Id.listRecipeShorts);
 
+            recyclerView = FindViewById<RecyclerView>(Resource.Id.listRecipeShorts);
             swipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout);
+            _drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            buttonMenu = FindViewById<Button>(Resource.Id.menu_button);
+            linearLayoutManager = new LinearLayoutManager(this);
+            
+
             swipeRefreshLayout.SetColorSchemeColors(Color.Orange, Color.DarkOrange);
             swipeRefreshLayout.Refresh += delegate (object sender, System.EventArgs e)
             {
@@ -58,7 +62,7 @@ namespace XamarinApp
 
 
             recyclerView.HasFixedSize = false;
-            linearLayoutManager = new LinearLayoutManager(this);
+            
 
 
             var onScrollListener = new RecipeListener(linearLayoutManager);
@@ -69,22 +73,21 @@ namespace XamarinApp
                 UpdateListView(query, recipeShorts);
             };
 
-            UpdateListView();
 
             SetPlateRecipe();
 
             SetSpinner();
 
-            _drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            
             var toggle = new ActionBarDrawerToggle(this, _drawer, Resource.String.navigation_drawer_open,
                 Resource.String.navigation_drawer_close);
             _drawer.AddDrawerListener(toggle);
             toggle.SyncState();
 
-            var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            
             navigationView.SetNavigationItemSelectedListener(this);
 
-            var buttonMenu = FindViewById<Button>(Resource.Id.menu_button);
+            
             buttonMenu.SetBackgroundResource(Resources.GetIdentifier("round_menu_24", "drawable", PackageName));
             buttonMenu.Click += SetButtonClick;
         }
@@ -113,26 +116,19 @@ namespace XamarinApp
 
             recyclerView.SetLayoutManager(linearLayoutManager);
 
-            int position = 0;
-
             if (recipeShorts == null)
+            {
                 this.recipeShorts = await UpdateCollectionRecipes(query);
+                recipeAdapter = new RecipeAdapter(this.recipeShorts, this);
+                recipeAdapter.ItemClick += OnItemClick;
+                recyclerView.SetAdapter(recipeAdapter);
+            }
             else
             {
-                List<RecipeShort> localRecipes = new List<RecipeShort>();
-                localRecipes.AddRange(recipeShorts);
-                position = localRecipes.Count - 4;
-                localRecipes.AddRange(await UpdateCollectionRecipes(query));
-                this.recipeShorts = localRecipes.ToArray();
+                var newRecipes = await UpdateCollectionRecipes(query);
+                recipeAdapter.AddItems(newRecipes);
             }
 
-            var adapter = new RecipeAdapter(this.recipeShorts, this);
-            adapter.ItemClick += OnItemClick;
-
-            
-            recyclerView.SetAdapter(adapter);
-            recyclerView.ScrollToPosition(position);
-           
             swipeRefreshLayout.Post(() =>
             {
                 swipeRefreshLayout.Refreshing = false;
@@ -213,15 +209,15 @@ namespace XamarinApp
 
             switch (item.ToString())
             {
-                case "По популярности":
+                case "Популярные":
                     query = $"section=popular&page={page}";
                     UpdateListView(query);
                     break;
-                case "По случайности":
+                case "Случайные":
                     query = $"section=random&page={page}";
                     UpdateListView(query);
                     break;
-                case "По новизне":
+                case "Новые":
                     query = $"section=new&page={page}";
                     UpdateListView(query);
                     break;

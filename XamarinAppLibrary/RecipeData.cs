@@ -46,6 +46,9 @@ namespace XamarinAppLibrary
 
             for (int i = 0; i < recipes.Length; i++)
             {
+                if (recipes[i].Recipe == null || recipes[i].Name == null)
+                    continue;
+
                 recipeShorts[i] = Data.ByteArrayToObject<RecipeShort>(recipes[i].Recipe);
             }
 
