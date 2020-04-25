@@ -34,7 +34,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
         {
             Url = parserRecipeSettings.Url;
 
-            var recipeBody = document.QuerySelector("div.grid-three-column__column grid-three-column__column_center onthe_data") 
+            var recipeBody = document.QuerySelector("div.grid-three-column__column.grid-three-column__column_center.onthe_data") 
                 ?? throw new ParserException("Не найдено главное тело рецепта.", "edimdoma.ru");
 
             Title = recipeBody.Attributes[5].Value;
@@ -44,7 +44,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
             Description = recipeBody.QuerySelector("div.recipe_description").TextContent;
 
             var ingredientBody = recipeBody.QuerySelector("div[id='recipe_ingredients_block']");
-            var inputArray = ingredientBody?.QuerySelectorAll("input.checkbox__input recipe_ingredient_checkbox");
+            var inputArray = ingredientBody?.QuerySelectorAll("input.checkbox__input.recipe_ingredient_checkbox");
 
             if (inputArray != null)
             {
@@ -66,7 +66,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
             var stepsBody = recipeBody.QuerySelector("div.recipe_steps") ??
                 throw new ParserException("Не найден блок с шагами.", "edimdoma.ru");
 
-            var recipeArray = stepsBody.QuerySelectorAll("div.content-box recipe_step");
+            var recipeArray = stepsBody.QuerySelectorAll("div.content-box.recipe_step");
 
             if (recipeArray != null)
             {
@@ -75,7 +75,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 stepsRecipe.AddRange(from stepBlock in recipeArray 
                     let stepImage = new Image("https://www.edimdoma.ru" + stepBlock.QuerySelector("img")?.Attributes[0]?.Value ?? 
                                               "/assets/default/recipe_steps/ed4_thumb-2c862fbcf2e544709c77a80ead4a3f58cd9a80e6b65f0ad18839af30ec9a2a5a.png") 
-                    let stepDescription = stepBlock.QuerySelector("div.plain-text recipe_step_text")?.TextContent 
+                    let stepDescription = stepBlock.QuerySelector("div.plain-text.recipe_step_text")?.TextContent 
                     select new StepRecipe(stepDescription, stepImage));
 
                 StepsRecipe = stepsRecipe.ToArray();

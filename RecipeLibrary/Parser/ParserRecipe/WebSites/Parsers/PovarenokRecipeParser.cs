@@ -41,15 +41,15 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         {
             Url = parserRecipeSettings.Url;
             
-            var recipeBody = document.QuerySelector("article.item-bl item-about");
+            var recipeBody = document.QuerySelector("article.item-bl.item-about");
             // recipeBody =>  главный фрейм с рецептом, если он существует - работаем с ним, иначе - рецепта не сущесвует.
             if (recipeBody == null)
                 return new RecipeFull();
 
             Title = recipeBody.QuerySelector("h1").TextContent;
-            TitleImage = new Image(recipeBody.QuerySelector("div[class='m-img']").FirstElementChild?.Attributes[1]?.Value);
+            TitleImage = new Image(recipeBody.QuerySelector("div.m-img").FirstElementChild?.Attributes[1]?.Value);
             
-            Description = document.QuerySelector("div[class='article-text']")
+            Description = document.QuerySelector("div.article-text")
                 .TextContent
                 .Replace("\n", String.Empty)
                 .Replace("  ", String.Empty);

@@ -42,38 +42,17 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             if (recipeBody is null)
                 return new RecipeFull();
 
-            #region Title
 
             Title = recipeBody.QuerySelector("h1.detailed[itemprop='name']").TextContent;
-            
-            TitleImage = new Image(recipeBody
-                .QuerySelectorAll("div")
-                .FirstOrDefault(el => el.ClassName == "bigImgBox")
-                ?.QuerySelector("a")
-                .FirstElementChild.Attributes[0].Value);
-
-            #endregion
-
-            #region Description
+            TitleImage = new Image(recipeBody.QuerySelector("div.bigImgBox")?
+                .QuerySelector("a:first-child").Attributes[0].Value);
 
             Description = String.Empty;
 
-            foreach (var textLine in recipeBody
-                .QuerySelectorAll("span")
-                .Where(el => el.ClassName == "detailed_full")
-                .Select(x => x.TextContent))
-            {
+            foreach (var textLine in recipeBody.QuerySelectorAll("span.detailed_full").Select(x => x.TextContent))
                 Description += Environment.NewLine + textLine;
-            }
-            #endregion
 
-            #region Ingredients
-
-            var ingredientsBody = recipeBody
-                .QuerySelectorAll("ul")
-                .First(x => x.ClassName == "detailed_ingredients")
-                .QuerySelectorAll("li")
-                .ToArray();
+            var ingredientsBody = recipeBody.QuerySelector("ul.detailed_ingredients").QuerySelectorAll("li");
 
             int countIngredients = ingredientsBody.Length;
 
@@ -91,19 +70,8 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Ingredients = ingredients;
 
-            #endregion
-
-            #region StepRecipes
-
-            var stepRecipeBody = recipeBody
-                .QuerySelectorAll("div")
-                .FirstOrDefault(el => el.Attributes.Length == 3 && el.Attributes[0].Value == "recipeInstructions");
-
-            var stepCollection = stepRecipeBody
-                .QuerySelectorAll("div")
-                .Where(x => x.ClassName != null)
-                .ToArray();
-
+            var stepRecipeBody = recipeBody.QuerySelector("div[itemprop='recipeInstructions'][itemtype='http://schema.org/ItemList']");
+            var stepCollection = stepRecipeBody.QuerySelectorAll("div");
             List<StepRecipe> stepRecipesBoxes = new List<StepRecipe>(stepCollection.Length / 3);
 
             foreach (var step in stepCollection)
@@ -134,28 +102,15 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             StepsRecipe = stepRecipesBoxes.ToArray();
 
-            #endregion
-
-            #region Additional
-
             var rcpAuthorTimeBody = recipeBody
-                .QuerySelectorAll("div")
-                .FirstOrDefault(x => x.ClassName == "rcpAuthorTime");
+                .QuerySelector("div.rcpAuthorTime");
 
-            string authorName = rcpAuthorTimeBody
-                .QuerySelectorAll("span")
-                .FirstOrDefault(x => x.Attributes[0] != null && x.Attributes[0].Value == "autorName")
-                .TextContent;
+            string authorName = rcpAuthorTimeBody.QuerySelector("span[id='autorName']").TextContent;
 
-            double prepMinutes = ConvertToMinutes(
-                rcpAuthorTimeBody
-                .QuerySelectorAll("meta")
-                .FirstOrDefault(x => x.Attributes[0] != null && x.Attributes[0].Value == "cookTime")
-                .Attributes[1].Value);
+            double prepMinutes = ConvertToMinutes(rcpAuthorTimeBody.QuerySelector("meta[itemprop='cookTime']").Attributes[1].Value);
 
             string[] portions = recipeBody
-                .QuerySelectorAll("em")
-                .FirstOrDefault(x => x.Attributes[0] != null && x.Attributes[0].Value == "recipeYield")
+                .QuerySelector("em[itemprop='recipeYield']")
                 .TextContent
                 .Remove(0, 19)
                 .Split('-') ?? null;
@@ -170,9 +125,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Additional = new Additional(authorName, countPortions, prepMinutes, CPFC);
 
-
-
-            #endregion
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients,
                 StepsRecipe,
