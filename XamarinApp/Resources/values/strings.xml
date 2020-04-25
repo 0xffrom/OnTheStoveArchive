@@ -1,8 +1,8 @@
 <resources>
     <string-array name="sort_array">
-        <item>По популярности</item>
-        <item>По новизне</item>
-        <item>По случайности</item>
+        <item>Популярные</item>
+        <item>Новые</item>
+        <item>Случайные</item>
     </string-array>
     
     <string name="app_name">На плите</string>

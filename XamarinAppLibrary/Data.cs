@@ -7,6 +7,8 @@ namespace XamarinAppLibrary
     {
         public static T ByteArrayToObject<T>(byte[] arrBytes)
         {
+
+
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
             using MemoryStream memoryStream = new MemoryStream(arrBytes);

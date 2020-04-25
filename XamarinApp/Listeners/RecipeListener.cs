@@ -32,7 +32,7 @@ namespace XamarinApp
             var totalItemCount = recyclerView.GetAdapter().ItemCount;
             var pastVisiblesItems = layoutManager.FindFirstVisibleItemPosition();
 
-            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && !isLoading)
+            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount - 4 && !isLoading && recyclerView.Clickable)
             {
                 isLoading = true;
 

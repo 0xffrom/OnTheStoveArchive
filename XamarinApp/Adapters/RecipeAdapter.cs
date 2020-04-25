@@ -14,7 +14,6 @@ namespace XamarinApp
     public class RecipeAdapter : RecyclerView.Adapter
     {
 
-        internal List<RecipeShort> _originalData;
         internal List<RecipeShort> _items;
         private Activity _activity;
         public event EventHandler<int> ItemClick;
@@ -26,6 +25,12 @@ namespace XamarinApp
 
             _items = recipeShorts.ToList();
 
+        }
+
+        public void AddItems(RecipeShort[] recipes)
+        {
+            _items.AddRange(recipes);
+            this.NotifyDataSetChanged();
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
@@ -46,7 +51,7 @@ namespace XamarinApp
                  .Into(vh.Image);
 
         }
-
+        
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View itemView = LayoutInflater.From(parent.Context).
