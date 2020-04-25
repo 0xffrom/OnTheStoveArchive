@@ -40,11 +40,14 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
             if (Settings.Section == "random")
                 pageId = GetPageId(Settings.MaxPageId);
 
-            var recipeName = Settings.RecipeName;
+            string recipeName = Settings.RecipeName;
+            string source = await _loader.GetSource(pageId, recipeName);
 
-            var source = await _loader.GetSource(pageId, recipeName);
+            // Если нет существуеющего раздела у сайта - выкидывается пустой.
+            if (source == null)
+                return null;
 
-            var domParser = new HtmlParser();
+            HtmlParser domParser = new HtmlParser();
 
             var document = await domParser.ParseDocumentAsync(source);
 

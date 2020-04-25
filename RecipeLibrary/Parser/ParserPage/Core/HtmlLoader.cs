@@ -22,7 +22,9 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
         public async Task<string> GetSource(int idPage, string recipeName)
         {
             if (!_settings.Sections.ContainsKey(_settings.Section))
+            {
                 throw new ParserException($"Раздела '{_settings.Section}' не существует.");
+            }
 
             string currentUrl = _url + _settings.Sections[_settings.Section];
 
