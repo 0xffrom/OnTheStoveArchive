@@ -6,7 +6,6 @@ using ObjectsLibrary.Parser.ParserRecipe.Core;
 using ObjectsLibrary.Parser.ParserRecipe.WebSites;
 using RecipeLibrary.Parser.ParserPage.WebSites;
 using RecipeLibrary.Parser.ParserRecipe.WebSites;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,8 +37,8 @@ namespace RecipeLibrary
 
         public static async Task<RecipeFull> GetRecipe(string url)
         {
-            IParserRecipe<RecipeFull> obj = null;
-            IParserRecipeSettings settings = null;
+            IParserRecipeSettings settings;
+            IParserRecipe<RecipeFull> obj;
 
             if (url.Contains("www.povarenok.ru"))
             {
@@ -58,7 +57,7 @@ namespace RecipeLibrary
             }
             else
                 throw new ParserException("Неизвестный сайт.");
-            
+
             var recipe = new ParserRecipe<RecipeFull>(obj, settings);
             return await recipe.Worker();
             

@@ -6,19 +6,13 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {
     internal class PovarenokPageSettings : IParserPageSettings
     {
-        public string Url { get; set; } = "https://www.povarenok.ru/recipes/";
-        public string SuffixNew { get; set; } = "~{PageId}/?sort=new&order=desc";
-        public string SuffixPopular { get; set; } = "~{PageId}/?sort=rating&order=desc";
-        public string SuffixRecipe { get; set; } = "search/~{PageId}/?name={RecipeName}#searchformtop";
-        public string Section { get; set; }
-        public int MaxPageId { get; set; } = 9234;
-        public int PageId { get; set; }
-        public string RecipeName { get; }
-        public double IndexPopularity { get; set; } = 95;
-        public double IndexStep { get; set; } = 2;
-
-        public Dictionary<string, string> Sections { get; set; } = new Dictionary<string,string>()
+        public string Url { get; } = "https://www.povarenok.ru/recipes/";
+        public Dictionary<string, string> Sections { get; } = new Dictionary<string, string>()
         {
+            {"new","~{PageId}/?sort=new&order=desc"},
+            {"random","~{PageId}/?sort=new&order=desc"},
+            {"popular","~{PageId}/?sort=rating&order=desc"},
+            {"recipe","search/~{PageId}/?name={RecipeName}#searchformtop"},
             {"горячее", "category/6/~{PageId}/"},
             {"супы", "category/2/~{PageId}/"},
             {"салаты", "category/12/~{PageId}/"},
@@ -27,6 +21,14 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
             {"десерты", "category/30/~{PageId}/"},
             {"соусы", "category/23/~{PageId}/"}
         };
+
+        public string Section { get; }
+        public int MaxPageId { get; } = 9234;
+        public int PageId { get; }
+        public string RecipeName { get; }
+        public double IndexPopularity { get; set; } = 95;
+        public double IndexStep { get;} = 2;
+ 
         public PovarenokPageSettings(string section, int pageId)
         {
             Section = section;

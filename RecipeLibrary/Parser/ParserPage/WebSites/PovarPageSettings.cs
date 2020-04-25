@@ -5,19 +5,14 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {
     internal class PovarPageSettings : IParserPageSettings
     {
-        public string Url { get; set; } = "https://povar.ru/";
-        public string SuffixNew { get; set; } = "mostnew/all/{PageId}/";
-        public string SuffixPopular { get; set; } = "master/rating/all/{PageId}/";
-        public string SuffixRecipe { get; set; } = "xmlsearch?query={RecipeName}&page={PageId}";
-        public string Section { get; set; }
-        public int MaxPageId { get; set; } = 1788;
-        public int PageId { get; set; }
-        public string RecipeName { get; }
-        public double IndexPopularity { get; set; } = 100;
-        public double IndexStep { get; set; } = 1;
-        
-        public Dictionary<string, string> Sections { get; set; } = new Dictionary<string,string>()
+        public string Url { get; } = "https://povar.ru/";
+        public string Section { get; }
+        public Dictionary<string, string> Sections { get; } = new Dictionary<string, string>()
         {
+            {"new","mostnew/all/{PageId}/"},
+            {"random","mostnew/all/{PageId}/"},
+            {"popular","master/rating/all/{PageId}/"},
+            {"recipe","xmlsearch?query={RecipeName}&page={PageId}"},
             {"горячее", "master/goryachie_bliuda/{PageId}/"},
             {"супы", "master/soup/{PageId}/"},
             {"салаты", "master/salad/{PageId}/"},
@@ -26,6 +21,11 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
             {"десерты", "master/dessert/{PageId}/"},
             {"соусы", "master/sousy/{PageId}/"}
         };
+        public int MaxPageId { get; set; } = 1788;
+        public int PageId { get; set; }
+        public string RecipeName { get; }
+        public double IndexPopularity { get; set; } = 100;
+        public double IndexStep { get; } = 1;       
 
         public PovarPageSettings(string section, int pageId)
         {

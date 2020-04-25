@@ -15,36 +15,16 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
         public HtmlLoader(IParserPageSettings settings)
         {
             _settings = settings;
-            _client = new HttpClient();
             _url = settings.Url;
+            _client = new HttpClient();
         }
 
         public async Task<string> GetSource(int idPage, string recipeName)
         {
-            string currentUrl = _url;
+            if (!_settings.Sections.ContainsKey(_settings.Section))
+                throw new ParserException($"Раздела '{_settings.Section}' не существует.");
 
-            switch (_settings.Section)
-            {
-                case ("new"):
-                    currentUrl += _settings.SuffixNew;
-                    break;
-                case ("popular"):
-                    currentUrl += _settings.SuffixPopular;
-                    break;
-                case ("recipe"):
-                    currentUrl += _settings.SuffixRecipe;
-                    break;
-                default:
-                    // Если есть поиск по тегу:
-                    if (_settings.Sections.ContainsKey(_settings.Section))
-                    {
-                        currentUrl += _settings.Sections[_settings.Section];
-                        break;
-                    }
-                    
-                    currentUrl += _settings.SuffixNew;
-                    break;
-            }
+            string currentUrl = _url + _settings.Sections[_settings.Section];
 
             currentUrl = currentUrl
                 .Replace("{PageId}", idPage.ToString())
