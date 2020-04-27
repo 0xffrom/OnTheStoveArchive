@@ -8,7 +8,7 @@ namespace WebServer.DataBase
     /// <summary>
     /// Класс, отвечающий за работу с базой данных MySQL.
     /// </summary>
-    public static class Database
+    public static class RecipeDataContext
     {
         /// <summary>
         /// Подключение к базе данных.

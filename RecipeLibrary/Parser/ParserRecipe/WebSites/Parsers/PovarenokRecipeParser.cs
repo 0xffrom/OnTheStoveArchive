@@ -41,23 +41,16 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         {
             Url = parserRecipeSettings.Url;
             
-            var recipeBody = document.QuerySelector("article.item-bl.item-about");
-            // recipeBody =>  главный фрейм с рецептом, если он существует - работаем с ним, иначе - рецепта не сущесвует.
-            if (recipeBody == null)
-                return new RecipeFull();
-
-            Title = recipeBody.QuerySelector("h1").TextContent;
-            TitleImage = new Image(recipeBody.QuerySelector("div.m-img").FirstElementChild?.Attributes[1]?.Value);
+            Title = document.QuerySelector("article.item-bl.item-about > h1").TextContent;
+            TitleImage = new Image(document.QuerySelector("article.item-bl.item-about > div.m-img").FirstElementChild?.Attributes[1]?.Value);
             
             Description = document.QuerySelector("div.article-text")
                 .TextContent
                 .Replace("\n", String.Empty)
                 .Replace("  ", String.Empty);
 
-            var ingredientBody = recipeBody.QuerySelector("div.ingredients-bl");
-
-            int countIngredientTitles = ingredientBody?.QuerySelectorAll("ul").Length ?? 0;
-
+            var ingredientBody = document.QuerySelector("article.item-bl.item-about > div.ingredients-bl");
+            int countIngredientTitles = ingredientBody.QuerySelectorAll("ul").Length;
             var ingredientsList = new List<Ingredient>();
 
             for (int i = 0; i < countIngredientTitles; i++)
@@ -121,7 +114,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Ingredients = ingredientsList.ToArray();
             
-            var recipesArray = recipeBody.QuerySelectorAll("div.cooking-bl");
+            var recipesArray = document.QuerySelectorAll("article.item-bl.item-about > 3div.cooking-bl");
             int countRecipes = recipesArray.Length;
 
             StepRecipe[] stepRecipeBoxes = new StepRecipe[countRecipes];
@@ -137,7 +130,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             StepsRecipe = stepRecipeBoxes;
 
-            string authorName = recipeBody.QuerySelector("a[title='Профиль пользователя']")?.TextContent;
+            string authorName = document.QuerySelector("article.item-bl.item-about > a[title='Профиль пользователя']")?.TextContent;
             var ingredientBodyP = ingredientBody.QuerySelectorAll("p");
 
             double prepMinutes = ConvertToMinutes(ingredientBodyP
@@ -148,8 +141,8 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Where(x => x.FirstElementChild.TextContent.Contains("Количество порций:"))
                 .Select(x => x.TextContent).FirstOrDefault()?.Replace("Количество порций:", string.Empty) ?? "0");
 
-            var tableCPFC = recipeBody
-                .QuerySelector("div[id='nae-value-bl']")
+            var tableCPFC = document
+                .QuerySelector("article.item-bl.item-about > div[id='nae-value-bl']")
                 .LastElementChild?
                 .FirstElementChild?
                 .QuerySelectorAll("tr")[3]

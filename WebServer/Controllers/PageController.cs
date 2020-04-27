@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using ObjectsLibrary;
 using RecipeLibrary;
 using System;
+using System.Threading.Tasks;
 
 namespace WebServer.Controllers
 {
@@ -15,7 +16,6 @@ namespace WebServer.Controllers
         public PageController(ILogger<PageController> logger)
         {
             _logger = logger;
-            
         }
 
 
@@ -29,7 +29,7 @@ namespace WebServer.Controllers
         /// <param name="recipeName">Название рецепта.</param>
         /// <returns>Объект типа RecipeShort[]</returns>
         [HttpGet("get")]
-        public async System.Threading.Tasks.Task<RecipeShort[]> Get(string section, int page = 1, string recipeName = null)
+        public async Task<ActionResult> Get(string section, int page = 1, string recipeName = null)
         {
             recipeName ??= string.Empty;
 
@@ -41,16 +41,16 @@ namespace WebServer.Controllers
             try
             {
                 RecipeShort[] recipes = await GetData.GetPage(section.ToLower(), page, recipeName.ToLower());
-
+                
                 _logger.LogInformation($"[{DateTime.Now}]: Запрос успешно выполнен.");
                 _logger.LogDebug($"[{DateTime.Now}] Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                return recipes;
+                return Ok(recipes);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, $"[{DateTime.Now}]: Запрос выполнен неудачно.");
                 _logger.LogWarning($"[{DateTime.Now}]: Возврат нулевого рецепта.");
-                return new RecipeShort[] { new RecipeShort() };
+                return NoContent();
             }
         }
     }

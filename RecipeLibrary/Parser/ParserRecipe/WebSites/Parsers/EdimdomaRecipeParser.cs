@@ -51,6 +51,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 List<Ingredient> ingredients = new List<Ingredient>(inputArray.Length);
 
                 foreach (var input in inputArray)
+                    
                 {
                     string titleIngredient = input.Attributes[2].Value;
                     string name = input.Attributes[4].Value;
@@ -83,28 +84,39 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             string authorName = recipeBody.QuerySelector("div.person__name").TextContent;
 
-            int.TryParse(recipeBody.QuerySelector("div.field__container")
-                .FirstElementChild?.Attributes[3].Value ?? "0", out int countPortions);
+            try
+            {
+                int.TryParse(recipeBody.QuerySelector("div.field__container")
+                    .FirstElementChild?.Attributes[3].Value ?? "0", out int countPortions);
 
-            double prepMinutes = ConvertToMinutes(recipeBody.QuerySelector("div.entry-stats__value").TextContent);
+                double prepMinutes = ConvertToMinutes(recipeBody.QuerySelector("div.entry-stats__value").TextContent);
 
-            var cpfcDiv = recipeBody.QuerySelector("div.nutritional-value__leftside");
+                var cpfcDiv = recipeBody.QuerySelector("div.nutritional-value__leftside");
 
-            double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value").TextContent, out double calories);
+                double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value").TextContent, out double calories);
 
-            var tablePFC = cpfcDiv.QuerySelector("div.nutritional-value__nutritional-list").QuerySelectorAll("table");
+                var tablePFC = cpfcDiv.QuerySelector("div.nutritional-value__nutritional-list")
+                    .QuerySelectorAll("table");
 
-            double.TryParse(tablePFC[0].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
-                .TextContent.Replace(" г", string.Empty) ?? "0", out double protein);
+                double.TryParse(
+                    tablePFC[0].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
+                        .TextContent.Replace(" г", string.Empty) ?? "0", out double protein);
 
-            double.TryParse(tablePFC[1].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
-                .TextContent.Replace(" г", string.Empty) ?? "0", out double fats);
+                double.TryParse(
+                    tablePFC[1].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
+                        .TextContent.Replace(" г", string.Empty) ?? "0", out double fats);
 
-            double.TryParse(tablePFC[2].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
-                .TextContent.Replace(" г", string.Empty) ?? "0", out double carbohydrates);
+                double.TryParse(
+                    tablePFC[2].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
+                        .TextContent.Replace(" г", string.Empty) ?? "0", out double carbohydrates);
 
-            Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC(calories, protein, fats, carbohydrates));
-
+                Additional = new Additional(authorName, countPortions, prepMinutes,
+                    new CPFC(calories, protein, fats, carbohydrates));
+            }
+            catch
+            {
+                Additional = new Additional();
+            }
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }
