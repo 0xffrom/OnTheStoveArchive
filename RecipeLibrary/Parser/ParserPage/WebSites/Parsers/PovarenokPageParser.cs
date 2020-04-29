@@ -21,7 +21,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
                     let urlPicture = recipeBlock.QuerySelector("div.m-img.desktop-img.conima")
                     .FirstElementChild.FirstElementChild.Attributes[0].Value
                     let picture = new Image(urlPicture)
-                    let image = recipeBlock.QuerySelector("h2").QuerySelector("a").TextContent
+                    let image = recipeBlock.QuerySelector("h2 > a").TextContent
                     let indexPopularity = indexStartPopularity -= settings.IndexStep
                     select new RecipeShort(image, picture, url, indexStartPopularity)).ToArray();
         }

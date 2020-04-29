@@ -14,10 +14,11 @@ namespace XamarinAppLibrary
         {
         }
 
-        public IngredientTable(string name, string unit) : this()
+        public IngredientTable(string name, string unit, string recipeName) : this()
         {
             Name = name;
             Unit = unit;
+            RecipeName = recipeName;
         }
     }
 }

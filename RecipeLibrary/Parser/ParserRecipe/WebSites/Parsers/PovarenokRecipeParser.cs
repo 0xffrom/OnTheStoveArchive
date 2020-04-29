@@ -42,7 +42,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             Url = parserRecipeSettings.Url;
             
             Title = document.QuerySelector("article.item-bl.item-about > h1").TextContent;
-            TitleImage = new Image(document.QuerySelector("article.item-bl.item-about > div.m-img").FirstElementChild?.Attributes[1]?.Value);
+            TitleImage = new Image(document.QuerySelector("article.item-bl.item-about > div.m-img > div:first-child")?.Attributes[1]?.Value);
             
             Description = document.QuerySelector("div.article-text")
                 .TextContent
@@ -104,7 +104,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                         if (titleIngredient != Title)
                             name += $" ({titleIngredient})";
 
-                        Ingredient ingredient = new Ingredient(name, unit);
+                        Ingredient ingredient = new Ingredient(name, unit, Title);
                         ingredients[j] = ingredient;
                     }
 

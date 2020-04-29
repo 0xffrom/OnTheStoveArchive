@@ -65,7 +65,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     .Replace(title, string.Empty)
                     .Remove(0, 35);
 
-                ingredients[i] = new Ingredient(title, unit);
+                ingredients[i] = new Ingredient(title, unit, Title);
             }
 
             Ingredients = ingredients;

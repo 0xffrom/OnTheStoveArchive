@@ -10,15 +10,17 @@ namespace ObjectsLibrary.Components
         public string Name { get; set; }
         /// <value>Количество и мера измерения.</value>
         public string Unit { get; set; }
-
+        /// <value>Название рецепта, которому принадлежит ингредиент.</value>
+        public string RecipeName { get; set; }
         public Ingredient()
         {
 
         }
-        public Ingredient(string name, string unit) : this()
+        public Ingredient(string name, string unit, string recipeName) : this()
         {
             Name = name;
             Unit = unit;
+            RecipeName = recipeName;
         }
     }
 }

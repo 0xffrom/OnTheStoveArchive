@@ -41,7 +41,7 @@ namespace XamarinApp
 
             DrawerLayout();
 
-            var buttonShare = FindViewById<Button>(Resource.Id.shareRecipe);
+            var buttonShare = FindViewById<ImageButton>(Resource.Id.shareRecipe);
             buttonShare.Click += new EventHandler((sender, args) =>
             {
                 Intent intent = new Intent(Intent.ActionSend);
@@ -60,14 +60,12 @@ namespace XamarinApp
                 }
             });
             var relativeLayoutBack = FindViewById<RelativeLayout>(Resource.Id.relativeLayoutBack);
-
             relativeLayoutBack.Click += new EventHandler((sender, args) =>
             {
                 base.OnBackPressed();
             });
 
             var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
-
             buttonBack.Click += new EventHandler((sender, args) =>
             {
                 base.OnBackPressed();

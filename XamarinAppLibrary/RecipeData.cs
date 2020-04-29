@@ -39,7 +39,6 @@ namespace XamarinAppLibrary
         {
             var db = new SQLiteConnection(dbPath);
             db.CreateTable<RecipeTable>();
-
             var recipes = db.Table<RecipeTable>().ToArray();
 
             RecipeShort[] recipeShorts = new RecipeShort[recipes.Length];

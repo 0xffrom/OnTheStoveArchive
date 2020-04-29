@@ -13,21 +13,20 @@ namespace XamarinApp
 {
     public class RecipeAdapter : RecyclerView.Adapter
     {
-
-        internal List<RecipeShort> _items;
-        private Activity _activity;
+        private readonly List<RecipeShort> _items;
+        private readonly Activity _activity;
         public event EventHandler<int> ItemClick;
         public override int ItemCount => _items.Count;
 
-        public RecipeAdapter(RecipeShort[] recipeShorts, Activity activity)
+        public RecipeAdapter(List<RecipeShort> recipeShorts, Activity activity)
         {
             _activity = activity;
 
-            _items = recipeShorts.ToList();
+            _items = recipeShorts;
 
         }
 
-        public void AddItems(RecipeShort[] recipes)
+        public void AddItems(List<RecipeShort> recipes)
         {
             _items.AddRange(recipes);
             this.NotifyDataSetChanged();

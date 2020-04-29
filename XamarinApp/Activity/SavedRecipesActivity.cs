@@ -28,7 +28,8 @@ namespace XamarinApp
         private RecyclerView recyclerView;
         private Android.Support.V7.Widget.SearchView _searchView;
         private LinearLayoutManager linearLayoutManager;
-        private RecipeShort[] recipeShorts;
+        private List<RecipeShort> recipeShorts;
+        private List<RecipeShort> dataRecipes;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -56,7 +57,7 @@ namespace XamarinApp
 
             _searchView.QueryTextChange += new EventHandler<QueryTextChangeEventArgs>((sender, args) =>
             {
-                var adapter = new RecipeAdapter(this.recipeShorts.Where(x => x.Title.ToLower().Contains(args.NewText.ToLower())).ToArray(), this);
+                var adapter = new RecipeAdapter(dataRecipes = this.recipeShorts.Where(x => x != null && x.Title.ToLower().Contains(args.NewText.ToLower())).ToList(), this);
                 adapter.ItemClick += OnItemClick;
                 _adapter = adapter;
                 recyclerView.SetAdapter(adapter);
@@ -67,7 +68,7 @@ namespace XamarinApp
             recyclerView.SetLayoutManager(linearLayoutManager);
 
 
-            recipeShorts = RecipeData.GetArrayRecipes();
+            recipeShorts = RecipeData.GetArrayRecipes().ToList();
 
             if (recipeShorts != null)
             {
@@ -75,6 +76,7 @@ namespace XamarinApp
                 adapter.ItemClick += OnItemClick;
                 _adapter = adapter;
                 recyclerView.SetAdapter(adapter);
+                dataRecipes = recipeShorts;
             }
         }
 
@@ -89,8 +91,8 @@ namespace XamarinApp
         void OnItemClick(object sender, int position)
         {
             Intent intent = new Intent(this, typeof(RecipeActivity));
-            intent.PutExtra("url", recipeShorts[position].Url);
-            intent.PutExtra("recipeShort", Data.RecipeToByteArray(recipeShorts[position]));
+            intent.PutExtra("url", dataRecipes[position].Url);
+            intent.PutExtra("recipeShort", Data.RecipeToByteArray(dataRecipes[position]));
 
             StartActivity(intent);
         }

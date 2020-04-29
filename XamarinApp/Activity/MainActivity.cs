@@ -14,6 +14,7 @@ using Android.Widget;
 using ObjectsLibrary;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using XamarinAppLibrary;
 
@@ -24,7 +25,7 @@ namespace XamarinApp
     {
         private RecyclerView recyclerView;
         private RecipeAdapter recipeAdapter;
-        private RecipeShort[] recipeShorts;
+        private List<RecipeShort> recipeShorts;
         private DrawerLayout _drawer;
         private SwipeRefreshLayout swipeRefreshLayout;
         private LinearLayoutManager linearLayoutManager;
@@ -106,7 +107,7 @@ namespace XamarinApp
 
         }
 
-        private async void UpdateListView(string query = "section=popular", RecipeShort[] recipeShorts = null)
+        private async void UpdateListView(string query = "section=popular", List<RecipeShort> recipeShorts = null)
         {
             swipeRefreshLayout.Post(() =>
             {
@@ -127,6 +128,7 @@ namespace XamarinApp
             {
                 var newRecipes = await UpdateCollectionRecipes(query);
                 recipeAdapter.AddItems(newRecipes);
+                recipeShorts.AddRange(newRecipes);
             }
 
             swipeRefreshLayout.Post(() =>
@@ -226,7 +228,7 @@ namespace XamarinApp
             lastQuery = query;
         }
 
-        private async Task<RecipeShort[]> UpdateCollectionRecipes(string query)
+        private async Task<List<RecipeShort>> UpdateCollectionRecipes(string query)
         {
             return await Task.Run(function: () => HttpGet.GetPages(query));
         }
@@ -247,6 +249,11 @@ namespace XamarinApp
             if (id == Resource.Id.nav_favorite)
             {
                Intent intent = new Intent(this, typeof(SavedRecipesActivity));
+               StartActivity(intent);
+            }
+            if (id == Resource.Id.nav_cart)
+            {
+                Intent intent = new Intent(this, typeof(SavedIngredientsActivity));
                 StartActivity(intent);
             }
 

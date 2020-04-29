@@ -49,7 +49,7 @@ namespace WebServer.Controllers
             catch (Exception e)
             {
                 _logger.LogError(e, $"[{DateTime.Now}]: Запрос выполнен неудачно.");
-                _logger.LogWarning($"[{DateTime.Now}]: Возврат нулевого рецепта.");
+                _logger.LogWarning($"[{DateTime.Now}]: Возврат пустой страницы.");
                 return NoContent();
             }
         }
