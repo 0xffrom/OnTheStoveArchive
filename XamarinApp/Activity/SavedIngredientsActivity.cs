@@ -25,7 +25,6 @@ namespace XamarinApp
     [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon")]
     class SavedIngredientsActivity : AppCompatActivity
     {
-        private RecipeAdapter _adapter;
         private RecyclerView recyclerView;
         private LinearLayoutManager linearLayoutManager;
         private List<Ingredient> ingredients;
