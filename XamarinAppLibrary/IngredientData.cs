@@ -13,7 +13,7 @@ namespace XamarinAppLibrary
 
         static IngredientData()
         {
-            Db.CreateTable<IngredientTable>();
+            Db.DeleteAll<IngredientTable>();
         }
 
         public static List<Ingredient> GetArrayIngredients()
@@ -44,12 +44,14 @@ namespace XamarinAppLibrary
 
         public static void DeleteIngredient(Ingredient ingredient)
         {
-            int id = Db.Table<IngredientTable>().First(x => 
-            x.Name == ingredient.Name && 
-            x.Unit == ingredient.Unit &&
-            x.RecipeName == ingredient.RecipeName).Id;
+            var ingredientDb = Db.Table<IngredientTable>().FirstOrDefault(x =>
+            x.Name == ingredient.Name &&
+            x.RecipeName == ingredient.RecipeName);
 
-            Db.Delete<IngredientTable>(id);
+            if (ingredientDb == null)
+                return;
+
+            Db.Delete<IngredientTable>(ingredientDb.Id);
         }
 
 

@@ -22,32 +22,25 @@ namespace XamarinApp
         {
             _items = ingredients;
         }
-
-        public void AddItems(List<Ingredient> ingredients)
-        {
-            _items.AddRange(ingredients);
-            this.NotifyDataSetChanged();
-        }
-
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             SavedIngredientsViewHolder vh = holder as SavedIngredientsViewHolder;
 
-            vh.CartButton.Click += (sender, e) =>
-            {
-                IngredientData.DeleteIngredient(_items[position]);
-            };
-
-            vh.Title.Text += _items[position]?.Name;
-            vh.Unit.Text += _items[position]?.Unit;
-            vh.RecipeName.Text += _items[position]?.RecipeName;
+            vh.Title.Text = "Название: " + _items[position].Name;
+            vh.Unit.Text = "Количество: " + _items[position].Unit;
+            vh.RecipeName.Text = "Для: " + _items[position].RecipeName;
         }
-
+        public void RemoveItem(int position)
+        {
+            this.NotifyItemRemoved(position);
+            IngredientData.DeleteIngredient(_items[position]);
+            _items.RemoveAt(position);
+        }
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View itemView = LayoutInflater.From(parent.Context).
                 Inflate(Resource.Layout.ingredients_saved_list, parent, false);
-            SavedIngredientsViewHolder vh = new SavedIngredientsViewHolder(itemView);
+            SavedIngredientsViewHolder vh = new SavedIngredientsViewHolder(itemView, RemoveItem);
             return vh;
         }
 
@@ -60,12 +53,14 @@ namespace XamarinApp
         public TextView Unit { get; private set; }
         public TextView RecipeName { get; private set; }
 
-        public SavedIngredientsViewHolder(View itemView) : base(itemView)
+        public SavedIngredientsViewHolder(View itemView, Action<int> listener) : base(itemView)
         {
             CartButton = itemView.FindViewById<Button>(Resource.Id.cart_button_saved_ingredient);
             Title = itemView.FindViewById<TextView>(Resource.Id.title_saved_ingredient);
             Unit = itemView.FindViewById<TextView>(Resource.Id.unit_saved_ingredient);
             RecipeName = itemView.FindViewById<TextView>(Resource.Id.recipe_saved_ingredient);
+
+            CartButton.Click += (sender, e) => listener(base.LayoutPosition);
         }
     }
 }
