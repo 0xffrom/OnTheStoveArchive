@@ -37,11 +37,11 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
             var recipeBody = document.QuerySelector("div.grid-three-column__column.grid-three-column__column_center.onthe_data") 
                 ?? throw new ParserException("Не найдено главное тело рецепта.", "edimdoma.ru");
 
-            Title = recipeBody.Attributes[5].Value;
+            Title = recipeBody.Attributes[5].Value ?? string.Empty;
 
-            TitleImage = new Image(recipeBody.QuerySelector("img").Attributes[2].Value);
+            TitleImage = new Image(recipeBody.QuerySelector("img").Attributes[2].Value ?? string.Empty);
 
-            Description = recipeBody.QuerySelector("div.recipe_description").TextContent;
+            Description = recipeBody.QuerySelector("div.recipe_description")?.TextContent ?? string.Empty;
 
             var ingredientBody = recipeBody.QuerySelector("div[id='recipe_ingredients_block']");
             var inputArray = ingredientBody?.QuerySelectorAll("input.checkbox__input.recipe_ingredient_checkbox");
@@ -84,35 +84,38 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             string authorName = recipeBody.QuerySelector("div.person__name").TextContent;
 
-                int.TryParse(recipeBody.QuerySelector("div.field__container > div:first-child")?.Attributes[3].Value ?? "0", out int countPortions);
+                int.TryParse(recipeBody.QuerySelector("div.field__container")?.FirstElementChild?.Attributes[3].Value ?? "0", out int countPortions);
 
                 double prepMinutes = ConvertToMinutes(recipeBody.QuerySelector("div.entry-stats__value").TextContent);
 
                 var cpfcDiv = recipeBody.QuerySelector("div.nutritional-value__leftside");
 
-                double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value").TextContent, out double calories);
+            if (cpfcDiv != null)
+            {
+                double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value")?.TextContent ?? "0", out double calories);
 
                 var tablePFC = cpfcDiv.QuerySelectorAll("div.nutritional-value__nutritional-list > table");
 
-            if (tablePFC != null)
-            {
-                double.TryParse(
-                    tablePFC[0].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
-                        .TextContent.Replace(" г", string.Empty) ?? "0", out double protein);
+                if (tablePFC != null)
+                {
+                    double.TryParse(
+                        tablePFC[0].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
+                            .TextContent.Replace(" г", string.Empty) ?? "0", out double protein);
 
-                double.TryParse(
-                    tablePFC[1].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
-                        .TextContent.Replace(" г", string.Empty) ?? "0", out double fats);
+                    double.TryParse(
+                        tablePFC[1].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
+                            .TextContent.Replace(" г", string.Empty) ?? "0", out double fats);
 
-                double.TryParse(
-                    tablePFC[2].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
-                        .TextContent.Replace(" г", string.Empty) ?? "0", out double carbohydrates);
+                    double.TryParse(
+                        tablePFC[2].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
+                            .TextContent.Replace(" г", string.Empty) ?? "0", out double carbohydrates);
 
-                Additional = new Additional(authorName, countPortions, prepMinutes,
-                    new CPFC(calories, protein, fats, carbohydrates));
+                    Additional = new Additional(authorName, countPortions, prepMinutes,
+                        new CPFC(calories, protein, fats, carbohydrates));
+                }
+                else
+                    Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC());
             }
-            else
-                Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC());
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }

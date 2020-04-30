@@ -52,7 +52,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             foreach (var textLine in recipeBody.QuerySelectorAll("span.detailed_full").Select(x => x.TextContent))
                 Description += Environment.NewLine + textLine;
 
-            var ingredientsBody = recipeBody.QuerySelectorAll("ul.detailed_ingredients > li");
+            var ingredientsBody = recipeBody.QuerySelector("ul.detailed_ingredients").QuerySelectorAll("li");
 
             int countIngredients = ingredientsBody.Length;
 

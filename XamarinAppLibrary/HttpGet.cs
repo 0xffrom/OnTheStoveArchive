@@ -25,6 +25,8 @@ namespace XamarinAppLibrary
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();
 
+            if (source == string.Empty)
+                throw new HttpRequestException();
             
             return source;
         }

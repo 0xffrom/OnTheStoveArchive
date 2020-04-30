@@ -43,7 +43,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             Url = parserRecipeSettings.Url;
             
             Title = recipeBody.QuerySelector("h1").TextContent;
-            TitleImage = new Image(recipeBody.QuerySelector("div.m-img > div:first-child")?.Attributes[1]?.Value);
+            TitleImage = new Image(recipeBody.QuerySelector("div.m-img").FirstElementChild?.Attributes[1]?.Value);
             
             Description = recipeBody.QuerySelector("div.article-text")
                 .TextContent

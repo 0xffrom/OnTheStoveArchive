@@ -175,57 +175,67 @@ namespace XamarinApp
             if (RecipeData.ExistsRecipe(_url))
                 buttonStar.SetBackgroundResource(Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
 
-            recipeFull = await UpdateCollectionRecipes(_url);
-
-
-            var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
-            var adapterIngredents = new IngredientsAdapter(this, recipeFull);
-            if (adapterIngredents.Count > 0)
-                listIngredients.Adapter = adapterIngredents;
-            var listSteps = FindViewById<ListView>(Resource.Id.listSteps);
-            var adapterStep = new StepAdapter(this, recipeFull);
-            listSteps.Adapter = adapterStep;
-
-
-            #region Первая страница.
-
-            var imageView = FindViewById<ImageView>(Resource.Id.imageMainRecipe);
-            var title = FindViewById<TextView>(Resource.Id.titleRecipe);
-            var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
-            var CPFCRecipe = FindViewById<TextView>(Resource.Id.CPFCRecipe);
-            var authorNameRecipe = FindViewById<TextView>(Resource.Id.authorNameRecipe);
-            var additionalInfoRecipe = FindViewById<TextView>(Resource.Id.additionalInfoRecipe);
-            var urlRecipe = FindViewById<TextView>(Resource.Id.urlRecipe);
-
-            title.Text = recipeFull.Title;
-
-            Picasso.With(this)
-                .Load(recipeFull.TitleImage.ImageUrl)
-                .Into(imageView);
-
-            description.Text += $"{recipeFull.Description.Replace("  ",string.Empty)}";
-
-            if (recipeFull.Additional.CPFC != null)
+            try
             {
-                if (recipeFull.Additional.CPFC.Calories != 0)
-                    CPFCRecipe.Text += $"Калории: {recipeFull.Additional.CPFC.Calories} Ккал.{System.Environment.NewLine}";
-                if(recipeFull.Additional.CPFC.Protein != 0)
-                    CPFCRecipe.Text += $"Белки: {recipeFull.Additional.CPFC.Protein} г.{System.Environment.NewLine}";
-                if (recipeFull.Additional.CPFC.Fats != 0)
-                    CPFCRecipe.Text += $"Жиры: {recipeFull.Additional.CPFC.Fats} г.{System.Environment.NewLine}";
-                if (recipeFull.Additional.CPFC.Carbohydrates != 0)
-                    CPFCRecipe.Text += $"Углеводы: {recipeFull.Additional.CPFC.Carbohydrates} г.{System.Environment.NewLine}";
+                recipeFull = await UpdateCollectionRecipes(_url);
+
+                var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
+                var adapterIngredents = new IngredientsAdapter(this, recipeFull);
+                if (adapterIngredents.Count > 0)
+                    listIngredients.Adapter = adapterIngredents;
+                var listSteps = FindViewById<ListView>(Resource.Id.listSteps);
+                var adapterStep = new StepAdapter(this, recipeFull);
+                listSteps.Adapter = adapterStep;
+
+
+                #region Первая страница.
+
+                var imageView = FindViewById<ImageView>(Resource.Id.imageMainRecipe);
+                var title = FindViewById<TextView>(Resource.Id.titleRecipe);
+                var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
+                var CPFCRecipe = FindViewById<TextView>(Resource.Id.CPFCRecipe);
+                var authorNameRecipe = FindViewById<TextView>(Resource.Id.authorNameRecipe);
+                var additionalInfoRecipe = FindViewById<TextView>(Resource.Id.additionalInfoRecipe);
+                var urlRecipe = FindViewById<TextView>(Resource.Id.urlRecipe);
+
+                title.Text = recipeFull.Title;
+
+                Picasso.With(this)
+                    .Load(recipeFull.TitleImage.ImageUrl)
+                    .Into(imageView);
+
+                description.Text += $"{recipeFull.Description.Replace("  ", string.Empty)}";
+
+                if (recipeFull.Additional.CPFC != null)
+                {
+                    if (recipeFull.Additional.CPFC.Calories != 0)
+                        CPFCRecipe.Text += $"Калории: {recipeFull.Additional.CPFC.Calories} Ккал.{System.Environment.NewLine}";
+                    if (recipeFull.Additional.CPFC.Protein != 0)
+                        CPFCRecipe.Text += $"Белки: {recipeFull.Additional.CPFC.Protein} г.{System.Environment.NewLine}";
+                    if (recipeFull.Additional.CPFC.Fats != 0)
+                        CPFCRecipe.Text += $"Жиры: {recipeFull.Additional.CPFC.Fats} г.{System.Environment.NewLine}";
+                    if (recipeFull.Additional.CPFC.Carbohydrates != 0)
+                        CPFCRecipe.Text += $"Углеводы: {recipeFull.Additional.CPFC.Carbohydrates} г.{System.Environment.NewLine}";
+                }
+
+                authorNameRecipe.Text = $"Рецепт от: {recipeFull.Additional.AuthorName}";
+
+                if (recipeFull.Additional.CountPortions != 0)
+                    additionalInfoRecipe.Text += $"Количество порций: {recipeFull.Additional.CountPortions}.{System.Environment.NewLine}";
+                if (recipeFull.Additional.PrepMinutes != 0)
+                    additionalInfoRecipe.Text += $"Количество минут на готовку: {recipeFull.Additional.PrepMinutes} мин.";
+
+                urlRecipe.Text = $"Ссылка на рецепт: {recipeFull.Url}";
+                #endregion
+            }
+            catch
+            {
+                new Android.Support.V7.App.AlertDialog.Builder(this)
+                    .SetTitle("Ошибка :(")
+                    .SetMessage("К сожалению, не удалось загрузить данный рецепт. Разработчики уже занимаются этим вопросом.");
+                
             }
 
-            authorNameRecipe.Text = $"Рецепт от: {recipeFull.Additional.AuthorName}";
-
-            if (recipeFull.Additional.CountPortions != 0)
-                additionalInfoRecipe.Text += $"Количество порций: {recipeFull.Additional.CountPortions}.{System.Environment.NewLine}";
-            if (recipeFull.Additional.PrepMinutes != 0)
-                additionalInfoRecipe.Text += $"Количество минут на готовку: {recipeFull.Additional.PrepMinutes} мин.";
-
-            urlRecipe.Text = $"Ссылка на рецепт: {recipeFull.Url}";
-            #endregion
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

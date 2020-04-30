@@ -34,7 +34,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
 
         public EdimDomaPageSettings(string section, int pageId, string recipeName) : this(section, pageId)
         {
-            RecipeName = recipeName;
+            RecipeName = recipeName.Replace(' ', '+');
         }
 
 

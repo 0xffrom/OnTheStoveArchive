@@ -21,6 +21,7 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
 
         public async Task<string> GetSource(int idPage, string recipeName)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             if (!_settings.Sections.ContainsKey(_settings.Section))
             {
                 throw new ParserException($"Раздела '{_settings.Section}' не существует.");
@@ -35,8 +36,6 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
             var response = await _client.GetAsync(currentUrl);
 
             string source;
-
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();

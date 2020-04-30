@@ -10,7 +10,9 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
     {
         public RecipeShort[] Parse(IHtmlDocument document, IParserPageSettings settings)
         {
-            var recipeCards = document.QuerySelectorAll("article.card > article:first-child");
+            var recipeCards = document.QuerySelectorAll("article")
+                    .Where(x => x.ClassName != null && x.ClassName == "card")
+                    .Select(x => x.FirstElementChild);
 
             double indexStartPopularity = settings.IndexPopularity;
 

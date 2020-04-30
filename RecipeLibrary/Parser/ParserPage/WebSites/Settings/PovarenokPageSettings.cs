@@ -26,7 +26,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
         public int MaxPageId { get; } = 9234;
         public int PageId { get; }
         public string RecipeName { get; }
-        public double IndexPopularity { get; set; } = 95;
+        public double IndexPopularity { get; set; } = 100;
         public double IndexStep { get;} = 2;
  
         public PovarenokPageSettings(string section, int pageId)
@@ -47,7 +47,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
 
             var valuePairs = new Dictionary<char, string>()
             {
-                {'a', "E0"}, {'б', "E1"}, {'в', "E2"}, {'г', "E3"}, {'д', "E4"}, {'е', "E5"},
+                {'а', "E0"}, {'б', "E1"}, {'в', "E2"}, {'г', "E3"}, {'д', "E4"}, {'е', "E5"},
                 {'ё', "B8"}, {'ж', "E6"}, {'з', "E7"}, {'и', "E8"}, {'й', "E9"}, {'к', "EA"},
                 {'л', "EB"}, {'м', "EC"}, {'н', "ED"}, {'о', "EE"}, {'п', "EF"}, {'р', "F0"},
                 {'с', "F1"}, {'т', "F2"}, {'у', "F3"}, {'ф', "F4"}, {'х', "F5"}, {'ц', "F6"},
@@ -58,7 +58,13 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
             string url = string.Empty;
 
             foreach (char symb in recipeName)
-                url += '%' + valuePairs.FirstOrDefault(item => item.Key == symb).Value;
+            {
+                if (valuePairs.ContainsKey(symb))
+                    url += '%' + valuePairs[symb];
+                if (symb == ' ')
+                    url += '+';
+            }
+
             return url;
         }
 

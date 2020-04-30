@@ -162,3 +162,248 @@
 2020-04-30 14:57:44.4958 Info Found 118 configuration items
 2020-04-30 14:57:45.3843 Info AppDomain Shutting down. Logger closing...
 2020-04-30 14:57:45.3960 Info Logger has been shut down.
+2020-04-30 17:09:38.6458 Info Message Template Auto Format enabled
+2020-04-30 17:09:38.6638 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 17:09:38.7994 Info Adding target FileTarget(Name=allfile)
+2020-04-30 17:09:38.7994 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 17:09:38.8328 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 17:09:38.8328 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 17:09:38.8328 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 17:09:38.8410 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 17:09:38.9000 Info Found 118 configuration items
+2020-04-30 17:18:26.8427 Info Message Template Auto Format enabled
+2020-04-30 17:18:26.8427 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 17:18:26.8805 Info Adding target FileTarget(Name=allfile)
+2020-04-30 17:18:26.8805 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 17:18:26.8905 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 17:18:26.8905 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 17:18:26.8905 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 17:18:26.8905 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 17:18:26.9153 Info Found 118 configuration items
+2020-04-30 17:18:34.6216 Info AppDomain Shutting down. Logger closing...
+2020-04-30 17:18:34.6381 Info Logger has been shut down.
+2020-04-30 19:05:20.0035 Info Message Template Auto Format enabled
+2020-04-30 19:05:20.0224 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:05:20.0942 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:05:20.0942 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:05:20.1160 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:05:20.1160 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:05:20.1215 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:05:20.1215 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:05:20.1599 Info Found 118 configuration items
+2020-04-30 19:06:55.9034 Info Message Template Auto Format enabled
+2020-04-30 19:06:55.9260 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:06:56.0675 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:06:56.0782 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:06:56.1045 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:06:56.1089 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:06:56.1089 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:06:56.1089 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:06:56.1532 Info Found 118 configuration items
+2020-04-30 19:14:28.9249 Info Message Template Auto Format enabled
+2020-04-30 19:14:28.9477 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:14:29.0850 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:14:29.0936 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:14:29.1137 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:14:29.1137 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:14:29.1137 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:14:29.1225 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:14:29.1744 Info Found 118 configuration items
+2020-04-30 19:16:09.7835 Info Message Template Auto Format enabled
+2020-04-30 19:16:09.7974 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:16:09.8672 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:16:09.8751 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:16:09.8972 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:16:09.9162 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:16:09.9189 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:16:09.9189 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:16:09.9731 Info Found 118 configuration items
+2020-04-30 19:17:21.7888 Info Message Template Auto Format enabled
+2020-04-30 19:17:21.8037 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:17:21.8760 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:17:21.8760 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:17:21.8986 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:17:21.9034 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:17:21.9034 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:17:21.9034 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:17:21.9507 Info Found 118 configuration items
+2020-04-30 19:19:36.0423 Info Message Template Auto Format enabled
+2020-04-30 19:19:36.0547 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:19:36.1474 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:19:36.1559 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:19:36.1716 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:19:36.1716 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:19:36.1716 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:19:36.1716 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:19:36.2195 Info Found 118 configuration items
+2020-04-30 19:21:39.0015 Info Message Template Auto Format enabled
+2020-04-30 19:21:39.0153 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:21:39.0770 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:21:39.0770 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:21:39.0966 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:21:39.0966 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:21:39.0966 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:21:39.0966 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:21:39.1337 Info Found 118 configuration items
+2020-04-30 19:21:55.8755 Info Message Template Auto Format enabled
+2020-04-30 19:21:55.8928 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:21:55.9812 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:21:55.9812 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:21:56.0071 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:21:56.0127 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:21:56.0127 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:21:56.0127 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:21:56.0547 Info Found 118 configuration items
+2020-04-30 19:58:32.2264 Info Message Template Auto Format enabled
+2020-04-30 19:58:32.2402 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:58:32.3197 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:58:32.3279 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:58:32.3439 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:58:32.3439 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:58:32.3439 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:58:32.3439 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:58:32.4122 Info Found 118 configuration items
+2020-04-30 19:59:33.3818 Info Message Template Auto Format enabled
+2020-04-30 19:59:33.3972 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 19:59:33.4641 Info Adding target FileTarget(Name=allfile)
+2020-04-30 19:59:33.4706 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 19:59:33.4830 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 19:59:33.4830 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 19:59:33.4830 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 19:59:33.4830 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 19:59:33.5193 Info Found 118 configuration items
+2020-04-30 20:09:02.9666 Info Message Template Auto Format enabled
+2020-04-30 20:09:02.9998 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:09:03.1532 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:09:03.1532 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:09:03.1959 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:09:03.2039 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:09:03.2039 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:09:03.2039 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:09:03.2719 Info Found 118 configuration items
+2020-04-30 20:09:41.3749 Info Message Template Auto Format enabled
+2020-04-30 20:09:41.3946 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:09:41.6722 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:09:41.6908 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:09:41.7266 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:09:41.7436 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:09:41.7436 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:09:41.7541 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:09:41.8548 Info Found 118 configuration items
+2020-04-30 20:12:34.2465 Info Message Template Auto Format enabled
+2020-04-30 20:12:34.2465 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:12:34.3296 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:12:34.3296 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:12:34.3492 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:12:34.3492 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:12:34.3492 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:12:34.3492 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:12:34.3849 Info Found 118 configuration items
+2020-04-30 20:15:20.1330 Info Message Template Auto Format enabled
+2020-04-30 20:15:20.1662 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:15:20.2955 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:15:20.3319 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:15:20.3626 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:15:20.3738 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:15:20.3738 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:15:20.3738 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:15:20.4339 Info Found 118 configuration items
+2020-04-30 20:16:40.6420 Info Message Template Auto Format enabled
+2020-04-30 20:16:40.6585 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:16:40.7296 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:16:40.7361 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:16:40.7490 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:16:40.7490 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:16:40.7490 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:16:40.7490 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:16:40.8002 Info Found 118 configuration items
+2020-04-30 20:43:27.8534 Info Message Template Auto Format enabled
+2020-04-30 20:43:27.9966 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:43:28.3421 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:43:28.3868 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:43:28.4195 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:43:28.4195 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:43:28.4345 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:43:28.4345 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:43:28.5661 Info Found 118 configuration items
+2020-04-30 20:44:45.1685 Info Message Template Auto Format enabled
+2020-04-30 20:44:45.1894 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:44:45.2913 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:44:45.3034 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:44:45.3313 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:44:45.3313 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:44:45.3416 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:44:45.3416 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:44:45.4045 Info Found 118 configuration items
+2020-04-30 20:51:09.7919 Info Message Template Auto Format enabled
+2020-04-30 20:51:09.8128 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:51:09.8935 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:51:09.8935 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:51:09.9143 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:51:09.9192 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:51:09.9192 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:51:09.9192 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:51:09.9625 Info Found 118 configuration items
+2020-04-30 20:51:37.4481 Info Message Template Auto Format enabled
+2020-04-30 20:51:37.4658 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:51:37.5396 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:51:37.5579 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:51:37.5731 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:51:37.5790 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:51:37.5790 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:51:37.5790 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:51:37.6242 Info Found 118 configuration items
+2020-04-30 20:58:02.7869 Info Message Template Auto Format enabled
+2020-04-30 20:58:02.8056 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:58:02.8912 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:58:02.9127 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:58:02.9359 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:58:02.9359 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:58:02.9359 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:58:02.9359 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:58:03.0131 Info Found 118 configuration items
+2020-04-30 20:59:29.6610 Info Message Template Auto Format enabled
+2020-04-30 20:59:29.6922 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:59:29.7870 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:59:29.7964 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:59:29.8166 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:59:29.8166 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:59:29.8256 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:59:29.8256 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:59:29.8708 Info Found 118 configuration items
+2020-04-30 20:59:56.9934 Info Message Template Auto Format enabled
+2020-04-30 20:59:57.0383 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 20:59:57.1507 Info Adding target FileTarget(Name=allfile)
+2020-04-30 20:59:57.1604 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 20:59:57.1809 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 20:59:57.1860 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 20:59:57.1860 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 20:59:57.1860 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 20:59:57.2328 Info Found 118 configuration items
+2020-04-30 21:00:29.0625 Info Message Template Auto Format enabled
+2020-04-30 21:00:29.0976 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 21:00:29.2163 Info Adding target FileTarget(Name=allfile)
+2020-04-30 21:00:29.2163 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 21:00:29.2376 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 21:00:29.2376 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 21:00:29.2376 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 21:00:29.2376 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 21:00:29.2806 Info Found 118 configuration items
+2020-04-30 21:01:05.1505 Info Message Template Auto Format enabled
+2020-04-30 21:01:05.1690 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 21:01:05.2625 Info Adding target FileTarget(Name=allfile)
+2020-04-30 21:01:05.2625 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 21:01:05.2843 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 21:01:05.2843 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 21:01:05.2843 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 21:01:05.2843 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 21:01:05.3225 Info Found 118 configuration items
+2020-04-30 21:01:52.6629 Info Message Template Auto Format enabled
+2020-04-30 21:01:52.6710 Info Loading assembly: NLog.Web.AspNetCore
+2020-04-30 21:01:52.7480 Info Adding target FileTarget(Name=allfile)
+2020-04-30 21:01:52.7480 Info Adding target FileTarget(Name=ownFile-web)
+2020-04-30 21:01:52.7643 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-04-30 21:01:52.7643 Info Adding target FileTarget(Name=logDebug)
+2020-04-30 21:01:52.7643 Info Adding target FileTarget(Name=logInfo)
+2020-04-30 21:01:52.7643 Info Adding target FileTarget(Name=logWarning)
+2020-04-30 21:01:52.7966 Info Found 118 configuration items
