@@ -22,7 +22,8 @@ using ObjectsLibrary.Components;
 
 namespace XamarinApp
 {
-    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon")]
+    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon",
+        ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
     class SavedIngredientsActivity : AppCompatActivity
     {
         private RecyclerView recyclerView;

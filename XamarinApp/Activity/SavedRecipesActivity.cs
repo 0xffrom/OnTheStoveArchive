@@ -21,7 +21,8 @@ using static Android.Support.V7.Widget.SearchView;
 
 namespace XamarinApp
 {
-    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon")]
+    [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon",
+        ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
     class SavedRecipesActivity : AppCompatActivity
     {
         private RecipeAdapter _adapter;
