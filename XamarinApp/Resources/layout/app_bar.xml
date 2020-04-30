@@ -5,14 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rectangle_2"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="70dp"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:padding="10dp"
     android:orientation="horizontal"
     android:background="@drawable/rectangle_2">
     <Button
-        
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center_vertical"
@@ -24,12 +23,12 @@
     <FrameLayout
         android:outlineSpotShadowColor="#000000"
         android:id="@+id/rectangle_3"
-        android:layout_height="55dp"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="10dp"
         android:background="@drawable/rectangle_3"
-        android:elevation="4dp">
+        android:elevation="3dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -63,7 +63,8 @@ namespace XamarinApp
                 _adapter = adapter;
                 recyclerView.SetAdapter(adapter);
             });
-
+            
+            
             recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerViewRecipes);
             linearLayoutManager = new LinearLayoutManager(this);
             recyclerView.SetLayoutManager(linearLayoutManager);

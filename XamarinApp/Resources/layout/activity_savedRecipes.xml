@@ -9,32 +9,32 @@
     <LinearLayout
         android:id="@+id/rectangle_2"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:layout_height="70dp"
+        android:padding="10dp"
         android:orientation="horizontal"
         android:background="@drawable/rectangle_2">
         <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:id="@+id/relativeLayoutBack">
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="left|center_vertical"
+                android:id="@+id/relativeLayoutBack">
             <Button
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="right"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/buttonBack"
-                android:background="@drawable/round_arrow_back_ios_24"/>
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:gravity="left|center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/round_arrow_back_ios_24"
+                    android:id="@+id/buttonBack"/>
         </RelativeLayout>
         <android.support.v7.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
             android:textSize="14dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textColor="#ffc4c4c4"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/rectangle_3"
             android:id="@+id/searchViewFind"/>
 

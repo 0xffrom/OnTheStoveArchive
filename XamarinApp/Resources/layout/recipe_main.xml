@@ -11,27 +11,25 @@
         android:orientation="horizontal"
         android:id="@+id/rectangle_2"
         android:layout_width="match_parent"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingRight="15dp"
-        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:gravity="left|center"
         android:background="@drawable/rectangle_2">
         <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/relativeLayoutBack">
-            <Button
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+        <Button
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_gravity="right"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/round_arrow_back_ios_24"
                 android:id="@+id/buttonBack"/>
-        </RelativeLayout>
+    </RelativeLayout>
         <TextView
             android:id="@+id/titleRecipe"
             android:gravity="center"

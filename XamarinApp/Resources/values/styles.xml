@@ -26,7 +26,6 @@
 
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:background">#FEB22C</item>
     </style>
     
     <style name="NavigationViewStyle">

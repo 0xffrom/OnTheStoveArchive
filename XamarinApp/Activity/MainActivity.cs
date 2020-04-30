@@ -108,7 +108,7 @@ namespace XamarinApp
 
         }
 
-        private async void UpdateListView(string query = "section=popular", List<RecipeShort> recipeShorts = null)
+        private async void UpdateListView(string query = "section=new", List<RecipeShort> recipeShorts = null)
         {
             swipeRefreshLayout.Post(() =>
             {
@@ -212,15 +212,15 @@ namespace XamarinApp
 
             switch (item.ToString())
             {
-                case "Популярные":
+                case "Популярные рецепты":
                     query = $"section=popular&page={page}";
                     UpdateListView(query);
                     break;
-                case "Случайные":
+                case "Случайные рецепты":
                     query = $"section=random&page={page}";
                     UpdateListView(query);
                     break;
-                case "Новые":
+                case "Новые рецепты":
                     query = $"section=new&page={page}";
                     UpdateListView(query);
                     break;
