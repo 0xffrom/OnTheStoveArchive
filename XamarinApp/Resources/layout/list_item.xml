@@ -32,6 +32,7 @@
                 android:layout_gravity="top|center_horizontal"
                 android:gravity="top|center_horizontal"
                 android:ems="10"
+                android:singleLine = "false"
                 android:padding="4dp"
                 android:textSize="16dp"
                 android:textStyle="bold"
@@ -40,6 +41,7 @@
                 />
             <TextView
                 android:id="@+id/textLink"
+                android:singleLine = "false"
                 android:layout_gravity="center_horizontal|bottom"
                 android:gravity="center_horizontal|bottom"
                 android:padding="4dp"
