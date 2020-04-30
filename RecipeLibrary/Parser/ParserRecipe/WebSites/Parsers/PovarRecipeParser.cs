@@ -71,36 +71,39 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             Ingredients = ingredients;
 
             var stepRecipeBody = recipeBody.QuerySelector("div[itemprop='recipeInstructions'][itemtype='http://schema.org/ItemList']");
-            var stepCollection = stepRecipeBody.QuerySelectorAll("div");
-            List<StepRecipe> stepRecipesBoxes = new List<StepRecipe>(stepCollection.Length / 3);
-
-            foreach (var step in stepCollection)
+            if (stepRecipeBody != null)
             {
-                switch (step.ClassName)
+                var stepCollection = stepRecipeBody.QuerySelectorAll("div");
+                List<StepRecipe> stepRecipesBoxes = new List<StepRecipe>(stepCollection.Length / 3);
+
+                foreach (var step in stepCollection)
                 {
-                    case "detailed_step_photo_big":
+                    switch (step.ClassName)
                     {
-                        var firstEl = step.FirstElementChild;
+                        case "detailed_step_photo_big":
+                        {
+                            var firstEl = step.FirstElementChild;
 
-                        string description = firstEl.Attributes[0].Value;
+                            string description = firstEl.Attributes[0].Value;
 
-                        string pictureUrl = firstEl.Attributes[3].Value;
+                            string pictureUrl = firstEl.Attributes[3].Value;
 
-                        stepRecipesBoxes.Add(new StepRecipe(description,
-                            new Image(pictureUrl)));
-                        break;
-                    }
-                    case "detailed_step_description_big noPhotoStep":
-                    {
-                        string description = step.TextContent;
-                        stepRecipesBoxes.Add(new StepRecipe(description,
-                            new Image()));
-                        break;
+                            stepRecipesBoxes.Add(new StepRecipe(description,
+                                new Image(pictureUrl)));
+                            break;
+                        }
+                        case "detailed_step_description_big noPhotoStep":
+                        {
+                            string description = step.TextContent;
+                            stepRecipesBoxes.Add(new StepRecipe(description,
+                                new Image()));
+                            break;
+                        }
                     }
                 }
+                StepsRecipe = stepRecipesBoxes.ToArray();
             }
-
-            StepsRecipe = stepRecipesBoxes.ToArray();
+           
 
             var rcpAuthorTimeBody = recipeBody
                 .QuerySelector("div.rcpAuthorTime");

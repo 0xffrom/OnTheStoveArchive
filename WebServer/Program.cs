@@ -23,6 +23,7 @@ namespace WebServer
         .ConfigureWebHostDefaults(webBuilder =>
         {
             webBuilder.UseStartup<Startup>();
+            
         });
     }
 }

@@ -29,7 +29,7 @@ namespace WebServer.Controllers
         [HttpGet("get")]
         public async Task<ActionResult> Get(string url)
         {
-
+            GC.Collect();
             DateTime startTime = DateTime.Now;
             MySql.Data.MySqlClient.MySqlConnection conn = RecipeDataContext.GetConnection();
             _logger.LogInformation($"[{DateTime.Now}]: Запрос на парсинг старницы рецепта. Url: {url}");
@@ -125,7 +125,7 @@ namespace WebServer.Controllers
                 // Подключения к БД нет:
                 default:
                     try
-                    {
+                    {       
                         // Пытаемся запарсить рецепт:
                         recipe = await GetData.GetRecipe(url);
                         _logger.LogDebug($"[{DateTime.Now}]: Рецепт получен.");
