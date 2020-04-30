@@ -17,7 +17,7 @@ namespace RecipeLibrary.Parser.ParserPage.WebSites
             double indexStartPopularity = settings.IndexPopularity;
 
             return (from recipe in recipesBody
-                    let anyBody = recipe.QuerySelector("h3").QuerySelector("a")
+                    let anyBody = recipe.QuerySelector("h3 > a")
                     let title = anyBody.TextContent
                     let url = "https://povar.ru" + anyBody.Attributes[0].Value
                     let pictureBody = recipe.QuerySelector("img")

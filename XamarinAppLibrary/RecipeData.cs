@@ -9,7 +9,13 @@ namespace XamarinAppLibrary
 {
     public static class RecipeData
     {
-        private static string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "onstove.db3");
+        private static string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "recipes.db3");
+        private static SQLiteConnection Db = new SQLiteConnection(dbPath);
+        static RecipeData()
+        {
+            Db.CreateTable<RecipeTable>();
+        }
+
         private static string GetFileRecipeName(string url)
         {
             // Пример: https://www.povarenok.ru/recipes/show/163893/
@@ -37,10 +43,7 @@ namespace XamarinAppLibrary
 
         public static RecipeShort[] GetArrayRecipes()
         {
-            var db = new SQLiteConnection(dbPath);
-            db.CreateTable<RecipeTable>();
-
-            var recipes = db.Table<RecipeTable>().ToArray();
+            var recipes = Db.Table<RecipeTable>().ToArray();
 
             RecipeShort[] recipeShorts = new RecipeShort[recipes.Length];
 
@@ -59,38 +62,26 @@ namespace XamarinAppLibrary
         {
             string fileName = GetFileRecipeName(url);
 
-            var db = new SQLiteConnection(dbPath);
-            db.CreateTable<RecipeTable>();
-
-            return db.Table<RecipeTable>().FirstOrDefault(x => x.Name == fileName) == null ? false : true;
+            return Db.Table<RecipeTable>().FirstOrDefault(x => x.Name == fileName) == null ? false : true;
         }
 
         public static void DeleteRecipe(string url)
         {
             string fileName = GetFileRecipeName(url);
+          
+            int id = Db.Table<RecipeTable>().First(x => x.Name == fileName).Id;
 
-            var db = new SQLiteConnection(dbPath);
-            db.CreateTable<RecipeTable>();
-
-            int id = db.Table<RecipeTable>().First(x => x.Name == fileName).Id;
-
-            db.Delete<RecipeTable>(id);
+            Db.Delete<RecipeTable>(id);
         }
 
 
         public static void SaveRecipe(string url, RecipeShort recipeShort)
         {
             string fileName = GetFileRecipeName(url);
-            var db = new SQLiteConnection(dbPath);
-            db.CreateTable<RecipeTable>();
+            
+            RecipeTable recipeTable = new RecipeTable(fileName, Data.RecipeToByteArray(recipeShort));
 
-            RecipeTable recipeTable = new RecipeTable();
-
-            recipeTable.Name = fileName;
-            recipeTable.Recipe = Data.RecipeToByteArray(recipeShort);
-
-            db.Insert(recipeTable);
-
+            Db.Insert(recipeTable);
         }
 
 

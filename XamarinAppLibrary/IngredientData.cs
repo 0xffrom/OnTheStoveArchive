@@ -1,71 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿
 using ObjectsLibrary.Components;
 using SQLite;
+using System.Collections.Generic;
+using System.IO;
 
 namespace XamarinAppLibrary
 {
-    public class IngredientData
+    public static class IngredientData
     {
-        private static string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "onstove.db3");
+        private static string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ingredients.db3");
+        private static SQLiteConnection Db = new SQLiteConnection(dbPath);
 
-        public static IngredientTable[] GetArrayIngredients()
+        static IngredientData()
         {
-            var db = new SQLiteConnection(dbPath);
-
-            db.CreateTable<RecipeTable>();
-
-            return db.Table<IngredientTable>().ToArray();
+            Db.DeleteAll<IngredientTable>();
         }
 
-        public static bool ExistsIngredient(Ingredient ingredient, string recipeName)
+        public static List<Ingredient> GetArrayIngredients()
         {
-            var db = new SQLiteConnection(dbPath);
-            db.CreateTable<IngredientTable>();
+            var ingredientsDb = Db.Table<IngredientTable>().ToArray();
 
-            return db.Table<IngredientTable>().FirstOrDefault(x => 
+            List<Ingredient> ingredients = new List<Ingredient>(ingredientsDb.Length);
+
+            for (int i = 0; i < ingredientsDb.Length; i++)
+            {
+                if (ingredientsDb[i].Name == null || ingredientsDb[i].Unit == null || ingredientsDb[i].RecipeName == null)
+                    continue;
+
+                ingredients.Add(new Ingredient(ingredientsDb[i].Name, ingredientsDb[i].Unit, ingredientsDb[i].RecipeName));
+            }
+
+            return ingredients;
+        }
+
+        public static bool ExistsIngredient(Ingredient ingredient)
+        {
+            return Db.Table<IngredientTable>().FirstOrDefault(x => 
             x.Name == ingredient.Name && 
             x.Unit == ingredient.Unit &&
-            x.RecipeName == recipeName) == null ? false : true;
+            x.RecipeName == ingredient.RecipeName) == null ? false : true;
         }
 
 
-        public static void DeleteIngredient(Ingredient ingredient, string recipeName)
+        public static void DeleteIngredient(Ingredient ingredient)
         {
-            var db = new SQLiteConnection(dbPath);
-            db.CreateTable<IngredientTable>();
+            var ingredientDb = Db.Table<IngredientTable>().FirstOrDefault(x =>
+            x.Name == ingredient.Name &&
+            x.RecipeName == ingredient.RecipeName);
 
-            int id = db.Table<IngredientTable>().First(x => 
-            x.Name == ingredient.Name && 
-            x.Unit == ingredient.Unit && 
-            (x.RecipeName == recipeName || x.RecipeName == null || x.RecipeName == string.Empty)).Id;
+            if (ingredientDb == null)
+                return;
 
-            db.Delete<RecipeTable>(id);
+            Db.Delete<IngredientTable>(ingredientDb.Id);
         }
 
 
-        public static void SaveIngredient(Ingredient ingredient, string recipeName)
+        public static void SaveIngredient(Ingredient ingredient)
         {
-            var db = new SQLiteConnection(dbPath);
-            db.CreateTable<IngredientTable>();
+            IngredientTable ingredientTable = 
+                new IngredientTable(ingredient.Name, ingredient.Unit, ingredient.RecipeName);
 
-            IngredientTable ingredientTable = new IngredientTable();
-
-            ingredientTable.Name = ingredient.Name;
-            ingredientTable.Unit = ingredient.Unit;
-            ingredientTable.RecipeName = recipeName;
-
-            db.Insert(ingredientTable);
+            Db.Insert(ingredientTable);
 
         }
 

@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using ObjectsLibrary;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -28,8 +29,8 @@ namespace XamarinAppLibrary
             return source;
         }
 
-        public static RecipeShort[] GetPages(string query) =>
-            JsonConvert.DeserializeObject<RecipeShort[]>(GetSource("page/get?" + query).Result);
+        public static List<RecipeShort> GetPages(string query) =>
+            JsonConvert.DeserializeObject<List<RecipeShort>>(GetSource("page/get?" + query).Result);
 
         public static RecipeFull GetRecipe(string url) =>
             JsonConvert.DeserializeObject<RecipeFull>

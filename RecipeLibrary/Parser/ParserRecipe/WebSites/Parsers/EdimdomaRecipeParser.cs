@@ -58,7 +58,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                     string unit = input.Attributes[1].Value + ' ' + input.Attributes[6].Value;
 
                     name = titleIngredient == "Основные" ? name : name + " (" + titleIngredient + ')';
-                    ingredients.Add(new Ingredient(name, unit));
+                    ingredients.Add(new Ingredient(name, unit, Title));
                 }
 
                 Ingredients = ingredients.ToArray();
@@ -84,10 +84,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             string authorName = recipeBody.QuerySelector("div.person__name").TextContent;
 
-            try
-            {
-                int.TryParse(recipeBody.QuerySelector("div.field__container")
-                    .FirstElementChild?.Attributes[3].Value ?? "0", out int countPortions);
+                int.TryParse(recipeBody.QuerySelector("div.field__container > div:first-child")?.Attributes[3].Value ?? "0", out int countPortions);
 
                 double prepMinutes = ConvertToMinutes(recipeBody.QuerySelector("div.entry-stats__value").TextContent);
 
@@ -95,9 +92,10 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
                 double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value").TextContent, out double calories);
 
-                var tablePFC = cpfcDiv.QuerySelector("div.nutritional-value__nutritional-list")
-                    .QuerySelectorAll("table");
+                var tablePFC = cpfcDiv.QuerySelectorAll("div.nutritional-value__nutritional-list > table");
 
+            if (tablePFC != null)
+            {
                 double.TryParse(
                     tablePFC[0].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
                         .TextContent.Replace(" г", string.Empty) ?? "0", out double protein);
@@ -113,10 +111,8 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 Additional = new Additional(authorName, countPortions, prepMinutes,
                     new CPFC(calories, protein, fats, carbohydrates));
             }
-            catch
-            {
-                Additional = new Additional();
-            }
+            else
+                Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC());
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }

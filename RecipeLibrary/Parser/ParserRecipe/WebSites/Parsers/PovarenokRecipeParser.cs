@@ -39,17 +39,18 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         /// <see cref="IParserRecipe{T}.Parse(IHtmlDocument, IParserRecipeSettings)"/>
         public RecipeFull Parse(IHtmlDocument document, IParserRecipeSettings parserRecipeSettings)
         {
+            var recipeBody = document.QuerySelector("article.item-bl.item-about");
             Url = parserRecipeSettings.Url;
             
-            Title = document.QuerySelector("article.item-bl.item-about > h1").TextContent;
-            TitleImage = new Image(document.QuerySelector("article.item-bl.item-about > div.m-img").FirstElementChild?.Attributes[1]?.Value);
+            Title = recipeBody.QuerySelector("h1").TextContent;
+            TitleImage = new Image(recipeBody.QuerySelector("div.m-img > div:first-child")?.Attributes[1]?.Value);
             
-            Description = document.QuerySelector("div.article-text")
+            Description = recipeBody.QuerySelector("div.article-text")
                 .TextContent
                 .Replace("\n", String.Empty)
                 .Replace("  ", String.Empty);
 
-            var ingredientBody = document.QuerySelector("article.item-bl.item-about > div.ingredients-bl");
+            var ingredientBody = recipeBody.QuerySelector("div.ingredients-bl");
             int countIngredientTitles = ingredientBody.QuerySelectorAll("ul").Length;
             var ingredientsList = new List<Ingredient>();
 
@@ -104,7 +105,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                         if (titleIngredient != Title)
                             name += $" ({titleIngredient})";
 
-                        Ingredient ingredient = new Ingredient(name, unit);
+                        Ingredient ingredient = new Ingredient(name, unit, Title);
                         ingredients[j] = ingredient;
                     }
 
@@ -114,7 +115,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Ingredients = ingredientsList.ToArray();
             
-            var recipesArray = document.QuerySelectorAll("article.item-bl.item-about > 3div.cooking-bl");
+            var recipesArray = recipeBody.QuerySelectorAll("div.cooking-bl");
             int countRecipes = recipesArray.Length;
 
             StepRecipe[] stepRecipeBoxes = new StepRecipe[countRecipes];
@@ -130,7 +131,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             StepsRecipe = stepRecipeBoxes;
 
-            string authorName = document.QuerySelector("article.item-bl.item-about > a[title='Профиль пользователя']")?.TextContent;
+            string authorName = recipeBody.QuerySelector("a[title='Профиль пользователя']")?.TextContent;
             var ingredientBodyP = ingredientBody.QuerySelectorAll("p");
 
             double prepMinutes = ConvertToMinutes(ingredientBodyP
@@ -141,29 +142,34 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Where(x => x.FirstElementChild.TextContent.Contains("Количество порций:"))
                 .Select(x => x.TextContent).FirstOrDefault()?.Replace("Количество порций:", string.Empty) ?? "0");
 
-            var tableCPFC = document
-                .QuerySelector("article.item-bl.item-about > div[id='nae-value-bl']")
-                .LastElementChild?
-                .FirstElementChild?
-                .QuerySelectorAll("tr")[3]
-                .QuerySelectorAll("strong")
-                .Select(x => x.TextContent)
-                .ToArray();
+            Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC());
 
-            CPFC CPFC = null;
-
-            if (tableCPFC != null)
+            var tableBody = recipeBody.QuerySelector("div[id='nae-value-bl']");
+            if (tableBody != null)
             {
-                double calories = double.Parse(tableCPFC[0].Replace(" ккал", string.Empty).Replace('.', ','));
-                double protein = double.Parse(tableCPFC[1].Replace(" г", string.Empty).Replace('.', ','));
-                double fats = double.Parse(tableCPFC[2].Replace(" г", string.Empty).Replace('.', ','));
-                double carbohydrates = double.Parse(tableCPFC[3].Replace(" г", string.Empty).Replace('.', ','));
+                var tableCPFC = tableBody
+                    .LastElementChild?
+                    .FirstElementChild?
+                    .QuerySelectorAll("tr")[3]
+                    .QuerySelectorAll("strong")
+                    .Select(x => x.TextContent)
+                    .ToArray();
 
-                CPFC = new CPFC(calories, protein, fats, carbohydrates);
+                CPFC CPFC = null;
+
+                if (tableCPFC != null)
+                {
+                    double calories = double.Parse(tableCPFC[0].Replace(" ккал", string.Empty).Replace('.', ','));
+                    double protein = double.Parse(tableCPFC[1].Replace(" г", string.Empty).Replace('.', ','));
+                    double fats = double.Parse(tableCPFC[2].Replace(" г", string.Empty).Replace('.', ','));
+                    double carbohydrates = double.Parse(tableCPFC[3].Replace(" г", string.Empty).Replace('.', ','));
+
+                    CPFC = new CPFC(calories, protein, fats, carbohydrates);
+                }
+
+
+                Additional = new Additional(authorName, countPortions, prepMinutes, CPFC);
             }
-
-            Additional = new Additional(authorName, countPortions, prepMinutes, CPFC);
-
 
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);

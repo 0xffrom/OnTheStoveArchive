@@ -43,15 +43,15 @@ namespace XamarinApp
                  {
                      if (e.IsChecked)
                      {
-                         IngredientData.SaveIngredient(_ingredients[position], _recipeFull.Title);
+                         IngredientData.SaveIngredient(_ingredients[position]);
                      }
                      else
                      {
-                         IngredientData.DeleteIngredient(_ingredients[position], _recipeFull.Title);
+                         IngredientData.DeleteIngredient(_ingredients[position]);
                      }
                  };
 
-            if (IngredientData.ExistsIngredient(_ingredients[position], _recipeFull.Title))
+            if (IngredientData.ExistsIngredient(_ingredients[position]))
                 checkBox.Checked = true;
             else
                 checkBox.Checked = false;
