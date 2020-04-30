@@ -31,6 +31,7 @@
                 android:ems="10"
                 android:textSize="18dp"
                 android:gravity="left"
+                android:fontFamily="@Font/ActorRegular"
                 android:id="@+id/stepDescription"
                 android:textColor="@android:color/black"
             />

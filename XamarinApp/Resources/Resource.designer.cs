@@ -10797,7 +10797,10 @@ namespace XamarinApp
 		{
 			
 			// aapt resource value: 0x7F090000
-			public const int ActorRegular = 2131296256;
+			public const int AbhayaLibreBold = 2131296256;
+			
+			// aapt resource value: 0x7F090001
+			public const int ActorRegular = 2131296257;
 			
 			static Font()
 			{

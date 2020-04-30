@@ -23,6 +23,7 @@
                 android:popupBackground="@color/colorOrange"
                 android:layout_gravity="left|center_vertical"
                 style="@style/SpinnerTheme"
+                android:fontFamily="@Font/ActorRegular"
                 android:spinnerMode="dropdown"/>
 
         <android.support.v4.widget.SwipeRefreshLayout

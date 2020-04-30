@@ -6,4 +6,5 @@
           android:paddingTop="2dp"
           android:paddingLeft="15dp"
           android:paddingBottom="10dp"
+          android:fontFamily="@Font/ActorRegular"
           android:textColor="#FFFFFF"/>

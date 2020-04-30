@@ -342,6 +342,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\outline_add_shopping_cart_black_48.png" />
     <AndroidResource Include="Resources\drawable\outline_add_shopping_cart_24.xml" />
     <AndroidResource Include="Resources\drawable\pan.png" />
+    <AndroidResource Include="Resources\Font\AbhayaLibreBold.ttf" />
     <AndroidResource Include="Resources\Font\ActorRegular.ttf" />
     <AndroidResource Include="Resources\layout\ingredients_saved_list.xml" />
     <AndroidResource Include="Resources\layout\spinner_text.xml" />

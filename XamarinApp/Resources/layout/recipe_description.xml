@@ -19,11 +19,13 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:layout_marginBottom="20dp">
                 <ImageView
                     android:layout_height="250dp"
                     android:layout_width="match_parent"
                     android:scaleType="centerCrop"
+                    android:fontFamily="@Font/ActorRegular"
                     android:id="@+id/imageMainRecipe"/>
 
                 <TextView
@@ -33,6 +35,7 @@
                     android:paddingRight="10dp"
                     android:gravity="left"
                     android:textSize="16dp"
+                    android:fontFamily="@Font/ActorRegular"
                     android:id="@+id/CPFCRecipe"
             />
                 <TextView
@@ -41,19 +44,20 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:gravity="left"
+                    android:fontFamily="@Font/ActorRegular"
                     android:textSize="16dp"
                     android:id="@+id/authorNameRecipe"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
+                    android:fontFamily="@Font/ActorRegular"
                     android:paddingRight="10dp"
                     android:gravity="left"
                     android:textSize="16dp"
                     android:id="@+id/additionalInfoRecipe"/>
                 <TextView
-                    android:typeface="sans"
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:padding="10dp"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
@@ -61,6 +65,7 @@
                     android:gravity="left"
                     android:textSize="18dp"
                     android:textColor="#000000"
+                    android:fontFamily="@Font/AbhayaLibreBold"
                     android:id="@+id/titleMainDescription"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -68,6 +73,7 @@
                     android:padding="10dp"
                     android:gravity="left"
                     android:textSize="12dp"
+                    android:fontFamily="@Font/ActorRegular"
                     android:textColor="@color/colorOrange"
                     android:id="@+id/urlRecipe"/>
 

@@ -35,6 +35,7 @@
         <TextView
             android:id="@+id/titleRecipe"
             android:gravity="center"
+            android:fontFamily="@Font/ActorRegular"
             android:layout_gravity="left|center_vertical"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -45,16 +46,16 @@
         />
             <ImageButton
             android:layout_gravity="right|center_vertical"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_margin="5dp"
             android:background="@drawable/round_share_24"
             android:id="@+id/shareRecipe"
             />
         <Button
             android:layout_gravity="right|center_vertical"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:background="@drawable/round_star_border_white_24"
             android:id="@+id/starRecipe"
             />
@@ -69,6 +70,7 @@
             android:id="@+id/textViewMainDescription"
             android:layout_centerInParent="true"
             android:layout_weight="1"
+            android:fontFamily="@Font/ActorRegular"
             android:layout_width="95dp"
             android:layout_height="30dp"
             android:layout_marginLeft="21dp"
@@ -81,6 +83,7 @@
             android:id="@+id/textViewMainIngredients"
             android:text="Ингредиенты"
             android:textSize="17dp"
+            android:fontFamily="@Font/ActorRegular"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="110dp"
@@ -88,6 +91,7 @@
         <TextView
             android:id="@+id/textViewMainRecipe"
             android:text="Рецепт"
+            android:fontFamily="@Font/ActorRegular"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_marginRight="21dp"

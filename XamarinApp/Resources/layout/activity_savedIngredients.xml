@@ -32,6 +32,7 @@
       android:layout_height="wrap_content"
       android:textColor="@android:color/white"
       android:textSize="18dp"
+      android:fontFamily="@Font/ActorRegular"
       android:layout_gravity="center_horizontal|center_vertical"
       android:text="Сохранённые ингредиенты"
       />
