@@ -31,26 +31,32 @@ namespace WebServer.Controllers
         [HttpGet("get")]
         public async Task<ActionResult> Get(string section, int page = 1, string recipeName = null)
         {
-            recipeName ??= string.Empty;
+            string log = $"GET запрос на получение страниц с рецептами. Параметры: " +
+             $"section={section}, page={page}";
 
+            if (recipeName != null)
+                log += $", recipeName={recipeName}";
+            else
+                recipeName = string.Empty;
+
+            _logger.LogInformation(log);
             DateTime startTime = DateTime.Now;
-
-            _logger.LogInformation($"[{DateTime.Now}]: Получен запрос на парсинг страницы с рецептами ==> " +
-                $"section: {section}, page: {page}, recipeName: {recipeName}");
 
             try
             {
                 RecipeShort[] recipes = await GetData.GetPage(section.ToLower(), page, recipeName.ToLower());
                 
-                _logger.LogInformation($"[{DateTime.Now}]: Запрос успешно выполнен.");
-                _logger.LogDebug($"[{DateTime.Now}] Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                _logger.LogInformation($"Запрос успешно выполнен.");
+                _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                _logger.LogInformation($"Статус: Ok.");
                 return Ok(recipes);
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"[{DateTime.Now}]: Запрос выполнен неудачно.");
-                _logger.LogWarning($"[{DateTime.Now}]: Возврат пустой страницы.");
-                return NoContent();
+                _logger.LogError(e, $"Запрос выполнен неудачно.");
+                _logger.LogWarning($"Возврат пустой страницы.");
+                _logger.LogInformation($"Статус: NotFound.");
+                return NotFound();
             }
         }
     }

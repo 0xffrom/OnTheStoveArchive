@@ -32,7 +32,7 @@ namespace WebServer.Controllers
             GC.Collect();
             DateTime startTime = DateTime.Now;
             MySql.Data.MySqlClient.MySqlConnection conn = RecipeDataContext.GetConnection();
-            _logger.LogInformation($"[{DateTime.Now}]: Запрос на парсинг старницы рецепта. Url: {url}");
+            _logger.LogInformation($"Запрос на парсинг старницы рецепта. Url: {url}");
 
             try
             { 
@@ -40,11 +40,11 @@ namespace WebServer.Controllers
             }
             catch (MySql.Data.MySqlClient.MySqlException)
             {
-                _logger.LogError($"[{DateTime.Now}]: Неудалось подключиться к базе данных.");
+                _logger.LogError("Неудалось подключиться к базе данных.");
             }
 
             if (conn.State == System.Data.ConnectionState.Open)
-                _logger.LogDebug($"[{DateTime.Now}]: Успешное подключение к базе данных.");
+                _logger.LogDebug("Успешное подключение к базе данных.");
 
             RecipeFull recipe;
 
@@ -60,16 +60,12 @@ namespace WebServer.Controllers
                     // Если случается ошибка при парсинге сайта:
                     catch (Exception exp)
                     {
-                        if (exp is ParserException)
-                            _logger.LogError(exp, $"[{DateTime.Now}]: Рецепт не парсится.");
-                        else
-                            _logger.LogCritical(exp, $"[{DateTime.Now}]: Рецепт не парсится. Ошибка неизвестна.");
-
+                        _logger.LogError(exp, "Рецепт невозможно получить с сайта.");        
 
                         // Если рецепт есть в БД, выкидываем его:
                         if (RecipeDataContext.IsExists(url, conn))
                         {
-                            _logger.LogWarning($"[{DateTime.Now}]: Был выброшен старый рецепт.");
+                            _logger.LogWarning($"[{DateTime.Now}]: Был выдан старый рецепт.");
                             recipe = RecipeDataContext.GetRecipe(url, conn, out double size);
                             _logger.LogDebug($"[{DateTime.Now}]: Рецепт взят из базы данных. Размер рецепта: {size:F2} KB");
                         }
@@ -77,50 +73,53 @@ namespace WebServer.Controllers
                         // Иначе выкидываем пустой рецепт:
                         else
                         {
-                            _logger.LogCritical($"[{DateTime.Now}]: В базе данных отсутствует данный рецепт. Был выброшен пустой рецепт.");
-                            _logger.LogDebug($"[{DateTime.Now}] Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                            _logger.LogCritical($"[{DateTime.Now}]");
-                            return NoContent();
+                            _logger.LogCritical($"В базе данных отсутствует данный рецепт. Был выброшен пустой рецепт.");
+                            _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                            _logger.LogInformation($"Статус: NotFound.");
+                            return NotFound();
                         }
 
-                        _logger.LogDebug($"[{DateTime.Now}]: Отключение от базы данных.");
-                        _logger.LogDebug($"[{DateTime.Now}] Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                        _logger.LogDebug($"Отключение от базы данных.");
+                        _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                        _logger.LogInformation($"Статус: Ok.");
 
                         conn.Clone();
                         return Ok(recipe);
-
                     }
 
                     // Если ошибки нет, добавляем рецепт в БД:
                     RecipeDataContext.AddRecipe(url, recipe, conn);
 
-                    _logger.LogDebug($"[{DateTime.Now}]: Рецепт был получен путём парсинга страницы, и был добавлен в БД.");
-                    _logger.LogDebug($"[{DateTime.Now}] Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                    _logger.LogDebug($"Рецепт был получен путём парсинга страницы, и был добавлен в БД.");
+                    _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                    _logger.LogInformation($"Статус: Ok.");
                     return Ok(recipe);
                 
                 // Подключение к БД есть и рецепт не нуждается в обновлении:
                 case System.Data.ConnectionState.Open:
-                    _logger.LogDebug($"[{DateTime.Now}]: Рецепт не нуждается в обновлении.");
+
+                    _logger.LogDebug($"Рецепт не нуждается в обновлении.");
 
                     try
                     {
                         recipe = RecipeDataContext.GetRecipe(url, conn, out double size);
-
-                        _logger.LogDebug($"[{DateTime.Now}]: Рецепт взят из базы данных. Размер рецепта: {size:F2} KB");
+                        _logger.LogDebug($"Рецепт взят из базы данных. Размер рецепта: {size:F2} KB");
                     }
                     // Если возникает ошибка с БД:
                     catch (MySql.Data.MySqlClient.MySqlException)
                     {
-                        _logger.LogCritical($"[{DateTime.Now}]: Ошибка с БД. Был выброшен пустой рецепт.");
-                        _logger.LogDebug($"[{DateTime.Now}]: Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                        return NoContent();
+                        _logger.LogCritical($"Ошибка с БД. Был выброшен пустой рецепт.");
+                        _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                        _logger.LogInformation($"Статус: NotFound.");
+                        return NotFound();
                     }
                     finally
                     {
-                        _logger.LogDebug($"[{DateTime.Now}]: Отключение от базы данных.");
+                        _logger.LogDebug($"Отключение от базы данных.");
                         conn.Close();
                     }
 
+                    _logger.LogInformation($"Статус: Ok.");
                     return Ok(recipe);
                 // Подключения к БД нет:
                 default:
@@ -128,22 +127,20 @@ namespace WebServer.Controllers
                     {       
                         // Пытаемся запарсить рецепт:
                         recipe = await GetData.GetRecipe(url);
-                        _logger.LogDebug($"[{DateTime.Now}]: Рецепт получен.");
-                        _logger.LogDebug($"[{DateTime.Now}]: Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                        _logger.LogDebug($"Рецепт получен.");
+                        _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                        _logger.LogInformation($"Статус: Ok.");
                         return Ok(recipe);
                     }
                     
                     // Если случается ошибка при парсинге сайта:
                     catch (Exception exp)
                     {
-                        if (exp is ParserException)
-                            _logger.LogError(exp, $"[{DateTime.Now}]: Рецепт не парсится.");
-                        else
-                            _logger.LogCritical(exp, $"[{DateTime.Now}]: Рецепт не парсится. Ошибка неизвестна.");
-                        
-                        _logger.LogDebug($"[{DateTime.Now}]: Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                        _logger.LogCritical($"[{DateTime.Now}]: Ошибка с БД и в парсинге рецепта. Был выброшен пустой рецепт.");
-                        return NoContent();
+                        _logger.LogError(exp, "Рецепт невозможно получить с сайта.");
+                        _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                        _logger.LogCritical($"Ошибка с БД и в парсинге рецепта. Был выброшен пустой рецепт.");
+                        _logger.LogInformation($"Статус: NotFound.");
+                        return NotFound();
                     }
             }         
         }

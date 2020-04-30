@@ -16,7 +16,7 @@ namespace Checker
         
         static async Task Main(string[] args)
         {
-            for (int page = 1; page < 30000; page++)
+            for (int page = 7; page < 30000; page++)
             {
                 Console.WriteLine("Страница: " + page);
                  List<RecipeShort> recipes = 
@@ -64,8 +64,6 @@ namespace Checker
             var client = new HttpClient();
 
             var response = await client.GetAsync(currentUrl);
-
-            var source = string.Empty;
 
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 return ("TRUE");

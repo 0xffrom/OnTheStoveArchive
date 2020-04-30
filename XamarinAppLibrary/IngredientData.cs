@@ -13,7 +13,7 @@ namespace XamarinAppLibrary
 
         static IngredientData()
         {
-            Db.DeleteAll<IngredientTable>();
+            Db.CreateTable<IngredientTable>();
         }
 
         public static List<Ingredient> GetArrayIngredients()
