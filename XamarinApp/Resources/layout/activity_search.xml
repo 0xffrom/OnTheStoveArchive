@@ -41,9 +41,9 @@
     </LinearLayout>
     <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
-            app:itemTextColor="#FFFFFF"
+            app:itemTextColor="#fff9f0"
             app:theme="@style/NavigationViewStyle"
-            android:background="@android:color/white"
+            android:background="@color/colorMain"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"

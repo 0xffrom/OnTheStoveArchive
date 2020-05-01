@@ -29,13 +29,6 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rectangle_3"
         android:elevation="3dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical|right"
-            android:background="@drawable/vector"
-            android:id="@+id/imageButton2"/>
         <EditText
             android:imeOptions="actionGo"
             android:layout_gravity="center_vertical|left"
@@ -43,14 +36,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:maxLength="25"
-            android:textSize="14dp"
+            android:textSize="16dp"
             android:layout_marginRight="10dp"
-            android:padding="10dp"
+            android:padding="5dp"
             android:layout_marginLeft="10dp"
             android:fontFamily="@Font/ActorRegular"
             android:hint="Поиск рецепта..."
-            android:textColor="@color/colorMain"     
+            android:background="@drawable/rectangle_3"
+            android:textColor="#eb9502"
             android:layout_centerInParent="true"
             android:id="@+id/TextFind"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical|right"
+            android:background="@drawable/vector"
+            android:id="@+id/imageButton2"/>
     </FrameLayout>
 </LinearLayout>

@@ -36,7 +36,7 @@
     <group android:checkableBehavior="single">
         <item
                 android:id="@+id/nav_ingredient"
-                android:title="Найти по ингредиенту"/>
+                android:title="Поиск по разделам"/>
         <item
                 android:id="@+id/nav_cart"
                 android:title="Корзина продуктов"/>

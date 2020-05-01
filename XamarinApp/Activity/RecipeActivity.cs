@@ -4,6 +4,7 @@ using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
 using Android.Util;
@@ -28,8 +29,10 @@ namespace XamarinApp
         private RecipeFull recipeFull;
         private RecipeShort recipeShort;
 
-        private Button buttonStar;
+        private Button buttonBack;
+        private FloatingActionButton buttonStar;
         private Button buttonShare;
+        private Button buttonWeb;
         private RelativeLayout relativeLayoutBack;
         private TextView title;
         private ViewPager viewPager;
@@ -52,9 +55,11 @@ namespace XamarinApp
 
             title = FindViewById<TextView>(Resource.Id.titleRecipe);
             buttonShare = FindViewById<Button>(Resource.Id.shareRecipe);
-            buttonStar = FindViewById<Button>(Resource.Id.starRecipe);
+            buttonStar = FindViewById<FloatingActionButton>(Resource.Id.starRecipe);
             relativeLayoutBack = FindViewById<RelativeLayout>(Resource.Id.relativeLayoutBack);
             viewPager = FindViewById<ViewPager>(Resource.Id.viewPager);
+            buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
+            buttonWeb = FindViewById<Button>(Resource.Id.webRecipe);
 
             // Получаем необходимые данные: 
             urlRecipe = Intent.GetStringExtra("url");
@@ -63,8 +68,10 @@ namespace XamarinApp
             buttonShare.Click += OnShareButton;
             buttonStar.Click += OnAddFavRecipe;
             relativeLayoutBack.Click += OnBackPressed;
+            buttonBack.Click += OnBackPressed;
+            buttonWeb.Click += OnStartWeb;
 
-            string[] messagesError = Resources.GetStringArray(Resource.String.messagesError);
+            string[] messagesError = Resources.GetStringArray(Resource.Array.messagesError);
             messageErrorTitle = messagesError[0];
             messageErrorText = messagesError[1];
             messageErrorTextButton = messagesError[2];
@@ -77,12 +84,13 @@ namespace XamarinApp
 
         protected override async void OnStart()
         {
+            base.OnStart();
+
             // Проверка на избранный рецепт: 
             if (RecipeData.ExistsRecipe(urlRecipe))
                 // Если избранный, то сделать звёздочку закрашенной.
                 buttonStar.SetBackgroundResource(
                     Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
-
             try
             {
                 recipeFull = await UpdateCollectionRecipes(urlRecipe);
@@ -96,24 +104,35 @@ namespace XamarinApp
                 errorDialog.Show();
             }
 
-            base.OnStart();
+            
         }
 
         private void OnBackPressed(object sender, EventArgs args) => base.OnBackPressed();
+
+        private void OnStartWeb(object sender, EventArgs args)
+        {
+            Android.Net.Uri address = Android.Net.Uri.Parse(recipeFull.Url);
+            Intent openLinkIntent = new Intent(Intent.ActionView, address);
+
+            if (openLinkIntent.ResolveActivity(PackageManager) != null)
+            {
+                StartActivity(openLinkIntent);
+            }
+        }
 
         private void OnAddFavRecipe(object sender, EventArgs args)
         {
             if (!RecipeData.ExistsRecipe(urlRecipe))
             {
+                Toast.MakeText(this, "Рецепт добавлен в избранное", ToastLength.Short).Show();
                 RecipeData.SaveRecipe(urlRecipe, recipeShort);
-                buttonStar.SetBackgroundResource(
-                    Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
+                buttonStar.SetImageResource(Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
                 return;
             }
             
             // else:
             RecipeData.DeleteRecipe(urlRecipe);
-            buttonStar.SetBackgroundResource(Resources.GetIdentifier("round_star_border_white_24", "drawable",
+            buttonStar.SetImageResource(Resources.GetIdentifier("round_star_border_white_24", "drawable",
                 PackageName));
         }
 
