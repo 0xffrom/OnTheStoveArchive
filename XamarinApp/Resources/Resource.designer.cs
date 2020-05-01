@@ -7606,10 +7606,13 @@ namespace XamarinApp
 		{
 			
 			// aapt resource value: 0x7F030000
-			public const int recipeTitles = 2130903040;
+			public const int messagesError = 2130903040;
 			
 			// aapt resource value: 0x7F030001
-			public const int sort_array = 2130903041;
+			public const int recipeTitles = 2130903041;
+			
+			// aapt resource value: 0x7F030002
+			public const int sort_array = 2130903042;
 			
 			static Array()
 			{
