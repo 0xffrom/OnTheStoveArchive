@@ -52,7 +52,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             foreach (var textLine in recipeBody.QuerySelectorAll("span.detailed_full").Select(x => x.TextContent))
                 Description += textLine + Environment.NewLine;
 
-            Description.Replace("/t", "").Replace("  ", "").Trim();
+            Description.Replace("\t", "").Replace("  ", "").Trim();
 
             var ingredientsBody = recipeBody.QuerySelector("ul.detailed_ingredients").QuerySelectorAll("li");
 

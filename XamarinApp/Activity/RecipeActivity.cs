@@ -41,9 +41,7 @@ namespace XamarinApp
             recipeShort = Data.ByteArrayToObject<RecipeShort>(Intent.GetByteArrayExtra("recipeShort"));
 
 
-            SetContentView(Resource.Layout.recipe_main);
-            UpdateView();
-            
+            SetContentView(Resource.Layout.recipe_main);         
 
             var buttonShare = FindViewById<Button>(Resource.Id.shareRecipe);
             buttonShare.Click += new EventHandler((sender, args) =>
@@ -91,7 +89,7 @@ namespace XamarinApp
                 }
             });
 
-
+            UpdateView();
         }
         
         private async void UpdateView()

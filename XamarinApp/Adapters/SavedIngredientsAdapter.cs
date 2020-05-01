@@ -26,9 +26,9 @@ namespace XamarinApp
         {
             SavedIngredientsViewHolder vh = holder as SavedIngredientsViewHolder;
 
-            vh.Title.Text = "Название: " + _items[position].Name;
-            vh.Unit.Text = "Количество: " + _items[position].Unit;
-            vh.RecipeName.Text = "Для: " + _items[position].RecipeName;
+            vh.Title.Text =  _items[position].Name;
+            vh.Unit.Text = _items[position].Unit;
+            vh.RecipeName.Text =  _items[position].RecipeName;
         }
         public void RemoveItem(int position)
         {

@@ -9,12 +9,10 @@ using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Views.Animations;
 using Android.Widget;
 using ObjectsLibrary;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using XamarinAppLibrary;
 
@@ -26,90 +24,104 @@ namespace XamarinApp
     {
         private RecyclerView recyclerView;
         private RecipeAdapter recipeAdapter;
-        private List<RecipeShort> recipeShorts;
-        private DrawerLayout _drawer;
+        private DrawerLayout drawer;
         private SwipeRefreshLayout swipeRefreshLayout;
         private LinearLayoutManager linearLayoutManager;
         private NavigationView navigationView;
         private Button buttonMenu;
+        private RecipeListener recipeListener;
+        private EditText editText;
+        private Spinner spinner;
+        private ArrayAdapter spinnerAdapter;
+        private ActionBarDrawerToggle actionBarDrawerToggle;
+
+        private List<RecipeShort> recipeShorts;
         private int page = 1;
         private string lastQuery;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // TODO: Тотальный рефакторинг.
-
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_search);
 
+            // Определяем компоненты: 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.listRecipeShorts);
             swipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout);
-            _drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             buttonMenu = FindViewById<Button>(Resource.Id.menu_button);
+            editText = FindViewById<EditText>(Resource.Id.TextFind);
+            spinner = FindViewById<Spinner>(Resource.Id.spinner);
+
             linearLayoutManager = new LinearLayoutManager(this);
-            
+            recipeListener = new RecipeListener(linearLayoutManager);
 
+            // Инициализируем элементы:
             swipeRefreshLayout.SetColorSchemeColors(Color.Orange, Color.DarkOrange);
-            swipeRefreshLayout.Refresh += delegate (object sender, System.EventArgs e)
-            {
-                if (lastQuery == null)
-                    UpdateListView();
-                else
-                    UpdateListView(lastQuery);
-            };
+            swipeRefreshLayout.Refresh += RefreshLayout;
 
+            recyclerView.AddOnScrollListener(recipeListener);
+            recipeListener.LoadMoreEvent += LoadMoreElements;
 
-            recyclerView.HasFixedSize = false;
-            
+            editText.KeyPress += FindByRecipeName;
 
-
-            var onScrollListener = new RecipeListener(linearLayoutManager);
-            recyclerView.AddOnScrollListener(onScrollListener);
-            onScrollListener.LoadMoreEvent += (object sender, EventArgs e) =>
-            {
-                string query = lastQuery.Substring(0, lastQuery.IndexOf("page=") + 5) + (++page);
-                UpdateListView(query, recipeShorts);
-            };
-
-
-            SetPlateRecipe();
-
-            SetSpinner();
-
-            
-            var toggle = new ActionBarDrawerToggle(this, _drawer, Resource.String.navigation_drawer_open,
-                Resource.String.navigation_drawer_close);
-            _drawer.AddDrawerListener(toggle);
-            toggle.SyncState();
-
-            
+            actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, 
+                Resource.String.navigation_drawer_open,Resource.String.navigation_drawer_close);
+            drawer.AddDrawerListener(actionBarDrawerToggle);
+            actionBarDrawerToggle.SyncState();
             navigationView.SetNavigationItemSelectedListener(this);
-
-            
             buttonMenu.SetBackgroundResource(Resources.GetIdentifier("round_menu_24", "drawable", PackageName));
-            buttonMenu.Click += SetButtonClick;
+            buttonMenu.Click += SetMenuButtonClick;
+
+            spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(SelectedItemSpinner);
+            spinnerAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
+            spinnerAdapter.SetDropDownViewResource(Resource.Layout.spinner_text);
+            spinner.Adapter = spinnerAdapter;
         }
 
-        private void SetButtonClick(object sender, EventArgs args)
+        private void FindByRecipeName(object sender, View.KeyEventArgs e)
         {
-            _drawer.OpenDrawer(GravityCompat.Start);
+            e.Handled = false;
+            page = 1;
 
-            var menu_buttonM = FindViewById<Button>(Resource.Id.menu_buttonM);
+            if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter)
+                return;
 
-            menu_buttonM.Click += delegate (object sender, EventArgs args)
-            {
-                if (_drawer.IsDrawerOpen(GravityCompat.Start))
-                    OnBackPressed();
-            };
+            lastQuery = $"section=recipe&recipeName={editText.Text}&page={page}";
+            UpdateListView(lastQuery);
 
+            //Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
+            e.Handled = true;
+        }
+
+        private void LoadMoreElements(object sender, EventArgs e)
+        {
+            // Получаем строку для нового запроса:
+            string query = lastQuery.Substring(0, lastQuery.IndexOf("page=") + 5) + (++page);
+            // Обновляем коллекцию:
+            UpdateListView(query, recipeShorts);
+        }
+
+        private void RefreshLayout(object sender, EventArgs e)
+        {
+            // Обновление странички.
+            if (lastQuery == null)
+                UpdateListView();
+            else
+                UpdateListView(lastQuery);
+        }
+
+        private void SetMenuButtonClick(object sender, EventArgs args)
+        {
+            // Кнопка "меню" на toolbar.
+            drawer.OpenDrawer(GravityCompat.Start);
         }
 
         private async void UpdateListView(string query = "section=new", List<RecipeShort> recipeShorts = null)
         {
+            // Запустить кружочек.
             swipeRefreshLayout.Post(() =>
             {
                 swipeRefreshLayout.Refreshing = true;
@@ -120,9 +132,11 @@ namespace XamarinApp
 
             if (recipeShorts == null)
             {
+                // Тут какой-то костыль, трогать я не буду, простите :(
+                // Из книги "Техники индуса-программиста-под-андройд-на-ксамарине-с-нуля".
                 this.recipeShorts = await UpdateCollectionRecipes(query);
                 recipeAdapter = new RecipeAdapter(this.recipeShorts, this);
-                recipeAdapter.ItemClick += OnItemClick;
+                recipeAdapter.ItemClick += OnRecipeClick;
                 recyclerView.SetAdapter(recipeAdapter);
             }
             else
@@ -132,6 +146,7 @@ namespace XamarinApp
                 recipeShorts.AddRange(newRecipes);
             }
 
+            // Остановить кружочек.
             swipeRefreshLayout.Post(() =>
             {
                 swipeRefreshLayout.Refreshing = false;
@@ -142,56 +157,19 @@ namespace XamarinApp
 
         public override void OnBackPressed()
         {
-            if (_drawer.IsDrawerOpen(GravityCompat.Start))
-            {
-                _drawer.CloseDrawer(GravityCompat.Start);
-            }
+            if (drawer.IsDrawerOpen(GravityCompat.Start))
+                drawer.CloseDrawer(GravityCompat.Start);
             else
-            {
                 base.OnBackPressed();
-            }
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-
             return true;
         }
 
-        private void SetSpinner()
-        {
-            var spinner = FindViewById<Spinner>(Resource.Id.spinner);
-            spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(SelectedItemSpinner);
-
-
-            var spinnerAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
-            spinnerAdapter.SetDropDownViewResource(Resource.Layout.spinner_text);
-            spinner.Adapter = spinnerAdapter;
-        }
-
-        private void SetPlateRecipe()
-        {
-            EditText edittext = FindViewById<EditText>(Resource.Id.TextFind);
-
-            edittext.KeyPress += (object sender, View.KeyEventArgs e) =>
-            {
-                e.Handled = false;
-
-                page = 1;
-
-                if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter) return;
-
-                lastQuery = $"section=recipe&recipeName={edittext.Text}&page={page}";
-                UpdateListView(lastQuery);
-                Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
-
-
-                e.Handled = true;
-            };
-        }
-
-        void OnItemClick(object sender, int position)
+        void OnRecipeClick(object sender, int position)
         {
             Intent intent = new Intent(this, typeof(RecipeActivity));
             intent.PutExtra("url", recipeShorts[position].Url);
@@ -203,11 +181,9 @@ namespace XamarinApp
 
         private void SelectedItemSpinner(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            var spinner = (Spinner)sender;
             var item = spinner.GetItemAtPosition(e.Position);
 
             page = 1;
-
             string query = null;
 
             switch (item.ToString())
@@ -258,7 +234,7 @@ namespace XamarinApp
                 StartActivity(intent);
             }
 
-            return CLoseDrawer(_drawer).IsDrawerOpen(GravityCompat.Start);
+            return CLoseDrawer(drawer).IsDrawerOpen(GravityCompat.Start);
         }
 
         private static DrawerLayout CLoseDrawer(DrawerLayout drawerLayout)

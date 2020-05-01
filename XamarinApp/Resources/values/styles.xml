@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- Customize your theme here. -->
-        <item name="android:colorPrimary">@color/colorOrange</item>
-        <item name="android:colorPrimaryDark">@color/colorOrange</item>
-        <item name="android:colorAccent">@color/colorOrange</item>
-        <item name="android:colorActivatedHighlight">@color/colorOrange</item>
-        <item name="android:colorControlActivated">@color/colorOrange</item>
-        <item name="android:colorControlActivated">@color/colorOrange</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBarOverlay">false</item>
-        <item name="android:panelColorBackground">@color/colorOrange</item>
-        <item name="android:windowActionBarOverlay">@color/colorOrange</item>
-    </style>
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <!-- Customize your theme here. -->
+    <item name="android:colorPrimary">@color/colorMain</item>
+    <item name="android:colorPrimaryDark">@color/colorMain</item>
+    <item name="android:colorAccent">@color/colorMain</item>
+    <item name="android:colorActivatedHighlight">@color/colorMain</item>
+    <item name="android:colorControlActivated">@color/colorMain</item>
+    <item name="android:colorControlActivated">@color/colorMain</item>
+    <item name="android:windowTranslucentStatus">true</item>
+    <item name="android:windowTranslucentNavigation">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">false</item>
+    <item name="android:windowActionBar">true</item>
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="android:panelColorBackground">@color/colorMain</item>
+    <item name="android:windowActionBarOverlay">@color/colorMain</item>
+  </style>
 
-  
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
 
-    <style name="SpinnerTheme" parent="android:Widget.Spinner">
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
-    
-    <style name="NavigationViewStyle">
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:textSize">18dp</item> <!-- menu item text size-->
-    </style>
-    
+  <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <item name="android:windowActionBar">false</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
+
+  <style name="SpinnerTheme" parent="android:Widget.Spinner">
+    <item name="android:textColor">#FFFFFF</item>
+  </style>
+
+  <style name="NavigationViewStyle">
+    <item name="android:layout_marginTop">5dp</item>
+    <item name="android:textSize">18dp</item>
+    <!-- menu item text size-->
+  </style>
+
 
 </resources>

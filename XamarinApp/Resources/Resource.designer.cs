@@ -9250,7 +9250,7 @@ namespace XamarinApp
 			public const int colorAccent = 2131099694;
 			
 			// aapt resource value: 0x7F06002F
-			public const int colorOrange = 2131099695;
+			public const int colorMain = 2131099695;
 			
 			// aapt resource value: 0x7F060030
 			public const int colorPrimary = 2131099696;
@@ -10626,73 +10626,88 @@ namespace XamarinApp
 			public const int round_arrow_back_ios_white_48 = 2131230859;
 			
 			// aapt resource value: 0x7F08008C
-			public const int round_menu_24 = 2131230860;
+			public const int round_clear_24 = 2131230860;
 			
 			// aapt resource value: 0x7F08008D
-			public const int round_menu_white_18 = 2131230861;
+			public const int round_clear_black_18 = 2131230861;
 			
 			// aapt resource value: 0x7F08008E
-			public const int round_menu_white_24 = 2131230862;
+			public const int round_clear_black_24 = 2131230862;
 			
 			// aapt resource value: 0x7F08008F
-			public const int round_menu_white_36 = 2131230863;
+			public const int round_clear_black_36 = 2131230863;
 			
 			// aapt resource value: 0x7F080090
-			public const int round_menu_white_48 = 2131230864;
+			public const int round_clear_black_48 = 2131230864;
 			
 			// aapt resource value: 0x7F080091
-			public const int round_share_24 = 2131230865;
+			public const int round_menu_24 = 2131230865;
 			
 			// aapt resource value: 0x7F080092
-			public const int round_share_white_18 = 2131230866;
+			public const int round_menu_white_18 = 2131230866;
 			
 			// aapt resource value: 0x7F080093
-			public const int round_share_white_24 = 2131230867;
+			public const int round_menu_white_24 = 2131230867;
 			
 			// aapt resource value: 0x7F080094
-			public const int round_share_white_36 = 2131230868;
+			public const int round_menu_white_36 = 2131230868;
 			
 			// aapt resource value: 0x7F080095
-			public const int round_share_white_48 = 2131230869;
+			public const int round_menu_white_48 = 2131230869;
 			
 			// aapt resource value: 0x7F080096
-			public const int round_star_24 = 2131230870;
+			public const int round_share_24 = 2131230870;
 			
 			// aapt resource value: 0x7F080097
-			public const int round_star_border_24 = 2131230871;
+			public const int round_share_white_18 = 2131230871;
 			
 			// aapt resource value: 0x7F080098
-			public const int round_star_border_white_18 = 2131230872;
+			public const int round_share_white_24 = 2131230872;
 			
 			// aapt resource value: 0x7F080099
-			public const int round_star_border_white_24 = 2131230873;
+			public const int round_share_white_36 = 2131230873;
 			
 			// aapt resource value: 0x7F08009A
-			public const int round_star_border_white_36 = 2131230874;
+			public const int round_share_white_48 = 2131230874;
 			
 			// aapt resource value: 0x7F08009B
-			public const int round_star_border_white_48 = 2131230875;
+			public const int round_star_24 = 2131230875;
 			
 			// aapt resource value: 0x7F08009C
-			public const int round_star_white_18 = 2131230876;
+			public const int round_star_border_24 = 2131230876;
 			
 			// aapt resource value: 0x7F08009D
-			public const int round_star_white_24 = 2131230877;
+			public const int round_star_border_white_18 = 2131230877;
 			
 			// aapt resource value: 0x7F08009E
-			public const int round_star_white_36 = 2131230878;
+			public const int round_star_border_white_24 = 2131230878;
 			
 			// aapt resource value: 0x7F08009F
-			public const int round_star_white_48 = 2131230879;
+			public const int round_star_border_white_36 = 2131230879;
 			
 			// aapt resource value: 0x7F0800A0
-			public const int tooltip_frame_dark = 2131230880;
+			public const int round_star_border_white_48 = 2131230880;
 			
 			// aapt resource value: 0x7F0800A1
-			public const int tooltip_frame_light = 2131230881;
+			public const int round_star_white_18 = 2131230881;
 			
 			// aapt resource value: 0x7F0800A2
-			public const int vector = 2131230882;
+			public const int round_star_white_24 = 2131230882;
+			
+			// aapt resource value: 0x7F0800A3
+			public const int round_star_white_36 = 2131230883;
+			
+			// aapt resource value: 0x7F0800A4
+			public const int round_star_white_48 = 2131230884;
+			
+			// aapt resource value: 0x7F0800A5
+			public const int tooltip_frame_dark = 2131230885;
+			
+			// aapt resource value: 0x7F0800A6
+			public const int tooltip_frame_light = 2131230886;
+			
+			// aapt resource value: 0x7F0800A7
+			public const int vector = 2131230887;
 			
 			static Drawable()
 			{
