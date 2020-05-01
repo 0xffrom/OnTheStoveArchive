@@ -37,7 +37,7 @@ namespace ObjectsLibrary
             Image image,
             string description,
             Ingredient[] ingredients,
-            StepRecipe[] stepRecipesBoxes,
+            StepRecipe[] stepsRecipe,
             Additional additional)
 
         {
@@ -46,7 +46,7 @@ namespace ObjectsLibrary
             TitleImage = image;
             Description = description;
             Ingredients = ingredients;
-            StepsRecipe = stepRecipesBoxes;
+            StepsRecipe = stepsRecipe;
             Additional = additional;
         }
 

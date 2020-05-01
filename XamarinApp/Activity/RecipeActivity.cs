@@ -7,18 +7,22 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using ObjectsLibrary;
 using Square.Picasso;
 using System;
 using System.Threading.Tasks;
+using AndroidX.Fragment.App;
+using AndroidX.ViewPager.Widget;
+using XamarinApp.Adapters;
 using XamarinAppLibrary;
 
 namespace XamarinApp
 {
     [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon",
         ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
-    public class RecipeActivity : AppCompatActivity
+    public class RecipeActivity : FragmentActivity
     {
         private string _url;
         private RecipeFull recipeFull;
@@ -73,7 +77,6 @@ namespace XamarinApp
             });
             
 
-
             buttonStar = FindViewById<Button>(Resource.Id.starRecipe);
             buttonStar.Click += new EventHandler((sender, args) =>
             {
@@ -89,88 +92,18 @@ namespace XamarinApp
                 }
             });
 
-
             UpdateView();
         }
 
         private void DrawerLayout()
         {
-            var frameDescription = FindViewById<View>(Resource.Id.frameDescription);
-            var frameIngredients = FindViewById<View>(Resource.Id.frameIngredients);
-            var frameSteps = FindViewById<View>(Resource.Id.frameSteps);
 
-            var textViewMainDescription = FindViewById<TextView>(Resource.Id.textViewMainDescription);
-            var textViewMainIngredients = FindViewById<TextView>(Resource.Id.textViewMainIngredients);
-            var textViewMainRecipe = FindViewById<TextView>(Resource.Id.textViewMainRecipe);
+            var adapter = new PagerRecipeAdapter(SupportFragmentManager);
 
-            var rectangleMainDescription = FindViewById<View>(Resource.Id.rectangleMainDescription);
-            var rectangleMainIngredients = FindViewById<View>(Resource.Id.rectangleMainIngredients);
-            var rectangleMainRecipe = FindViewById<View>(Resource.Id.rectangleMainRecipe);
-
-            SetColorStart(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
-                rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-
-            textViewMainDescription.Click += (sender, args) =>
-            {
-                SetColorStart(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
-                    rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-
-                frameDescription.Visibility = ViewStates.Visible;
-                frameSteps.Visibility = ViewStates.Invisible;
-                frameIngredients.Visibility = ViewStates.Invisible;
-            };
-
-            textViewMainIngredients.Click += (sender, args) =>
-            {
-                SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
-                    rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-
-                textViewMainIngredients.SetTextColor(ColorFeb22C);
-                rectangleMainIngredients.SetBackgroundColor(ColorFeb22C);
-
-                frameDescription.Visibility = ViewStates.Invisible;
-                frameIngredients.Visibility = ViewStates.Visible;
-                frameSteps.Visibility = ViewStates.Invisible;
-            };
-
-            textViewMainRecipe.Click += (sender, args) =>
-            {
-                SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
-                    rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-
-                textViewMainRecipe.SetTextColor(ColorFeb22C);
-                rectangleMainRecipe.SetBackgroundColor(ColorFeb22C);
-
-                frameDescription.Visibility = ViewStates.Invisible;
-                frameIngredients.Visibility = ViewStates.Invisible;
-                frameSteps.Visibility = ViewStates.Visible;
-            };
+            ViewPager viewPager = findViewById(R.id.viewpager);
+            viewPager.setAdapter(adapter); // устанавливаем адаптер
+            viewPager.setCurrentItem(1); // выводим второй экран
         }
-
-        private void SetColorDefault(TextView textViewMainDescription, TextView textViewMainIngredients,
-            TextView textViewMainRecipe,
-            View rectangleMainDescription, View rectangleMainIngredients, View rectangleMainRecipe)
-        {
-            textViewMainDescription.SetTextColor(ColorC4C4C4);
-            textViewMainIngredients.SetTextColor(ColorC4C4C4);
-            textViewMainRecipe.SetTextColor(ColorC4C4C4);
-
-            rectangleMainDescription.SetBackgroundColor(ColorC4C4C4);
-            rectangleMainIngredients.SetBackgroundColor(ColorC4C4C4);
-            rectangleMainRecipe.SetBackgroundColor(ColorC4C4C4);
-        }
-
-        private void SetColorStart(TextView textViewMainDescription, TextView textViewMainIngredients,
-            TextView textViewMainRecipe,
-            View rectangleMainDescription, View rectangleMainIngredients, View rectangleMainRecipe)
-        {
-            SetColorDefault(textViewMainDescription, textViewMainIngredients, textViewMainRecipe,
-                rectangleMainDescription, rectangleMainIngredients, rectangleMainRecipe);
-
-            textViewMainDescription.SetTextColor(ColorFeb22C);
-            rectangleMainDescription.SetBackgroundColor(ColorFeb22C);
-        }
-
         private async void UpdateView()
         {
             if (RecipeData.ExistsRecipe(_url))
@@ -205,7 +138,7 @@ namespace XamarinApp
                     .Load(recipeFull.TitleImage.ImageUrl)
                     .Into(imageView);
 
-                description.Text += $"{recipeFull.Description.Replace("  ", string.Empty)}";
+                description.Text += recipeFull.Description;
 
                 if (recipeFull.Additional.CPFC != null)
                 {
@@ -229,12 +162,19 @@ namespace XamarinApp
                 urlRecipe.Text = $"Ссылка на рецепт: {recipeFull.Url}";
                 #endregion
             }
+            // Обработка случая, когда рецепт битый.
             catch
             {
-                new Android.Support.V7.App.AlertDialog.Builder(this)
+                var dialog = new Android.Support.V7.App.AlertDialog.Builder(this)
                     .SetTitle("Ошибка :(")
+                    .SetNeutralButton("Хорошо", 
+                    (sender, e) => 
+                    {
+                        base.OnBackPressed();
+                    })
                     .SetMessage("К сожалению, не удалось загрузить данный рецепт. Разработчики уже занимаются этим вопросом.");
-                
+
+                dialog.Show();
             }
 
         }

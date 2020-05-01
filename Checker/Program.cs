@@ -13,20 +13,23 @@ namespace Checker
     {
         static string queryRecipe = "http://51.77.58.18/recipe/get?url=";
         static string queryPage = "http://51.77.58.18/page/get?section=popular&page=";
-        
+
         static async Task Main(string[] args)
         {
-            for (int page = 7; page < 30000; page++)
+            for (int page = 12; page < 30000; page++)
             {
                 Console.WriteLine("Страница: " + page);
-                 List<RecipeShort> recipes = 
-                    JsonConvert.DeserializeObject<List<RecipeShort>>
-                    (GetSource(queryPage + page.ToString()).Result);
+                List<RecipeShort> recipes =
+                   JsonConvert.DeserializeObject<List<RecipeShort>>
+                   (GetSource(queryPage + page.ToString()).Result);
                 foreach (var recipe in recipes)
                 {
                     string result = await GetRecipeResult(queryRecipe + recipe.Url);
-                    Console.WriteLine($"Сайт: {recipe.Url}. Результат: {result}");
-                    await Logger(recipe.Url, result);
+                    if (result == "FALSE")
+                    {
+                        Console.WriteLine($"Сайт: {recipe.Url}. Результат: {result}. Страница: {page}");
+                        await Logger(recipe.Url, result);
+                    }
                 }
             }
         }
@@ -34,9 +37,9 @@ namespace Checker
         private static async Task Logger(string webSite, string result)
         {
             if (result.Contains("FALSE"))
-            { 
-            using StreamWriter streamWriter = new StreamWriter("log.log", true);
-            await streamWriter.WriteLineAsync($"Сайт: {webSite}. Состояние: {result}");
+            {
+                using StreamWriter streamWriter = new StreamWriter("log.log", true);
+                await streamWriter.WriteLineAsync($"Сайт: {webSite}. Состояние: {result}");
             }
         }
 

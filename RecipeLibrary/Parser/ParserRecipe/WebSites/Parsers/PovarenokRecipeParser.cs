@@ -43,8 +43,9 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             Url = parserRecipeSettings.Url;
             
             Title = recipeBody.QuerySelector("h1").TextContent;
-            TitleImage = new Image(recipeBody.QuerySelector("div.m-img").FirstElementChild?.Attributes[1]?.Value);
-            
+            TitleImage = new Image(recipeBody.QuerySelector("img[itemprop='image']").Attributes[1]?.Value);
+
+
             Description = recipeBody.QuerySelector("div.article-text")
                 .TextContent
                 .Replace("\n", String.Empty)
@@ -118,7 +119,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             var recipesArray = recipeBody.QuerySelectorAll("div.cooking-bl");
             int countRecipes = recipesArray.Length;
 
-            StepRecipe[] stepRecipeBoxes = new StepRecipe[countRecipes];
+            List<StepRecipe> stepRecipeBoxes = new List<StepRecipe>(countRecipes);
 
             for (int i = 0; i < countRecipes; i++)
             {
@@ -126,10 +127,16 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 string description = recipesArray[i]?.LastElementChild?.FirstElementChild?.TextContent;
                 var image = new Image(imageUrl);
                 var stepRecipeBox = new StepRecipe(description, image);
-                stepRecipeBoxes[i] = stepRecipeBox;
+                stepRecipeBoxes.Add(stepRecipeBox);
             }
 
-            StepsRecipe = stepRecipeBoxes;
+            if (stepRecipeBoxes.Count == 0)
+            {
+                var body = recipeBody.QuerySelector("div.article-tags").PreviousElementSibling;
+                stepRecipeBoxes.Add(new StepRecipe(body?.TextContent ?? string.Empty, new Image("https://www.povarenok.ru/i/new3/logo.png?v=1")));
+            }
+
+            StepsRecipe = stepRecipeBoxes.ToArray();
 
             string authorName = recipeBody.QuerySelector("a[title='Профиль пользователя']")?.TextContent;
             var ingredientBodyP = ingredientBody.QuerySelectorAll("p");

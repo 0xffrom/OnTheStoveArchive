@@ -5,6 +5,12 @@
         <item>Случайные рецепты</item>
     </string-array>
     
+    <string-array name="recipeTitles">
+        <item>Описание</item>
+        <item>Ингредиенты</item>
+        <item>Рецепт</item>
+    </string-array>
+    
     <string name="app_name">На плите</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
