@@ -19,9 +19,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner"
-                android:popupBackground="@color/colorOrange"
+                android:popupBackground="@color/colorMain"
                 android:layout_gravity="left|center_vertical"
-                android:background="@color/colorOrange"
+                android:background="@color/colorMain"
                 android:fontFamily="@Font/ActorRegular"
                 android:spinnerMode="dropdown"/>
 
@@ -43,7 +43,7 @@
             android:id="@+id/nav_view"
             app:itemTextColor="#FFFFFF"
             app:theme="@style/NavigationViewStyle"
-            android:background="@color/colorOrange"
+            android:background="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
