@@ -10,24 +10,42 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using ObjectsLibrary;
+using XamarinAppLibrary;
 
 namespace XamarinApp.Fragments
 {
-    public class RecipeStepsFragment : AndroidX.Fragment.App.Fragment
+    public class RecipeStepsFragment : Android.Support.V4.App.Fragment
     {
+        private RecipeFull _recipeFull;
+        private ListView _listSteps;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your fragment here
+            var arguments = Arguments;
+            
+            if (arguments != null)
+            {
+                _recipeFull = Data.ByteArrayToObject<RecipeFull>(arguments.GetByteArray("recipeFull"));
+            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            var view = inflater.Inflate(Resource.Layout.recipe_steps_fragment, container, false);
+            
+            _listSteps = view.FindViewById<ListView>(Resource.Id.listSteps);
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+            return view;
+        }
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            var adapterStep = new StepAdapter(View.Context, _recipeFull);
+            _listSteps.Adapter = adapterStep;
+
+            base.OnActivityCreated(savedInstanceState);
         }
     }
 }

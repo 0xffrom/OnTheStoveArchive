@@ -10,24 +10,45 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using ObjectsLibrary;
+using XamarinAppLibrary;
 
 namespace XamarinApp.Fragments
 {
-    public class RecipeIngredientsFragment : AndroidX.Fragment.App.Fragment
+    public class RecipeIngredientsFragment : Android.Support.V4.App.Fragment
     {
+        private RecipeFull _recipeFull;
+        private ListView _listIngredients;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your fragment here
+            var arguments = Arguments;
+            
+            if (arguments != null)
+            {
+                _recipeFull = Data.ByteArrayToObject<RecipeFull>(arguments.GetByteArray("recipeFull"));
+            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            var view = inflater.Inflate(Resource.Layout.recipe_ingredients_fragment, container, false);
+            
+            _listIngredients = view.FindViewById<ListView>(Resource.Id.listIngredients);
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+            return view;
+        }
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            
+            var listIngredientsAdapter = new IngredientsAdapter(View.Context, _recipeFull);
+            
+            if (listIngredientsAdapter.Count > 0)
+                _listIngredients.Adapter = listIngredientsAdapter;
+            
+            base.OnActivityCreated(savedInstanceState);
         }
     }
 }

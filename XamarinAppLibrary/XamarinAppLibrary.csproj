@@ -90,6 +90,9 @@
     <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3.netstandard11">
       <Version>1.1.14</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Migration">
+      <Version>1.0.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.5.2</Version>
     </PackageReference>

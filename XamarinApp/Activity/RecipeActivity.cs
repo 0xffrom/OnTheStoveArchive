@@ -4,6 +4,7 @@ using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.View;
 using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
@@ -13,8 +14,6 @@ using ObjectsLibrary;
 using Square.Picasso;
 using System;
 using System.Threading.Tasks;
-using AndroidX.Fragment.App;
-using AndroidX.ViewPager.Widget;
 using XamarinApp.Adapters;
 using XamarinAppLibrary;
 
@@ -22,7 +21,7 @@ namespace XamarinApp
 {
     [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon",
         ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
-    public class RecipeActivity : FragmentActivity
+    public class RecipeActivity : AppCompatActivity
     {
         private string _url;
         private RecipeFull recipeFull;
@@ -43,10 +42,10 @@ namespace XamarinApp
 
 
             SetContentView(Resource.Layout.recipe_main);
+            UpdateView();
+            
 
-            DrawerLayout();
-
-            var buttonShare = FindViewById<ImageButton>(Resource.Id.shareRecipe);
+            var buttonShare = FindViewById<Button>(Resource.Id.shareRecipe);
             buttonShare.Click += new EventHandler((sender, args) =>
             {
                 Intent intent = new Intent(Intent.ActionSend);
@@ -92,18 +91,9 @@ namespace XamarinApp
                 }
             });
 
-            UpdateView();
+
         }
-
-        private void DrawerLayout()
-        {
-
-            var adapter = new PagerRecipeAdapter(SupportFragmentManager);
-
-            ViewPager viewPager = findViewById(R.id.viewpager);
-            viewPager.setAdapter(adapter); // устанавливаем адаптер
-            viewPager.setCurrentItem(1); // выводим второй экран
-        }
+        
         private async void UpdateView()
         {
             if (RecipeData.ExistsRecipe(_url))
@@ -113,55 +103,17 @@ namespace XamarinApp
             {
                 recipeFull = await UpdateCollectionRecipes(_url);
 
-                var listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
-                var adapterIngredents = new IngredientsAdapter(this, recipeFull);
-                if (adapterIngredents.Count > 0)
-                    listIngredients.Adapter = adapterIngredents;
-                var listSteps = FindViewById<ListView>(Resource.Id.listSteps);
-                var adapterStep = new StepAdapter(this, recipeFull);
-                listSteps.Adapter = adapterStep;
+                var _title = FindViewById<TextView>(Resource.Id.titleRecipe);
+                _title.Text = recipeFull.Title;
 
 
-                #region Первая страница.
+                var adapter = new PagerRecipeAdapter(SupportFragmentManager, recipeFull);
 
-                var imageView = FindViewById<ImageView>(Resource.Id.imageMainRecipe);
-                var title = FindViewById<TextView>(Resource.Id.titleRecipe);
-                var description = FindViewById<TextView>(Resource.Id.titleMainDescription);
-                var CPFCRecipe = FindViewById<TextView>(Resource.Id.CPFCRecipe);
-                var authorNameRecipe = FindViewById<TextView>(Resource.Id.authorNameRecipe);
-                var additionalInfoRecipe = FindViewById<TextView>(Resource.Id.additionalInfoRecipe);
-                var urlRecipe = FindViewById<TextView>(Resource.Id.urlRecipe);
+                ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.viewPager);
+                viewPager.Adapter = (adapter);
 
-                title.Text = recipeFull.Title;
-
-                Picasso.With(this)
-                    .Load(recipeFull.TitleImage.ImageUrl)
-                    .Into(imageView);
-
-                description.Text += recipeFull.Description;
-
-                if (recipeFull.Additional.CPFC != null)
-                {
-                    if (recipeFull.Additional.CPFC.Calories != 0)
-                        CPFCRecipe.Text += $"Калории: {recipeFull.Additional.CPFC.Calories} Ккал.{System.Environment.NewLine}";
-                    if (recipeFull.Additional.CPFC.Protein != 0)
-                        CPFCRecipe.Text += $"Белки: {recipeFull.Additional.CPFC.Protein} г.{System.Environment.NewLine}";
-                    if (recipeFull.Additional.CPFC.Fats != 0)
-                        CPFCRecipe.Text += $"Жиры: {recipeFull.Additional.CPFC.Fats} г.{System.Environment.NewLine}";
-                    if (recipeFull.Additional.CPFC.Carbohydrates != 0)
-                        CPFCRecipe.Text += $"Углеводы: {recipeFull.Additional.CPFC.Carbohydrates} г.{System.Environment.NewLine}";
-                }
-
-                authorNameRecipe.Text = $"Рецепт от: {recipeFull.Additional.AuthorName}";
-
-                if (recipeFull.Additional.CountPortions != 0)
-                    additionalInfoRecipe.Text += $"Количество порций: {recipeFull.Additional.CountPortions}.{System.Environment.NewLine}";
-                if (recipeFull.Additional.PrepMinutes != 0)
-                    additionalInfoRecipe.Text += $"Количество минут на готовку: {recipeFull.Additional.PrepMinutes} мин.";
-
-                urlRecipe.Text = $"Ссылка на рецепт: {recipeFull.Url}";
-                #endregion
             }
+            
             // Обработка случая, когда рецепт битый.
             catch
             {

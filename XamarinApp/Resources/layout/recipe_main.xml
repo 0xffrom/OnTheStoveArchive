@@ -42,7 +42,7 @@
             android:layout_margin="2dp"
             android:textSize="18dp"
         />
-        <ImageButton
+        <Button
             android:layout_gravity="right|center_vertical"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -59,86 +59,18 @@
             />
 
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-        <TextView
-            android:id="@+id/textViewMainDescription"
-            android:layout_centerInParent="true"
-            android:layout_weight="1"
-            android:fontFamily="@Font/ActorRegular"
-            android:layout_width="95dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="21dp"
-            android:text="Описание"
-            android:gravity="center"
-            android:textSize="17dp"
-        />
 
-        <TextView
-            android:id="@+id/textViewMainIngredients"
-            android:text="Ингредиенты"
-            android:textSize="17dp"
-            android:fontFamily="@Font/ActorRegular"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="110dp"
-            android:layout_height="30dp"/>
-        <TextView
-            android:id="@+id/textViewMainRecipe"
-            android:text="Рецепт"
-            android:fontFamily="@Font/ActorRegular"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_marginRight="21dp"
-            android:textSize="17dp"
-            android:layout_width="95dp"
-            android:layout_height="30dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="10dp">
-        <View
-            android:id="@+id/rectangleMainDescription"
-            android:layout_width="95dp"
-            android:gravity="center"
-            android:layout_marginLeft="21dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/rectangle_1"
-        />
-        <View
-            android:id="@+id/rectangleMainIngredients"
-            android:layout_width="105dp"
-            android:gravity="center"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/rectangle_1"
-        />
-        <View
-            android:id="@+id/rectangleMainRecipe"
-            android:layout_width="95dp"
-            android:gravity="center"
-            android:layout_height="2dp"
-            android:layout_marginRight="21dp"
-            android:layout_weight="1"
-            android:background="@drawable/rectangle_1"
-        />
-    </LinearLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:id="@+id/viewPager"
         android:layout_height="wrap_content">
         <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_title_strip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textColor="#fff" />
-    </androidx.viewpager.widget.ViewPager>
+            android:textSize="18dp"
+            android:textColor="#fa9e00"
+            android:fontFamily="@Font/ActorRegular" />
+    </android.support.v4.view.ViewPager>
 </LinearLayout>
