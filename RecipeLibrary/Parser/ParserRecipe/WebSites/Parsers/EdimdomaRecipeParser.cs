@@ -90,6 +90,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
                 var cpfcDiv = recipeBody.QuerySelector("div.nutritional-value__leftside");
 
+            CPFC cpfc = new CPFC();
             if (cpfcDiv != null)
             {
                 double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value")?.TextContent ?? "0", out double calories);
@@ -110,11 +111,19 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                         tablePFC[2].QuerySelector("td.definition-list-table__td.definition-list-table__td_value")
                             .TextContent.Replace(" г", string.Empty) ?? "0", out double carbohydrates);
 
+                    cpfc = new CPFC(calories, protein, fats, carbohydrates);
                     Additional = new Additional(authorName, countPortions, prepMinutes,
-                        new CPFC(calories, protein, fats, carbohydrates));
+                       cpfc);
                 }
                 else
-                    Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC());
+                    Additional = new Additional(authorName, countPortions, prepMinutes, cpfc);
+            }
+
+            var videoBody = recipeBody.QuerySelectorAll("video").FirstOrDefault(x => !x.HasAttribute("id"));
+            if (videoBody != null)
+            {
+                string videoUrl = videoBody.Attributes[1]?.Value ?? string.Empty;
+                Additional = new Additional(authorName, countPortions, prepMinutes, cpfc, videoUrl);
             }
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);

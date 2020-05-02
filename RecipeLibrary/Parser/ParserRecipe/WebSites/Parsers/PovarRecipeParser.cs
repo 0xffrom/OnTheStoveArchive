@@ -50,9 +50,9 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             Description = String.Empty;
 
             foreach (var textLine in recipeBody.QuerySelectorAll("span.detailed_full").Select(x => x.TextContent))
-                Description += textLine + Environment.NewLine;
+                Description += textLine.Trim() + Environment.NewLine;
 
-            Description.Replace("\t", "").Replace("  ", "").Trim();
+            Description.Replace("\t", "").Replace("  ", "");
 
             var ingredientsBody = recipeBody.QuerySelector("ul.detailed_ingredients").QuerySelectorAll("li");
 
@@ -130,6 +130,13 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Additional = new Additional(authorName, countPortions, prepMinutes, CPFC);
 
+            var videoBody = recipeBody.QuerySelector("iframe.youtubeVideo");
+            if (videoBody != null)
+            {
+                string videoUrl = videoBody.Attributes[0].Value;
+
+                Additional = new Additional(authorName, countPortions, prepMinutes, CPFC, videoUrl);
+            }
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients,
                 StepsRecipe,

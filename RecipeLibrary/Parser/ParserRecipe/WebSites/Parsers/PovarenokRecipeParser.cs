@@ -149,7 +149,9 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Where(x => x.FirstElementChild.TextContent.Contains("Количество порций:"))
                 .Select(x => x.TextContent).FirstOrDefault()?.Replace("Количество порций:", string.Empty) ?? "0");
 
-            Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC());
+            var cpfc = new CPFC();
+
+            Additional = new Additional(authorName, countPortions, prepMinutes, cpfc);
 
             var tableBody = recipeBody.QuerySelector("div[id='nae-value-bl']");
             if (tableBody != null)
@@ -162,7 +164,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     .Select(x => x.TextContent)
                     .ToArray();
                 
-                CPFC CPFC = null;
+                cpfc = null;
 
                 if (tableCPFC != null)
                 {
@@ -171,13 +173,20 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     double fats = double.Parse(tableCPFC[2].Replace(" г", string.Empty).Replace('.', ','));
                     double carbohydrates = double.Parse(tableCPFC[3].Replace(" г", string.Empty).Replace('.', ','));
 
-                    CPFC = new CPFC(calories, protein, fats, carbohydrates);
+                    cpfc = new CPFC(calories, protein, fats, carbohydrates);
                 }
 
 
-                Additional = new Additional(authorName, countPortions, prepMinutes, CPFC);
+                Additional = new Additional(authorName, countPortions, prepMinutes, cpfc);
             }
 
+            // Видео контент при наличии:
+            var videoBody = recipeBody.QuerySelector("div.video-bl");
+            if (videoBody != null)
+            {
+                string videoUrl = videoBody.FirstElementChild?.FirstElementChild?.Attributes[0]?.Value ?? string.Empty;
+                Additional = new Additional(authorName, countPortions, prepMinutes, cpfc, videoUrl);
+            }
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }

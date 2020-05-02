@@ -17,6 +17,8 @@ namespace ObjectsLibrary.Components
 
         /// <see cref="CPFC"/>
         public CPFC CPFC { get; set; }
+        /// <value>Интернет адрес на видео.</value>
+        public string VideoUrl { get; set; }
 
         public Additional()
         {
@@ -31,6 +33,11 @@ namespace ObjectsLibrary.Components
             CPFC = cpfc;
         }
 
+        public Additional(string authorName, int countPortions, double prepMinutes,
+            CPFC cpfc, string videoUrl) : this(authorName, countPortions, prepMinutes, cpfc)
+        {
+            VideoUrl = videoUrl;
+        }
 
     }
 }
