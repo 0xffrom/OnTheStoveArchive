@@ -4,8 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="#de8d00"
+    android:background="#f09800"
     android:orientation="horizontal"
+    android:outlineSpotShadowColor="@android:color/black"
+    android:elevation="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
@@ -32,7 +34,7 @@
                         android:text="'НИУ ВШЭ' Москва 2020."
             android:textColor="#fff9f0"
             android:fontFamily="@Font/ActorRegular"
-                        android:textSize="14dp"
+                        android:textSize="15dp"
             
             />
     </LinearLayout>
