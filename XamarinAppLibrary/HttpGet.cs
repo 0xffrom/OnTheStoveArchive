@@ -25,9 +25,11 @@ namespace XamarinAppLibrary
             if (response != null && response.StatusCode == HttpStatusCode.OK)
                 source = await response.Content.ReadAsStringAsync();
 
+            if (response != null && response.StatusCode == HttpStatusCode.NotFound)
+                throw new HttpRequestException("Не удалось загрузить рецепт.");
             if (source == string.Empty)
-                throw new HttpRequestException();
-            
+                throw new HttpRequestException("Нет подключения к интернету, попробуйте позже :(");
+
             return source;
         }
 

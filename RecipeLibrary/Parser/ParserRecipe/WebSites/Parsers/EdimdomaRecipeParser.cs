@@ -4,6 +4,7 @@ using ObjectsLibrary.Parser.ParserRecipe.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 {
@@ -119,13 +120,23 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                     Additional = new Additional(authorName, countPortions, prepMinutes, cpfc);
             }
 
-            var videoBody = recipeBody.QuerySelectorAll("video").FirstOrDefault(x => !x.HasAttribute("id"));
-            if (videoBody != null)
+            
+            // Так как JS скрипт подгружает видео позже, чем мы схватываем HTML
+            // А мне не хочется тратить лишнее время, чтобы его ждать
+            // То информацию о видео забираем прямо из JS скрипта)))
+            var videoBody = document.QuerySelectorAll("script[type = 'text/javascript']")
+                .FirstOrDefault(x=>x.OuterHtml.Contains("var player = new Playerjs"))?.InnerHtml ?? null;
+            if (videoBody != null && videoBody != string.Empty)
             {
-                string videoUrl = videoBody.Attributes[1]?.Value ?? string.Empty;
-                Additional = new Additional(authorName, countPortions, prepMinutes, cpfc, videoUrl);
+                // ,[720]//vid.edimdoma.ru/data/video/0008/0913/80913-original.mp4?1468483768","id":80913},{"
+                // => //vid.edimdoma.ru/data/video/0008/0913/80913-original.mp4?1468483768"
+               string videoUrl = string.Empty;
+                Regex regex = new Regex(@"(?s)(?<=720]).*?(?="",)");
+                Match match = regex.Match(videoBody);
+                if (match.Success)
+                   videoUrl = match.Value;
+               Additional = new Additional(authorName, countPortions, prepMinutes, cpfc, videoUrl);
             }
-
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }
 

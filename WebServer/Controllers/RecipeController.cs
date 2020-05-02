@@ -119,6 +119,7 @@ namespace WebServer.Controllers
                         conn.Close();
                     }
 
+                    _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
                     _logger.LogInformation($"Статус: Ok.");
                     return Ok(recipe);
                 // Подключения к БД нет:

@@ -11504,22 +11504,25 @@ namespace XamarinApp
 			public const int useLogo = 2131362034;
 			
 			// aapt resource value: 0x7F0A00F3
-			public const int viewPager = 2131362035;
+			public const int videoRecipe = 2131362035;
 			
 			// aapt resource value: 0x7F0A00F4
-			public const int view_offset_helper = 2131362036;
+			public const int viewPager = 2131362036;
 			
 			// aapt resource value: 0x7F0A00F5
-			public const int visible = 2131362037;
+			public const int view_offset_helper = 2131362037;
 			
 			// aapt resource value: 0x7F0A00F6
-			public const int webRecipe = 2131362038;
+			public const int visible = 2131362038;
 			
 			// aapt resource value: 0x7F0A00F7
-			public const int withText = 2131362039;
+			public const int webRecipe = 2131362039;
 			
 			// aapt resource value: 0x7F0A00F8
-			public const int wrap_content = 2131362040;
+			public const int withText = 2131362040;
+			
+			// aapt resource value: 0x7F0A00F9
+			public const int wrap_content = 2131362041;
 			
 			static Id()
 			{

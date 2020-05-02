@@ -39,6 +39,11 @@ namespace XamarinApp
         private int page = 1;
         private string lastQuery;
 
+        private string messageErrorTitle;
+        private string messageErrorText;
+        private string messageErrorTextButton = "Повторить";
+        private Android.Support.V7.App.AlertDialog.Builder errorDialog;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -79,6 +84,17 @@ namespace XamarinApp
             spinnerAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.sort_array, Resource.Layout.spinner_text);
             spinnerAdapter.SetDropDownViewResource(Resource.Layout.spinner_text);
             spinner.Adapter = spinnerAdapter;
+
+
+            string[] messagesError = Resources.GetStringArray(Resource.Array.messagesError);
+            messageErrorTitle = messagesError[0];
+            messageErrorText = messagesError[1];
+
+            errorDialog = new Android.Support.V7.App.AlertDialog.Builder(this)
+                .SetTitle(messageErrorTitle)
+                .SetMessage(messageErrorText)
+                .SetCancelable(false)
+                .SetNeutralButton(messageErrorTextButton, RefreshLayout);
         }
 
         private void FindByRecipeName(object sender, View.KeyEventArgs e)
@@ -130,28 +146,38 @@ namespace XamarinApp
 
             recyclerView.SetLayoutManager(linearLayoutManager);
 
-            if (recipeShorts == null)
+            try
             {
-                // Тут какой-то костыль, трогать я не буду, простите :(
-                // Из книги "Техники индуса-программиста-под-андройд-на-ксамарине-с-нуля".
-                this.recipeShorts = await UpdateCollectionRecipes(query);
-                recipeAdapter = new RecipeAdapter(this.recipeShorts, this);
-                recipeAdapter.ItemClick += OnRecipeClick;
-                recyclerView.SetAdapter(recipeAdapter);
+                if (recipeShorts == null)
+                {
+                    // Тут какой-то костыль, трогать я не буду, простите :(
+                    // Из книги "Техники индуса-программиста-под-андройд-на-ксамарине-с-нуля".
+                    this.recipeShorts = await UpdateCollectionRecipes(query);
+                    recipeAdapter = new RecipeAdapter(this.recipeShorts, this);
+                    recipeAdapter.ItemClick += OnRecipeClick;
+                    recyclerView.SetAdapter(recipeAdapter);
+                }
+                else
+                {
+                    var newRecipes = await UpdateCollectionRecipes(query);
+                    recipeAdapter.AddItems(newRecipes);
+                    recipeShorts.AddRange(newRecipes);
+                }
             }
-            else
+            catch (Exception exp)
             {
-                var newRecipes = await UpdateCollectionRecipes(query);
-                recipeAdapter.AddItems(newRecipes);
-                recipeShorts.AddRange(newRecipes);
+                errorDialog.SetMessage(exp.Message);
+                errorDialog.Show();
             }
-
-            // Остановить кружочек.
-            swipeRefreshLayout.Post(() =>
+            finally
             {
-                swipeRefreshLayout.Refreshing = false;
-                recyclerView.Clickable = true;
-            });
+                // Остановить кружочек.
+                swipeRefreshLayout.Post(() =>
+                {
+                    swipeRefreshLayout.Refreshing = false;
+                    recyclerView.Clickable = true;
+                });
+            }
 
         }
 

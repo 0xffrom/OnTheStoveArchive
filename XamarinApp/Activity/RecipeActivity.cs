@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
+using Android.Net;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -65,20 +66,15 @@ namespace XamarinApp
             urlRecipe = Intent.GetStringExtra("url");
             recipeShort = Data.ByteArrayToObject<RecipeShort>(Intent.GetByteArrayExtra("recipeShort"));
 
-            buttonShare.Click += OnShareButton;
-            buttonStar.Click += OnAddFavRecipe;
-            relativeLayoutBack.Click += OnBackPressed;
-            buttonBack.Click += OnBackPressed;
-            buttonWeb.Click += OnStartWeb;
-
             string[] messagesError = Resources.GetStringArray(Resource.Array.messagesError);
             messageErrorTitle = messagesError[0];
             messageErrorText = messagesError[1];
             messageErrorTextButton = messagesError[2];
-                
+
             errorDialog = new Android.Support.V7.App.AlertDialog.Builder(this)
                 .SetTitle(messageErrorTitle)
                 .SetMessage(messageErrorText)
+                .SetCancelable(false)
                 .SetNeutralButton(messageErrorTextButton, OnBackPressed);
         }
 
@@ -97,14 +93,22 @@ namespace XamarinApp
                 title.Text = recipeFull.Title;
                 viewPager.Adapter = (new PagerRecipeAdapter(SupportFragmentManager, recipeFull));
             }
-
+            catch(AndroidException exp)
+            {
+                errorDialog.SetMessage(exp.Message);
+            }
             // Обработка случая, когда рецепт не загружается:
             catch
             {
+                errorDialog.SetMessage(messageErrorText);
                 errorDialog.Show();
             }
 
-            
+            buttonShare.Click += OnShareButton;
+            buttonStar.Click += OnAddFavRecipe;
+            relativeLayoutBack.Click += OnBackPressed;
+            buttonBack.Click += OnBackPressed;
+            buttonWeb.Click += OnStartWeb;
         }
 
         private void OnBackPressed(object sender, EventArgs args) => base.OnBackPressed();
@@ -129,7 +133,7 @@ namespace XamarinApp
                 buttonStar.SetImageResource(Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
                 return;
             }
-            
+
             // else:
             RecipeData.DeleteRecipe(urlRecipe);
             buttonStar.SetImageResource(Resources.GetIdentifier("round_star_border_white_24", "drawable",
@@ -154,7 +158,7 @@ namespace XamarinApp
             }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, 
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
             [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -166,7 +170,9 @@ namespace XamarinApp
         /// </summary>
         /// <param name="url">Интернет адрес рецепта.</param>
         /// <returns><see cref="RecipeFull"/></returns>
-        private static async Task<RecipeFull> UpdateCollectionRecipes(string url) =>
-            await Task.Run(() => HttpGet.GetRecipe(url));
+        private static async Task<RecipeFull> UpdateCollectionRecipes(string url)
+        {
+            return await Task.Run(() => HttpGet.GetRecipe(url));     
+        }      
     }
 }

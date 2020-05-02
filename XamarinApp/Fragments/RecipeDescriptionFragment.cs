@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Android.Webkit;
 using Android.Widget;
 using ObjectsLibrary;
 using Square.Picasso;
@@ -25,6 +26,7 @@ namespace XamarinApp.Fragments
         private TextView _authorNameRecipe;
         private TextView _additionalInfoRecipe;
         private TextView _urlRecipe;
+        private WebView _videoView;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -48,7 +50,7 @@ namespace XamarinApp.Fragments
             _authorNameRecipe = view.FindViewById<TextView>(Resource.Id.authorNameRecipe);
             _additionalInfoRecipe = view.FindViewById<TextView>(Resource.Id.additionalInfoRecipe);
             _urlRecipe = view.FindViewById<TextView>(Resource.Id.urlRecipe);
-            
+            _videoView = view.FindViewById<WebView>(Resource.Id.videoRecipe);
             return view;
         }
 
@@ -81,6 +83,18 @@ namespace XamarinApp.Fragments
 
             _urlRecipe.Text = $"Ссылка на рецепт: {_recipeFull.Url}";
             
+            if(_recipeFull.Additional.VideoUrl != null && _recipeFull.Additional.VideoUrl != string.Empty)
+            {
+                String videoSource = _recipeFull.Additional.VideoUrl;
+                WebSettings webSettings = _videoView.Settings;
+                webSettings.JavaScriptEnabled = true;
+                _videoView.LoadUrl(videoSource);            
+            }
+            else
+            {
+
+            }
+
             base.OnActivityCreated(savedInstanceState);
         }
     }

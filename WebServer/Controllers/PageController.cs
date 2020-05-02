@@ -46,7 +46,6 @@ namespace WebServer.Controllers
             {
                 RecipeShort[] recipes = await GetData.GetPage(section.ToLower(), page, recipeName.ToLower());
                 
-                _logger.LogInformation($"Запрос успешно выполнен.");
                 _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
                 _logger.LogInformation($"Статус: Ok.");
                 return Ok(recipes);
@@ -54,7 +53,6 @@ namespace WebServer.Controllers
             catch (Exception e)
             {
                 _logger.LogError(e, $"Запрос выполнен неудачно.");
-                _logger.LogWarning($"Возврат пустой страницы.");
                 _logger.LogInformation($"Статус: NotFound.");
                 return NotFound();
             }

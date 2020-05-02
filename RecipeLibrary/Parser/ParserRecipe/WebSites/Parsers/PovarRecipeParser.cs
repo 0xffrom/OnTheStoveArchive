@@ -133,7 +133,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             var videoBody = recipeBody.QuerySelector("iframe.youtubeVideo");
             if (videoBody != null)
             {
-                string videoUrl = videoBody.Attributes[0].Value;
+                string videoUrl = videoBody.Attributes[2]?.Value ?? string.Empty;
 
                 Additional = new Additional(authorName, countPortions, prepMinutes, CPFC, videoUrl);
             }

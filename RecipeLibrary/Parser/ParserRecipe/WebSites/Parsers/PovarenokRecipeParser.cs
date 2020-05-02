@@ -41,7 +41,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         {
             var recipeBody = document.QuerySelector("article.item-bl.item-about");
             Url = parserRecipeSettings.Url;
-            
+
             Title = recipeBody.QuerySelector("h1").TextContent;
             TitleImage = new Image(recipeBody.QuerySelector("img[itemprop='image']").Attributes[1]?.Value);
 
@@ -115,8 +115,9 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             }
 
             Ingredients = ingredientsList.ToArray();
-            
+
             var recipesArray = recipeBody.QuerySelectorAll("div.cooking-bl");
+
             int countRecipes = recipesArray.Length;
 
             List<StepRecipe> stepRecipeBoxes = new List<StepRecipe>(countRecipes);
@@ -132,8 +133,9 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             if (stepRecipeBoxes.Count == 0)
             {
-                var body = recipeBody.QuerySelector("div.article-tags").PreviousElementSibling;
-                stepRecipeBoxes.Add(new StepRecipe(body?.TextContent ?? string.Empty, new Image("https://www.povarenok.ru/i/new3/logo.png?v=1")));
+                var body = recipeBody.QuerySelector("div.article-tags")?.PreviousElementSibling ?? null;
+                if (body != null)
+                    stepRecipeBoxes.Add(new StepRecipe(body?.TextContent ?? string.Empty, new Image("https://www.povarenok.ru/i/new3/logo.png?v=1")));
             }
 
             StepsRecipe = stepRecipeBoxes.ToArray();
@@ -163,8 +165,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     .QuerySelectorAll("strong")
                     .Select(x => x.TextContent)
                     .ToArray();
-                
-                cpfc = null;
 
                 if (tableCPFC != null)
                 {
@@ -180,11 +180,13 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 Additional = new Additional(authorName, countPortions, prepMinutes, cpfc);
             }
 
+
             // Видео контент при наличии:
-            var videoBody = recipeBody.QuerySelector("div.video-bl");
+            var videoBody = recipeBody.QuerySelector("div.video-wrapper");
+
             if (videoBody != null)
             {
-                string videoUrl = videoBody.FirstElementChild?.FirstElementChild?.Attributes[0]?.Value ?? string.Empty;
+                string videoUrl = videoBody.FirstElementChild?.Attributes[2]?.Value ?? string.Empty;
                 Additional = new Additional(authorName, countPortions, prepMinutes, cpfc, videoUrl);
             }
 
