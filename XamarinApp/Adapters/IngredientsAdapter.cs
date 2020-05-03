@@ -15,7 +15,7 @@ namespace XamarinApp
 
         public IngredientsAdapter(Context context, RecipeFull recipeFull)
         {
-            this._recipeFull = recipeFull;
+            _recipeFull = recipeFull;
             _context = context;
 
             if (recipeFull.Ingredients != null)
@@ -29,38 +29,38 @@ namespace XamarinApp
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            View view = convertView;
-            view = LayoutInflater.From(_context).Inflate(Resource.Layout.list_ingredients, null, false);
+            convertView = LayoutInflater.From(_context).Inflate(Resource.Layout.list_ingredients, null, false);
 
-            var ingredientName = view.FindViewById<TextView>(Resource.Id.ingredientName);
+            var ingredientName = convertView.FindViewById<TextView>(Resource.Id.ingredientName);
+            var ingredientUnit = convertView.FindViewById<TextView>(Resource.Id.ingredientUnit);
+            var checkBox = convertView.FindViewById<CheckBox>(Resource.Id.ingredientCheck);
+         
             ingredientName.Text = _ingredients[position].Name;
-
-            var ingredientUnit = view.FindViewById<TextView>(Resource.Id.ingredientUnit);
             ingredientUnit.Text = _ingredients[position].Unit;
 
-            var checkBox = view.FindViewById<CheckBox>(Resource.Id.ingredientCheck);
+
             checkBox.CheckedChange += (sender, e) =>
-                 {
-                     if (e.IsChecked)
-                     {
-                         IngredientData.SaveIngredient(_ingredients[position]);
-                     }
-                     else
-                     {
-                         IngredientData.DeleteIngredient(_ingredients[position]);
-                     }
-                 };
+            {
+                if (e.IsChecked)
+                {
+                    Toast.MakeText(_context, "Ингредиент добавлен в корзину продуктов!", ToastLength.Short).Show();
+                    IngredientData.SaveIngredient(_ingredients[position]);
+                }
+                else
+                {
+                    Toast.MakeText(_context, "Ингредиент убран из корзины продуктов!", ToastLength.Short).Show();
+                    IngredientData.DeleteIngredient(_ingredients[position]);
+                }
+            };
 
             if (IngredientData.ExistsIngredient(_ingredients[position]))
                 checkBox.Checked = true;
             else
                 checkBox.Checked = false;
 
-            return view;
+            return convertView;
         }
-
-
-
+  
         public override int Count => _ingredients.Length;
 
         public override RecipeFull this[int position] => _recipeFull;

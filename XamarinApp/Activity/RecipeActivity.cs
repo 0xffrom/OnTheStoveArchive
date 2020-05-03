@@ -86,7 +86,7 @@ namespace XamarinApp
             if (RecipeData.ExistsRecipe(urlRecipe))
                 // Если избранный, то сделать звёздочку закрашенной.
                 buttonStar.SetBackgroundResource(
-                    Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
+                    Resources.GetIdentifier("outline_favorite_24", "drawable", PackageName));
             try
             {
                 recipeFull = await UpdateCollectionRecipes(urlRecipe);
@@ -130,13 +130,13 @@ namespace XamarinApp
             {
                 Toast.MakeText(this, "Рецепт добавлен в избранное", ToastLength.Short).Show();
                 RecipeData.SaveRecipe(urlRecipe, recipeShort);
-                buttonStar.SetImageResource(Resources.GetIdentifier("round_star_white_24", "drawable", PackageName));
+                buttonStar.SetImageResource(Resources.GetIdentifier("outline_favorite_24", "drawable", PackageName));
                 return;
             }
 
             // else:
             RecipeData.DeleteRecipe(urlRecipe);
-            buttonStar.SetImageResource(Resources.GetIdentifier("round_star_border_white_24", "drawable",
+            buttonStar.SetImageResource(Resources.GetIdentifier("outline_favorite_border_24", "drawable",
                 PackageName));
         }
 

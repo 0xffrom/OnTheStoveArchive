@@ -52,7 +52,7 @@ namespace XamarinApp.Fragments
             _urlRecipe = view.FindViewById<TextView>(Resource.Id.urlRecipe);
             _videoView = view.FindViewById<WebView>(Resource.Id.videoRecipe);
 
-            if (_recipeFull.Additional.VideoUrl == null || _recipeFull.Additional.VideoUrl == string.Empty)
+            if (_recipeFull.Additional?.VideoUrl == null || _recipeFull.Additional?.VideoUrl == string.Empty)
             {
                 // Если видео нет:
                 _videoView.LayoutParameters.Height = 0;
@@ -65,14 +65,14 @@ namespace XamarinApp.Fragments
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
-            if (_recipeFull.TitleImage.ImageUrl != null && _recipeFull.TitleImage.ImageUrl != string.Empty)
+            if (_recipeFull.TitleImage?.ImageUrl != null && _recipeFull.TitleImage?.ImageUrl != string.Empty)
                 Picasso.With(View.Context)
                     .Load(_recipeFull.TitleImage.ImageUrl)
                     .Into(_image);
 
             _description.Text += _recipeFull.Description;
 
-            if (_recipeFull.Additional.CPFC != null)
+            if (_recipeFull.Additional?.CPFC != null)
             {
                 if (_recipeFull.Additional.CPFC.Calories != 0)
                     _cpfcRecipe.Text += $"Калории: {_recipeFull.Additional.CPFC.Calories} Ккал.{System.Environment.NewLine}";
@@ -86,14 +86,14 @@ namespace XamarinApp.Fragments
 
             _authorNameRecipe.Text = $"Рецепт от: {_recipeFull.Additional.AuthorName}";
 
-            if (_recipeFull.Additional.CountPortions != 0)
+            if (_recipeFull.Additional?.CountPortions != 0)
                 _additionalInfoRecipe.Text += $"Количество порций: {_recipeFull.Additional.CountPortions}.{System.Environment.NewLine}";
-            if (_recipeFull.Additional.PrepMinutes != 0)
+            if (_recipeFull.Additional?.PrepMinutes != 0)
                 _additionalInfoRecipe.Text += $"Количество минут на готовку: {_recipeFull.Additional.PrepMinutes} мин.";
 
             _urlRecipe.Text = $"Ссылка на рецепт: {_recipeFull.Url}";
             
-            if(_recipeFull.Additional.VideoUrl != null && _recipeFull.Additional.VideoUrl != string.Empty)
+            if(_recipeFull.Additional?.VideoUrl != null && _recipeFull.Additional?.VideoUrl != string.Empty)
             {
                 String videoSource = _recipeFull.Additional.VideoUrl;
                 WebSettings webSettings = _videoView.Settings;

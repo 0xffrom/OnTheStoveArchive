@@ -19,10 +19,13 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
             {
                 index -= settings.IndexStep;
                 var divInfo = recipe.QuerySelector("div.lazy-load-container");
-                string imageUrl = divInfo.Attributes[3].Value;
-                string title = divInfo.Attributes[1].Value;
-                string url = settings.Url + recipe.QuerySelector("div.horizontal-tile__item-link.js-click-link").Attributes[1].Value;
-                recipeShorts.Add(new RecipeShort(title, new ObjectsLibrary.Components.Image(imageUrl), url, index));
+                if (divInfo != null) {
+                    string imageUrl = divInfo.Attributes[3]?.Value ?? "";
+                    string title = divInfo.Attributes[1]?.Value ?? "";
+                    string url = settings.Url + recipe.QuerySelector("div.horizontal-tile__item-link.js-click-link")?.Attributes[1]?.Value ?? "";
+                    if(imageUrl != "" && title != "")
+                        recipeShorts.Add(new RecipeShort(title, new ObjectsLibrary.Components.Image(imageUrl), url, index));
+                }
             }
             return recipeShorts.ToArray();
         }

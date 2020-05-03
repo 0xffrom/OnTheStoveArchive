@@ -29,7 +29,6 @@ namespace WebServer.Controllers
         [HttpGet("get")]
         public async Task<ActionResult> Get(string url)
         {
-            GC.Collect();
             DateTime startTime = DateTime.Now;
             MySql.Data.MySqlClient.MySqlConnection conn = RecipeDataContext.GetConnection();
             _logger.LogInformation($"Запрос на парсинг старницы рецепта. Url: {url}");

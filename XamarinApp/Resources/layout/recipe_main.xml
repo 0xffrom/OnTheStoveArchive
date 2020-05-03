@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         app:backgroundTint="@color/colorMain"
-        android:src="@drawable/round_star_border_white_24"
+        android:src="@drawable/outline_favorite_border_24"
         android:layout_margin="16dp" />
 
 </android.support.design.widget.CoordinatorLayout>

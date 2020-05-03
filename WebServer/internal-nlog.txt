@@ -1658,3 +1658,41 @@
 2020-05-03 03:02:12.9358 Info Found 118 configuration items
 2020-05-03 03:02:15.2061 Info AppDomain Shutting down. Logger closing...
 2020-05-03 03:02:15.2388 Info Logger has been shut down.
+2020-05-03 03:49:34.5834 Info Message Template Auto Format enabled
+2020-05-03 03:49:34.6190 Info Loading assembly: NLog.Web.AspNetCore
+2020-05-03 03:49:34.7014 Info Adding target FileTarget(Name=allfile)
+2020-05-03 03:49:34.7014 Info Adding target FileTarget(Name=ownFile-web)
+2020-05-03 03:49:34.7358 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-05-03 03:49:34.7358 Info Adding target FileTarget(Name=logDebug)
+2020-05-03 03:49:34.7358 Info Adding target FileTarget(Name=logInfo)
+2020-05-03 03:49:34.7358 Info Adding target FileTarget(Name=logWarning)
+2020-05-03 03:49:34.7962 Info Found 118 configuration items
+2020-05-03 03:50:14.3859 Info Message Template Auto Format enabled
+2020-05-03 03:50:14.4098 Info Loading assembly: NLog.Web.AspNetCore
+2020-05-03 03:50:14.4620 Info Adding target FileTarget(Name=allfile)
+2020-05-03 03:50:14.4677 Info Adding target FileTarget(Name=ownFile-web)
+2020-05-03 03:50:14.4677 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-05-03 03:50:14.4832 Info Adding target FileTarget(Name=logDebug)
+2020-05-03 03:50:14.4832 Info Adding target FileTarget(Name=logInfo)
+2020-05-03 03:50:14.4832 Info Adding target FileTarget(Name=logWarning)
+2020-05-03 03:50:14.5136 Info Found 118 configuration items
+2020-05-03 03:51:44.0056 Info Message Template Auto Format enabled
+2020-05-03 03:51:44.0195 Info Loading assembly: NLog.Web.AspNetCore
+2020-05-03 03:51:44.0974 Info Adding target FileTarget(Name=allfile)
+2020-05-03 03:51:44.1095 Info Adding target FileTarget(Name=ownFile-web)
+2020-05-03 03:51:44.1237 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-05-03 03:51:44.1237 Info Adding target FileTarget(Name=logDebug)
+2020-05-03 03:51:44.1237 Info Adding target FileTarget(Name=logInfo)
+2020-05-03 03:51:44.1237 Info Adding target FileTarget(Name=logWarning)
+2020-05-03 03:51:44.1743 Info Found 118 configuration items
+2020-05-03 03:54:10.2298 Info Message Template Auto Format enabled
+2020-05-03 03:54:10.2436 Info Loading assembly: NLog.Web.AspNetCore
+2020-05-03 03:54:10.3078 Info Adding target FileTarget(Name=allfile)
+2020-05-03 03:54:10.3138 Info Adding target FileTarget(Name=ownFile-web)
+2020-05-03 03:54:10.3283 Info Adding target ColoredConsoleTarget(Name=logconsole)
+2020-05-03 03:54:10.3283 Info Adding target FileTarget(Name=logDebug)
+2020-05-03 03:54:10.3283 Info Adding target FileTarget(Name=logInfo)
+2020-05-03 03:54:10.3283 Info Adding target FileTarget(Name=logWarning)
+2020-05-03 03:54:10.3781 Info Found 118 configuration items
+2020-05-03 03:55:37.6005 Info AppDomain Shutting down. Logger closing...
+2020-05-03 03:55:37.6318 Info Logger has been shut down.

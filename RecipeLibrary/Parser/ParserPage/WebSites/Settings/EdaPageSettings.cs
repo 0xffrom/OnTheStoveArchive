@@ -10,7 +10,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
         public Dictionary<string, string> Sections { get; } = new Dictionary<string, string>()
         {
             {"new","RecipesCatalog/GetPage?sorting=date&page={PageId}"},
-            {"random","RecipesCatalog/GetPage?sorting=date&page={PageId}"},
+            {"random","RecipesCatalog/GetPage?sorting=rate&page={PageId}"},
             {"popular","RecipesCatalog/GetPage?sorting=rating&page={PageId}"},
             {"recipe","RecipesSearch/GetNextRecipes?sorting=rating&page={PageId}&q={RecipeName}&OnlyEdaChecked=false"},
             {"горячее", "RecipesCatalog/GetPage?sorting=rate&page={PageId}&tags=osnovnye-blyuda"},
@@ -21,7 +21,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
             {"десерты", "RecipesCatalog/GetPage?sorting=rate&page={PageId}&tags=vypechka-deserty"},
             {"соусы", "RecipesCatalog/GetPage?sorting=rate&page={PageId}&tags=sousy-marinady"}
         };
-        public int MaxPageId { get; } = 700;
+        public int MaxPageId { get; } = 350;
         public int PageId { get; set; }
         public string RecipeName { get; }
         public double IndexPopularity { get; set; } = 100;

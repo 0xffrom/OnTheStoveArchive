@@ -41,6 +41,7 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
                 pageId = GetPageId(Settings.MaxPageId);
 
             string recipeName = Settings.RecipeName;
+
             string source = await _loader.GetSource(pageId, recipeName);
 
             // Если нет существуеющего раздела у сайта - выкидывается пустой.
