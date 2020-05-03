@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectsLibrary", "ObjectLib
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A0BDE08-0636-4412-88A0-AC9573EBF54A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checker", "Checker\Checker.csproj", "{C29977F7-E9D1-4134-A2CD-D462E72430A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Additional", "Checker\Additional.csproj", "{C29977F7-E9D1-4134-A2CD-D462E72430A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

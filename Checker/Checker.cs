@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Checker
 {
-    class Program
+    class Checker
     {
         static string queryRecipe = "http://51.77.58.18/recipe/get?url=";
         static string queryPage = "http://51.77.58.18/page/get?section=popular&page=";

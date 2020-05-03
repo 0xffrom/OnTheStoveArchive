@@ -1,4 +1,8 @@
-﻿using System.Net;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +37,25 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
                 .Replace("{PageId}", idPage.ToString())
                 .Replace("{RecipeName}", recipeName);
 
-            var response = await _client.GetAsync(currentUrl);
+            HttpResponseMessage response;
+
+            // Для сайта eda.ru выполняются POST запросы, для остальных GET.
+            if (currentUrl.Contains("https://eda.ru"))
+            {
+                var data = "name=onthestove";
+                StringContent queryString = new StringContent(data);
+                response = await _client.PostAsync(new Uri(currentUrl), queryString);
+
+                string responseBody = string.Empty;
+                if (response != null && response.StatusCode == HttpStatusCode.OK)
+                    responseBody = await response.Content.ReadAsStringAsync();
+                JObject jObject = JObject.Parse(responseBody);
+
+                return jObject["Recipes"].Value<string>();
+
+            }
+            else
+                response = await _client.GetAsync(currentUrl);
 
             string source;
 

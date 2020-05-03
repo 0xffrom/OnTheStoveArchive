@@ -45,7 +45,8 @@ namespace XamarinApp
 
             var url = _items[position]?.Image.ImageUrl;
 
-            Picasso.With(_activity)
+            if (url != null && url != string.Empty)
+                Picasso.With(_activity)
                  .Load(url)
                  .Into(vh.Image);
 

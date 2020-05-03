@@ -51,14 +51,24 @@ namespace XamarinApp.Fragments
             _additionalInfoRecipe = view.FindViewById<TextView>(Resource.Id.additionalInfoRecipe);
             _urlRecipe = view.FindViewById<TextView>(Resource.Id.urlRecipe);
             _videoView = view.FindViewById<WebView>(Resource.Id.videoRecipe);
+
+            if (_recipeFull.Additional.VideoUrl == null || _recipeFull.Additional.VideoUrl == string.Empty)
+            {
+                // Если видео нет:
+                _videoView.LayoutParameters.Height = 0;
+                _videoView.RefreshDrawableState();
+                _videoView.RequestLayout();
+            }
+
             return view;
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
-            Picasso.With(View.Context)
-                .Load(_recipeFull.TitleImage.ImageUrl)
-                .Into(_image);
+            if (_recipeFull.TitleImage.ImageUrl != null && _recipeFull.TitleImage.ImageUrl != string.Empty)
+                Picasso.With(View.Context)
+                    .Load(_recipeFull.TitleImage.ImageUrl)
+                    .Into(_image);
 
             _description.Text += _recipeFull.Description;
 
@@ -88,12 +98,9 @@ namespace XamarinApp.Fragments
                 String videoSource = _recipeFull.Additional.VideoUrl;
                 WebSettings webSettings = _videoView.Settings;
                 webSettings.JavaScriptEnabled = true;
-                _videoView.LoadUrl(videoSource);            
+                _videoView.LoadUrl(videoSource);
             }
-            else
-            {
 
-            }
 
             base.OnActivityCreated(savedInstanceState);
         }

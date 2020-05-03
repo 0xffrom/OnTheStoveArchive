@@ -27,7 +27,11 @@ namespace RecipeLibrary
             var edimdoma = new ParserPage<RecipeShort[]>
                 (new EdimDomaPageParser(), new EdimDomaPageSettings(section, page, findName));
 
-            await Task.WhenAll(ParseRecipe(edimdoma, recipeShorts), ParseRecipe(povarenok, recipeShorts), ParseRecipe(povar, recipeShorts));
+            var eda = new ParserPage<RecipeShort[]>
+               (new EdaPageParser(), new EdaPageSettings(section, page, findName));
+
+            await Task.WhenAll(ParseRecipe(edimdoma, recipeShorts), ParseRecipe(povarenok, recipeShorts), 
+                ParseRecipe(povar, recipeShorts), ParseRecipe(eda, recipeShorts));
 
             return recipeShorts.OrderByDescending(x => x.IndexPopularity).ToArray();
         }
@@ -54,6 +58,11 @@ namespace RecipeLibrary
             {
                 obj = new EdimdomaRecipeParser();
                 settings = new EdimdomaRecipeSettings(url);
+            }
+            else if (url.Contains("https://eda.ru"))
+            {
+                obj = new EdaRecipeParser();
+                settings = new EdaRecipeSettings(url);
             }
             else
                 throw new ParserException("Неизвестный сайт.");

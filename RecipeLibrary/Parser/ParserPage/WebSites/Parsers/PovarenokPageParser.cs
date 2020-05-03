@@ -1,8 +1,6 @@
-﻿using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
+﻿using AngleSharp.Html.Dom;
 using ObjectsLibrary.Components;
 using ObjectsLibrary.Parser.ParserPage.Core;
-using System;
 using System.Linq;
 
 namespace ObjectsLibrary.Parser.ParserPage.WebSites

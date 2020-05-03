@@ -42,9 +42,10 @@ namespace XamarinApp
             
             var url = _stepRecipeBoxes[position].Image.ImageUrl;
 
-            Picasso.With(_context)
-                .Load(url)
-                .Into(imageView);
+            if (url != null && url != string.Empty)
+                Picasso.With(_context)
+                    .Load(url)
+                    .Into(imageView);
 
             return view;
         }

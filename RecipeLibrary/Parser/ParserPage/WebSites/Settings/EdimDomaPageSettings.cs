@@ -25,7 +25,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
         public int PageId { get; set; }
         public string RecipeName { get; }
         public double IndexPopularity { get; set; } = 100;
-        public double IndexStep { get; } = 2;
+        public double IndexStep { get; } = 1;
         public EdimDomaPageSettings(string section, int pageId)
         {
             Section = section;
