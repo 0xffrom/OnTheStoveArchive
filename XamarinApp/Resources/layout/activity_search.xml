@@ -17,16 +17,38 @@
         <include
             layout="@layout/app_bar"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:background="@color/colorMain"
+            android:padding="2dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="16dp"              
+                android:gravity="left|center"
+                android:paddingBottom="7dp"
+                android:paddingLeft="3dp"
+                android:textColor="@android:color/white"
+                android:text ="Фильтр:"/>
             <Spinner
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner"
-                android:layout_gravity="left|center_vertical"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:padding="3dp"
                 android:popupBackground="@color/colorMain"
                 android:background="@color/colorMain"
                 android:fontFamily="@Font/ActorRegular"
                 android:spinnerMode="dropdown"/>
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/keyboard_arrow_down_black_24dp"/>
+            </LinearLayout>
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="wrap_content"
