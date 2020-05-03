@@ -39,7 +39,7 @@ namespace XamarinApp
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View itemView = LayoutInflater.From(parent.Context).
-                Inflate(Resource.Layout.ingredients_saved_list, parent, false);
+                Inflate(Resource.Layout.list_ingredients_saved, parent, false);
             SavedIngredientsViewHolder vh = new SavedIngredientsViewHolder(itemView, RemoveItem);
             return vh;
         }

@@ -51,7 +51,10 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
                     responseBody = await response.Content.ReadAsStringAsync();
                 JObject jObject = JObject.Parse(responseBody);
 
-                return jObject["Recipes"].Value<string>();
+                if (jObject.ContainsKey("Recipes"))
+                    return jObject["Recipes"]?.Value<string>();
+                else
+                    return jObject["Html"].Value<string>();
 
             }
             else

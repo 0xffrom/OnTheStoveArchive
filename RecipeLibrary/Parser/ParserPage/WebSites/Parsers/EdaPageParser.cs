@@ -9,6 +9,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
     {
         public RecipeShort[] Parse(IHtmlDocument document, IParserPageSettings settings)
         {
+            //tile-list__horizontal-tile.horizontal-tile.js-portions-count-parent.js-bookmark__obj
             var recipes = document.QuerySelectorAll("div.tile-list__horizontal-tile.horizontal-tile.js-portions-count-parent.js-bookmark__obj");
 
             List <RecipeShort> recipeShorts = new List<RecipeShort>(recipes.Length);

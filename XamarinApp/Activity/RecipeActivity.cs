@@ -52,7 +52,7 @@ namespace XamarinApp
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            SetContentView(Resource.Layout.recipe_main);
+            SetContentView(Resource.Layout.activity_recipe);
 
             title = FindViewById<TextView>(Resource.Id.titleRecipe);
             buttonShare = FindViewById<Button>(Resource.Id.shareRecipe);

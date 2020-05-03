@@ -35,13 +35,13 @@
                 android:paddingLeft="20dp"
                 android:fontFamily="@Font/ActorRegular"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:text="Корзина ингредиентов"
+                android:text="Выберите желаемый раздел"
         />
 
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewIngredients"
+            android:id="@+id/recyclerViewRecipesPlates"
             android:orientation="vertical"
             android:padding="5dp"
             android:layout_margin="5dp"

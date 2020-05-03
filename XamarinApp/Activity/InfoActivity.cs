@@ -13,36 +13,20 @@ using ObjectsLibrary.Components;
 namespace XamarinApp
 {
     [Activity(Label = "На плите!", Theme = "@style/AppTheme.NoActionBar", Icon = "@drawable/icon",
-        ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
-    class SavedIngredientsActivity : AppCompatActivity
+        ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
+    class InfoActivity : AppCompatActivity
     {
-        private RecyclerView recyclerView;
-        private LinearLayoutManager linearLayoutManager;
-        private List<Ingredient> ingredients;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            SetContentView(Resource.Layout.activity_savedIngredients);
-
-
-            recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerViewIngredients);
-            linearLayoutManager = new LinearLayoutManager(this);
-            recyclerView.SetLayoutManager(linearLayoutManager);
+            SetContentView(Resource.Layout.activity_info);
 
             var relativeLayoutBack = FindViewById<RelativeLayout>(Resource.Id.relativeLayoutBack);
-            var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);   
+            var buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
 
             relativeLayoutBack.Click += OnBackPressed;
             buttonBack.Click += OnBackPressed;
-
-            ingredients = IngredientData.GetArrayIngredients().ToList();
-
-            if (ingredients != null)
-            {
-                var adapter = new SavedIngredientsAdapter(ingredients);
-                recyclerView.SetAdapter(adapter);
-            }
         }
 
         private void OnBackPressed(object sender, EventArgs args) => base.OnBackPressed();

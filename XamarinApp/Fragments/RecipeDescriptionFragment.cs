@@ -42,7 +42,7 @@ namespace XamarinApp.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = inflater.Inflate(Resource.Layout.recipe_description_fragment, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_recipe_description, container, false);
             
             _image = view.FindViewById<ImageView>(Resource.Id.imageMainRecipe);
             _description = view.FindViewById<TextView>(Resource.Id.titleMainDescription);

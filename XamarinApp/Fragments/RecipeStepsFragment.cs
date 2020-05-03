@@ -33,7 +33,7 @@ namespace XamarinApp.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = inflater.Inflate(Resource.Layout.recipe_steps_fragment, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_recipe_steps, container, false);
             
             _listSteps = view.FindViewById<ListView>(Resource.Id.listSteps);
 

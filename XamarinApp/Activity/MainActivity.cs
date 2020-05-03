@@ -9,6 +9,7 @@ using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 using ObjectsLibrary;
 using System;
@@ -34,6 +35,7 @@ namespace XamarinApp
         private Spinner spinner;
         private ArrayAdapter spinnerAdapter;
         private ActionBarDrawerToggle actionBarDrawerToggle;
+        private Button findButton;
 
         private List<RecipeShort> recipeShorts;
         private int page = 1;
@@ -49,7 +51,7 @@ namespace XamarinApp
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
-            SetContentView(Resource.Layout.activity_search);
+            SetContentView(Resource.Layout.activity_main);
 
             // Определяем компоненты: 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.listRecipeShorts);
@@ -59,6 +61,7 @@ namespace XamarinApp
             buttonMenu = FindViewById<Button>(Resource.Id.menu_button);
             editText = FindViewById<EditText>(Resource.Id.TextFind);
             spinner = FindViewById<Spinner>(Resource.Id.spinner);
+            findButton = FindViewById<Button>(Resource.Id.findButton);
 
             linearLayoutManager = new LinearLayoutManager(this);
             recipeListener = new RecipeListener(linearLayoutManager);
@@ -70,6 +73,7 @@ namespace XamarinApp
             recyclerView.AddOnScrollListener(recipeListener);
             recipeListener.LoadMoreEvent += LoadMoreElements;
 
+            findButton.Click += OnClickFind;
             editText.KeyPress += FindByRecipeName;
 
             actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, 
@@ -97,16 +101,28 @@ namespace XamarinApp
                 .SetNeutralButton(messageErrorTextButton, RefreshLayout);
         }
 
+        private void OnClickFind(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(editText.Text))
+                return;
+
+            page = 1;
+            lastQuery = $"section=recipe&recipeName={editText.Text}&page={page}";
+            UpdateListView(lastQuery);
+            Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
+        }
         private void FindByRecipeName(object sender, View.KeyEventArgs e)
         {
             e.Handled = false;
-            page = 1;
 
-            if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter)
+            if (string.IsNullOrWhiteSpace(editText.Text))
                 return;
 
+            page = 1;
+            Window.SetSoftInputMode(SoftInput.StateHidden);
             lastQuery = $"section=recipe&recipeName={editText.Text}&page={page}";
             UpdateListView(lastQuery);
+
 
             //Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
             e.Handled = true;
@@ -257,6 +273,16 @@ namespace XamarinApp
             if (id == Resource.Id.nav_cart)
             {
                 Intent intent = new Intent(this, typeof(SavedIngredientsActivity));
+                StartActivity(intent);
+            }
+            if(id == Resource.Id.nav_section)
+            {
+                Intent intent = new Intent(this, typeof(PlatesActivity));
+                StartActivity(intent);
+            }
+            if (id == Resource.Id.nav_app)
+            {  
+                Intent intent = new Intent(this, typeof(InfoActivity));
                 StartActivity(intent);
             }
 
