@@ -13,7 +13,7 @@ namespace WebServer
         {
             Cache = new MemoryCache(new MemoryCacheOptions
             {
-                SizeLimit = 1024
+                SizeLimit = 1536
             });
         }
     }
