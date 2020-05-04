@@ -115,6 +115,9 @@ namespace XamarinApp
         {
             e.Handled = false;
 
+            if (e.Event.Action != KeyEventActions.Down || e.KeyCode != Keycode.Enter)
+                return;
+
             if (string.IsNullOrWhiteSpace(editText.Text))
                 return;
 
