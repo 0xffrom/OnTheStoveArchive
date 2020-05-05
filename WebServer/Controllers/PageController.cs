@@ -13,6 +13,7 @@ namespace WebServer.Controllers
     public class PageController : ControllerBase
     {
         private readonly ILogger<PageController> _logger;
+
         public PageController(ILogger<PageController> logger)
         {
             _logger = logger;
@@ -32,7 +33,7 @@ namespace WebServer.Controllers
         public async Task<ActionResult> Get(string section, int page = 1, string recipeName = null)
         {
             string log = $"GET запрос на получение страниц с рецептами. Параметры: " +
-             $"section={section}, page={page}";
+                         $"section={section}, page={page}";
 
             if (recipeName != null)
                 log += $", recipeName={recipeName}";
@@ -45,7 +46,7 @@ namespace WebServer.Controllers
             try
             {
                 RecipeShort[] recipes = await GetData.GetPage(section.ToLower(), page, recipeName.ToLower());
-                
+
                 _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
                 _logger.LogInformation($"Статус: Ok.");
                 return Ok(recipes);

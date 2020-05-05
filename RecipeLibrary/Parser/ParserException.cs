@@ -7,6 +7,7 @@ namespace ObjectsLibrary.Parser
     {
         public string WebSite { get; }
         public override string Message { get; }
+
         public ParserException()
         {
             //
@@ -16,6 +17,7 @@ namespace ObjectsLibrary.Parser
         {
             Message = message;
         }
+
         public ParserException(string message, string webSite) : base(message)
         {
             WebSite = webSite;
@@ -26,7 +28,8 @@ namespace ObjectsLibrary.Parser
             //
         }
 
-        protected ParserException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        protected ParserException(System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         {
             //

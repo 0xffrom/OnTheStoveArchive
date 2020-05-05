@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeLibrary", "RecipeLibr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServer", "WebServer\WebServer.csproj", "{A8AD85B8-38EB-4C25-B8BE-0CBE2C61EE0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinApp", "XamarinApp\XamarinApp.csproj", "{CEB3721A-0C45-4AD4-9D8A-9305C9A3397D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidApp", "AndroidApp\AndroidApp.csproj", "{CEB3721A-0C45-4AD4-9D8A-9305C9A3397D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinAppLibrary", "XamarinAppLibrary\XamarinAppLibrary.csproj", "{DEA1A7D3-7FA8-4E62-9EFD-22F3CD415979}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidLibrary", "AndroidLibrary\AndroidLibrary.csproj", "{DEA1A7D3-7FA8-4E62-9EFD-22F3CD415979}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectsLibrary", "ObjectLibrary\ObjectsLibrary.csproj", "{2E71F618-7DFD-4161-83D0-ED114448827E}"
 EndProject

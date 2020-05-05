@@ -30,7 +30,7 @@ namespace WebServer.DataBase
             MySqlCommand command = new MySqlCommand(sqlCommand, conn);
 
             // Получение бинарного представления объекта из БД.
-            byte[] result = (byte[])command.ExecuteScalar();
+            byte[] result = (byte[]) command.ExecuteScalar();
 
             // Получение размера:
             size = result.Length * 1.0 / 1024;
@@ -46,7 +46,6 @@ namespace WebServer.DataBase
         /// <param name="conn">Подключение к базе данных MySQL <see cref="MySqlConnection"/></param>
         public static void AddRecipe(string url, RecipeFull recipeFull, MySqlConnection conn)
         {
-
             byte[] buffer = RecipeToByteArray(recipeFull);
 
             var resultExists = IsExists(url, conn);
@@ -121,7 +120,7 @@ namespace WebServer.DataBase
             NFX.Serialization.Slim.SlimSerializer slimSerializer =
                 new NFX.Serialization.Slim.SlimSerializer();
 
-            RecipeFull recipeFull = (RecipeFull)slimSerializer.Deserialize(memoryStream);
+            RecipeFull recipeFull = (RecipeFull) slimSerializer.Deserialize(memoryStream);
 
             return recipeFull;
         }

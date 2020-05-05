@@ -55,7 +55,6 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
                     return jObject["Recipes"]?.Value<string>();
                 else
                     return jObject["Html"].Value<string>();
-
             }
             else
                 response = await _client.GetAsync(currentUrl);

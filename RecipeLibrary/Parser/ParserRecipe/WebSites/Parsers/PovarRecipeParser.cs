@@ -36,8 +36,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
         {
             Url = parserRecipeSettings.Url;
 
-            var recipeBody = document
-                .QuerySelector("div.cont_area");
+            var recipeBody = document.QuerySelector("div.cont_area");
 
             if (recipeBody is null)
                 return new RecipeFull();
@@ -72,7 +71,8 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
             Ingredients = ingredients;
 
-            var stepRecipeBody = recipeBody.QuerySelector("div[itemprop='recipeInstructions'][itemtype='http://schema.org/ItemList']");
+            var stepRecipeBody =
+                recipeBody.QuerySelector("div[itemprop='recipeInstructions'][itemtype='http://schema.org/ItemList']");
             if (stepRecipeBody != null)
             {
                 var stepCollection = stepRecipeBody.QuerySelectorAll("div");
@@ -103,16 +103,18 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                         }
                     }
                 }
+
                 StepsRecipe = stepRecipesBoxes.ToArray();
             }
-           
+
 
             var rcpAuthorTimeBody = recipeBody
                 .QuerySelector("div.rcpAuthorTime");
 
             string authorName = rcpAuthorTimeBody.QuerySelector("span[id='autorName']").TextContent;
 
-            double prepMinutes = ConvertToMinutes(rcpAuthorTimeBody.QuerySelector("meta[itemprop='cookTime']").Attributes[1].Value);
+            double prepMinutes =
+                ConvertToMinutes(rcpAuthorTimeBody.QuerySelector("meta[itemprop='cookTime']").Attributes[1].Value);
 
             string[] portions = recipeBody
                 .QuerySelector("em[itemprop='recipeYield']")
@@ -162,6 +164,5 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             // Format: PT<min>M
             return double.Parse(inputLine[2..^1]);
         }
-
     }
 }

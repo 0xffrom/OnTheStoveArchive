@@ -8,6 +8,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
     public class HtmlLoader
     {
         private readonly HttpClient _client;
+
         public HtmlLoader(IParserRecipeSettings settings)
         {
             _client = new HttpClient();

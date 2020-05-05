@@ -14,7 +14,8 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
         private IParserPageSettings Settings
         {
             get => _parserSettings;
-            set {
+            set
+            {
                 _parserSettings = value;
                 _loader = new HtmlLoader(value);
             }

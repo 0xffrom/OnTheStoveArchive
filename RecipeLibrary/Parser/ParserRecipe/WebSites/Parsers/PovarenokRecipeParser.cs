@@ -11,7 +11,6 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 {
     public class PovarenokRecipeParser : IParserRecipe<RecipeFull>
     {
-
         /// <see cref="RecipeFull.Url"/>
         private string Url { get; set; }
 
@@ -135,7 +134,8 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
             {
                 var body = recipeBody.QuerySelector("div.article-tags")?.PreviousElementSibling ?? null;
                 if (body != null)
-                    stepRecipeBoxes.Add(new StepRecipe(body?.TextContent ?? string.Empty, new Image("https://www.povarenok.ru/i/new3/logo.png?v=1")));
+                    stepRecipeBoxes.Add(new StepRecipe(body?.TextContent ?? string.Empty,
+                        new Image("https://www.povarenok.ru/i/new3/logo.png?v=1")));
             }
 
             StepsRecipe = stepRecipeBoxes.ToArray();
@@ -148,8 +148,10 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 .Select(x => x.LastElementChild.TextContent).FirstOrDefault());
 
             int countPortions = int.Parse(ingredientBodyP
-                .Where(x => x.FirstElementChild.TextContent.Contains("Количество порций:"))
-                .Select(x => x.TextContent).FirstOrDefault()?.Replace("Количество порций:", string.Empty) ?? "0");
+                .Where(
+                    x => x.FirstElementChild.TextContent.Contains("Количество порций:"))
+                .Select(x => x.TextContent).FirstOrDefault()
+                ?.Replace("Количество порций:", string.Empty) ?? "0");
 
             var cpfc = new CPFC();
 

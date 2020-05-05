@@ -7,12 +7,13 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
     internal class PovarenokPageSettings : IParserPageSettings
     {
         public string Url { get; } = "https://www.povarenok.ru/recipes/";
+
         public Dictionary<string, string> Sections { get; } = new Dictionary<string, string>()
         {
-            {"new","~{PageId}/?sort=new&order=desc"},
-            {"random","~{PageId}/?sort=new&order=desc"},
-            {"popular","~{PageId}/?sort=rating&order=desc"},
-            {"recipe","search/~{PageId}/?name={RecipeName}#searchformtop"},
+            {"new", "~{PageId}/?sort=new&order=desc"},
+            {"random", "~{PageId}/?sort=new&order=desc"},
+            {"popular", "~{PageId}/?sort=rating&order=desc"},
+            {"recipe", "search/~{PageId}/?name={RecipeName}#searchformtop"},
             {"горячее", "category/6/~{PageId}/"},
             {"супы", "category/2/~{PageId}/"},
             {"салаты", "category/12/~{PageId}/"},
@@ -27,8 +28,8 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
         public int PageId { get; }
         public string RecipeName { get; }
         public double IndexPopularity { get; set; } = 100;
-        public double IndexStep { get;} = 2;
- 
+        public double IndexStep { get; } = 2;
+
         public PovarenokPageSettings(string section, int pageId)
         {
             Section = section;
@@ -67,6 +68,5 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
 
             return url;
         }
-
     }
 }

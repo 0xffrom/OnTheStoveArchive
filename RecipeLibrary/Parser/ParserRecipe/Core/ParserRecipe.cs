@@ -20,7 +20,8 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
         internal IParserRecipeSettings Settings
         {
             get => parserSettings;
-            set {
+            set
+            {
                 parserSettings = value;
                 loader = new HtmlLoader(value);
             }
@@ -48,13 +49,11 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
                 var result = parser.Parse(document, parserSettings);
 
                 return result;
-
             }
             catch (Exception e)
             {
                 throw new ParserException("Ошибка при парсинге страницы: " + e);
             }
-
         }
     }
 }

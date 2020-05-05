@@ -16,7 +16,7 @@ namespace RecipeLibrary
     {
         public static async Task<RecipeShort[]> GetPage(string section, int page, string findName = null)
         {
-            List<RecipeShort> recipeShorts = new List<RecipeShort>();
+            var recipeShorts = new List<RecipeShort>();
 
             var povarenok = new ParserPage<RecipeShort[]>
                 (new PovarenokPageParser(), new PovarenokPageSettings(section, page, findName));
@@ -28,9 +28,9 @@ namespace RecipeLibrary
                 (new EdimDomaPageParser(), new EdimDomaPageSettings(section, page, findName));
 
             var eda = new ParserPage<RecipeShort[]>
-               (new EdaPageParser(), new EdaPageSettings(section, page, findName));
+                (new EdaPageParser(), new EdaPageSettings(section, page, findName));
 
-            await Task.WhenAll(ParseRecipe(edimdoma, recipeShorts), ParseRecipe(povarenok, recipeShorts), 
+            await Task.WhenAll(ParseRecipe(edimdoma, recipeShorts), ParseRecipe(povarenok, recipeShorts),
                 ParseRecipe(povar, recipeShorts), ParseRecipe(eda, recipeShorts));
 
             return recipeShorts.OrderByDescending(x => x.IndexPopularity).ToArray();
@@ -69,9 +69,6 @@ namespace RecipeLibrary
 
             var recipe = new ParserRecipe<RecipeFull>(obj, settings);
             return await recipe.Worker();
-            
-
-
         }
     }
 }

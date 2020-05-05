@@ -41,15 +41,17 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             foreach (var description in divsDescription)
             {
-                Description += description.TextContent.Trim().Replace("\n","") + Environment.NewLine;
+                Description += description.TextContent.Trim().Replace("\n", "") + Environment.NewLine;
             }
 
             foreach (var history in divsHistory)
             {
-                Description += history.TextContent.Trim().Replace("\n", "").Replace("Читать полностью","") + Environment.NewLine;
+                Description += history.TextContent.Trim().Replace("\n", "").Replace("Читать полностью", "") +
+                               Environment.NewLine;
             }
 
-            var pIngredients = document.QuerySelectorAll("div.ingredients-list.layout__content-col > div.ingredients-list__content > p.ingredients-list__content-item.content-item.js-cart-ingredients");
+            var pIngredients = document.QuerySelectorAll(
+                "div.ingredients-list.layout__content-col > div.ingredients-list__content > p.ingredients-list__content-item.content-item.js-cart-ingredients");
 
             List<Ingredient> ingredients = new List<Ingredient>(pIngredients.Length);
 
@@ -71,8 +73,9 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             foreach (var liStep in liSteps)
             {
-                string imageUrl =  liStep.QuerySelector("div.lazy-load-container")?.Attributes[3]?.Value ?? "";
-                string description = liStep.QuerySelector("span.instruction__description.js-steps__description").TextContent.Trim();
+                string imageUrl = liStep.QuerySelector("div.lazy-load-container")?.Attributes[3]?.Value ?? "";
+                string description = liStep.QuerySelector("span.instruction__description.js-steps__description")
+                    .TextContent.Trim();
                 stepRecipes.Add(new StepRecipe(description, new Image(imageUrl)));
             }
 
@@ -84,13 +87,16 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
             if (imageBody?.Attributes[0] != null)
                 TitleImage = new Image(imageBody.Attributes[0].Value);
             else
-                TitleImage = stepRecipes[stepRecipes.Count-1]?.Image ??
-                    new Image("https://s2.eda.ru/StaticContent/All/w/29261930/assets/images/png/404-ingr.png");
+                TitleImage = stepRecipes[stepRecipes.Count - 1]?.Image ??
+                             new Image("https://s2.eda.ru/StaticContent/All/w/29261930/assets/images/png/404-ingr.png");
 
             double prepMinutes = ConvertToMinutes(document.QuerySelectorAll("span.info-pad__item")
-                .FirstOrDefault(x=> x.FirstElementChild?.ClassName == "timer").QuerySelector("span.info-text")?.TextContent ?? "0");
+                .FirstOrDefault(x => x.FirstElementChild?.ClassName == "timer")
+                .QuerySelector("span.info-text")?.TextContent ?? "0");
             int countPortions = int.Parse(document.QuerySelectorAll("span.info-pad__item")
-                .FirstOrDefault(x => x.FirstElementChild?.ClassName == "portion").QuerySelector("span.info-text.js-portions-count-print")?.TextContent.Split(' ')[0] ?? "0");
+                .FirstOrDefault(x => x.FirstElementChild?.ClassName == "portion")
+                .QuerySelector("span.info-text.js-portions-count-print")?.TextContent
+                .Split(' ')[0] ?? "0");
             string authorName = document.QuerySelector("p.author-name > span")?.TextContent ?? string.Empty;
 
             var cpfcList = document.QuerySelectorAll("li > p.nutrition__weight");
@@ -105,7 +111,8 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
             if (videoScr != null)
                 videoUrl = videoScr.Attributes[3]?.Value ?? "";
 
-            Additional = new Additional(authorName, countPortions, prepMinutes, new CPFC(calories, protein, fats, carbohydrates), videoUrl);
+            Additional = new Additional(authorName, countPortions, prepMinutes,
+                new CPFC(calories, protein, fats, carbohydrates), videoUrl);
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }
@@ -133,6 +140,5 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             return minutes;
         }
-
     }
 }

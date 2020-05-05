@@ -35,7 +35,8 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
         {
             Url = parserRecipeSettings.Url;
 
-            var recipeBody = document.QuerySelector("div.grid-three-column__column.grid-three-column__column_center.onthe_data") 
+            var recipeBody =
+                document.QuerySelector("div.grid-three-column__column.grid-three-column__column_center.onthe_data")
                 ?? throw new ParserException("Не найдено главное тело рецепта.", "edimdoma.ru");
 
             Title = recipeBody.Attributes[5].Value ?? string.Empty;
@@ -52,7 +53,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 List<Ingredient> ingredients = new List<Ingredient>(inputArray.Length);
 
                 foreach (var input in inputArray)
-                    
+
                 {
                     string titleIngredient = input.Attributes[2].Value;
                     string name = input.Attributes[4].Value;
@@ -66,18 +67,19 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
             }
 
             var stepsBody = recipeBody.QuerySelector("div.recipe_steps") ??
-                throw new ParserException("Не найден блок с шагами.", "edimdoma.ru");
+                            throw new ParserException("Не найден блок с шагами.", "edimdoma.ru");
 
             var recipeArray = stepsBody.QuerySelectorAll("div.content-box.recipe_step");
 
             if (recipeArray != null)
             {
                 List<StepRecipe> stepsRecipe = new List<StepRecipe>(recipeArray.Length);
-                
-                stepsRecipe.AddRange(from stepBlock in recipeArray 
-                    let stepImage = new Image("https://www.edimdoma.ru" + stepBlock.QuerySelector("img")?.Attributes[0]?.Value ?? 
-                                              "/assets/default/recipe_steps/ed4_thumb-2c862fbcf2e544709c77a80ead4a3f58cd9a80e6b65f0ad18839af30ec9a2a5a.png") 
-                    let stepDescription = stepBlock.QuerySelector("div.plain-text.recipe_step_text")?.TextContent 
+
+                stepsRecipe.AddRange(from stepBlock in recipeArray
+                    let stepImage = new Image(
+                        "https://www.edimdoma.ru" + stepBlock.QuerySelector("img")?.Attributes[0]?.Value ??
+                        "/assets/default/recipe_steps/ed4_thumb-2c862fbcf2e544709c77a80ead4a3f58cd9a80e6b65f0ad18839af30ec9a2a5a.png")
+                    let stepDescription = stepBlock.QuerySelector("div.plain-text.recipe_step_text")?.TextContent
                     select new StepRecipe(stepDescription, stepImage));
 
                 StepsRecipe = stepsRecipe.ToArray();
@@ -85,16 +87,19 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             string authorName = recipeBody.QuerySelector("div.person__name").TextContent;
 
-                int.TryParse(recipeBody.QuerySelector("div.field__container")?.FirstElementChild?.Attributes[3].Value ?? "0", out int countPortions);
+            int.TryParse(
+                recipeBody.QuerySelector("div.field__container")?.FirstElementChild?.Attributes[3].Value ?? "0",
+                out int countPortions);
 
-                double prepMinutes = ConvertToMinutes(recipeBody.QuerySelector("div.entry-stats__value").TextContent);
+            double prepMinutes = ConvertToMinutes(recipeBody.QuerySelector("div.entry-stats__value").TextContent);
 
-                var cpfcDiv = recipeBody.QuerySelector("div.nutritional-value__leftside");
+            var cpfcDiv = recipeBody.QuerySelector("div.nutritional-value__leftside");
 
-            CPFC cpfc = new CPFC();
+            var cpfc = new CPFC();
             if (cpfcDiv != null)
             {
-                double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value")?.TextContent ?? "0", out double calories);
+                double.TryParse(cpfcDiv.QuerySelector("div.kkal-meter__value")?.TextContent ?? "0",
+                    out double calories);
 
                 var tablePFC = cpfcDiv.QuerySelectorAll("div.nutritional-value__nutritional-list > table");
 
@@ -114,29 +119,31 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
                     cpfc = new CPFC(calories, protein, fats, carbohydrates);
                     Additional = new Additional(authorName, countPortions, prepMinutes,
-                       cpfc);
+                        cpfc);
                 }
                 else
                     Additional = new Additional(authorName, countPortions, prepMinutes, cpfc);
             }
 
-            
+
             // Так как JS скрипт подгружает видео позже, чем мы схватываем HTML
             // А мне не хочется тратить лишнее время, чтобы его ждать
             // То информацию о видео забираем прямо из JS скрипта)))
             var videoBody = document.QuerySelectorAll("script[type = 'text/javascript']")
-                .FirstOrDefault(x=>x.OuterHtml.Contains("var player = new Playerjs"))?.InnerHtml ?? null;
+                                .FirstOrDefault(x => x.OuterHtml.Contains("var player = new Playerjs"))?.InnerHtml ??
+                            null;
             if (videoBody != null && videoBody != string.Empty)
             {
                 // ,[720]//vid.edimdoma.ru/data/video/0008/0913/80913-original.mp4?1468483768","id":80913},{"
                 // => //vid.edimdoma.ru/data/video/0008/0913/80913-original.mp4?1468483768"
-               string videoUrl = string.Empty;
+                string videoUrl = string.Empty;
                 Regex regex = new Regex(@"(?s)(?<=720]).*?(?="",)");
                 Match match = regex.Match(videoBody);
                 if (match.Success)
-                   videoUrl = match.Value;
-               Additional = new Additional(authorName, countPortions, prepMinutes, cpfc, videoUrl);
+                    videoUrl = match.Value;
+                Additional = new Additional(authorName, countPortions, prepMinutes, cpfc, videoUrl);
             }
+
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }
 
@@ -163,6 +170,5 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             return minutes;
         }
-
     }
 }

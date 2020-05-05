@@ -16,6 +16,7 @@ namespace ObjectsLibrary
         /// <value>Главное изображение.</value>
         /// <see cref="Image"/>
         public Image TitleImage { get; set; }
+
         /// <value>Описание рецепта.</value>
         public string Description { get; set; }
 
@@ -31,15 +32,8 @@ namespace ObjectsLibrary
         /// <see cref="Additional"/>
         public Additional Additional { get; set; }
 
-        public RecipeFull(
-            string url,
-            string title,
-            Image image,
-            string description,
-            Ingredient[] ingredients,
-            StepRecipe[] stepsRecipe,
-            Additional additional)
-
+        public RecipeFull(string url, string title, Image image, string description, Ingredient[] ingredients,
+            StepRecipe[] stepsRecipe, Additional additional)
         {
             Url = url;
             Title = title;
@@ -55,5 +49,4 @@ namespace ObjectsLibrary
             // (0-.oo)
         }
     }
-
 }

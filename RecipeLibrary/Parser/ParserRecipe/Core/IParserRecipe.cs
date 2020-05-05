@@ -21,5 +21,4 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
         /// <returns>Количество минут.</returns>
         double ConvertToMinutes(string inputLine);
     }
-
 }
