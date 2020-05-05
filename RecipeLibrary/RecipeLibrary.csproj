@@ -10,8 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="0.14.0" />
-    <PackageReference Include="AngleSharp.Css" Version="0.14.0" />
+    <PackageReference Include="AngleSharp" Version="1.0.0-alpha-822" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

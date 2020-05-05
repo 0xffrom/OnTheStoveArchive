@@ -4,6 +4,7 @@ using Android.Widget;
 using ObjectsLibrary;
 using ObjectsLibrary.Components;
 using AndroidLibrary;
+using XamarinApp;
 
 namespace AndroidApp
 {

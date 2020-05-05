@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.Widget;
-using AndroidLibrary;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
-using Android.Support.V7.Widget;
-using ObjectsLibrary.Components;
+using XamarinApp;
 
 namespace AndroidApp
 {

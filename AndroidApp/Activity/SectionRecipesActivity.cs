@@ -7,12 +7,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
-using AndroidApp.General;
 using Android.Content;
 using Android.Support.V4.Widget;
 using ObjectsLibrary;
 using Android.Graphics;
 using System.Threading.Tasks;
+using XamarinApp;
 
 namespace AndroidApp
 {

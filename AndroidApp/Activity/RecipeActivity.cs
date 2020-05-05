@@ -1,23 +1,18 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Content.Res;
-using Android.Graphics;
-using Android.Net;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
 using Android.Util;
-using Android.Views;
-using Android.Views.Animations;
 using Android.Widget;
 using ObjectsLibrary;
-using Square.Picasso;
 using System;
 using System.Threading.Tasks;
 using AndroidApp.Adapters;
 using AndroidLibrary;
+using XamarinApp;
 
 namespace AndroidApp
 {

@@ -4,7 +4,7 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using XamarinApp;
 using AndroidApp.General;
 
 namespace AndroidApp

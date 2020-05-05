@@ -5,6 +5,7 @@ using ObjectsLibrary;
 using ObjectsLibrary.Components;
 using Square.Picasso;
 using System.Collections.Generic;
+using XamarinApp;
 
 namespace AndroidApp
 {

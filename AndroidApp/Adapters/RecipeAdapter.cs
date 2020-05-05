@@ -1,13 +1,12 @@
-﻿using Android;
-using Android.App;
-using Android.Support.V7.Widget;
+﻿using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ObjectsLibrary;
 using Square.Picasso;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Android.App;
+using XamarinApp;
 
 namespace AndroidApp
 {

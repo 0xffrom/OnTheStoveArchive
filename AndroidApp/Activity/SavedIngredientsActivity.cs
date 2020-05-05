@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using ObjectsLibrary.Components;
+using XamarinApp;
 
 namespace AndroidApp
 {
