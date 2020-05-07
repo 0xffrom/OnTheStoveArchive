@@ -1,6 +1,7 @@
 ﻿using ObjectsLibrary;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebServer.Data
 {
@@ -11,7 +12,7 @@ namespace WebServer.Data
         public Guid Id { get; set; }
         public string Url { get; set; }
         public DateTime Date { get; set; }
-        public RecipeFull RecipeFull { get; set; }
+        public byte[] RecipeFull { get; set; }
 
         public Recipe()
         {

@@ -53,10 +53,10 @@ namespace WebServer.Controllers
                         try
                         {
                             recipe = await GetData.GetRecipe(url);
-
-                            recipeDb.RecipeFull = recipe;
+                            recipe.Key = recipeDb.Id;
+                            recipeDb.RecipeFull = db.RecipeToByte(recipe);
                             recipeDb.Date = startTime;
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
 
                             _logger.LogInformation($"Статус: Ok.");
                             LogTime(startTime);
@@ -68,7 +68,7 @@ namespace WebServer.Controllers
                             _logger.LogInformation($"Статус: Ok.");
 
                             LogTime(startTime);
-                            return Ok(recipeDb.RecipeFull);
+                            return Ok(db.ByteToRecipe(recipeDb.RecipeFull));
                         }
                     }
 
@@ -79,7 +79,9 @@ namespace WebServer.Controllers
                         _logger.LogInformation($"Статус: Ok.");
 
                         LogTime(startTime);
-                        return Ok(recipeDb.RecipeFull);
+                        recipe = db.ByteToRecipe(recipeDb.RecipeFull);
+                        recipe.Key = recipeDb.Id;
+                        return Ok(recipe);
                     }
                 }
                 // Если в БД нет рецепта:
@@ -89,8 +91,8 @@ namespace WebServer.Controllers
                     try
                     {
                         recipe = await GetData.GetRecipe(url);
-                        db.Recipes.Add(new Recipe { Url = url, Date = startTime, RecipeFull = recipe }) ;
-                        db.SaveChanges();
+                        await db.Recipes.AddAsync(new Recipe { Url = url, Date = startTime, RecipeFull = db.RecipeToByte(recipe) }) ;
+                        await db.SaveChangesAsync();
 
                         _logger.LogInformation($"Статус: Ok.");
                         LogTime(startTime);
