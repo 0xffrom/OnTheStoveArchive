@@ -13,7 +13,7 @@ namespace WebServer.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=recipes;Trusted_Connection=True;");
+            optionsBuilder.UseMySql("server=localhost;UserId=root;Password=password;database=Recipes;");
         }
     }
 }

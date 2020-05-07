@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
 using System;
 
 namespace ObjectsLibrary.Components
 {
     /// <summary>Шаг приготовления кулинарного рецепта.</summary>
     [Serializable]
-    [Keyless]
     [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public class StepRecipe
     {

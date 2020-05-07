@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
 using System;
 
 namespace ObjectsLibrary.Components
 {
     /// <summary>Изображение.</summary>
     [Serializable]
-    [Keyless]
     [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public class Image
     {

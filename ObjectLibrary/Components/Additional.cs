@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,7 +6,6 @@ namespace ObjectsLibrary.Components
 {
     /// <summary>Дополнительная информация рецепта.</summary>
     [Serializable]
-    [Keyless]
     [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public class Additional
     {
