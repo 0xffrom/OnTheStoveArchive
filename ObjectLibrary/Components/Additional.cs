@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ObjectsLibrary.Components
 {
     /// <summary>Дополнительная информация рецепта.</summary>
     [Serializable]
+    [Keyless]
+    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public class Additional
     {
         /// <value>Имя автора.</value>
@@ -33,8 +37,8 @@ namespace ObjectsLibrary.Components
             CPFC = cpfc;
         }
 
-        public Additional(string authorName, int countPortions, double prepMinutes,
-            CPFC cpfc, string videoUrl) : this(authorName, countPortions, prepMinutes, cpfc)
+        public Additional(string authorName, int countPortions, double prepMinutes,CPFC cpfc, string videoUrl) : 
+            this(authorName, countPortions, prepMinutes, cpfc)
         {
             VideoUrl = videoUrl;
         }

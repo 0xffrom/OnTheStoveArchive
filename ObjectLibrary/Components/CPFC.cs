@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ObjectsLibrary.Components
 {
     /// <summary>Калории, белки, жиры, углеводы.</summary>
     [Serializable]
+    [Keyless]
+    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public class CPFC
     {
         /// <value>Количество калорий.</value>

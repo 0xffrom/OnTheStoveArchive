@@ -1,5 +1,6 @@
 using ObjectsLibrary.Components;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ObjectsLibrary
 {
@@ -7,6 +8,8 @@ namespace ObjectsLibrary
     [Serializable]
     public class RecipeFull
     {
+        [Key]
+        public Guid Key { get; set; }
         /// <value>Адрес рецепта.</value>
         public string Url { get; set; }
 
@@ -32,21 +35,21 @@ namespace ObjectsLibrary
         /// <see cref="Additional"/>
         public Additional Additional { get; set; }
 
-        public RecipeFull(string url, string title, Image image, string description, Ingredient[] ingredients,
-            StepRecipe[] stepsRecipe, Additional additional)
+        public RecipeFull()
+        {
+            // (0-.oo)
+        }
+        public RecipeFull(string url, string title, Image titleImage, string description, Ingredient[] ingredients,
+            StepRecipe[] stepsRecipe, Additional additional) : this()
         {
             Url = url;
             Title = title;
-            TitleImage = image;
+            TitleImage = titleImage;
             Description = description;
             Ingredients = ingredients;
             StepsRecipe = stepsRecipe;
             Additional = additional;
         }
 
-        public RecipeFull()
-        {
-            // (0-.oo)
-        }
     }
 }

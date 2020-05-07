@@ -99,20 +99,26 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
                 .Split(' ')[0] ?? "0");
             string authorName = document.QuerySelector("p.author-name > span")?.TextContent ?? string.Empty;
 
-            var cpfcList = document.QuerySelectorAll("li > p.nutrition__weight");
-
-            double calories = double.Parse(cpfcList[0]?.TextContent?.Replace('.', ',') ?? "0");
-            double protein = double.Parse(cpfcList[1]?.TextContent?.Replace('.', ',') ?? "0");
-            double fats = double.Parse(cpfcList[2]?.TextContent?.Replace('.', ',') ?? "0");
-            double carbohydrates = double.Parse(cpfcList[3]?.TextContent?.Replace('.', ',') ?? "0");
-
             var videoScr = document.QuerySelector("iframe[frameborder='0']");
             string videoUrl = string.Empty;
             if (videoScr != null)
                 videoUrl = videoScr.Attributes[3]?.Value ?? "";
 
             Additional = new Additional(authorName, countPortions, prepMinutes,
-                new CPFC(calories, protein, fats, carbohydrates), videoUrl);
+                new CPFC(), videoUrl);
+
+            var cpfcList = document.QuerySelectorAll("li > p.nutrition__weight");
+            if (cpfcList.Length > 3)
+            {
+                double calories = double.Parse(cpfcList[0]?.TextContent?.Replace('.', ',') ?? "0");
+                double protein = double.Parse(cpfcList[1]?.TextContent?.Replace('.', ',') ?? "0");
+                double fats = double.Parse(cpfcList[2]?.TextContent?.Replace('.', ',') ?? "0");
+                double carbohydrates = double.Parse(cpfcList[3]?.TextContent?.Replace('.', ',') ?? "0");
+
+                Additional = new Additional(authorName, countPortions, prepMinutes, 
+                    new CPFC(calories, protein, fats, carbohydrates), videoUrl);
+            }
+
 
             return new RecipeFull(Url, Title, TitleImage, Description, Ingredients, StepsRecipe, Additional);
         }

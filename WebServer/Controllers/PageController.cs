@@ -30,15 +30,19 @@ namespace WebServer.Controllers
         /// <param name="recipeName">Название рецепта.</param>
         /// <returns>Объект типа RecipeShort[]</returns>
         [HttpGet("get")]
-        public async Task<ActionResult> Get(string section, int page = 1, string recipeName = null)
+        public async Task<IActionResult> GetPages(string section, int page = 1, string recipeName = null)
         {
             string log = $"GET запрос на получение страниц с рецептами. Параметры: " +
                          $"section={section}, page={page}";
 
             if (recipeName != null)
+            {
                 log += $", recipeName={recipeName}";
+            }
             else
+            {
                 recipeName = string.Empty;
+            }
 
             _logger.LogInformation(log);
             DateTime startTime = DateTime.Now;
@@ -49,14 +53,22 @@ namespace WebServer.Controllers
 
                 _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
                 _logger.LogInformation($"Статус: Ok.");
+
+                LogTime(startTime);
                 return Ok(recipes);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, $"Запрос выполнен неудачно.");
-                _logger.LogInformation($"Статус: NotFound.");
-                return NotFound();
+                _logger.LogInformation($"Статус: 400.");
+
+                LogTime(startTime);
+                return BadRequest();
             }
+        }
+        private void LogTime(DateTime startTime)
+        {
+            _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
         }
     }
 }

@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ObjectsLibrary;
-using ObjectsLibrary.Parser;
 using RecipeLibrary;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
-using WebServer.DataBase;
+using WebServer.Data;
 
 namespace WebServer.Controllers
 {
@@ -15,7 +17,7 @@ namespace WebServer.Controllers
     public class RecipeController : ControllerBase
     {
         private readonly ILogger<RecipeController> _logger;
-
+        private const int diffHours = 24;
         public RecipeController(ILogger<RecipeController> logger)
         {
             _logger = logger;
@@ -28,129 +30,87 @@ namespace WebServer.Controllers
         /// <param name="url">URL адрес рецепта.</param>
         /// <returns>Объект типа RecipeFull</returns>
         [HttpGet("get")]
-        public async Task<ActionResult> Get(string url)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetRecipe(string url)
         {
-            DateTime startTime = DateTime.Now;
-            MySql.Data.MySqlClient.MySqlConnection conn = RecipeDataContext.GetConnection();
             _logger.LogInformation($"Запрос на парсинг старницы рецепта. Url: {url}");
 
-            try
-            {
-                conn.Open();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                _logger.LogError("Неудалось подключиться к базе данных.");
-            }
-
-            if (conn.State == System.Data.ConnectionState.Open)
-                _logger.LogDebug("Успешное подключение к базе данных.");
-
+            DateTime startTime = DateTime.Now;
             RecipeFull recipe;
+            Recipe recipeDb;
 
-            switch (conn.State)
+            using(RecipeContext db = new RecipeContext())
             {
-                // Подключение к БД есть и рецепт нуждается в обновлении:
-                case System.Data.ConnectionState.Open when RecipeDataContext.IsNeedUpdate(url, conn):
-                    try
+                // Если в БД есть рецепт: 
+                if((recipeDb = db.Recipes.FirstOrDefault(x => x.Url == url)) != null)
+                {
+                    _logger.LogDebug($"Рецепт существует в БД. Id = {recipeDb.Id}, Date = {recipeDb.Date}");
+                    // Если рецепт нужно обновить: 
+                    if ((startTime - recipeDb.Date).TotalHours > diffHours)
                     {
-                        // Пытаемся запарсить рецепт:
-                        recipe = await GetData.GetRecipe(url);
+                        _logger.LogDebug($"Требуется обновление рецепта.");
+                        try
+                        {
+                            recipe = await GetData.GetRecipe(url);
+
+                            recipeDb.RecipeFull = recipe;
+                            recipeDb.Date = startTime;
+                            db.SaveChanges();
+
+                            _logger.LogInformation($"Статус: Ok.");
+                            LogTime(startTime);
+                            return Ok(recipe);
+                        }
+                        catch(Exception e)
+                        {
+                            _logger.LogWarning(e, $"Произошла ошибка при парсинге рецепта! Выдан рецепт из БД.");
+                            _logger.LogInformation($"Статус: Ok.");
+
+                            LogTime(startTime);
+                            return Ok(recipeDb.RecipeFull);
+                        }
                     }
-                    // Если случается ошибка при парсинге сайта:
-                    catch (Exception exp)
+
+                    // Если рецепт есть в БД и обновляеть его ненужно:
+                    else
                     {
-                        _logger.LogError(exp, "Рецепт невозможно получить с сайта.");
-
-                        // Если рецепт есть в БД, выкидываем его:
-                        if (RecipeDataContext.IsExists(url, conn))
-                        {
-                            _logger.LogWarning($"[{DateTime.Now}]: Был выдан старый рецепт.");
-                            recipe = RecipeDataContext.GetRecipe(url, conn, out double size);
-                            _logger.LogDebug(
-                                $"[{DateTime.Now}]: Рецепт взят из базы данных. Размер рецепта: {size:F2} KB");
-                        }
-
-                        // Иначе выкидываем пустой рецепт:
-                        else
-                        {
-                            _logger.LogCritical(
-                                $"В базе данных отсутствует данный рецепт. Был выброшен пустой рецепт.");
-                            _logger.LogDebug(
-                                $"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                            _logger.LogInformation($"Статус: NotFound.");
-                            return NotFound();
-                        }
-
-                        _logger.LogDebug($"Отключение от базы данных.");
-                        _logger.LogDebug(
-                            $"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                        _logger.LogDebug("Обновление не требуется.");
                         _logger.LogInformation($"Статус: Ok.");
 
-                        conn.Clone();
-                        return Ok(recipe);
+                        LogTime(startTime);
+                        return Ok(recipeDb.RecipeFull);
                     }
-
-                    // Если ошибки нет, добавляем рецепт в БД:
-                    RecipeDataContext.AddRecipe(url, recipe, conn);
-
-                    _logger.LogDebug($"Рецепт был получен путём парсинга страницы, и был добавлен в БД.");
-                    _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                    _logger.LogInformation($"Статус: Ok.");
-                    return Ok(recipe);
-
-                // Подключение к БД есть и рецепт не нуждается в обновлении:
-                case System.Data.ConnectionState.Open:
-
-                    _logger.LogDebug($"Рецепт не нуждается в обновлении.");
-
+                }
+                // Если в БД нет рецепта:
+                else
+                {
+                    _logger.LogDebug($"Рецепта не существует в БД.");
                     try
                     {
-                        recipe = RecipeDataContext.GetRecipe(url, conn, out double size);
-                        _logger.LogDebug($"Рецепт взят из базы данных. Размер рецепта: {size:F2} KB");
-                    }
-                    // Если возникает ошибка с БД:
-                    catch (MySql.Data.MySqlClient.MySqlException)
-                    {
-                        _logger.LogCritical($"Ошибка с БД. Был выброшен пустой рецепт.");
-                        _logger.LogDebug(
-                            $"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                        _logger.LogInformation($"Статус: NotFound.");
-                        return NotFound();
-                    }
-                    finally
-                    {
-                        _logger.LogDebug($"Отключение от базы данных.");
-                        conn.Close();
-                    }
-
-                    _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                    _logger.LogInformation($"Статус: Ok.");
-                    return Ok(recipe);
-                // Подключения к БД нет:
-                default:
-                    try
-                    {
-                        // Пытаемся запарсить рецепт:
                         recipe = await GetData.GetRecipe(url);
-                        _logger.LogDebug($"Рецепт получен.");
-                        _logger.LogDebug(
-                            $"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
+                        db.Recipes.Add(new Recipe { Url = url, Date = startTime, RecipeFull = recipe }) ;
+                        db.SaveChanges();
+
                         _logger.LogInformation($"Статус: Ok.");
+                        LogTime(startTime);
                         return Ok(recipe);
                     }
-
-                    // Если случается ошибка при парсинге сайта:
-                    catch (Exception exp)
+                    catch (Exception e)
                     {
-                        _logger.LogError(exp, "Рецепт невозможно получить с сайта.");
-                        _logger.LogDebug(
-                            $"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
-                        _logger.LogCritical($"Ошибка с БД и в парсинге рецепта. Был выброшен пустой рецепт.");
-                        _logger.LogInformation($"Статус: NotFound.");
-                        return NotFound();
+                        _logger.LogWarning(e, $"Произошла ошибка при парсинге рецепта!");
+                        _logger.LogInformation($"Статус: 400");
+
+                        LogTime(startTime);
+                        return BadRequest();
                     }
+                }
             }
+        }
+
+        private void LogTime(DateTime startTime)
+        {
+            _logger.LogDebug($"Время исполнения: {(DateTime.Now - startTime).TotalMilliseconds} миллисекунд.");
         }
     }
 }
