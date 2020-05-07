@@ -3,7 +3,7 @@ using View = Android.Views.View;
 
 namespace AndroidApp
 {
-    public class MyTouchListener : Java.Lang.Object, View.IOnTouchListener
+    public class RecipeTouchListener : Java.Lang.Object, View.IOnTouchListener
     {
         public bool OnTouch(View v, MotionEvent e)
         {

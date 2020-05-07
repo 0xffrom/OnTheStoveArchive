@@ -29,7 +29,7 @@ namespace AndroidApp.Adapters
         {
             var arguments = new Bundle();
 
-            arguments.PutByteArray("recipeFull", Data.RecipeToByteArray(_recipeFull));
+            arguments.PutByteArray("recipeFull", DataContext.RecipeToByteArray(_recipeFull));
 
             var fragment = position switch
             {

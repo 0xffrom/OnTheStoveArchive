@@ -29,7 +29,7 @@ namespace AndroidApp.Fragments
 
             if (arguments != null)
             {
-                _recipeFull = Data.ByteArrayToObject<RecipeFull>(arguments.GetByteArray("recipeFull"));
+                _recipeFull = DataContext.ByteArrayToObject<RecipeFull>(arguments.GetByteArray("recipeFull"));
             }
         }
 

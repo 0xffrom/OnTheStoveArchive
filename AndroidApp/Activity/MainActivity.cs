@@ -31,7 +31,7 @@ namespace AndroidApp
         private LinearLayoutManager linearLayoutManager;
         private NavigationView navigationView;
         private Button buttonMenu;
-        private RecipeListener recipeListener;
+        private RecipeScrollListener recipeListener;
         private EditText editText;
         private Spinner spinner;
         private ArrayAdapter spinnerAdapter;
@@ -65,7 +65,7 @@ namespace AndroidApp
             findButton = FindViewById<Button>(Resource.Id.findButton);
 
             linearLayoutManager = new LinearLayoutManager(this);
-            recipeListener = new RecipeListener(linearLayoutManager);
+            recipeListener = new RecipeScrollListener(linearLayoutManager);
 
             // Инициализируем элементы:
             swipeRefreshLayout.SetColorSchemeColors(Color.Orange, Color.DarkOrange);
@@ -220,7 +220,7 @@ namespace AndroidApp
         {
             var intent = new Intent(this, typeof(RecipeActivity));
             intent.PutExtra("url", recipeShorts[position].Url);
-            intent.PutExtra("recipeShort", Data.RecipeToByteArray(recipeShorts[position]));
+            intent.PutExtra("recipeShort", DataContext.RecipeToByteArray(recipeShorts[position]));
 
             StartActivity(intent);
         }

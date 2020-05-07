@@ -3,7 +3,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AndroidLibrary
 {
-    public static class Data
+    public static class DataContext
     {
         public static T ByteArrayToObject<T>(byte[] arrBytes)
         {

@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@13 @14 Type=HttpGet)" Category="CodeSchema_Class" Bounds="52.9530598958333,-1125.35048719184,83.2833333333333,26" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="HttpGet" Icon="Microsoft.VisualStudio.Class.Public" Label="HttpGet" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidLibrary/HttpGet.cs&quot; StartLineNumber=9 StartCharacterOffset=24 EndLineNumber=9 EndCharacterOffset=31)" UseManualLocation="True" />
+    <Node Id="(@30 @31 Type=InfoActivity)" Category="CodeSchema_Class" Bounds="-413.26446429116,-959.249145507813,100.553333333333,26" CodeSchemaProperty_IsInternal="True" CommonLabel="InfoActivity" Icon="Microsoft.VisualStudio.Class.Internal" Label="InfoActivity" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Activity/InfoActivity.cs&quot; StartLineNumber=13 StartCharacterOffset=19 EndLineNumber=13 EndCharacterOffset=31)" UseManualLocation="True" />
+    <Node Id="(@30 @31 Type=IngredientsAdapter)" Category="CodeSchema_Class" Bounds="-648.636104916161,-647.745605468751,143.183333333333,26" CodeSchemaProperty_IsPublic="True" CommonLabel="IngredientsAdapter" Icon="Microsoft.VisualStudio.Class.Public" Label="IngredientsAdapter" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/IngredientsAdapter.cs&quot; StartLineNumber=10 StartCharacterOffset=17 EndLineNumber=10 EndCharacterOffset=35)" UseManualLocation="True" />
+    <Node Id="(@30 @31 Type=RecipeScrollListener)" Category="CodeSchema_Class" Bounds="-378.323542863752,-1111.24963378906,146.05,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeScrollListener" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeScrollListener" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Listeners/RecipeScrollListener.cs&quot; StartLineNumber=14 StartCharacterOffset=17 EndLineNumber=14 EndCharacterOffset=37)" />
+    <Node Id="(@30 @31 Type=RecipeTouchListener)" Category="CodeSchema_Class" Bounds="-378.323541236148,-1055.24951171875,148.386666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeTouchListener" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeTouchListener" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Listeners/RecipeTouchListener.cs&quot; StartLineNumber=5 StartCharacterOffset=17 EndLineNumber=5 EndCharacterOffset=36)" />
+    <Node Id="(@30 @31 Type=SavedIngredientsActivity)" Category="CodeSchema_Class" Bounds="-447.770354183739,-895.788330078126,171.053333333333,26" CodeSchemaProperty_IsInternal="True" CommonLabel="SavedIngredientsActivity" Icon="Microsoft.VisualStudio.Class.Internal" Label="SavedIngredientsActivity" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Activity/SavedIngredientsActivity.cs&quot; StartLineNumber=18 StartCharacterOffset=19 EndLineNumber=18 EndCharacterOffset=43)" UseManualLocation="True" />
+    <Node Id="(@30 @31 Type=SavedRecipesActivity)" Category="CodeSchema_Class" Bounds="-687.024288103009,-839.581665039063,151.33,26" CodeSchemaProperty_IsInternal="True" CommonLabel="SavedRecipesActivity" Icon="Microsoft.VisualStudio.Class.Internal" Label="SavedRecipesActivity" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Activity/SavedRecipesActivity.cs&quot; StartLineNumber=20 StartCharacterOffset=19 EndLineNumber=20 EndCharacterOffset=39)" UseManualLocation="True" />
+    <Node Id="(@30 @31 Type=SectionRecipesActivity)" Category="CodeSchema_Class" Bounds="-495.471375708804,-839.788208007813,158.746666666667,26" CodeSchemaProperty_IsInternal="True" CommonLabel="SectionRecipesActivity" Icon="Microsoft.VisualStudio.Class.Internal" Label="SectionRecipesActivity" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Activity/SectionRecipesActivity.cs&quot; StartLineNumber=21 StartCharacterOffset=19 EndLineNumber=21 EndCharacterOffset=41)" UseManualLocation="True" />
+    <Node Id="(@30 @31 Type=StepAdapter)" Category="CodeSchema_Class" Bounds="-648.175678076968,-703.745727539063,106.866666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="StepAdapter" Icon="Microsoft.VisualStudio.Class.Public" Label="StepAdapter" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/StepAdapter.cs&quot; StartLineNumber=11 StartCharacterOffset=17 EndLineNumber=11 EndCharacterOffset=28)" UseManualLocation="True" />
+    <Node Id="(@30 Namespace=AndroidApp.Adapters Type=PagerRecipeAdapter)" Category="CodeSchema_Class" Bounds="-653.913707048322,-591.745483398438,148.3,26" CodeSchemaProperty_IsPublic="True" CommonLabel="PagerRecipeAdapter" Icon="Microsoft.VisualStudio.Class.Public" Label="PagerRecipeAdapter" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/PagerRecipeAdapter.cs&quot; StartLineNumber=11 StartCharacterOffset=17 EndLineNumber=11 EndCharacterOffset=35)" UseManualLocation="True" />
+    <Node Id="(@30 Namespace=AndroidApp.Fragments Type=RecipeDescriptionFragment)" Category="CodeSchema_Class" Bounds="-675.136850155419,-998.005493164063,186.813333333334,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeDescriptionFragment" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeDescriptionFragment" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Fragments/RecipeDescriptionFragment.cs&quot; StartLineNumber=12 StartCharacterOffset=17 EndLineNumber=12 EndCharacterOffset=42)" />
+    <Node Id="(@30 Namespace=AndroidApp.Fragments Type=RecipeIngredientsFragment)" Category="CodeSchema_Class" Bounds="-675.137161027814,-1054.00561523438,186.26,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeIngredientsFragment" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeIngredientsFragment" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Fragments/RecipeIngredientsFragment.cs&quot; StartLineNumber=9 StartCharacterOffset=17 EndLineNumber=9 EndCharacterOffset=42)" />
+    <Node Id="(@30 Namespace=AndroidApp.Fragments Type=RecipeStepsFragment)" Category="CodeSchema_Class" Bounds="-675.137203955875,-1110.00598144531,155.036666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeStepsFragment" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeStepsFragment" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Fragments/RecipeStepsFragment.cs&quot; StartLineNumber=9 StartCharacterOffset=17 EndLineNumber=9 EndCharacterOffset=36)" />
+    <Node Id="(@38 Namespace=WebServer Type=Program)" Category="CodeSchema_Class" Bounds="138.25243896458,-953.349182128906,86.6066666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="Program" Icon="Microsoft.VisualStudio.Class.Public" Label="Program" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/WebServer/Program.cs&quot; StartLineNumber=9 StartCharacterOffset=17 EndLineNumber=9 EndCharacterOffset=24)" />
+    <Node Id="(@38 Namespace=WebServer Type=ServerMemoryCache)" Category="CodeSchema_Class" Bounds="-93.4911566164743,-833.349670410156,150.566666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="ServerMemoryCache" Icon="Microsoft.VisualStudio.Class.Public" Label="ServerMemoryCache" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/WebServer/ServerMemoryCache.cs&quot; StartLineNumber=8 StartCharacterOffset=17 EndLineNumber=8 EndCharacterOffset=34)" />
+    <Node Id="(@38 Namespace=WebServer Type=Startup)" Category="CodeSchema_Class" Bounds="138.252426859274,-1009.34930419922,79.2433333333333,26" CodeSchemaProperty_IsPublic="True" CommonLabel="Startup" Icon="Microsoft.VisualStudio.Class.Public" Label="Startup" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/WebServer/Startup.cs&quot; StartLineNumber=9 StartCharacterOffset=17 EndLineNumber=9 EndCharacterOffset=24)" />
+    <Node Id="(@38 Namespace=WebServer.Controllers Type=PageController)" Category="CodeSchema_Class" Bounds="13.4520001209866,-777.34909585452,139.543333333333,25" CodeSchemaProperty_IsPublic="True" CommonLabel="PageController" Group="Collapsed" Icon="Microsoft.VisualStudio.Class.Public" Label="PageController" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/WebServer/Controllers/PageController.cs&quot; StartLineNumber=12 StartCharacterOffset=17 EndLineNumber=12 EndCharacterOffset=31)" />
+    <Node Id="(@38 Namespace=WebServer.DataBase Type=Settings)" Category="CodeSchema_Class" Bounds="-34.4392398073923,-929.349975585938,83.64,26" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="Settings" Icon="Microsoft.VisualStudio.Class.Public" Label="Settings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/WebServer/Data/DbSettings.cs&quot; StartLineNumber=3 StartCharacterOffset=24 EndLineNumber=3 EndCharacterOffset=32)" />
+    <Node Id="@11" Category="CodeSchema_Class" Bounds="61.5019394938151,-526.660857002524,95.5866666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="Additional" Icon="Microsoft.VisualStudio.Class.Public" Label="Additional" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/Components/Additional.cs&quot; StartLineNumber=6 StartCharacterOffset=17 EndLineNumber=6 EndCharacterOffset=27)" UseManualLocation="True" />
+    <Node Id="@12" Category="CodeSchema_Class" Bounds="-50.4969165039062,-474.692078502091,68.44,26" CodeSchemaProperty_IsPublic="True" CommonLabel="CPFC" Icon="Microsoft.VisualStudio.Class.Public" Label="CPFC" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/Components/CPFC.cs&quot; StartLineNumber=6 StartCharacterOffset=17 EndLineNumber=6 EndCharacterOffset=21)" UseManualLocation="True" />
+    <Node Id="@15" Category="CodeSchema_Class" Bounds="54.8411181640624,-1181.35060926215,106.86,26" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="DataContext" Icon="Microsoft.VisualStudio.Class.Public" Label="DataContext" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidLibrary/DataContext.cs&quot; StartLineNumber=5 StartCharacterOffset=24 EndLineNumber=5 EndCharacterOffset=35)" UseManualLocation="True" />
+    <Node Id="@17" Category="CodeSchema_Class" Bounds="300.0667045082,-566.742059863277,118.136666666667,26" CodeSchemaProperty_IsInternal="True" CommonLabel="EdaPageParser" Icon="Microsoft.VisualStudio.Class.Internal" Label="EdaPageParser" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/WebSites/Parsers/EdaPageParser.cs&quot; StartLineNumber=7 StartCharacterOffset=10 EndLineNumber=7 EndCharacterOffset=23)" UseManualLocation="True" />
+    <Node Id="@18" Category="CodeSchema_Class" Bounds="487.135560505921,-566.431091308594,128.643333333333,26" CodeSchemaProperty_IsInternal="True" CommonLabel="EdaPageSettings" Icon="Microsoft.VisualStudio.Class.Internal" Label="EdaPageSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/WebSites/Settings/EdaPageSettings.cs&quot; StartLineNumber=5 StartCharacterOffset=10 EndLineNumber=5 EndCharacterOffset=25)" UseManualLocation="True" />
+    <Node Id="@20" Category="CodeSchema_Class" Bounds="688.354769286846,-628.911010742188,127.26,26" CodeSchemaProperty_IsPublic="True" CommonLabel="EdaRecipeParser" Icon="Microsoft.VisualStudio.Class.Public" Label="EdaRecipeParser" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/WebSites/Parsers/EdaRecipeParser.cs&quot; StartLineNumber=10 StartCharacterOffset=17 EndLineNumber=10 EndCharacterOffset=32)" UseManualLocation="True" />
+    <Node Id="@21" Category="CodeSchema_Class" Bounds="887.40160685195,-628.439819335938,137.766666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="EdaRecipeSettings" Icon="Microsoft.VisualStudio.Class.Public" Label="EdaRecipeSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/WebSites/Settings/EdaRecipeSettings.cs&quot; StartLineNumber=4 StartCharacterOffset=17 EndLineNumber=4 EndCharacterOffset=34)" UseManualLocation="True" />
+    <Node Id="@22" Category="CodeSchema_Class" Bounds="296.009963378643,-451.59765068359,157.16,26" CodeSchemaProperty_IsInternal="True" CommonLabel="EdimDomaPageParser" Icon="Microsoft.VisualStudio.Class.Internal" Label="EdimDomaPageParser" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/WebSites/Parsers/EdimDomaPageParser.cs&quot; StartLineNumber=7 StartCharacterOffset=11 EndLineNumber=7 EndCharacterOffset=29)" UseManualLocation="True" />
+    <Node Id="@23" Category="CodeSchema_Class" Bounds="483.169963378643,-454.430908203125,167.666666666667,26" CodeSchemaProperty_IsInternal="True" CommonLabel="EdimDomaPageSettings" Icon="Microsoft.VisualStudio.Class.Internal" Label="EdimDomaPageSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/WebSites/Settings/EdimDomaPageSettings.cs&quot; StartLineNumber=5 StartCharacterOffset=19 EndLineNumber=5 EndCharacterOffset=39)" UseManualLocation="True" />
+    <Node Id="@24" Category="CodeSchema_Class" Bounds="683.186510416403,-513.354370117188,164.936666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="EdimdomaRecipeParser" Icon="Microsoft.VisualStudio.Class.Public" Label="EdimdomaRecipeParser" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/WebSites/Parsers/EdimdomaRecipeParser.cs&quot; StartLineNumber=10 StartCharacterOffset=17 EndLineNumber=10 EndCharacterOffset=37)" UseManualLocation="True" />
+    <Node Id="@25" Category="CodeSchema_Class" Bounds="889.997599690492,-515.79931640625,175.443333333333,26" CodeSchemaProperty_IsPublic="True" CommonLabel="EdimdomaRecipeSettings" Icon="Microsoft.VisualStudio.Class.Public" Label="EdimdomaRecipeSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/WebSites/Settings/EdimdomaRecipeSettings.cs&quot; StartLineNumber=4 StartCharacterOffset=17 EndLineNumber=4 EndCharacterOffset=39)" UseManualLocation="True" />
+    <Node Id="@26" Category="CodeSchema_Class" Bounds="683.078681640362,-851.444519042969,84.27,26" CodeSchemaProperty_IsPublic="True" CommonLabel="GetData" Icon="Microsoft.VisualStudio.Class.Public" Label="GetData" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/GetData.cs&quot; StartLineNumber=14 StartCharacterOffset=17 EndLineNumber=14 EndCharacterOffset=24)" />
+    <Node Id="@27" Category="CodeSchema_Class" Bounds="308.630413411195,-785.09033203125,103.133333333333,26" CodeSchemaProperty_IsPublic="True" CommonLabel="HtmlLoader" Icon="Microsoft.VisualStudio.Class.Public" Label="HtmlLoader" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/Core/HtmlLoader.cs&quot; StartLineNumber=11 StartCharacterOffset=17 EndLineNumber=11 EndCharacterOffset=27)" UseManualLocation="True" />
+    <Node Id="@28" Category="CodeSchema_Class" Bounds="970.195721028383,-804.665649414063,103.133333333333,26" CodeSchemaProperty_IsPublic="True" CommonLabel="HtmlLoader" Icon="Microsoft.VisualStudio.Class.Public" Label="HtmlLoader" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/Core/HtmlLoader.cs&quot; StartLineNumber=7 StartCharacterOffset=17 EndLineNumber=7 EndCharacterOffset=27)" UseManualLocation="True" />
+    <Node Id="@29" Category="CodeSchema_Class" Bounds="-51.033249130249,-586.692278502091,73.98,26" CodeSchemaProperty_IsPublic="True" CommonLabel="Image" Icon="Microsoft.VisualStudio.Class.Public" Label="Image" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/Components/Image.cs&quot; StartLineNumber=6 StartCharacterOffset=17 EndLineNumber=6 EndCharacterOffset=22)" UseManualLocation="True" />
+    <Node Id="@32" Category="CodeSchema_Class" Bounds="59.0451621500651,-591.16970710018,95.6066666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="Ingredient" Icon="Microsoft.VisualStudio.Class.Public" Label="Ingredient" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/Components/Ingredient.cs&quot; StartLineNumber=6 StartCharacterOffset=17 EndLineNumber=6 EndCharacterOffset=27)" UseManualLocation="True" />
+    <Node Id="@33" Category="CodeSchema_Class" Bounds="-54.4991516113281,-1258.35073133246,120.3,26" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="IngredientData" Icon="Microsoft.VisualStudio.Class.Public" Label="IngredientData" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidLibrary/IngredientData.cs&quot; StartLineNumber=8 StartCharacterOffset=24 EndLineNumber=8 EndCharacterOffset=38)" UseManualLocation="True" />
+    <Node Id="@34" Category="CodeSchema_Class" Bounds="-99.9369433593749,-1178.60048719184,122.89,26" CodeSchemaProperty_IsPublic="True" CommonLabel="IngredientTable" Icon="Microsoft.VisualStudio.Class.Public" Label="IngredientTable" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidLibrary/Tables/IngredientTable.cs&quot; StartLineNumber=5 StartCharacterOffset=17 EndLineNumber=5 EndCharacterOffset=32)" UseManualLocation="True" />
+    <Node Id="@35" Category="CodeSchema_Interface" Bounds="586.300299478903,-707.922296679683,144.726666666667,26" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CommonLabel="IParserPageSettings" Icon="Microsoft.VisualStudio.Interface.Public" Label="IParserPageSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/Core/IParserPageSettings.cs&quot; StartLineNumber=3 StartCharacterOffset=21 EndLineNumber=3 EndCharacterOffset=40)" UseManualLocation="True" />
+    <Node Id="@36" Category="CodeSchema_Interface" Bounds="937.506241454814,-700.796936035156,153.85,26" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CommonLabel="IParserRecipeSettings" Icon="Microsoft.VisualStudio.Interface.Public" Label="IParserRecipeSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/Core/IParserRecipeSettings.cs&quot; StartLineNumber=2 StartCharacterOffset=21 EndLineNumber=2 EndCharacterOffset=42)" UseManualLocation="True" />
+    <Node Id="@37" Category="CodeSchema_Class" Bounds="-418.323542863752,-1191.24983378906,228.386668294271,202.000522070312" CodeSchemaProperty_IsPublic="True" CommonLabel="MainActivity" Group="Expanded" Icon="Microsoft.VisualStudio.Class.Public" Label="MainActivity" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Activity/MainActivity.cs&quot; StartLineNumber=24 StartCharacterOffset=17 EndLineNumber=24 EndCharacterOffset=29)" UseManualLocation="True" />
+    <Node Id="@39" Category="CodeSchema_Class" Bounds="492.094714762106,-851.134799023433,124.376666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="ParserException" Icon="Microsoft.VisualStudio.Class.Public" Label="ParserException" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserException.cs&quot; StartLineNumber=5 StartCharacterOffset=17 EndLineNumber=5 EndCharacterOffset=32)" UseManualLocation="True" />
+    <Node Id="@4" Category="CodeSchema_Interface" Bounds="420.026853840882,-705.974481738277,124.793333333333,26" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsInternal="True" CommonLabel="IParserPage&lt;T&gt;" Icon="Microsoft.VisualStudio.Interface.Internal" Label="IParserPage&lt;T&gt;" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/Core/IParser.cs&quot; StartLineNumber=4 StartCharacterOffset=23 EndLineNumber=4 EndCharacterOffset=34)" UseManualLocation="True" />
+    <Node Id="@40" Category="CodeSchema_Class" Bounds="-544.847020850405,-896.209655761719,67.0766666666668,26" CodeSchemaProperty_IsPublic="True" CommonLabel="Plate" Icon="Microsoft.VisualStudio.Class.Public" Label="Plate" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/General/Plate.cs&quot; StartLineNumber=2 StartCharacterOffset=17 EndLineNumber=2 EndCharacterOffset=22)" UseManualLocation="True" />
+    <Node Id="@41" Category="CodeSchema_Class" Bounds="-416.308996354963,-649.655883789063,109.56,26" CodeSchemaProperty_IsPublic="True" CommonLabel="PlateAdapter" Icon="Microsoft.VisualStudio.Class.Public" Label="PlateAdapter" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/PlateAdapter.cs&quot; StartLineNumber=11 StartCharacterOffset=17 EndLineNumber=11 EndCharacterOffset=29)" UseManualLocation="True" />
+    <Node Id="@42" Category="CodeSchema_Class" Bounds="-685.800429867332,-897.004638671875,110.953333333333,26" CodeSchemaProperty_IsInternal="True" CommonLabel="PlatesActivity" Icon="Microsoft.VisualStudio.Class.Internal" Label="PlatesActivity" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Activity/PlatesActivity.cs&quot; StartLineNumber=18 StartCharacterOffset=19 EndLineNumber=18 EndCharacterOffset=33)" UseManualLocation="True" />
+    <Node Id="@43" Category="CodeSchema_Class" Bounds="-423.4525266284,-592.655761718751,128.36,26" CodeSchemaProperty_IsPublic="True" CommonLabel="PlateViewHolder" Icon="Microsoft.VisualStudio.Class.Public" Label="PlateViewHolder" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/PlateAdapter.cs&quot; StartLineNumber=50 StartCharacterOffset=17 EndLineNumber=50 EndCharacterOffset=32)" UseManualLocation="True" />
+    <Node Id="@44" Category="CodeSchema_Class" Bounds="294.859105631247,-622.74218193359,154.286666666667,26" CodeSchemaProperty_IsInternal="True" CommonLabel="PovarenokPageParser" Icon="Microsoft.VisualStudio.Class.Internal" Label="PovarenokPageParser" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/WebSites/Parsers/PovarenokPageParser.cs&quot; StartLineNumber=7 StartCharacterOffset=10 EndLineNumber=7 EndCharacterOffset=29)" UseManualLocation="True" />
+    <Node Id="@45" Category="CodeSchema_Class" Bounds="482.700681965882,-622.431213378906,164.793333333333,26" CodeSchemaProperty_IsInternal="True" CommonLabel="PovarenokPageSettings" Icon="Microsoft.VisualStudio.Class.Internal" Label="PovarenokPageSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/WebSites/Settings/PovarenokPageSettings.cs&quot; StartLineNumber=6 StartCharacterOffset=19 EndLineNumber=6 EndCharacterOffset=40)" UseManualLocation="True" />
+    <Node Id="@46" Category="CodeSchema_Class" Bounds="683.596834919984,-457.354248046875,163.41,26" CodeSchemaProperty_IsPublic="True" CommonLabel="PovarenokRecipeParser" Icon="Microsoft.VisualStudio.Class.Public" Label="PovarenokRecipeParser" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/WebSites/Parsers/PovarenokRecipeParser.cs&quot; StartLineNumber=11 StartCharacterOffset=17 EndLineNumber=11 EndCharacterOffset=38)" UseManualLocation="True" />
+    <Node Id="@47" Category="CodeSchema_Class" Bounds="892.348567504619,-456.813720703125,173.916666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="PovarenokRecipeSettings" Icon="Microsoft.VisualStudio.Class.Public" Label="PovarenokRecipeSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/WebSites/Settings/PovarenokRecipeSettings.cs&quot; StartLineNumber=4 StartCharacterOffset=17 EndLineNumber=4 EndCharacterOffset=40)" UseManualLocation="True" />
+    <Node Id="@48" Category="CodeSchema_Class" Bounds="297.266608072653,-510.742004394531,128.226666666667,26" CodeSchemaProperty_IsInternal="True" CommonLabel="PovarPageParser" Icon="Microsoft.VisualStudio.Class.Internal" Label="PovarPageParser" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/WebSites/Parsers/PovarPageParser.cs&quot; StartLineNumber=8 StartCharacterOffset=10 EndLineNumber=8 EndCharacterOffset=25)" UseManualLocation="True" />
+    <Node Id="@49" Category="CodeSchema_Class" Bounds="483.729613850648,-510.431030273438,138.733333333333,26" CodeSchemaProperty_IsInternal="True" CommonLabel="PovarPageSettings" Icon="Microsoft.VisualStudio.Class.Internal" Label="PovarPageSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/WebSites/Settings/PovarPageSettings.cs&quot; StartLineNumber=5 StartCharacterOffset=19 EndLineNumber=5 EndCharacterOffset=36)" UseManualLocation="True" />
+    <Node Id="@50" Category="CodeSchema_Class" Bounds="684.966660155987,-569.3544921875,137.35,26" CodeSchemaProperty_IsPublic="True" CommonLabel="PovarRecipeParser" Icon="Microsoft.VisualStudio.Class.Public" Label="PovarRecipeParser" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/WebSites/Parsers/PovarRecipeParser.cs&quot; StartLineNumber=10 StartCharacterOffset=17 EndLineNumber=10 EndCharacterOffset=34)" UseManualLocation="True" />
+    <Node Id="@51" Category="CodeSchema_Class" Bounds="890.687417398825,-571.799438476563,147.856666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="PovarRecipeSettings" Icon="Microsoft.VisualStudio.Class.Public" Label="PovarRecipeSettings" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/WebSites/Settings/PovarRecipeSettings.cs&quot; StartLineNumber=4 StartCharacterOffset=17 EndLineNumber=4 EndCharacterOffset=36)" UseManualLocation="True" />
+    <Node Id="@52" Category="CodeSchema_Class" Bounds="-715.137203955875,-1190.00618144531,266.813687133789,258.00088828125" CodeSchemaProperty_IsInternal="True" CommonLabel="RecipeActivity" Group="Expanded" Icon="Microsoft.VisualStudio.Class.Internal" Label="RecipeActivity" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Activity/RecipeActivity.cs&quot; StartLineNumber=21 StartCharacterOffset=19 EndLineNumber=21 EndCharacterOffset=33)" UseManualLocation="True" />
+    <Node Id="@53" Category="CodeSchema_Class" Bounds="-417.749088111148,-536.655654907227,118.366666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeAdapter" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeAdapter" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/RecipeAdapter.cs&quot; StartLineNumber=12 StartCharacterOffset=17 EndLineNumber=12 EndCharacterOffset=30)" UseManualLocation="True" />
+    <Node Id="@54" Category="CodeSchema_Class" Bounds="-93.490906474059,-1009.35017558594,201.743333333333,146.0004" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeController" Group="Expanded" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeController" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/WebServer/Controllers/RecipeController.cs&quot; StartLineNumber=14 StartCharacterOffset=17 EndLineNumber=14 EndCharacterOffset=33)" />
+    <Node Id="@55" Category="CodeSchema_Class" Bounds="127.800839029948,-1258.6509022309,100.576666666667,26" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="RecipeData" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeData" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidLibrary/RecipeData.cs&quot; StartLineNumber=9 StartCharacterOffset=24 EndLineNumber=9 EndCharacterOffset=34)" UseManualLocation="True" />
+    <Node Id="@56" Category="CodeSchema_Class" Bounds="-73.490906474059,-969.350075585938,161.743333333333,86.0002" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="RecipeDataContext" Group="Expanded" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeDataContext" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/WebServer/Data/RecipeDataContext.cs&quot; StartLineNumber=10 StartCharacterOffset=24 EndLineNumber=10 EndCharacterOffset=41)" />
+    <Node Id="@57" Category="CodeSchema_Class" Bounds="77.6654346720377,-661.317107002524,94.3466666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeFull" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeFull" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/RecipeFull.cs&quot; StartLineNumber=7 StartCharacterOffset=17 EndLineNumber=7 EndCharacterOffset=27)" UseManualLocation="True" />
+    <Node Id="@58" Category="CodeSchema_Class" Bounds="-61.3342900594076,-662.348784248618,104.316666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeShort" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeShort" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/RecipeShort.cs&quot; StartLineNumber=8 StartCharacterOffset=17 EndLineNumber=8 EndCharacterOffset=28)" UseManualLocation="True" />
+    <Node Id="@59" Category="CodeSchema_Class" Bounds="192.64545694987,-1178.10073133246,103.166666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeTable" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeTable" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidLibrary/Tables/RecipeTable.cs&quot; StartLineNumber=5 StartCharacterOffset=17 EndLineNumber=5 EndCharacterOffset=28)" UseManualLocation="True" />
+    <Node Id="@6" Category="CodeSchema_Interface" Bounds="773.589271646872,-708.53759765625,133.916666666667,26" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsInternal="True" CommonLabel="IParserRecipe&lt;T&gt;" Icon="Microsoft.VisualStudio.Interface.Internal" Label="IParserRecipe&lt;T&gt;" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/Core/IParserRecipe.cs&quot; StartLineNumber=4 StartCharacterOffset=23 EndLineNumber=4 EndCharacterOffset=36)" UseManualLocation="True" />
+    <Node Id="@60" Category="CodeSchema_Class" Bounds="-424.898615088687,-480.655639648438,137.166666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="RecipeViewHolder" Icon="Microsoft.VisualStudio.Class.Public" Label="RecipeViewHolder" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/RecipeAdapter.cs&quot; StartLineNumber=65 StartCharacterOffset=17 EndLineNumber=65 EndCharacterOffset=33)" UseManualLocation="True" />
+    <Node Id="@61" Category="CodeSchema_Class" Bounds="-654.096947201317,-535.745376586915,174.753333333333,26" CodeSchemaProperty_IsPublic="True" CommonLabel="SavedIngredientsAdapter" Icon="Microsoft.VisualStudio.Class.Public" Label="SavedIngredientsAdapter" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/SavedIngredientsAdapter.cs&quot; StartLineNumber=11 StartCharacterOffset=17 EndLineNumber=11 EndCharacterOffset=40)" UseManualLocation="True" />
+    <Node Id="@62" Category="CodeSchema_Class" Bounds="-661.450941952293,-479.745361328126,193.553333333333,26" CodeSchemaProperty_IsPublic="True" CommonLabel="SavedIngredientsViewHolder" Icon="Microsoft.VisualStudio.Class.Public" Label="SavedIngredientsViewHolder" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/Adapters/SavedIngredientsAdapter.cs&quot; StartLineNumber=46 StartCharacterOffset=17 EndLineNumber=46 EndCharacterOffset=43)" UseManualLocation="True" />
+    <Node Id="@63" Category="CodeSchema_Class" Bounds="-67.7647305806478,-530.692178502091,99.2666666666667,26" CodeSchemaProperty_IsPublic="True" CommonLabel="StepRecipe" Icon="Microsoft.VisualStudio.Class.Public" Label="StepRecipe" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/Components/StepRecipe.cs&quot; StartLineNumber=6 StartCharacterOffset=17 EndLineNumber=6 EndCharacterOffset=27)" UseManualLocation="True" />
+    <Node Id="@64" Category="CodeSchema_Class" Bounds="59.7749654134115,-470.660757002524,71.7333333333333,26" CodeSchemaProperty_IsPublic="True" CommonLabel="Video" Icon="Microsoft.VisualStudio.Class.Public" Label="Video" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/Components/Video.cs&quot; StartLineNumber=6 StartCharacterOffset=17 EndLineNumber=6 EndCharacterOffset=22)" UseManualLocation="True" />
+    <Node Id="@7" Category="CodeSchema_Class" Bounds="549.003739013408,-795.134699023433,121.6,26" CodeSchemaProperty_IsInternal="True" CommonLabel="ParserPage&lt;T&gt;" Icon="Microsoft.VisualStudio.Class.Internal" Label="ParserPage&lt;T&gt;" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserPage/Core/ParserPage.cs&quot; StartLineNumber=6 StartCharacterOffset=19 EndLineNumber=6 EndCharacterOffset=29)" UseManualLocation="True" />
+    <Node Id="@8" Category="CodeSchema_Class" Bounds="785.031488850648,-774.89501953125,130.723333333333,26" CodeSchemaProperty_IsInternal="True" CommonLabel="ParserRecipe&lt;T&gt;" Icon="Microsoft.VisualStudio.Class.Internal" Label="ParserRecipe&lt;T&gt;" SourceLocation="(Assembly=&quot;file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/Parser/ParserRecipe/Core/ParserRecipe.cs&quot; StartLineNumber=6 StartCharacterOffset=19 EndLineNumber=6 EndCharacterOffset=31)" UseManualLocation="True" />
+    <Node Id="Activity" Bounds="-735.137203955874,-1231.24993378906,565.200329386393,437.668368750001" Group="Expanded" UseManualLocation="True" />
+    <Node Id="Adapters" Bounds="-681.450941952293,-743.745827539063,413.718993530273,310.000566210937" Group="Expanded" UseManualLocation="True" />
+    <Node Id="AndroidApp" Bounds="-755.137203955874,-1271.25003378906,605.200329386393,857.504872460938" Group="Expanded" Label="Android App" UseManualLocation="True" />
+    <Node Id="AndroidLibrary" Bounds="-119.936943359375,-1298.6510022309,435.749066975911,219.300615039062" Group="Expanded" Label="Android Library" UseManualLocation="True" />
+    <Node Id="Fragments" Bounds="-695.137203955875,-1150.00608144531,226.813687133789,198.00068828125" Group="Expanded" />
+    <Node Id="Listeners" Bounds="-398.323542863752,-1151.24973378906,188.386668294271,142.000322070312" Group="Expanded" />
+    <Node Id="ObjectLibrary" Bounds="-87.7647305806478,-702.348884248618,279.776831919352,277.688227246094" Group="Expanded" Label="Object Library" UseManualLocation="True" />
+    <Node Id="RecipeLibrary" Bounds="274.859105631247,-891.444619042969,836.497135823568,485.847068359379" Group="Expanded" Label="Recipe Library" UseManualLocation="True" />
+    <Node Id="Сервер" Bounds="-113.491156616474,-1049.35027558594,358.350262247721,317.001279731418" Group="Expanded" Label="WebServer" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="@11" Target="@12" Bounds="23.438059950835,-500.660827636719,54.4452881849612,22.5324857791778" />
+    <Link Source="@11" Target="@64" Bounds="100.943105704173,-500.660827636719,5.18257540412969,21.2562015016277" />
+    <Link Source="@17" Target="@18" Bounds="418.203371174867,-553.646551413066,59.9322010958891,0.0969052506036405" />
+    <Link Source="@20" Target="@21" Bounds="815.614769286846,-615.764256537099,62.7868615020119,0.144809617314763" />
+    <Link Source="@22" Target="@23" Bounds="453.169963378643,-440.063965636169,21.0009755368321,0.309236219894501" />
+    <Link Source="@24" Target="@25" Bounds="848.12317708307,-501.684193865826,32.8750207052664,0.379024726957596" />
+    <Link Source="@26" Target="@39" Bounds="625.471366654361,-838.368171973093,57.6073149860005,0.104382335411856" />
+    <Link Source="@26" Target="@7" Bounds="644.536500530003,-825.444519042969,54.0329962482888,26.3633117268943" />
+    <Link Source="@26" Target="@8" Bounds="746.472255122625,-825.444519042969,74.9841807642558,45.8541750578233" />
+    <Link Source="@33" Target="@15" Bounds="22.9763210140514,-1232.35073133246,60.7705005147347,45.5985544391026" />
+    <Link Source="@33" Target="@34" Bounds="-26.9377848051574,-1232.35073133246,25.3929650312,45.8760101139765" />
+    <Link Source="@35" Target="@18" Bounds="602.05029296875,-681.922302246094,56.4894409179688,112.829772949219" />
+    <Link Source="@35" Target="@23" Bounds="605.178344726563,-681.922302246094,53.2694091796875,223.592895507813" />
+    <Link Source="@35" Target="@45" Bounds="585.969497222025,-681.922296679683,58.4661992093316,53.4202971797602" />
+    <Link Source="@35" Target="@49" Bounds="590.086975097656,-681.922302246094,68.4527587890625,167.755859375" />
+    <Link Source="@36" Target="@21" Bounds="972.369411130461,-674.796936035156,31.6150083531835,39.341639948073" />
+    <Link Source="@36" Target="@25" Bounds="1013.95343017578,-674.796936035156,26.9799194335938,155.215148925781" />
+    <Link Source="@36" Target="@47" Bounds="1018.61236572266,-674.796936035156,51.9642944335938,214.841674804688" />
+    <Link Source="@36" Target="@51" Bounds="1000.91363525391,-674.796936035156,26.0366821289063,99.2217407226563" />
+    <Link Source="@37" Target="Listeners" Category="Contains" />
+    <Link Source="@4" Target="@17" Bounds="407.298309326172,-679.974487304688,72.296630859375,110.426025390625" />
+    <Link Source="@4" Target="@22" Bounds="411.154602050781,-679.974487304688,68.0462036132813,224.628112792969" />
+    <Link Source="@4" Target="@44" Bounds="396.436004778701,-679.974481738277,68.7409171916569,51.8149663868195" />
+    <Link Source="@4" Target="@48" Bounds="395.944061279297,-679.974487304688,82.1490173339844,165.266845703125" />
+    <Link Source="@41" Target="@43" Bounds="-361.014364010682,-623.655883789063,0.871199952824668,22.0071659167817" />
+    <Link Source="@42" Target="@40" Bounds="-574.847096533999,-883.63407215617,21.0002764585832,0.14027517772206" />
+    <Link Source="@44" Target="@45" Bounds="449.145772297914,-609.6179469089,24.5549213388316,0.0395443277725462" />
+    <Link Source="@46" Target="@47" Bounds="847.006834919984,-444.147880097445,36.3417612922869,0.0917908910906249" />
+    <Link Source="@48" Target="@49" Bounds="425.49327473932,-497.638009150432,49.2363509510609,0.0798639856876662" />
+    <Link Source="@50" Target="@51" Bounds="822.316660155986,-557.838401778557,59.3713615380748,0.688045577884282" />
+    <Link Source="@52" Target="Fragments" Category="Contains" />
+    <Link Source="@53" Target="@60" Bounds="-358.043323682808,-510.655654907227,0.84421947166885,21.0072739479121" />
+    <Link Source="@54" Target="@56" Category="Contains" />
+    <Link Source="@55" Target="@15" Bounds="126.045292251206,-1232.6509022309,40.3022078656741,44.621301911604" />
+    <Link Source="@55" Target="@59" Bounds="188.76345180141,-1232.6509022309,39.0797755584436,47.5945083885499" />
+    <Link Source="@56" Target="(@38 Namespace=WebServer.DataBase Type=Settings)" Category="Contains" />
+    <Link Source="@57" Target="@11" Bounds="129.695693969727,-635.317138671875,35.6627349853516,102.493713378906" />
+    <Link Source="@57" Target="@29" Bounds="18.078638416622,-635.317138671875,82.5662377814594,44.3649620205198" />
+    <Link Source="@57" Target="@32" Bounds="112.418342164668,-635.317138671875,9.08639573964089,35.4295375370806" />
+    <Link Source="@57" Target="@63" Bounds="4.44160556793213,-635.317138671875,105.228255271912,98.8684692382813" />
+    <Link Source="@58" Target="@29" Bounds="-12.6290934586777,-636.348754882812,2.61679344214302,40.6750614680369" />
+    <Link Source="@6" Target="@20" Bounds="773.136370859042,-682.53759765625,52.9522838052812,47.6092437161594" />
+    <Link Source="@6" Target="@24" Bounds="800.151184082031,-682.53759765625,39.7479248046875,165.209838867188" />
+    <Link Source="@6" Target="@46" Bounds="810.555358886719,-682.53759765625,42.002685546875,222.183258056641" />
+    <Link Source="@6" Target="@50" Bounds="788.068481445313,-682.53759765625,50.6893920898438,109.201782226563" />
+    <Link Source="@61" Target="@62" Bounds="-566.24531515983,-509.745376586915,0.767471563877621,21.0060161421126" />
+    <Link Source="@7" Target="@27" Bounds="420.756468640338,-779.688059515781,128.247270373071,5.16077036913316" />
+    <Link Source="@7" Target="@35" Bounds="617.086861623438,-769.134699023433,29.8947825855341,53.3606523494135" />
+    <Link Source="@7" Target="@4" Bounds="508.369434129901,-769.134699023433,82.8616399551565,57.9992867783179" />
+    <Link Source="@8" Target="@28" Bounds="915.457059235359,-781.166950214515,45.8714703997966,7.9688900399367" />
+    <Link Source="@8" Target="@36" Bounds="879.172511427376,-748.89501953125,98.2773457279164,44.3931232670942" />
+    <Link Source="@8" Target="@6" Bounds="843.797318197871,-748.89501953125,4.66700775726542,31.4548791837987" />
+    <Link Source="Activity" Target="(@30 @31 Type=InfoActivity)" Category="Contains" />
+    <Link Source="Activity" Target="(@30 @31 Type=SavedIngredientsActivity)" Category="Contains" />
+    <Link Source="Activity" Target="(@30 @31 Type=SavedRecipesActivity)" Category="Contains" />
+    <Link Source="Activity" Target="(@30 @31 Type=SectionRecipesActivity)" Category="Contains" />
+    <Link Source="Activity" Target="@37" Category="Contains" />
+    <Link Source="Activity" Target="@40" Category="Contains" />
+    <Link Source="Activity" Target="@42" Category="Contains" />
+    <Link Source="Activity" Target="@52" Category="Contains" />
+    <Link Source="Activity" Target="Adapters" Bounds="-466.054945839362,-793.581565039063,2.12636222066612,40.8479068072481" />
+    <Link Source="Adapters" Target="(@30 @31 Type=IngredientsAdapter)" Category="Contains" />
+    <Link Source="Adapters" Target="(@30 @31 Type=StepAdapter)" Category="Contains" />
+    <Link Source="Adapters" Target="(@30 Namespace=AndroidApp.Adapters Type=PagerRecipeAdapter)" Category="Contains" />
+    <Link Source="Adapters" Target="@41" Category="Contains" />
+    <Link Source="Adapters" Target="@43" Category="Contains" />
+    <Link Source="Adapters" Target="@53" Category="Contains" />
+    <Link Source="Adapters" Target="@60" Category="Contains" />
+    <Link Source="Adapters" Target="@61" Category="Contains" />
+    <Link Source="Adapters" Target="@62" Category="Contains" />
+    <Link Source="AndroidApp" Target="Activity" Category="Contains" />
+    <Link Source="AndroidApp" Target="Adapters" Category="Contains" />
+    <Link Source="AndroidApp" Target="AndroidLibrary" Bounds="-149.936874569481,-1074.55597977538,66.0610478546268,41.5829476248509" />
+    <Link Source="AndroidApp" Target="ObjectLibrary" Bounds="-149.936874569481,-675.210405875328,54.2956400728178,30.0163919528472" />
+    <Link Source="AndroidApp" Target="Сервер" Bounds="-149.936874569481,-873.295794880673,27.4846392851758,2.56442385056448" />
+    <Link Source="AndroidLibrary" Target="(@13 @14 Type=HttpGet)" Category="Contains" />
+    <Link Source="AndroidLibrary" Target="@15" Category="Contains" />
+    <Link Source="AndroidLibrary" Target="@33" Category="Contains" />
+    <Link Source="AndroidLibrary" Target="@34" Category="Contains" />
+    <Link Source="AndroidLibrary" Target="@55" Category="Contains" />
+    <Link Source="AndroidLibrary" Target="@59" Category="Contains" />
+    <Link Source="AndroidLibrary" Target="ObjectLibrary" Bounds="-129.838592529297,-1079.35034179688,35.5064010620117,383.365661621094" />
+    <Link Source="Fragments" Target="(@30 Namespace=AndroidApp.Fragments Type=RecipeDescriptionFragment)" Category="Contains" />
+    <Link Source="Fragments" Target="(@30 Namespace=AndroidApp.Fragments Type=RecipeIngredientsFragment)" Category="Contains" />
+    <Link Source="Fragments" Target="(@30 Namespace=AndroidApp.Fragments Type=RecipeStepsFragment)" Category="Contains" />
+    <Link Source="Listeners" Target="(@30 @31 Type=RecipeScrollListener)" Category="Contains" />
+    <Link Source="Listeners" Target="(@30 @31 Type=RecipeTouchListener)" Category="Contains" />
+    <Link Source="ObjectLibrary" Target="@11" Category="Contains" />
+    <Link Source="ObjectLibrary" Target="@12" Category="Contains" />
+    <Link Source="ObjectLibrary" Target="@29" Category="Contains" />
+    <Link Source="ObjectLibrary" Target="@32" Category="Contains" />
+    <Link Source="ObjectLibrary" Target="@57" Category="Contains" />
+    <Link Source="ObjectLibrary" Target="@58" Category="Contains" />
+    <Link Source="ObjectLibrary" Target="@63" Category="Contains" />
+    <Link Source="ObjectLibrary" Target="@64" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@17" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@18" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@20" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@21" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@22" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@23" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@24" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@25" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@26" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@27" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@28" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@35" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@36" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@39" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@4" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@44" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@45" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@46" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@47" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@48" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@49" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@50" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@51" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@6" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@7" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="@8" Category="Contains" />
+    <Link Source="RecipeLibrary" Target="ObjectLibrary" Bounds="200.93396764199,-593.047075628026,73.9251379892574,9.80499182103222" />
+    <Link Source="Сервер" Target="(@38 Namespace=WebServer Type=Program)" Category="Contains" />
+    <Link Source="Сервер" Target="(@38 Namespace=WebServer Type=ServerMemoryCache)" Category="Contains" />
+    <Link Source="Сервер" Target="(@38 Namespace=WebServer Type=Startup)" Category="Contains" />
+    <Link Source="Сервер" Target="(@38 Namespace=WebServer.Controllers Type=PageController)" Category="Contains" />
+    <Link Source="Сервер" Target="@54" Category="Contains" />
+    <Link Source="Сервер" Target="ObjectLibrary" Bounds="58.247820993002,-732.34899585452,0.870250905870108,21.007823851249" />
+    <Link Source="Сервер" Target="RecipeLibrary" Bounds="244.859105631247,-821.647197333561,21.6044338031577,8.34423555190995" />
+  </Links>
+  <Categories>
+    <Category Id="CodeSchema_Class" Label="Класс" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Классы" />
+    <Category Id="CodeSchema_Interface" Label="Интерфейс" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Interface" NavigationActionLabel="Интерфейсы" />
+    <Category Id="CodeSchema_Type" Label="Тип" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Типы" />
+    <Category Id="Contains" Label="Содержит" Description="Указывает, содержит ли источник связи целевой объект" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Содержится в" IsContainment="True" OutgoingActionLabel="Содержит" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsAbstract" Label="Является абстрактным" Description="Флаг, указывающий, что член является Abstract и не содержит полной реализации" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsInternal" Label="Является Internal" Description="Флаг, указывающий, что метод является Internal" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPublic" Label="Является Public" Description="Флаг, указывающий на область видимости Public" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsStatic" Label="Является статическим" Description="Флаг, указывающий, что член является статическим" DataType="System.Boolean" />
+    <Property Id="CommonLabel" DataType="System.String" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="Group" Label="Группа" Description="Отображать узел как группу" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="Icon" Label="Значок" Description="Значок" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="Label" Label="Метка" Description="Отображаемая метка аннотируемого объекта" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="SourceLocation" Label="Номер начальной строки" DataType="Microsoft.VisualStudio.GraphModel.CodeSchema.SourceLocation" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="Assembly" Label="Сборка" ValueType="Uri" />
+    <Name Id="GenericParameterCount" Label="Число универсальных параметров" ValueType="System.String" />
+    <Name Id="Name" Label="Имя" ValueType="System.String" />
+    <Name Id="Namespace" Label="Пространство имен" ValueType="System.String" />
+    <Name Id="Type" Label="Тип" ValueType="System.Object" />
+  </QualifiedNames>
+  <IdentifierAliases>
+    <Alias n="1" Uri="Assembly=$(cb33df16-fe35-4c07-b1c5-a52cd87a90c8.OutputPathUri)" />
+    <Alias n="2" Id="Namespace=ObjectsLibrary.Parser.ParserPage.Core" />
+    <Alias n="3" Id="GenericParameterCount=1" />
+    <Alias n="4" Id="(@1 @2 Type=(Name=IParserPage @3))" />
+    <Alias n="5" Id="Namespace=ObjectsLibrary.Parser.ParserRecipe.Core" />
+    <Alias n="6" Id="(@1 @5 Type=(Name=IParserRecipe @3))" />
+    <Alias n="7" Id="(@1 @2 Type=(Name=ParserPage @3))" />
+    <Alias n="8" Id="(@1 @5 Type=(Name=ParserRecipe @3))" />
+    <Alias n="9" Uri="Assembly=$(2e71f618-7dfd-4161-83d0-ed114448827e.OutputPathUri)" />
+    <Alias n="10" Id="Namespace=ObjectsLibrary.Components" />
+    <Alias n="11" Id="(@9 @10 Type=Additional)" />
+    <Alias n="12" Id="(@9 @10 Type=CPFC)" />
+    <Alias n="13" Uri="Assembly=$(dea1a7d3-7fa8-4e62-9efd-22f3cd415979.OutputPathUri)" />
+    <Alias n="14" Id="Namespace=AndroidLibrary" />
+    <Alias n="15" Id="(@13 @14 Type=DataContext)" />
+    <Alias n="16" Id="Namespace=ObjectsLibrary.Parser.ParserPage.WebSites" />
+    <Alias n="17" Id="(@1 @16 Type=EdaPageParser)" />
+    <Alias n="18" Id="(@1 @16 Type=EdaPageSettings)" />
+    <Alias n="19" Id="Namespace=ObjectsLibrary.Parser.ParserRecipe.WebSites" />
+    <Alias n="20" Id="(@1 @19 Type=EdaRecipeParser)" />
+    <Alias n="21" Id="(@1 @19 Type=EdaRecipeSettings)" />
+    <Alias n="22" Id="(@1 @16 Type=EdimDomaPageParser)" />
+    <Alias n="23" Id="(@1 @16 Type=EdimDomaPageSettings)" />
+    <Alias n="24" Id="(@1 @19 Type=EdimdomaRecipeParser)" />
+    <Alias n="25" Id="(@1 @19 Type=EdimdomaRecipeSettings)" />
+    <Alias n="26" Id="(@1 Namespace=RecipeLibrary Type=GetData)" />
+    <Alias n="27" Id="(@1 @2 Type=HtmlLoader)" />
+    <Alias n="28" Id="(@1 @5 Type=HtmlLoader)" />
+    <Alias n="29" Id="(@9 @10 Type=Image)" />
+    <Alias n="30" Uri="Assembly=$(ceb3721a-0c45-4ad4-9d8a-9305c9a3397d.OutputPathUri)" />
+    <Alias n="31" Id="Namespace=AndroidApp" />
+    <Alias n="32" Id="(@9 @10 Type=Ingredient)" />
+    <Alias n="33" Id="(@13 @14 Type=IngredientData)" />
+    <Alias n="34" Id="(@13 @14 Type=IngredientTable)" />
+    <Alias n="35" Id="(@1 @2 Type=IParserPageSettings)" />
+    <Alias n="36" Id="(@1 @5 Type=IParserRecipeSettings)" />
+    <Alias n="37" Id="(@30 @31 Type=MainActivity)" />
+    <Alias n="38" Uri="Assembly=$(a8ad85b8-38eb-4c25-b8be-0cbe2c61ee0d.OutputPathUri)" />
+    <Alias n="39" Id="(@1 Namespace=ObjectsLibrary.Parser Type=ParserException)" />
+    <Alias n="40" Id="(@30 Namespace=AndroidApp.General Type=Plate)" />
+    <Alias n="41" Id="(@30 @31 Type=PlateAdapter)" />
+    <Alias n="42" Id="(@30 @31 Type=PlatesActivity)" />
+    <Alias n="43" Id="(@30 @31 Type=PlateViewHolder)" />
+    <Alias n="44" Id="(@1 @16 Type=PovarenokPageParser)" />
+    <Alias n="45" Id="(@1 @16 Type=PovarenokPageSettings)" />
+    <Alias n="46" Id="(@1 Namespace=RecipeLibrary.Parser.ParserRecipe.WebSites Type=PovarenokRecipeParser)" />
+    <Alias n="47" Id="(@1 @19 Type=PovarenokRecipeSettings)" />
+    <Alias n="48" Id="(@1 Namespace=RecipeLibrary.Parser.ParserPage.WebSites Type=PovarPageParser)" />
+    <Alias n="49" Id="(@1 @16 Type=PovarPageSettings)" />
+    <Alias n="50" Id="(@1 Namespace=RecipeLibrary.Parser.ParserRecipe.WebSites Type=PovarRecipeParser)" />
+    <Alias n="51" Id="(@1 @19 Type=PovarRecipeSettings)" />
+    <Alias n="52" Id="(@30 @31 Type=RecipeActivity)" />
+    <Alias n="53" Id="(@30 @31 Type=RecipeAdapter)" />
+    <Alias n="54" Id="(@38 Namespace=WebServer.Controllers Type=RecipeController)" />
+    <Alias n="55" Id="(@13 @14 Type=RecipeData)" />
+    <Alias n="56" Id="(@38 Namespace=WebServer.DataBase Type=RecipeDataContext)" />
+    <Alias n="57" Id="(@9 Namespace=ObjectsLibrary Type=RecipeFull)" />
+    <Alias n="58" Id="(@9 Namespace=ObjectsLibrary Type=RecipeShort)" />
+    <Alias n="59" Id="(@13 @14 Type=RecipeTable)" />
+    <Alias n="60" Id="(@30 @31 Type=RecipeViewHolder)" />
+    <Alias n="61" Id="(@30 @31 Type=SavedIngredientsAdapter)" />
+    <Alias n="62" Id="(@30 @31 Type=SavedIngredientsViewHolder)" />
+    <Alias n="63" Id="(@9 @10 Type=StepRecipe)" />
+    <Alias n="64" Id="(@9 @10 Type=Video)" />
+  </IdentifierAliases>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Комментарий" ValueLabel="Имеет комментарий">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
+  </Styles>
+  <Paths>
+    <Path Id="2e71f618-7dfd-4161-83d0-ed114448827e.OutputPathUri" Value="file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/ObjectLibrary/bin/Release/netstandard2.1/ObjectsLibrary.dll" />
+    <Path Id="a8ad85b8-38eb-4c25-b8be-0cbe2c61ee0d.OutputPathUri" Value="file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/WebServer/bin/Release/netcoreapp3.1/WebServer.dll" />
+    <Path Id="cb33df16-fe35-4c07-b1c5-a52cd87a90c8.OutputPathUri" Value="file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/RecipeLibrary/bin/Release/netcoreapp3.1/RecipeLibrary.dll" />
+    <Path Id="ceb3721a-0c45-4ad4-9d8a-9305c9a3397d.OutputPathUri" Value="file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidApp/bin/Release/AndroidApp.dll" />
+    <Path Id="dea1a7d3-7fa8-4e62-9efd-22f3cd415979.OutputPathUri" Value="file:///C:/Users/andre/Desktop/Personal Blog/OnTheStove/AndroidLibrary/bin/Release/AndroidLibrary.dll" />
+  </Paths>
+</DirectedGraph>

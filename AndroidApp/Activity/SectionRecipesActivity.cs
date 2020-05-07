@@ -26,7 +26,7 @@ namespace AndroidApp
         private RecyclerView recyclerView;
         private RecipeAdapter recipeAdapter;
         private LinearLayoutManager linearLayoutManager;
-        private RecipeListener recipeListener;
+        private RecipeScrollListener recipeListener;
         private RelativeLayout relativeLayoutBack;
         private Button buttonBack;
         private TextView textViewTitle;
@@ -63,7 +63,7 @@ namespace AndroidApp
             buttonBack.Click += OnBackPressed;
 
             linearLayoutManager = new LinearLayoutManager(this);
-            recipeListener = new RecipeListener(linearLayoutManager);
+            recipeListener = new RecipeScrollListener(linearLayoutManager);
 
             swipeRefreshLayout.SetColorSchemeColors(Color.Orange, Color.DarkOrange);
             swipeRefreshLayout.Refresh += RefreshLayout;
@@ -156,7 +156,7 @@ namespace AndroidApp
         {
             Intent intent = new Intent(this, typeof(RecipeActivity));
             intent.PutExtra("url", recipeShorts[position].Url);
-            intent.PutExtra("recipeShort", Data.RecipeToByteArray(recipeShorts[position]));
+            intent.PutExtra("recipeShort", DataContext.RecipeToByteArray(recipeShorts[position]));
 
             StartActivity(intent);
         }

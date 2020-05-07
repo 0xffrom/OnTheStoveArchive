@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data.cs" />
+    <Compile Include="DataContext.cs" />
     <Compile Include="IngredientData.cs" />
     <Compile Include="Tables\IngredientTable.cs" />
     <Compile Include="RecipeData.cs" />

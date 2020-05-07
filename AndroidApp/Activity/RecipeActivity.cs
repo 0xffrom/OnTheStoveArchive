@@ -59,7 +59,7 @@ namespace AndroidApp
 
             // Получаем необходимые данные: 
             urlRecipe = Intent.GetStringExtra("url");
-            recipeShort = Data.ByteArrayToObject<RecipeShort>(Intent.GetByteArrayExtra("recipeShort"));
+            recipeShort = DataContext.ByteArrayToObject<RecipeShort>(Intent.GetByteArrayExtra("recipeShort"));
 
             string[] messagesError = Resources.GetStringArray(Resource.Array.messagesError);
             messageErrorTitle = messagesError[0];

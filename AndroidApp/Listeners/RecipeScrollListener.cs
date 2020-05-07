@@ -12,14 +12,14 @@ using Android.Widget;
 
 namespace AndroidApp
 {
-    public class RecipeListener : RecyclerView.OnScrollListener
+    public class RecipeScrollListener : RecyclerView.OnScrollListener
     {
         private LinearLayoutManager layoutManager;
         private bool isLoading = false;
 
         public event EventHandler LoadMoreEvent;
 
-        public RecipeListener(LinearLayoutManager layoutManager)
+        public RecipeScrollListener(LinearLayoutManager layoutManager)
         {
             this.layoutManager = layoutManager;
         }

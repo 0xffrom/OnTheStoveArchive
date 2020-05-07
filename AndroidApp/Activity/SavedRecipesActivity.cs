@@ -90,7 +90,7 @@ namespace AndroidApp
         {
             Intent intent = new Intent(this, typeof(RecipeActivity));
             intent.PutExtra("url", dataRecipes[position].Url);
-            intent.PutExtra("recipeShort", Data.RecipeToByteArray(dataRecipes[position]));
+            intent.PutExtra("recipeShort", DataContext.RecipeToByteArray(dataRecipes[position]));
 
             StartActivity(intent);
         }

@@ -56,7 +56,7 @@ namespace AndroidLibrary
                 if (recipes[i].Recipe == null || recipes[i].Name == null)
                     continue;
 
-                recipeShorts[i] = Data.ByteArrayToObject<RecipeShort>(recipes[i].Recipe);
+                recipeShorts[i] = DataContext.ByteArrayToObject<RecipeShort>(recipes[i].Recipe);
             }
 
             return recipeShorts;
@@ -83,7 +83,7 @@ namespace AndroidLibrary
         {
             string fileName = GetFileRecipeName(url);
 
-            RecipeTable recipeTable = new RecipeTable(fileName, Data.RecipeToByteArray(recipeShort));
+            RecipeTable recipeTable = new RecipeTable(fileName, DataContext.RecipeToByteArray(recipeShort));
 
             Db.Insert(recipeTable);
         }

@@ -412,8 +412,8 @@
     <Compile Include="Fragments\RecipeIngredientsFragment.cs" />
     <Compile Include="Fragments\RecipeStepsFragment.cs" />
     <Compile Include="General\Plate.cs" />
-    <Compile Include="Listeners\RecipeListener.cs" />
-    <Compile Include="Listeners\TouchListener.cs" />
+    <Compile Include="Listeners\RecipeScrollListener.cs" />
+    <Compile Include="Listeners\RecipeTouchListener.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
