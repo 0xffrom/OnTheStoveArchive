@@ -45,7 +45,7 @@ namespace AndroidApp.Fragments
             _urlRecipe = view.FindViewById<TextView>(Resource.Id.urlRecipe);
             _videoView = view.FindViewById<WebView>(Resource.Id.videoRecipe);
 
-            if (_recipeFull.Additional?.VideoUrl == null || _recipeFull.Additional?.VideoUrl == string.Empty)
+            if (string.IsNullOrEmpty(_recipeFull.Additional?.VideoUrl))
             {
                 // Если видео нет:
                 _videoView.LayoutParameters.Height = 0;
@@ -58,7 +58,7 @@ namespace AndroidApp.Fragments
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
-            if (_recipeFull.TitleImage?.ImageUrl != null && _recipeFull.TitleImage?.ImageUrl != string.Empty)
+            if (!string.IsNullOrEmpty(_recipeFull.TitleImage?.ImageUrl))
                 Picasso.With(View.Context)
                     .Load(_recipeFull.TitleImage.ImageUrl)
                     .Into(_image);
@@ -89,7 +89,7 @@ namespace AndroidApp.Fragments
 
             _urlRecipe.Text = $"Ссылка на рецепт: {_recipeFull.Url}";
 
-            if (_recipeFull.Additional?.VideoUrl != null && _recipeFull.Additional?.VideoUrl != string.Empty)
+            if (!string.IsNullOrEmpty(_recipeFull.Additional?.VideoUrl))
             {
                 String videoSource = _recipeFull.Additional.VideoUrl;
                 WebSettings webSettings = _videoView.Settings;

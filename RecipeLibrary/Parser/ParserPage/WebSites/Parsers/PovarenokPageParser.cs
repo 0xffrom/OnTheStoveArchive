@@ -9,7 +9,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
     {
         public RecipeShort[] Parse(IHtmlDocument document, IParserPageSettings settings)
         {
-            var recipesList = document.QuerySelectorAll("article.item-bl");
+            var recipesList = document.QuerySelectorAll("article").Where(x=> x.ClassName == "item-bl");
 
             double indexStartPopularity = settings.IndexPopularity;
 
