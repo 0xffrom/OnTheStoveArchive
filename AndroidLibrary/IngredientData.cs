@@ -12,16 +12,15 @@ namespace AndroidLibrary
             Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
                 "ingredients.db3");
 
-        private static SQLiteConnection Db = new SQLiteConnection(dbPath);
-
+        private static SQLiteConnection dbConnection = new SQLiteConnection(dbPath);
         static IngredientData()
         {
-            Db.CreateTable<IngredientTable>();
+            dbConnection.CreateTable<IngredientTable>();
         }
 
         public static List<Ingredient> GetArrayIngredients()
         {
-            var ingredientsDb = Db.Table<IngredientTable>().ToArray();
+            var ingredientsDb = dbConnection.Table<IngredientTable>().ToArray();
 
             List<Ingredient> ingredients = new List<Ingredient>(ingredientsDb.Length);
             ingredients.AddRange(from t in ingredientsDb
@@ -33,7 +32,7 @@ namespace AndroidLibrary
 
         public static bool ExistsIngredient(Ingredient ingredient)
         {
-            return Db.Table<IngredientTable>().FirstOrDefault(x =>
+            return dbConnection.Table<IngredientTable>().FirstOrDefault(x =>
                 x.Name == ingredient.Name &&
                 x.Unit == ingredient.Unit &&
                 x.RecipeName == ingredient.RecipeName) != null;
@@ -42,14 +41,14 @@ namespace AndroidLibrary
 
         public static void DeleteIngredient(Ingredient ingredient)
         {
-            var ingredientDb = Db.Table<IngredientTable>().FirstOrDefault(x =>
+            var ingredientDb = dbConnection.Table<IngredientTable>().FirstOrDefault(x =>
                 x.Name == ingredient.Name &&
                 x.RecipeName == ingredient.RecipeName);
 
             if (ingredientDb == null)
                 return;
 
-            Db.Delete<IngredientTable>(ingredientDb.Id);
+            dbConnection.Delete<IngredientTable>(ingredientDb.Id);
         }
 
 
@@ -58,7 +57,7 @@ namespace AndroidLibrary
             IngredientTable ingredientTable =
                 new IngredientTable(ingredient.Name, ingredient.Unit, ingredient.RecipeName);
 
-            Db.Insert(ingredientTable);
+            dbConnection.Insert(ingredientTable);
         }
     }
 }

@@ -10,26 +10,26 @@ namespace ObjectsLibrary.Components
     public class CPFC
     {
         /// <value>Количество калорий.</value>
-        public double Calories { get; set; }
+        public double Calories { get; }
 
         /// <value>Количество белка.</value>
-        public double Protein { get; set; }
+        public double Proteins { get; }
 
         /// <value>Количество жиров.</value>
-        public double Fats { get; set; }
+        public double Fats { get;}
 
         /// <value>Количество углеводов.</value>
-        public double Carbohydrates { get; set; }
+        public double Carbohydrates { get; }
 
         public CPFC()
         {
             //
         }
 
-        public CPFC(double calories, double protein, double fats, double carbohydrates) : this()
+        public CPFC(double calories, double proteins, double fats, double carbohydrates) : this()
         {
             Calories = calories;
-            Protein = protein;
+            Proteins = proteins;
             Fats = fats;
             Carbohydrates = carbohydrates;
         }

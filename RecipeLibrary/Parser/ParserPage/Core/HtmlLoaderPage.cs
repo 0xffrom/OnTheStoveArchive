@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace ObjectsLibrary.Parser.ParserPage.Core
 {
-    public class HtmlLoader
+    public class HtmlLoaderPage
     {
         private readonly HttpClient _client;
         private readonly string _url;
-
         private readonly IParserPageSettings _settings;
-
-        public HtmlLoader(IParserPageSettings settings)
+        public HtmlLoaderPage(IParserPageSettings settings)
         {
             _settings = settings;
             _url = settings.Url;
@@ -49,15 +47,13 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
                 string responseBody = string.Empty;
                 if (response != null && response.StatusCode == HttpStatusCode.OK)
                     responseBody = await response.Content.ReadAsStringAsync();
-                JObject jObject = JObject.Parse(responseBody);
+                var jObject = JObject.Parse(responseBody);
 
-                if (jObject.ContainsKey("Recipes"))
-                    return jObject["Recipes"]?.Value<string>();
-                else
-                    return jObject["Html"].Value<string>();
+                return jObject.ContainsKey("Recipes") ?
+                    jObject["Recipes"]?.Value<string>() : jObject["Html"].Value<string>();
             }
-            else
-                response = await _client.GetAsync(currentUrl);
+            
+            response = await _client.GetAsync(currentUrl);
 
             string source;
 

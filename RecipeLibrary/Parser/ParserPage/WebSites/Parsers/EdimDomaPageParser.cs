@@ -5,7 +5,7 @@
  
  namespace ObjectsLibrary.Parser.ParserPage.WebSites
  {
-     class EdimDomaPageParser : IParserPage<RecipeShort[]>
+     internal class EdimDomaPageParser : IParserPage<RecipeShort[]>
      {
          public RecipeShort[] Parse(IHtmlDocument document, IParserPageSettings settings)
          {

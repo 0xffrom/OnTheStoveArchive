@@ -85,8 +85,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                     .QuerySelectorAll("li")
                     .ToArray();
 
-                if (ingredientsArray != null)
-                {
+
                     Ingredient[] ingredients = new Ingredient[ingredientsArray.Length];
 
                     for (int j = 0; j < ingredientsArray.Length; j++)
@@ -107,7 +106,7 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
 
                         Ingredient ingredient = new Ingredient(name, unit, Title);
                         ingredients[j] = ingredient;
-                    }
+                    
 
                     ingredientsList.AddRange(ingredients);
                 }

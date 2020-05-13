@@ -11,29 +11,29 @@ namespace ObjectsLibrary
         [Key]
         public Guid Key { get; set; }
         /// <value>Адрес рецепта.</value>
-        public string Url { get; set; }
+        public string Url { get; }
 
         /// <value>Название рецепта.</value>
-        public string Title { get; set; }
+        public string Title { get; }
 
         /// <value>Главное изображение.</value>
         /// <see cref="Image"/>
-        public Image TitleImage { get; set; }
+        public Image TitleImage { get; }
 
         /// <value>Описание рецепта.</value>
-        public string Description { get; set; }
+        public string Description { get; }
 
         /// <value>Массив ингредиентов рецепта.</value>
         /// <see cref="Ingredient"/> 
-        public Ingredient[] Ingredients { get; set; }
+        public Ingredient[] Ingredients { get; }
 
         /// <value>Шаги приготовления рецепта.</value>
         /// <see cref="StepRecipe"/>
-        public StepRecipe[] StepsRecipe { get; set; }
+        public StepRecipe[] StepsRecipe { get; }
 
         /// <value>Дополнительное описание рецепта.</value>
         /// <see cref="Additional"/>
-        public Additional Additional { get; set; }
+        public Additional Additional { get; }
 
         public RecipeFull()
         {

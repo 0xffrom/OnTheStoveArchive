@@ -9,11 +9,11 @@ namespace ObjectsLibrary.Components
     public class Ingredient
     {
         /// <value>Название ингредиента.</value>
-        public string Name { get; set; }
+        public string Name { get; }
         /// <value>Количество и мера измерения.</value>
-        public string Unit { get; set; }
+        public string Unit { get; }
         /// <value>Название рецепта, которому принадлежит ингредиент.</value>
-        public string RecipeName { get; set; }
+        public string RecipeName { get; }
         public Ingredient()
         {
 

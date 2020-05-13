@@ -5,22 +5,13 @@ namespace ObjectsLibrary.Parser
     [Serializable]
     public class ParserException : System.Net.WebException
     {
-        public string WebSite { get; }
-        public override string Message { get; }
-
         public ParserException()
         {
             //
         }
-
-        public ParserException(string message) : base()
+        
+        public ParserException(string message) : base(message)
         {
-            Message = message;
-        }
-
-        public ParserException(string message, string webSite) : base(message)
-        {
-            WebSite = webSite;
         }
 
         public ParserException(string message, Exception inner) : base(message, inner)

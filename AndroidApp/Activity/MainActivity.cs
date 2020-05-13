@@ -209,13 +209,12 @@ namespace AndroidApp
             else
                 base.OnBackPressed();
         }
-
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
             return true;
         }
-
+        
         private void OnRecipeClick(object sender, int position)
         {
             var intent = new Intent(this, typeof(RecipeActivity));
@@ -224,8 +223,7 @@ namespace AndroidApp
 
             StartActivity(intent);
         }
-
-
+        
         private void SelectedItemSpinner(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             var item = spinner.GetItemAtPosition(e.Position);
@@ -254,7 +252,7 @@ namespace AndroidApp
 
         private async Task<List<RecipeShort>> UpdateCollectionRecipes(string query)
         {
-            return await Task.Run(function: () => HttpGet.GetPages(query));
+            return await Task.Run(function: () => HttpContext.GetPages(query));
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions,

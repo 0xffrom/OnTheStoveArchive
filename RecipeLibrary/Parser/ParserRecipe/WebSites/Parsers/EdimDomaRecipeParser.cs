@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 {
-    public class EdimdomaRecipeParser : IParserRecipe<RecipeFull>
+    public class EdimDomaRecipeParser : IParserRecipe<RecipeFull>
     {
         /// <see cref="RecipeFull.Url"/>
         private string Url { get; set; }
@@ -37,7 +37,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             var recipeBody =
                 document.QuerySelector("div.grid-three-column__column.grid-three-column__column_center.onthe_data")
-                ?? throw new ParserException("Не найдено главное тело рецепта.", "edimdoma.ru");
+                ?? throw new ParserException("Не найдено главное тело рецепта.");
 
             Title = recipeBody.Attributes[5].Value ?? string.Empty;
 
@@ -67,7 +67,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
             }
 
             var stepsBody = recipeBody.QuerySelector("div.recipe_steps") ??
-                            throw new ParserException("Не найден блок с шагами.", "edimdoma.ru");
+                            throw new ParserException("Не найден блок с шагами.");
 
             var recipeArray = stepsBody.QuerySelectorAll("div.content-box.recipe_step");
 

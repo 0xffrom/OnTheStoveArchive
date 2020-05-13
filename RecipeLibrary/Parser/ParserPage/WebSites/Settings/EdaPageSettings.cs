@@ -3,7 +3,7 @@ using ObjectsLibrary.Parser.ParserPage.Core;
 
 namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {
-    class EdaPageSettings : IParserPageSettings
+    internal class EdaPageSettings : IParserPageSettings
     {
         public string Url { get; } = "https://eda.ru/";
         public string Section { get; }
@@ -24,12 +24,12 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
         };
 
         public int MaxPageId { get; } = 350;
-        public int PageId { get; set; }
+        public int PageId { get; }
         public string RecipeName { get; }
         public double IndexPopularity { get; set; } = 100;
         public double IndexStep { get; } = 1;
 
-        public EdaPageSettings(string section, int pageId)
+        private EdaPageSettings(string section, int pageId)
         {
             Section = section;
             PageId = pageId;

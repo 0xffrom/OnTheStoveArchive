@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {
-    class EdaPageParser : IParserPage<RecipeShort[]>
+    internal class EdaPageParser : IParserPage<RecipeShort[]>
     {
         public RecipeShort[] Parse(IHtmlDocument document, IParserPageSettings settings)
         {

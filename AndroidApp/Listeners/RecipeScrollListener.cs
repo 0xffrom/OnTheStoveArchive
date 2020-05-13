@@ -15,8 +15,6 @@ namespace AndroidApp
     public class RecipeScrollListener : RecyclerView.OnScrollListener
     {
         private LinearLayoutManager layoutManager;
-        private bool isLoading = false;
-
         public event EventHandler LoadMoreEvent;
 
         public RecipeScrollListener(LinearLayoutManager layoutManager)
@@ -24,8 +22,9 @@ namespace AndroidApp
             this.layoutManager = layoutManager;
         }
 
-        public override void OnScrolled(Android.Support.V7.Widget.RecyclerView recyclerView, int dx, int dy)
+        public override void OnScrolled(RecyclerView recyclerView, int dx, int dy)
         {
+            bool isLoading = false;
             base.OnScrolled(recyclerView, dx, dy);
 
             var visibleItemCount = recyclerView.ChildCount;

@@ -145,17 +145,9 @@ namespace RecipeLibrary.Parser.ParserRecipe.WebSites
                 Additional);
         }
 
-        private string RemoveSymbols(string line)
+        private static string RemoveSymbols(string line)
         {
-            string newLine = string.Empty;
-
-            foreach (var item in line)
-            {
-                if (char.IsDigit(item))
-                    newLine += item;
-            }
-
-            return newLine;
+            return line.Where(item => char.IsDigit(item)).Aggregate(string.Empty, (current, item) => current + item);
         }
 
         /// <see cref="IParserRecipe{T}.ConvertToMinutes(string)"/>

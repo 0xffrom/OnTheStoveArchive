@@ -8,7 +8,7 @@ namespace WebServer.Data
 {
     public class RecipeContext : DbContext
     {
-        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Recipe> Recipes { get; }
 
         public RecipeContext()
         {

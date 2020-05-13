@@ -12,14 +12,8 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
         {
             {"new", "retsepty?page={PageId}"},
             {"random", "retsepty?page={PageId}"},
-            {
-                "popular",
-                "retsepty?with_ingredient=&without_ingredient=&user_ids=&page={PageId}&field=popular&direction=desc"
-            },
-            {
-                "recipe",
-                "retsepty?with_ingredient=&without_ingredient=&user_ids=&page={PageId}&field=&direction=&query={RecipeName}"
-            },
+            {"popular", "retsepty?with_ingredient=&without_ingredient=&user_ids=&page={PageId}&field=popular&direction=desc"},
+            {"recipe", "retsepty?with_ingredient=&without_ingredient=&user_ids=&page={PageId}&field=&direction=&query={RecipeName}"},
             {"горячее", "retsepty?page={PageId}&tags[recipe_category][]=основные+блюда"},
             {"супы", "retsepty?page={PageId}&tags[recipe_category][]=супы+и+бульоны"},
             {"салаты", "retsepty?page={PageId}&tags[recipe_category][]=салаты+и+винегреты"},

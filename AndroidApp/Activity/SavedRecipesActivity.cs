@@ -84,9 +84,7 @@ namespace AndroidApp
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
-
-        void OnItemClick(object sender, int position)
+        private void OnItemClick(object sender, int position)
         {
             Intent intent = new Intent(this, typeof(RecipeActivity));
             intent.PutExtra("url", dataRecipes[position].Url);

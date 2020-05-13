@@ -41,7 +41,7 @@ namespace ObjectsLibrary.Parser.ParserPage.WebSites
             RecipeName = GetUrl(recipeName);
         }
 
-        private string GetUrl(string recipeName)
+        private static string GetUrl(string recipeName)
         {
             // абвгдеёжзийклмнопрстуфхцчшщъыьэюя =>
             // %E0%E1%E2%E3%E4%E5%B8%E6%E7%E8%E9%EA%EB%EC%ED%EE%EF%F0%F1%F2%F3%F4%F5%F6%F7%F8%F9%FA%FB%FC%FD%FE%FF

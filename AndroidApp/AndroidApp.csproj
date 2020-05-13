@@ -413,9 +413,11 @@
     <Compile Include="Fragments\RecipeStepsFragment.cs" />
     <Compile Include="General\Plate.cs" />
     <Compile Include="Listeners\RecipeScrollListener.cs" />
-    <Compile Include="Listeners\RecipeTouchListener.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewHolders\PlateViewHolder.cs" />
+    <Compile Include="ViewHolders\RecipeViewHolder.cs" />
+    <Compile Include="ViewHolders\SavedIngredientsViewHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

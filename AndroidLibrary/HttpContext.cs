@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AndroidLibrary
 {
-    public static class HttpGet
+    public static class HttpContext
     {
         //http://51.77.58.18/
         private const string ipAdress = "http://51.77.58.18/";

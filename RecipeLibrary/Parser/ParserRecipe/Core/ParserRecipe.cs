@@ -6,32 +6,24 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
 {
     internal class ParserRecipe<T> where T : RecipeFull
     {
-        IParserRecipe<T> parser;
-        IParserRecipeSettings parserSettings;
+        private IParserRecipeSettings parserSettings;
+        private HtmlLoaderRecipe loader;
+        private IParserRecipe<T> Parser { get; }
 
-        HtmlLoader loader;
-
-        internal IParserRecipe<T> Parser
-        {
-            get => parser;
-            set => parser = value;
-        }
-
-        internal IParserRecipeSettings Settings
+        private IParserRecipeSettings Settings
         {
             get => parserSettings;
             set
             {
                 parserSettings = value;
-                loader = new HtmlLoader(value);
+                loader = new HtmlLoaderRecipe(value);
             }
         }
 
-        public ParserRecipe(IParserRecipe<T> parser)
+        private ParserRecipe(IParserRecipe<T> parser)
         {
             Parser = parser;
         }
-
         public ParserRecipe(IParserRecipe<T> parser, IParserRecipeSettings parserSettings) : this(parser)
         {
             Settings = parserSettings;
@@ -46,7 +38,7 @@ namespace ObjectsLibrary.Parser.ParserRecipe.Core
                 var domParser = new HtmlParser();
                 var document = await domParser.ParseDocumentAsync(source);
 
-                var result = parser.Parse(document, parserSettings);
+                var result = Parser.Parse(document, parserSettings);
 
                 return result;
             }

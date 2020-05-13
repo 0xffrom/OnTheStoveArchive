@@ -5,9 +5,10 @@ namespace AndroidLibrary
     [Table("Recipe")]
     public class RecipeTable
     {
-        [PrimaryKey, AutoIncrement] public int Id { get; set; }
-        public string Name { get; set; }
-        public byte[] Recipe { get; set; }
+        [PrimaryKey, AutoIncrement] 
+        public int Id { get; set; }
+        public string Name { get; }
+        public byte[] Recipe { get; }
 
         public RecipeTable()
         {

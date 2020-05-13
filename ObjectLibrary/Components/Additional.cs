@@ -10,18 +10,18 @@ namespace ObjectsLibrary.Components
     public class Additional
     {
         /// <value>Имя автора.</value>
-        public string AuthorName { get; set; }
+        public string AuthorName { get;  }
 
         /// <value>Количество порций.</value>
-        public int CountPortions { get; set; }
+        public int CountPortions { get;  }
 
         /// <value>Количество минут для приготовления блюда.</value>
-        public double PrepMinutes { get; set; }
+        public double PrepMinutes { get;  }
 
         /// <see cref="CPFC"/>
-        public CPFC CPFC { get; set; }
+        public CPFC CPFC { get;  }
         /// <value>Интернет адрес на видео.</value>
-        public string VideoUrl { get; set; }
+        public string VideoUrl { get;  }
 
         public Additional()
         {

@@ -9,11 +9,11 @@ namespace ObjectsLibrary.Components
     public class StepRecipe
     {
         /// <value>Описание шага кулинарного рецепта.</value>
-        public string Description { get; set; }
+        public string Description { get;}
 
         /// <value>Изображение шага кулинарного рецепта.</value>
         /// <see cref="Image"/>
-        public Image Image { get; set; }
+        public Image Image { get; }
         public StepRecipe()
         {
             //

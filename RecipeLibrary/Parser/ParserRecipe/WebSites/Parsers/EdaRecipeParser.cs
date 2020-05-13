@@ -92,10 +92,10 @@ namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 
             double prepMinutes = ConvertToMinutes(document.QuerySelectorAll("span.info-pad__item")
                 .FirstOrDefault(x => x.FirstElementChild?.ClassName == "timer")
-                .QuerySelector("span.info-text")?.TextContent ?? "0");
+                ?.QuerySelector("span.info-text")?.TextContent ?? "0");
             int countPortions = int.Parse(document.QuerySelectorAll("span.info-pad__item")
                 .FirstOrDefault(x => x.FirstElementChild?.ClassName == "portion")
-                .QuerySelector("span.info-text.js-portions-count-print")?.TextContent
+                ?.QuerySelector("span.info-text.js-portions-count-print")?.TextContent
                 .Split(' ')[0] ?? "0");
             string authorName = document.QuerySelector("p.author-name > span")?.TextContent ?? string.Empty;
 

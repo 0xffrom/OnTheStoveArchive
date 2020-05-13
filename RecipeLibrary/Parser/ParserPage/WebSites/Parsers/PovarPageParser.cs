@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace RecipeLibrary.Parser.ParserPage.WebSites
 {
-    class PovarPageParser : IParserPage<RecipeShort[]>
+    internal class PovarPageParser : IParserPage<RecipeShort[]>
     {
         public RecipeShort[] Parse(IHtmlDocument document, IParserPageSettings settings)
         {

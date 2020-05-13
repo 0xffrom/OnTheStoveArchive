@@ -8,7 +8,7 @@ namespace WebServer
 {
     public class ServerMemoryCache
     {
-        public MemoryCache Cache { get; set; }
+        public MemoryCache Cache { get; }
         public ServerMemoryCache()
         {
             Cache = new MemoryCache(new MemoryCacheOptions

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Android.App;
 using XamarinApp;
+using XamarinApp.ViewHolders;
 
 namespace AndroidApp
 {
@@ -27,7 +28,7 @@ namespace AndroidApp
         public void AddItems(List<RecipeShort> recipes)
         {
             _items.AddRange(recipes);
-            this.NotifyDataSetChanged();
+            NotifyDataSetChanged();
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
@@ -55,27 +56,10 @@ namespace AndroidApp
             RecipeViewHolder vh = new RecipeViewHolder(itemView, OnClick);
             return vh;
         }
-
-
+        
         void OnClick(int position)
         {
             ItemClick?.Invoke(this, position);
-        }
-    }
-
-    public class RecipeViewHolder : RecyclerView.ViewHolder
-    {
-        public ImageView Image { get; private set; }
-        public TextView Title { get; private set; }
-        public TextView Link { get; private set; }
-
-        public RecipeViewHolder(View itemView, Action<int> listener) : base(itemView)
-        {
-            Image = itemView.FindViewById<ImageView>(Resource.Id.imageTitle);
-            Title = itemView.FindViewById<TextView>(Resource.Id.title);
-            Link = itemView.FindViewById<TextView>(Resource.Id.textLink);
-
-            itemView.Click += (sender, e) => listener(base.LayoutPosition);
         }
     }
 }

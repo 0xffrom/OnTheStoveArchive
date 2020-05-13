@@ -7,33 +7,27 @@ namespace ObjectsLibrary.Parser.ParserPage.Core
     internal class ParserPage<T> where T : class
     {
         private IParserPageSettings _parserSettings;
-
-        private HtmlLoader _loader;
+        private HtmlLoaderPage _loader;
+        private static readonly Random Random = new Random();
         private IParserPage<T> Parser { get; }
-
         private IParserPageSettings Settings
         {
             get => _parserSettings;
             set
             {
                 _parserSettings = value;
-                _loader = new HtmlLoader(value);
+                _loader = new HtmlLoaderPage(value);
             }
         }
-
         private ParserPage(IParserPage<T> parser)
         {
             Parser = parser;
         }
-
         internal ParserPage(IParserPage<T> parser, IParserPageSettings parserSettings) : this(parser)
         {
             Settings = parserSettings;
         }
-
-        private static readonly Random Random = new Random();
         private static int GetPageId(int maxPage) => Random.Next(1, maxPage + 1);
-
         internal async Task<T> Worker()
         {
             var pageId = Settings.PageId;

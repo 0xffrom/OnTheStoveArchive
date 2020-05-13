@@ -9,7 +9,7 @@ namespace ObjectsLibrary.Components
     public class Image
     {
         /// <value>Интернет адрес на изображение.</value>
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; }
 
         public Image()
         {

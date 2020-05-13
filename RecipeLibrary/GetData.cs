@@ -56,8 +56,8 @@ namespace RecipeLibrary
             }
             else if (url.Contains("www.edimdoma.ru"))
             {
-                obj = new EdimdomaRecipeParser();
-                settings = new EdimdomaRecipeSettings(url);
+                obj = new EdimDomaRecipeParser();
+                settings = new EdimDomaRecipeSettings(url);
             }
             else if (url.Contains("https://eda.ru"))
             {

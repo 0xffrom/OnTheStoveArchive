@@ -28,8 +28,7 @@ namespace AndroidApp
         {
             return position;
         }
-
-
+        
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View view = LayoutInflater.From(_context).Inflate(Resource.Layout.list_steps, null, false);

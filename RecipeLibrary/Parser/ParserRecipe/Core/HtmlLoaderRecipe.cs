@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace ObjectsLibrary.Parser.ParserRecipe.Core
 {
-    public class HtmlLoader
+    public class HtmlLoaderRecipe
     {
         private readonly HttpClient _client;
 
-        public HtmlLoader(IParserRecipeSettings settings)
+        public HtmlLoaderRecipe(IParserRecipeSettings settings)
         {
             _client = new HttpClient();
         }

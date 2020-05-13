@@ -13,19 +13,15 @@ namespace AndroidApp.Adapters
     {
         private readonly RecipeFull _recipeFull;
         private readonly string[] pagesName = {"Описание", "Ингредиенты", "Пошаговый рецепт"};
-
-        public PagerRecipeAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-        {
-        }
-
-        public PagerRecipeAdapter(Android.Support.V4.App.FragmentManager fm, RecipeFull recipeFull) : base(fm)
+        
+        public PagerRecipeAdapter(FragmentManager fm, RecipeFull recipeFull) : base(fm)
         {
             _recipeFull = recipeFull;
         }
 
         public override int Count { get; } = 3;
 
-        public override Android.Support.V4.App.Fragment GetItem(int position)
+        public override Fragment GetItem(int position)
         {
             var arguments = new Bundle();
 
@@ -33,7 +29,7 @@ namespace AndroidApp.Adapters
 
             var fragment = position switch
             {
-                0 => (Android.Support.V4.App.Fragment) new RecipeDescriptionFragment(),
+                0 => (Fragment) new RecipeDescriptionFragment(),
                 1 => new RecipeIngredientsFragment(),
                 2 => new RecipeStepsFragment(),
                 _ => new RecipeDescriptionFragment()

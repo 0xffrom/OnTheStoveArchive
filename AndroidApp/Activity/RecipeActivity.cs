@@ -84,7 +84,7 @@ namespace AndroidApp
                     Resources.GetIdentifier("outline_favorite_24", "drawable", PackageName));
             try
             {
-                recipeFull = await UpdateCollectionRecipes(urlRecipe);
+                recipeFull = await LoadRecipe(urlRecipe);
                 title.Text = recipeFull.Title;
                 viewPager.Adapter = (new PagerRecipeAdapter(SupportFragmentManager, recipeFull));
             }
@@ -124,7 +124,7 @@ namespace AndroidApp
             if (!RecipeData.ExistsRecipe(urlRecipe))
             {
                 Toast.MakeText(this, "Рецепт добавлен в избранное", ToastLength.Short).Show();
-                RecipeData.SaveRecipe(urlRecipe, recipeShort);
+                RecipeData.SaveRecipe(recipeShort);
                 buttonStar.SetImageResource(Resources.GetIdentifier("outline_favorite_24", "drawable", PackageName));
                 return;
             }
@@ -153,21 +153,21 @@ namespace AndroidApp
             }
         }
 
+        /// <summary>
+        /// Загрузка рецепта с сервера.
+        /// </summary>
+        /// <param name="url">Интернет адрес рецепта.</param>
+        /// <returns><see cref="RecipeFull"/></returns>
+        private static async Task<RecipeFull> LoadRecipe(string url)
+        {
+            return await Task.Run(() => HttpContext.GetRecipe(url));
+        }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
             [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
-        /// <summary>
-        /// Загрузка рецепта с сервера.
-        /// </summary>
-        /// <param name="url">Интернет адрес рецепта.</param>
-        /// <returns><see cref="RecipeFull"/></returns>
-        private static async Task<RecipeFull> UpdateCollectionRecipes(string url)
-        {
-            return await Task.Run(() => HttpGet.GetRecipe(url));
-        }
+        
     }
 }

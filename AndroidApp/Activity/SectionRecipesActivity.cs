@@ -83,12 +83,7 @@ namespace AndroidApp
 
             UpdateListView();
         }
-
-        protected override void OnStart()
-        {
-            base.OnStart();
-        }
-
+        
         private void LoadMoreElements(object sender, EventArgs e)
         {
             // Получаем строку для нового запроса:
@@ -149,10 +144,10 @@ namespace AndroidApp
 
         private async Task<List<RecipeShort>> UpdateCollectionRecipes(string query)
         {
-            return await Task.Run(function: () => HttpGet.GetPages(query));
+            return await Task.Run(function: () => HttpContext.GetPages(query));
         }
 
-        void OnRecipeClick(object sender, int position)
+        private void OnRecipeClick(object sender, int position)
         {
             Intent intent = new Intent(this, typeof(RecipeActivity));
             intent.PutExtra("url", recipeShorts[position].Url);
@@ -160,8 +155,7 @@ namespace AndroidApp
 
             StartActivity(intent);
         }
-
-
+        
         private void OnBackPressed(object sender, EventArgs args) => base.OnBackPressed();
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions,

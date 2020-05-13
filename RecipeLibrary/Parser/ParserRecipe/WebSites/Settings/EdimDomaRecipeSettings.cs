@@ -2,11 +2,11 @@ using ObjectsLibrary.Parser.ParserRecipe.Core;
 
 namespace ObjectsLibrary.Parser.ParserRecipe.WebSites
 {
-    public class EdimdomaRecipeSettings : IParserRecipeSettings
+    public class EdimDomaRecipeSettings : IParserRecipeSettings
     {
         public string Url { get; }
 
-        public EdimdomaRecipeSettings(string url)
+        public EdimDomaRecipeSettings(string url)
         {
             Url = url;
         }

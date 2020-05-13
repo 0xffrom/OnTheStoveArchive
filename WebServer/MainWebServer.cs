@@ -7,7 +7,7 @@ using NLog.Web;
 
 namespace WebServer
 {
-    public class Program
+    public class MainWebServer
     {
         public static void Main(string[] args)
         {

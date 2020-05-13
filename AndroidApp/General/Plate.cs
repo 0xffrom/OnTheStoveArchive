@@ -5,13 +5,8 @@
         public string Title { get; }
         public string Background { get; }
         public string Key { get; }
-
-        public Plate()
-        {
-            //
-        }
-
-        public Plate(string title, string background, string key) : this()
+        
+        public Plate(string title, string background, string key) 
         {
             Title = title;
             Background = background;

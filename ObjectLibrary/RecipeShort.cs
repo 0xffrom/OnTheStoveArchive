@@ -9,20 +9,20 @@ namespace ObjectsLibrary
     public class RecipeShort
     {
         /// <value>Название рецепта.</value>
-        public string Title { get; set; }
+        public string Title { get; }
 
         /// <value>Изображение рецепта.</value>
         /// /// <see cref="Image"/>ИК
-        public Image Image { get; set; }
+        public Image Image { get;}
 
         /// <value>Интернет адрес рецепта.</value>
 
-        public string Url { get; set; }
+        public string Url { get; }
 
         /// <value>Индекс популярности рецепта.</value>
         /// <remarks>Используется для сортировки рецептов сервером.</remarks>
         [IgnoreDataMember]
-        public double IndexPopularity { get; set; }
+        public double IndexPopularity { get; }
 
         public RecipeShort(string title, Image image, string url) : this()
         {

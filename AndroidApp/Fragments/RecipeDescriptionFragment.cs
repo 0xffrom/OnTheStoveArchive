@@ -32,7 +32,6 @@ namespace AndroidApp.Fragments
                 _recipeFull = DataContext.ByteArrayToObject<RecipeFull>(arguments.GetByteArray("recipeFull"));
             }
         }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_recipe_description, container, false);
@@ -55,7 +54,6 @@ namespace AndroidApp.Fragments
 
             return view;
         }
-
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             if (!string.IsNullOrEmpty(_recipeFull.TitleImage?.ImageUrl))
@@ -70,8 +68,8 @@ namespace AndroidApp.Fragments
                 if (_recipeFull.Additional.CPFC.Calories != 0)
                     _cpfcRecipe.Text +=
                         $"Калории: {_recipeFull.Additional.CPFC.Calories} Ккал.{System.Environment.NewLine}";
-                if (_recipeFull.Additional.CPFC.Protein != 0)
-                    _cpfcRecipe.Text += $"Белки: {_recipeFull.Additional.CPFC.Protein} г.{System.Environment.NewLine}";
+                if (_recipeFull.Additional.CPFC.Proteins != 0)
+                    _cpfcRecipe.Text += $"Белки: {_recipeFull.Additional.CPFC.Proteins} г.{System.Environment.NewLine}";
                 if (_recipeFull.Additional.CPFC.Fats != 0)
                     _cpfcRecipe.Text += $"Жиры: {_recipeFull.Additional.CPFC.Fats} г.{System.Environment.NewLine}";
                 if (_recipeFull.Additional.CPFC.Carbohydrates != 0)
