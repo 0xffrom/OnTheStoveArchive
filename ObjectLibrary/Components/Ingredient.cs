@@ -1,19 +1,17 @@
-﻿
-using System;
+﻿using System;
 
 namespace ObjectsLibrary.Components
 {
     /// <summary>Ингредиент.</summary>
     [Serializable]
-    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public class Ingredient
     {
         /// <value>Название ингредиента.</value>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <value>Количество и мера измерения.</value>
-        public string Unit { get; }
+        public string Unit { get; set; }
         /// <value>Название рецепта, которому принадлежит ингредиент.</value>
-        public string RecipeName { get; }
+        public string RecipeName { get; set; }
         public Ingredient()
         {
 

@@ -7,9 +7,9 @@ namespace AndroidLibrary
     {
         [PrimaryKey, AutoIncrement] 
         public int Id { get; set; }
-        public string Name { get; }
-        public string Unit { get; }
-        public string RecipeName { get; }
+        public string Name { get; set;}
+        public string Unit { get; set; }
+        public string RecipeName { get; set; }
 
         public IngredientTable()
         {

@@ -1,27 +1,24 @@
-﻿
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 
 namespace ObjectsLibrary.Components
 {
     /// <summary>Дополнительная информация рецепта.</summary>
     [Serializable]
-    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public class Additional
     {
         /// <value>Имя автора.</value>
-        public string AuthorName { get;  }
+        public string AuthorName { get; set; }
 
         /// <value>Количество порций.</value>
-        public int CountPortions { get;  }
+        public int CountPortions { get; set; }
 
         /// <value>Количество минут для приготовления блюда.</value>
-        public double PrepMinutes { get;  }
+        public double PrepMinutes { get; set; }
 
         /// <see cref="CPFC"/>
-        public CPFC CPFC { get;  }
+        public CPFC CPFC { get; set; }
         /// <value>Интернет адрес на видео.</value>
-        public string VideoUrl { get;  }
+        public string VideoUrl { get; set; }
 
         public Additional()
         {

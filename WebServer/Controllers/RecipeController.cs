@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ObjectsLibrary;
@@ -53,7 +52,6 @@ namespace WebServer.Controllers
                         try
                         {
                             recipe = await GetData.GetRecipe(url);
-                            recipe.Key = recipeDb.Id;
                             recipeDb.RecipeFull = db.RecipeToByte(recipe);
                             recipeDb.Date = startTime;
                             await db.SaveChangesAsync();
@@ -80,7 +78,6 @@ namespace WebServer.Controllers
 
                         LogTime(startTime);
                         recipe = db.ByteToRecipe(recipeDb.RecipeFull);
-                        recipe.Key = recipeDb.Id;
                         return Ok(recipe);
                     }
                 }

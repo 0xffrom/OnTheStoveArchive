@@ -1,9 +1,7 @@
 ﻿using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
 using ObjectsLibrary.Components;
 using XamarinApp;
-using System;
 using System.Collections.Generic;
 using AndroidLibrary;
 using XamarinApp.ViewHolders;

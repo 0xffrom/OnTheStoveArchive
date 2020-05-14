@@ -36,7 +36,7 @@
             <TextView
                     android:id="@+id/titleRecipe"
                     android:gravity="left|center_vertical"
-                    android:fontFamily="@Font/ActorRegular"
+                    android:fontFamily="@font/actorregular"
                     android:layout_gravity="left|center_vertical"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18dp"
                     android:textColor="@color/colorMain"
-                    android:fontFamily="@Font/ActorRegular"/>
+                    android:fontFamily="@font/actorregular"/>
         </android.support.v4.view.ViewPager>
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton

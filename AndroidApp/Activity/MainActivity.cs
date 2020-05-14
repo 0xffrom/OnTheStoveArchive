@@ -133,7 +133,6 @@ namespace AndroidApp
             //Toast.MakeText(this, "Загрузка...", ToastLength.Short).Show();
             e.Handled = true;
         }
-
         private void LoadMoreElements(object sender, EventArgs e)
         {
             // Получаем строку для нового запроса:

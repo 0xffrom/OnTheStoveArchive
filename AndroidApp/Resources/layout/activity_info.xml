@@ -33,7 +33,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="17dp"
                 android:paddingLeft="20dp"
-                android:fontFamily="@Font/ActorRegular"
+                android:fontFamily="@font/actorregular"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:text="Информация о приложении"
         />
@@ -59,8 +59,8 @@
                         android:layout_height="wrap_content"
                         android:textSize="17dp"
                         android:paddingLeft="20dp"
-                        android:text="О приложении: \nКурсовая работа студента 1 курса БПИ-194 2019-2020 года Романюк Андрея 'Клиент-серверное приложение реализующее агрегатор кулинарных рецептов'.\n\nПриложение является неким интерфейсом для кулинарных сайтов.\nОно поддерживает следующие сайты:\npovarenok.ru, povar.ru, eda.ru, edimdoma.ru.\n\nТехническая часть: Романюк Андрей\nДизайн: Полина Круглик.\n\nПо вопросам или предложениям обращаться по адресу help@onthestove.ru"
-                        android:fontFamily="@Font/ActorRegular"/>
+                        android:text="О приложении: \nКурсовая работа студента 1 курса БПИ-194 2019-2020 года Романюк Андрея 'Агрегатор кулинарных рецептов на Android.'.\n\nПриложение поддерживает следующие сайты:\npovarenok.ru, povar.ru, eda.ru, edimdoma.ru.\n\n\nЗадиизайнено: Полина Круглик."
+                    android:fontFamily="@font/actorregular"/>
                 <ImageView
                         android:layout_width="300dp"
                         android:layout_height="300dp"

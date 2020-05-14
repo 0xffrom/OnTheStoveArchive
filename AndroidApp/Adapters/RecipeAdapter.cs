@@ -1,6 +1,5 @@
 ﻿using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
 using ObjectsLibrary;
 using Square.Picasso;
 using System;
@@ -37,14 +36,14 @@ namespace AndroidApp
 
             vh.Title.Text = _items[position]?.Title;
 
-            var urlArray = _items[position]?.Url.Split('/');
+            var urlArray = _items[position]?.Url?.Split('/');
 
             if (urlArray != null && urlArray.Length >= 2)
                 vh.Link.Text = urlArray[2];
 
-            var url = _items[position]?.Image.ImageUrl;
+            var url = _items[position]?.Image?.ImageUrl;
 
-            if (url != null && url != string.Empty)
+            if (!string.IsNullOrEmpty(url))
                 Picasso.With(_activity)
                     .Load(url)
                     .Into(vh.Image);

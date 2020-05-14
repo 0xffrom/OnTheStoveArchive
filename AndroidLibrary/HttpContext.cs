@@ -33,10 +33,18 @@ namespace AndroidLibrary
             return source;
         }
 
-        public static List<RecipeShort> GetPages(string query) =>
-            JsonConvert.DeserializeObject<List<RecipeShort>>(GetSource("page/get?" + query).Result);
+        public static List<RecipeShort> GetPages(string query)
+        {
+            string json = GetSource("page/get?" + query).Result;
+            var obj = JsonConvert.DeserializeObject<List<RecipeShort>>(json);
+            return obj;
+        }
 
-        public static RecipeFull GetRecipe(string url) =>
-            JsonConvert.DeserializeObject<RecipeFull>(GetSource("recipe/get?url=" + url).Result);
+        public static RecipeFull GetRecipe(string url)
+        {
+            string json = GetSource("recipe/get?url=" + url).Result;
+            var obj = JsonConvert.DeserializeObject<RecipeFull>(json);
+            return obj;
+        }
     }
 }

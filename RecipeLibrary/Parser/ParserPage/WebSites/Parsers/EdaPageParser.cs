@@ -1,7 +1,6 @@
 ﻿using AngleSharp.Html.Dom;
 using ObjectsLibrary.Parser.ParserPage.Core;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ObjectsLibrary.Parser.ParserPage.WebSites
 {

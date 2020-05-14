@@ -1,25 +1,22 @@
-﻿
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 
 namespace ObjectsLibrary.Components
 {
     /// <summary>Калории, белки, жиры, углеводы.</summary>
     [Serializable]
-    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public class CPFC
     {
         /// <value>Количество калорий.</value>
-        public double Calories { get; }
+        public double Calories { get; set; }
 
         /// <value>Количество белка.</value>
-        public double Proteins { get; }
+        public double Proteins { get; set; }
 
         /// <value>Количество жиров.</value>
-        public double Fats { get;}
+        public double Fats { get; set; }
 
         /// <value>Количество углеводов.</value>
-        public double Carbohydrates { get; }
+        public double Carbohydrates { get; set; }
 
         public CPFC()
         {

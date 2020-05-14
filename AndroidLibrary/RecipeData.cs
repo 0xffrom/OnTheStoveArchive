@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using ObjectsLibrary;
-using ObjectsLibrary.Components;
 using SQLite;
 
 namespace AndroidLibrary

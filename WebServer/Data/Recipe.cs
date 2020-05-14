@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebServer.Data
 {
-
     public class Recipe
     {
         [Key]

@@ -33,7 +33,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="17dp"
                 android:paddingLeft="20dp"
-                android:fontFamily="@Font/ActorRegular"
+                android:fontFamily="@font/actorregular"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:text="Корзина ингредиентов"
         />

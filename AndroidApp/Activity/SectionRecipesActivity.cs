@@ -13,6 +13,7 @@ using ObjectsLibrary;
 using Android.Graphics;
 using System.Threading.Tasks;
 using XamarinApp;
+using System.Linq;
 
 namespace AndroidApp
 {
@@ -144,7 +145,7 @@ namespace AndroidApp
 
         private async Task<List<RecipeShort>> UpdateCollectionRecipes(string query)
         {
-            return await Task.Run(function: () => HttpContext.GetPages(query));
+            return (await Task.Run(function: () => HttpContext.GetPages(query))).ToList();
         }
 
         private void OnRecipeClick(object sender, int position)

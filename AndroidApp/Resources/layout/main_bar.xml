@@ -39,7 +39,7 @@
                 android:layout_marginRight="10dp"
                 android:padding="3dp"
                 android:layout_marginLeft="10dp"
-                android:fontFamily="@Font/ActorRegular"
+                android:fontFamily="@font/actorregular"
                 android:hint="Поиск рецепта..."
                 android:background="@drawable/rectangle_3"
                 android:textColor="#eb9502"

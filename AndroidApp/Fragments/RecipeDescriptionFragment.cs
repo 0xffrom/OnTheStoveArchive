@@ -77,7 +77,8 @@ namespace AndroidApp.Fragments
                         $"Углеводы: {_recipeFull.Additional.CPFC.Carbohydrates} г.{System.Environment.NewLine}";
             }
 
-            _authorNameRecipe.Text = $"Рецепт от: {_recipeFull.Additional.AuthorName}";
+            if (_recipeFull.Additional != null && !string.IsNullOrEmpty(_recipeFull.Additional.AuthorName))
+                _authorNameRecipe.Text = $"Рецепт от: {_recipeFull.Additional.AuthorName}";
 
             if (_recipeFull.Additional?.CountPortions != 0)
                 _additionalInfoRecipe.Text +=

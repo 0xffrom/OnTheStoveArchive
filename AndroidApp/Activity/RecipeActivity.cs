@@ -80,8 +80,8 @@ namespace AndroidApp
             // Проверка на избранный рецепт: 
             if (RecipeData.ExistsRecipe(urlRecipe))
                 // Если избранный, то сделать звёздочку закрашенной.
-                buttonStar.SetBackgroundResource(
-                    Resources.GetIdentifier("outline_favorite_24", "drawable", PackageName));
+                buttonStar.SetBackgroundResource(Resources.GetIdentifier("outline_favorite_24", "drawable", PackageName));
+
             try
             {
                 recipeFull = await LoadRecipe(urlRecipe);
