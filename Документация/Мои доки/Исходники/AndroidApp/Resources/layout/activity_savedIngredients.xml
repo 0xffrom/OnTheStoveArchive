@@ -1,0 +1,51 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true">
+    <LinearLayout
+            android:id="@+id/rectangle_2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangle_2">
+        <RelativeLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="left|center_vertical"
+                android:id="@+id/relativeLayoutBack">
+            <Button
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:gravity="left|center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/round_arrow_back_ios_24"
+                    android:id="@+id/buttonBack"/>
+        </RelativeLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="17dp"
+                android:paddingLeft="20dp"
+                android:fontFamily="@font/actorregular"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="Корзина ингредиентов"
+        />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewIngredients"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>
