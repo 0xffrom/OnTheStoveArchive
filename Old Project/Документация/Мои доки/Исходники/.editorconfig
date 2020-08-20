@@ -1,7 +1,0 @@
-﻿[*.cs]
-
-# DV2001: Нет связанных схем зависимостей
-dotnet_diagnostic.DV2001.severity = none
-
-# CS0642: Возможно, ошибочный пустой оператор
-dotnet_diagnostic.CS0642.severity = none
